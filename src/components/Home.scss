@@ -1,0 +1,36 @@
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+@mixin border-radius{
+    border: 1px solid black;
+    border-radius: 5px;
+}  
+  
+
+.body-container{
+    
+    @include border-radius();
+    justify-content: space-between;
+    align-items: stretch;
+    margin: 10px;
+    padding: 10px;
+    
+    
+    .content-container{
+       @extend .body-container;
+       flex:2;
+       margin: 0;
+       height: 450px; 
+  
+
+    }
+    .loggin-container{
+        @extend .body-container;
+        flex: 1;  
+        width: 400px;
+        height: 450px; 
+    }
+}
+
