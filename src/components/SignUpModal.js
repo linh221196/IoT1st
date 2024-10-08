@@ -51,8 +51,11 @@ const SignUpModal = ({ userInfo, show, handleSignUpClose }) => {
                         <Form.Label column sm="3">
                             전화번호
                         </Form.Label>
-                        <Col sm="9">
+                        <Col sm="7">
                             <Form.Control type="phone" />
+                        </Col>
+                        <Col sm="2">
+                            <Button style={{ padding: '6px 11px' }} >체크</Button>
                         </Col>
                     </Form.Group>
                     <Form.Group controlId="formFile" className="mb-3">

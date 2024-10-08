@@ -18,39 +18,30 @@ const UserInfoUpdateModal = ({ userInfo, show, handleClose }) => {
                         <Col sm="9">
                             <Form.Control type="email" placeholder="name@example.com" />
                         </Col>
-
                     </Form.Group>
 
                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                        <Form.Label column sm="3">
-                            비밀번호
-                        </Form.Label>
+                        <Form.Label column sm="3">비밀번호</Form.Label>
                         <Col sm="9">
                             <Form.Control type="password" placeholder="Password" />
                         </Col>
                     </Form.Group>
 
                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextName">
-                        <Form.Label column sm="3">
-                            이름
-                        </Form.Label>
+                        <Form.Label column sm="3"> 이름</Form.Label>
                         <Col sm="9">
                             <Form.Control type="text" />
                         </Col>
                     </Form.Group>
 
                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextAge">
-                        <Form.Label column sm="3">
-                            생년월일
-                        </Form.Label>
+                        <Form.Label column sm="3">생년월일</Form.Label>
                         <Col sm="9">
                             <Form.Control type="date" />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextAge">
-                        <Form.Label column sm="3">
-                            전화번호
-                        </Form.Label>
+                        <Form.Label column sm="3">전화번호</Form.Label>
                         <Col sm="7">
                             <Form.Control type="phone" />
                         </Col>

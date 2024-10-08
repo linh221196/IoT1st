@@ -4,7 +4,9 @@ import Col from "react-bootstrap/Col";
 import "./Content.scss";
 import { NavLink } from "react-bootstrap";
 
+
 const Content = () => {
+
   return (
     <div>
       <Container>
@@ -21,7 +23,8 @@ const Content = () => {
             <NavLink>측정 치수</NavLink>
           </Col>
           <Col className="c-content">
-            <NavLink>자원 봉사</NavLink>
+            <NavLink href="/Volunteer" >자원 봉사</NavLink>
+
           </Col>
         </Row>
       </Container>

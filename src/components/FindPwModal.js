@@ -31,18 +31,21 @@ const FindPwModal = ({ userInfo, show, handleFindPwClose }) => {
 
                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextAge">
                         <Form.Label column sm="3">
-                            나이
+                            생년월일
                         </Form.Label>
                         <Col sm="9">
-                            <Form.Control type="number" />
+                            <Form.Control type="date" />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextAge">
                         <Form.Label column sm="3">
                             전화번호
                         </Form.Label>
-                        <Col sm="9">
+                        <Col sm="7">
                             <Form.Control type="phone" />
+                        </Col>
+                        <Col sm="2">
+                            <Button style={{ padding: '6px 11px' }} >체크</Button>
                         </Col>
                     </Form.Group>
 
@@ -52,6 +55,7 @@ const FindPwModal = ({ userInfo, show, handleFindPwClose }) => {
                 <Button variant="secondary" onClick={handleFindPwClose}>
                     Close
                 </Button>
+
                 <Button variant="primary" onClick={handleFindPwClose}>
                     Save Changes
                 </Button>
@@ -60,5 +64,5 @@ const FindPwModal = ({ userInfo, show, handleFindPwClose }) => {
     );
 };
 
-
 export default FindPwModal;
+
