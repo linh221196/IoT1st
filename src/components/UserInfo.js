@@ -39,26 +39,26 @@ const UserInfo = () => {
 
             <Container  >
                 <Row className="r-userInfo">
-                    <Col className="c-userInfo">
+                    <Col className="c1-userInfo" sm="5">
                         성함
                     </Col>
-                    <Col className="c-userInfo">
+                    <Col className="c2-userInfo" sm="7">
                         {userInfo.name}
                     </Col>
                 </Row>
                 <Row className="r-userInfo">
-                    <Col className="c-userInfo">
+                    <Col className="c1-userInfo" sm="5">
                         나이
                     </Col>
-                    <Col className="c-userInfo">
+                    <Col className="c2-userInfo" sm="7">
                         {userInfo.age}
                     </Col>
                 </Row>
                 <Row className="r-userInfo">
-                    <Col className="c-userInfo">
-                        지도 의료진
+                    <Col className="c1-userInfo" sm="5">
+                        의료진
                     </Col>
-                    <Col className="c-userInfo">
+                    <Col className="c2-userInfo" sm="7">
                         {userInfo.nurse}
                     </Col>
                 </Row>
