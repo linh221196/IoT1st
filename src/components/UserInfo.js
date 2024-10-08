@@ -15,7 +15,7 @@ const UserInfo = () => {
     const userInfo =
     {
         name: "린",
-        age: "26",
+        age: "12/34/5678",
         nurse: "노영휸"
 
     }
@@ -35,8 +35,6 @@ const UserInfo = () => {
                 <Image className="user-image" src={code} rounded />
             </Container>
 
-
-
             <Container  >
                 <Row className="r-userInfo">
                     <Col className="c1-userInfo" sm="5">
@@ -48,7 +46,7 @@ const UserInfo = () => {
                 </Row>
                 <Row className="r-userInfo">
                     <Col className="c1-userInfo" sm="5">
-                        나이
+                        생년월일
                     </Col>
                     <Col className="c2-userInfo" sm="7">
                         {userInfo.age}

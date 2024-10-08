@@ -20,9 +20,6 @@ const FindPwModal = ({ userInfo, show, handleFindPwClose }) => {
                         </Col>
 
                     </Form.Group>
-
-
-
                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextName">
                         <Form.Label column sm="3">
                             이름

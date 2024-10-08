@@ -41,10 +41,10 @@ const SignUpModal = ({ userInfo, show, handleSignUpClose }) => {
 
                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextAge">
                         <Form.Label column sm="3">
-                            나이
+                            생년월일
                         </Form.Label>
                         <Col sm="9">
-                            <Form.Control type="number" />
+                            <Form.Control type="date" />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextAge">
