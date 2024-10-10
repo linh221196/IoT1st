@@ -12,7 +12,7 @@ const Content = () => {
       <Container>
         <Row className="r-content">
           <Col className="c-content">
-            <NavLink>기계안내</NavLink>
+            <NavLink href="/DeviceView">기계안내</NavLink>
           </Col>
           <Col className="c-content">
             <NavLink>주의 할 요소</NavLink>
