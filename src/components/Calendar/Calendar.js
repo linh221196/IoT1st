@@ -43,7 +43,7 @@ const Calendar = () => {
                             }}
                             slotProps={{
                                 calendarHeader: {
-                                    labelFormat: (month) => `${month.month() + 1}월 ${month.date()}일`, 
+                                    labelFormat: (month) => `${month.month() + 1}월 ${month.date()}일`,
                                 },
                                 actionBar: {
                                     actions: ['clear', 'today', 'cancel', 'accept'],
