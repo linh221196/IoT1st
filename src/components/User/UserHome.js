@@ -1,22 +1,22 @@
 import { Stack } from "react-bootstrap"
-import './Home.scss'
-import Content from "./Content"
+import '../Home.scss'
+import Content from "../Content"
 import UserInfo from "./UserInfo"
 
-const UserHome= ()=>{
+const UserHome = () => {
 
-    return(
+  return (
     <div className="body-container">
       <Stack direction="horizontal" >
         <div className="content-container">
-        <Content/>
+          <Content />
         </div>
         <div className="loggin-container">
-        <UserInfo/>
+          <UserInfo />
         </div>
       </Stack>
     </div>
-    )
+  )
 }
 
 export default UserHome

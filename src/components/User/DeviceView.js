@@ -1,9 +1,9 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import blood from '../assets/blood.jpeg';
-import heart from '../assets/heart.jpg';
-import brainWaves from '../assets/brain-waves.jpg';
+import blood from '../../assets/blood.jpeg';
+import heart from '../../assets/heart.jpg';
+import brainWaves from '../../assets/brain-waves.jpg';
 import { NavLink } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -15,19 +15,19 @@ const DeviceView = () => {
       id: 1,
       name: "heart",
       img: heart,
-      des: "심장 위한 디바이스 입니다"
+      des: "심장 위한 디바이스 입니다, Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content."
     },
     {
       id: 2,
       name: "blood",
       img: blood,
-      des: "혈액 위한 디바이스 입니다"
+      des: "혈액 위한 디바이스 입니다. Some quick example text to build on the card title and make up the bulk of the card's content."
     },
     {
       id: 3,
       name: "brain-waves",
       img: brainWaves,
-      des: "뇌 신호 디바이스"
+      des: "뇌 신호 디바이스. Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title and make up the bulk of the card's content."
     }
   ];
 
@@ -44,6 +44,7 @@ const DeviceView = () => {
                 <Card.Title>{device.name}</Card.Title>
                 <Card.Text>
                   {device.des}
+
                 </Card.Text>
               </Card.Body>
               <Card.Footer className="text-center">

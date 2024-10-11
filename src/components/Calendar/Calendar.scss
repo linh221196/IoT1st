@@ -1,0 +1,39 @@
+.calendar-container.border.col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    
+    .MuiPickersToolbar-root {
+        margin-top: 10px;
+        border-radius: 10px;
+        .MuiTypography-overline {
+            font-size: 18px;
+        }
+
+        &.MuiDatePickerToolbar-root.MuiPickersLayout-toolbar{
+            background-color:#e0f7fa;
+             
+        }
+    }
+
+   .MuiPickersLayout-contentWrapper .MuiPickersCalendarHeader-root{
+    background-color:#78cdd8;
+    border-radius: 10px;
+   }
+
+   .MuiDialogActions-root.MuiDialogActions-spacing.MuiPickersLayout-actionBar{
+    display: 'flex';
+     justify-content: 'space-evenly';
+      align-items: 'center';
+      width: '100%',
+   }
+    
+}
+
+button.MuiButtonBase-root.MuiButton-root.MuiButton-text.MuiButton-textPrimary.MuiButton-sizeMedium.MuiButton-textSizeMedium.MuiButton-colorPrimary.MuiButton-root.MuiButton-text{
+    font-size: large;
+   
+    
+}
+//.calendar-container.border.col 

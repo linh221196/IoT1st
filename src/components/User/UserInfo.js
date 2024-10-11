@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import "./UserInfo.scss"
 import { NavLink } from "react-bootstrap";
 import Image from 'react-bootstrap/Image';
-import code from '../assets/image.jpg'
+import code from '../../assets/image.jpg'
 import Button from "react-bootstrap/Button";
 import { FiEdit } from "react-icons/fi";
 import UserInfoUpdateModal from "./UserInfoUpdateModal";

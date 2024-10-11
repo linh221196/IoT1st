@@ -1,4 +1,4 @@
-
+import Calendar from "../Calendar/Calendar";
 
 const Volunteer = () => {
 
@@ -6,6 +6,7 @@ const Volunteer = () => {
   return (
     <div className="vol-container">
       volunteer.js
+      <Calendar />
     </div>
   );
 }

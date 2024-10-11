@@ -1,9 +1,9 @@
 import './App.scss';
 import Home from './components/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import UserHome from './components/UserHome';
-import Volunteer from './components/Volunteer';
-import DeviceView from './components/DeviceView';
+import UserHome from './components/User/UserHome';
+import Volunteer from './components/User/Volunteer';
+import DeviceView from './components/User/DeviceView';
 function App() {
   return (
     <div className="App">
