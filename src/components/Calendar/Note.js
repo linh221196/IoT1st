@@ -12,20 +12,14 @@ const Note = ({ note, noteList }) => {
 
             <div className="noteCard-container">
                 <div className="note-card" >
-                    {noteList.map(item =>
-                        <Card body className="card-item" style={{ marginBottom: 10 }} >
+                    {noteList.map((item, index) =>
+                        <Card body className="card-item" style={{ marginBottom: 10 }} key={item.noteDate + index}>
                             <p>{item.noteDate}</p>
                             <p>{item.noteContent}</p>
                         </Card>
                     )}
                 </div>
             </div>
-
-
-
-
-
-
         </div>
     )
 

@@ -14,6 +14,8 @@ function App() {
         <Route path='/Volunteer' element={<Volunteer />} />
         <Route path='/DeviceView' element={<DeviceView />} />
       </Routes>
+
+
     </div>
   );
 }
