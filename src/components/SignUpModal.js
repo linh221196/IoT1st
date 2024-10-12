@@ -13,10 +13,10 @@ const SignUpModal = ({ show, handleSignUpClose }) => {
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                    <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
-                        <Form.Label column sm="3">이메일</Form.Label>
+                    <Form.Group as={Row} className="mb-3" controlId="formBasicId">
+                        <Form.Label column sm="3">ID</Form.Label>
                         <Col sm="9">
-                            <Form.Control type="email" placeholder="name@example.com" />
+                            <Form.Control type="text" placeholder="TopazIoT6" />
                         </Col>
 
                     </Form.Group>

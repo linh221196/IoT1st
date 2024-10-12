@@ -27,9 +27,9 @@ function LogginView() {
     }
     return (
         <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>이메일</Form.Label>
-                <Form.Control type="email" placeholder="예제: topaz@iot6.com" />
+            <Form.Group className="mb-3" controlId="formBasicId">
+                <Form.Label>ID</Form.Label>
+                <Form.Control type="text" placeholder="예제: topaziot6" />
 
             </Form.Group>
 
