@@ -4,8 +4,12 @@
     justify-content: center;
     align-items: center;
     align-content: center;
+    border-color: #e0f7fa;
     margin-bottom: 20px;
     margin-top: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-right: none;
 
     .MuiPickersToolbar-root {
       border-radius: 10px;
@@ -57,7 +61,6 @@
     color: #147582;
     font-weight: 300;
   }
-  
 
   .note-container {
     display: flex;

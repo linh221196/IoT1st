@@ -61,7 +61,7 @@ const Calendar = () => {
         >
             <div className="container">
                 <Row className='g-4'>
-                    <Col className='calendar-container border'>
+                    <Col className='calendar-container border '>
                         <StaticDatePicker
                             orientation='portrait'
                             openTo={view}
@@ -90,9 +90,10 @@ const Calendar = () => {
                         />
                     </Col>
 
-                    <Col className='note-container border'>
-                        <Note note={note}
+                    <Col className='note-container '>
+                        <Note
                             noteList={noteList}
+                            setNoteList={setNoteList}
                             newValue={newValue}
                         />
                     </Col>
