@@ -8,19 +8,18 @@ import "./Note.scss"
 const Note = ({ note, noteList }) => {
 
     return (
-        <div className="noteContent-container">
 
-            <div className="noteCard-container">
-                <div className="note-card" >
-                    {noteList.map((item, index) =>
-                        <Card body className="card-item" style={{ marginBottom: 10 }} key={item.noteDate + index}>
-                            <p>{item.noteDate}</p>
-                            <p>{item.noteContent}</p>
-                        </Card>
-                    )}
-                </div>
-            </div>
+
+        <div className="note-card" >
+            {noteList.map((item, index) =>
+                <Card body className="card-item" style={{ marginBottom: 10 }} key={item.noteDate + index}>
+                    <p>{item.noteDate}</p>
+                    <p>{item.noteContent}</p>
+                </Card>
+            )}
         </div>
+
+
     )
 
 }

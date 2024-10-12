@@ -13,8 +13,6 @@ import Button from 'react-bootstrap/Button';
 import { TextField } from "@mui/material"
 import "./Calendar.scss"
 import Note from './Note';
-import { useTheme } from '@emotion/react';
-
 dayjs.locale('ko');
 
 const Calendar = () => {
@@ -28,7 +26,6 @@ const Calendar = () => {
     ]);
     const [view, setView] = useState('day');
 
-
     const handleAddEvent = () => {
         setShowModal(true);
     };
@@ -40,7 +37,6 @@ const Calendar = () => {
     const handleCancel = () => {
         setView('day'); // Reset view to day
     };
-
 
     const handleSubmit = () => {
         if (note.trim()) {
@@ -83,9 +79,6 @@ const Calendar = () => {
                                 okButtonLabel: '추가',
                             }}
                             slotProps={{
-                                calendarHeader: {
-                                    labelFormat: (month) => `${month.format('MM월 DD일')}`,
-                                },
                                 actionBar: {
                                     actions: ['today', 'cancel', 'accept'],
                                     onAccept: handleAddEvent,
@@ -130,7 +123,5 @@ const Calendar = () => {
 
         </LocalizationProvider>
     )
-
-
 }
 export default Calendar
