@@ -8,13 +8,54 @@ import dayjs from 'dayjs';
 import ko from 'dayjs/locale/ko';
 import { useState } from 'react';
 import Badge from '@mui/material/Badge';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import { TextField } from "@mui/material"
 import "./Calendar.scss"
+import Note from './Note';
+import { useTheme } from '@emotion/react';
 
 dayjs.locale('ko');
 
 const Calendar = () => {
 
     const [newValue, setValue] = useState(dayjs())
+    const [showModal, setShowModal] = useState(false);
+    const [note, setNote] = useState("")
+    const [noteList, setNoteList] = useState([
+        { noteDate: "2024-10-01", noteContent: "1st note" },
+        { noteDate: "2024-10-02", noteContent: "2nd note" },
+    ]);
+    const [view, setView] = useState('day');
+
+
+    const handleAddEvent = () => {
+        setShowModal(true);
+    };
+
+    const handleClose = () => {
+        setShowModal(false);
+    };
+
+    const handleCancel = () => {
+        setView('day'); // Reset view to day
+    };
+
+
+    const handleSubmit = () => {
+        if (note.trim()) {
+            const newNote = {
+                noteDate: newValue.format('YYYY-MM-DD'),
+                noteContent: note
+            };
+            setNoteList(prev => [...prev, newNote]);
+            setNote("");
+            setShowModal(false);
+
+        } else {
+            alert("내용을 입력해주세요.");
+        }
+    };
 
     return (
 
@@ -27,36 +68,64 @@ const Calendar = () => {
                     <Col className='calendar-container border'>
                         <StaticDatePicker
                             orientation='portrait'
-                            openTo='day'
+                            openTo={view}
                             value={newValue}
+                            onViewChange={(newView) => setView(newView)}
                             onChange={(newValue) => setValue(newValue)}
                             renderInput={(params) => <input {...params} />}
                             locale={ko}
                             views={['year', 'month', 'day']}
-                            format="MM월 DD일"
+                            format='MM월 DD일'
                             localeText={{
                                 toolbarTitle: '날짜 선택',
                                 cancelButtonLabel: '취소',
-                                clearButtonLabel: '초기화',
                                 todayButtonLabel: '오늘',
-                                okButtonLabel: '확인',
+                                okButtonLabel: '추가',
                             }}
                             slotProps={{
                                 calendarHeader: {
-                                    labelFormat: (month) => `${month.month() + 1}월 ${month.date()}일`,
+                                    labelFormat: (month) => `${month.format('MM월 DD일')}`,
                                 },
                                 actionBar: {
-                                    actions: ['clear', 'today', 'cancel', 'accept'],
-                                },
+                                    actions: ['today', 'cancel', 'accept'],
+                                    onAccept: handleAddEvent,
+                                    onCancel: handleCancel,
 
+                                },
                             }}
                             disablePast
-
                         />
                     </Col>
-                    <Col className='note-container border'>Note</Col>
+
+                    <Col className='note-container border'>
+                        <Note note={note}
+                            noteList={noteList}
+                            newValue={newValue}
+                        />
+                    </Col>
                 </Row>
 
+                <Modal show={showModal} onHide={handleClose} style={{ minHeight: '300px' }}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>{newValue.format('YYYY년 MM월 DD일')}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body style={{ minHeight: '200px' }}>
+                        <TextField
+                            label="내용을 입력해주세요"
+                            fullWidth
+                            multiline
+                            value={note} type="text"
+                            onChange={e => setNote(e.target.value)}
+
+                        />
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={() => { handleSubmit() }}>추가</Button>
+                        <Button variant="secondary" onClick={handleClose}>
+                            취소
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
 
         </LocalizationProvider>

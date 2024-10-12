@@ -57,6 +57,7 @@
     color: #147582;
     font-weight: 300;
   }
+  
 
   .note-container {
     display: flex;
@@ -65,5 +66,10 @@
     align-content: center;
     margin-bottom: 20px;
     margin-top: 20px;
+  }
+
+  .MuiFormControl-Root .MuiTextField-root {
+    position: relative;
+    display: flex;
   }
 }

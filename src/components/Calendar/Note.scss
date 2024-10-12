@@ -1,0 +1,23 @@
+.note-container .border .col {
+  .noteContent-container {
+    display: flex;
+
+    .noteCard-container {
+      position: relative; /* Ensure it is positioned relative to the container */
+      display: flexbox;
+      align-items: flex-start; /* Align items to the top */
+      margin-bottom: 10px;
+      .note-card {
+        padding: 20px;
+        position: absolute;
+        top: 0; /* Position it at the very top */
+        left: 0; /* Position it on the left side */
+        background-color: #f0f0f0; /* Optional: background styling */
+        padding: 10px; /* Optional: for padding inside the card */
+        border-radius: 5px; /* Optional: rounded corners */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: card shadow */
+        z-index: 1; /* Make sure it appears on top of other elements */
+      }
+    }
+  }
+}
