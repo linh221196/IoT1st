@@ -95,6 +95,8 @@ const Calendar = () => {
                             noteList={noteList}
                             setNoteList={setNoteList}
                             newValue={newValue}
+                            note={note}
+                            setNote={setNote}
                         />
                     </Col>
                 </Row>

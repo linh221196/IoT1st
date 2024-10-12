@@ -5,7 +5,6 @@ const Volunteer = () => {
 
   return (
     <div className="vol-container">
-      volunteer.js
       <Calendar />
     </div>
   );

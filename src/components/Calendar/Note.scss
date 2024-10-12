@@ -1,6 +1,6 @@
 .container .note-container {
-  height: 539.13px; /* Set the height */
-  overflow-y: scroll; /* Allow horizontal scrolling */
+  height: 539.2px; /* Set the height */
+  overflow-y: auto; /* Allow horizontal scrolling */
   overflow-x: hidden;
   justify-content: flex-start;
   align-items: flex-start;
@@ -15,9 +15,9 @@
     height: 8px;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: rgba(131, 178, 179, 0.2); /* Scrollbar color */
+    background-color: rgba(131, 178, 179, 0.2);
     border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px; /* Keep scrollbar edges round */
+    border-bottom-right-radius: 20px;
   }
 
   .note-card {
