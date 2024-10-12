@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
-const SignUpModal = ({ userInfo, show, handleSignUpClose }) => {
+const SignUpModal = ({ show, handleSignUpClose }) => {
     return (
         <Modal show={show} onHide={handleSignUpClose}>
             <Modal.Header closeButton>
