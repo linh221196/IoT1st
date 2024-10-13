@@ -2,14 +2,32 @@ import { NavLink } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "./LogginView.scss"
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import SignUpModal from './SignUpModal';
 import FindPwModal from './FindPwModal';
+import User from './User'
 function LogginView() {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const [showFindPwModal, setFindPwShowModal] = useState(false);
+    const [user, setUser] = useState({
+        id: "",
+        pw: "",
+        userName: "",
+        birth: "",
+        phone: "",
+        userImage: ""
+    })
+
+    const handleChange = (e) => {
+        setUser({
+            ...user,
+            [e.target.name]: e.target.value
+        }
+        )
+    }
+
     const handleSignUp = () => {
         setShowModal(true);
     }
@@ -25,21 +43,34 @@ function LogginView() {
     const handleFindPwClose = () => {
         setFindPwShowModal(false);
     }
+    const handleSignUpSubmit = (e) => {
+        e.preventDefault(); // Prevent default form behavior (like refreshing the page)
+        alert(JSON.stringify(user, null, 2)); // Display user data in a readable format
+        setShowModal(false); // Close the modal after submission
+        navigate('/UserHome')
+    }
+
+    const handleSubmit = () => {
+        console.log("Logging in user:", user);
+        navigate('/UserHome')
+    };
     return (
-        <Form>
+        <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicId">
                 <Form.Label>ID</Form.Label>
-                <Form.Control type="text" placeholder="예제: topaziot6" />
+                <Form.Control type="text" placeholder="예제: topaziot6"
+                    name="id"
+                />
 
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>비밀번호</Form.Label>
-                <Form.Control type="password" placeholder="비밀번호 입력해주세요" />
+                <Form.Control type="password" placeholder="비밀번호 입력해주세요"
+                    name="pw"
+                />
             </Form.Group>
-            <Button variant="primary" type="submit"
-                onClick={() => navigate('/UserHome')}
-            >
+            <Button variant="primary" type="submit" >
                 Submit
             </Button>
             <div className='findPw-container'>
@@ -61,6 +92,9 @@ function LogginView() {
                 <SignUpModal
                     show={showModal}
                     handleSignUpClose={handleSignUpClose}
+                    handleSignUpSubmit={handleSignUpSubmit}
+                    setUser={setUser}
+                    handleChange={handleChange}
                 />
 
             </div>

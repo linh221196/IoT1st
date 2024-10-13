@@ -5,18 +5,20 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
-const SignUpModal = ({ show, handleSignUpClose }) => {
+const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, setUser, handleChange }) => {
     return (
         <Modal show={show} onHide={handleSignUpClose}>
             <Modal.Header closeButton>
                 <Modal.Title>회원가입</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body> 
                 <Form>
                     <Form.Group as={Row} className="mb-3" controlId="formBasicId">
                         <Form.Label column sm="3">ID</Form.Label>
                         <Col sm="9">
-                            <Form.Control type="text" placeholder="TopazIoT6" />
+                            <Form.Control type="text" placeholder="TopazIoT6"
+                                name="id" onChange={handleChange}
+                            />
                         </Col>
 
                     </Form.Group>
@@ -26,7 +28,8 @@ const SignUpModal = ({ show, handleSignUpClose }) => {
                             비밀번호
                         </Form.Label>
                         <Col sm="9">
-                            <Form.Control type="password" placeholder="Password" />
+                            <Form.Control type="password" placeholder="Password"
+                                name="pw" onChange={handleChange} />
                         </Col>
                     </Form.Group>
 
@@ -35,7 +38,7 @@ const SignUpModal = ({ show, handleSignUpClose }) => {
                             이름
                         </Form.Label>
                         <Col sm="9">
-                            <Form.Control type="text" />
+                            <Form.Control type="text" name="userName" onChange={handleChange} />
                         </Col>
                     </Form.Group>
 
@@ -44,7 +47,7 @@ const SignUpModal = ({ show, handleSignUpClose }) => {
                             생년월일
                         </Form.Label>
                         <Col sm="9">
-                            <Form.Control type="date" />
+                            <Form.Control type="date" name="birth" onChange={handleChange}/>
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="formPlaintextAge">
@@ -52,7 +55,7 @@ const SignUpModal = ({ show, handleSignUpClose }) => {
                             전화번호
                         </Form.Label>
                         <Col sm="7">
-                            <Form.Control type="phone" />
+                            <Form.Control type="phone" name="phone" onChange={handleChange} />
                         </Col>
                         <Col sm="2">
                             <Button style={{ padding: '6px 11px' }} >체크</Button>
@@ -60,7 +63,7 @@ const SignUpModal = ({ show, handleSignUpClose }) => {
                     </Form.Group>
                     <Form.Group controlId="formFile" className="mb-3">
                         <Form.Label>이미지</Form.Label>
-                        <Form.Control type="file" />
+                        <Form.Control type="file" name="userImage" onChange={handleChange} />
                     </Form.Group>
                 </Form>
             </Modal.Body>
@@ -68,7 +71,7 @@ const SignUpModal = ({ show, handleSignUpClose }) => {
                 <Button variant="secondary" onClick={handleSignUpClose}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={handleSignUpClose}>
+                <Button variant="primary" onClick={handleSignUpSubmit}>
                     Save Changes
                 </Button>
             </Modal.Footer>
