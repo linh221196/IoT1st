@@ -3,10 +3,16 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./Content.scss";
 import { NavLink } from "react-bootstrap";
-
+import NoticeMeasure from "./User/NoticeMeasure";
+import { useState } from 'react';
 
 const Content = () => {
-
+  const [fullscreen, setFullscreen] = useState(true);
+  const [showNoticeModal, setNoticeModalShow] = useState(false);
+  const handleNoticeModalShow = (breakpoint) => {
+    setFullscreen(breakpoint);
+    setNoticeModalShow(true);
+  }
   return (
     <div>
       <Container>
@@ -15,7 +21,13 @@ const Content = () => {
             <NavLink href="/DeviceView">기계안내</NavLink>
           </Col>
           <Col className="c-content">
-            <NavLink>주의 할 요소</NavLink>
+            <NavLink onClick={handleNoticeModalShow}>주의 할 요소</NavLink>
+            <NoticeMeasure
+              showNoticeModal={showNoticeModal}
+              handleNoticeModalShow={handleNoticeModalShow}
+              setNoticeModalShow={setNoticeModalShow}
+              fullscreen={fullscreen}
+            />
           </Col>
         </Row>
         <Row className="r-content">

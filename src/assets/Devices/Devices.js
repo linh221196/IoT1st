@@ -8,6 +8,7 @@ import GSR from './GSR.png'
 import NIBP from './NIBP.png'
 import SPO2 from './SPO2.png'
 
+
 const Devices =
     [{
         id: 1,
@@ -27,12 +28,12 @@ const Devices =
         img: NIBP,
         des: "혈압 측정계"
     },
-    {
-        id: 4,
-        name: "GULOMETER 혈당 측정계",
-        img: Gluco,
-        des: "혈당 측정계"
-    },
+    // {
+    //     id: 4,
+    //     name: "GULOMETER 혈당 측정계",
+    //     img: Gluco,
+    //     des: "혈당 측정계"
+    // },
     {
         id: 5,
         name: "SPO2 산소 포화도",

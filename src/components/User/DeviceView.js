@@ -8,6 +8,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import './DeviceView.scss'
 import Devices from '../../assets/Devices/Devices';
+import { RxVideo } from "react-icons/rx";
 
 const DeviceView = () => {
   const devices = Devices
@@ -29,7 +30,7 @@ const DeviceView = () => {
                 </Card.Text>
               </Card.Body>
               <Card.Footer className="text-center">
-                <NavLink href="#">더보기</NavLink>
+                <NavLink href="#"><RxVideo size={20} />더보기</NavLink>
               </Card.Footer>
             </Card>
           </Col>
