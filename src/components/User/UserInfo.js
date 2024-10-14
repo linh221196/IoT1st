@@ -2,7 +2,6 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./UserInfo.scss"
-import { NavLink } from "react-bootstrap";
 import Image from 'react-bootstrap/Image';
 import code from '../../assets/image.jpg'
 import Button from "react-bootstrap/Button";

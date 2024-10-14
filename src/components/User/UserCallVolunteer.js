@@ -1,6 +1,6 @@
 import Calendar from "../Calendar/Calendar";
 
-const Volunteer = () => {
+const UserCallVolunteer = () => {
 
 
   return (
@@ -10,4 +10,4 @@ const Volunteer = () => {
   );
 }
 
-export default Volunteer;
+export default UserCallVolunteer;

@@ -7,7 +7,6 @@ import Col from 'react-bootstrap/Col';
 import dayjs from 'dayjs';
 import ko from 'dayjs/locale/ko';
 import { useState } from 'react';
-import Badge from '@mui/material/Badge';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { TextField } from "@mui/material"

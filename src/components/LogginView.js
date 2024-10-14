@@ -2,7 +2,7 @@ import { NavLink } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "./LogginView.scss"
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import SignUpModal from './SignUpModal';
 import FindPwModal from './FindPwModal';
@@ -44,9 +44,9 @@ function LogginView() {
         setFindPwShowModal(false);
     }
     const handleSignUpSubmit = (e) => {
-        e.preventDefault(); // Prevent default form behavior (like refreshing the page)
-        alert(JSON.stringify(user, null, 2)); // Display user data in a readable format
-        setShowModal(false); // Close the modal after submission
+        e.preventDefault();
+        alert(JSON.stringify(user, null, 2));
+        setShowModal(false);
         navigate('/UserHome')
     }
 
