@@ -6,27 +6,33 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import SignUpModal from './SignUpModal';
 import FindPwModal from './FindPwModal';
-import User from './User'
+import axios from 'axios';
 const LogginView = () => {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const [showFindPwModal, setFindPwShowModal] = useState(false);
     const [user, setUser] = useState({
         email: "",
-        pw: "",
-        userName: "",
-        birth: "",
-        phone: "",
+        password: "",
+        username: "",
+        role: "",
         userImage: ""
     })
     const [validated, setValidated] = useState(false);
 
     const handleChange = (e) => {
-        setUser({
-            ...user,
-            [e.target.name]: e.target.value
+        const { name, value, type, checked } = e.target;
+        if (type === "checkbox") {
+            setUser({
+                ...user,
+                [name]: checked ? value : "" // Assign value if checked, empty if unchecked
+            });
+        } else {
+            setUser({
+                ...user,
+                [name]: value
+            });
         }
-        )
     }
 
     const handleSignUp = () => {
@@ -44,7 +50,7 @@ const LogginView = () => {
     const handleFindPwClose = () => {
         setFindPwShowModal(false);
     }
-    const handleSignUpSubmit = (e) => {
+    const handleSignUpSubmit = async (e) => {
         const form = e.currentTarget;
         e.preventDefault();
         if (form.checkValidity() === false) {
@@ -53,9 +59,23 @@ const LogginView = () => {
             return;
         }
         setValidated(true);
-        alert(JSON.stringify(user, null, 2));
-        setShowModal(false);
-        navigate('/UserHome')
+        //call api 여기서 나중에 백엔드 만들어줄 api 넣으면돼요
+        const formData = new FormData();
+        formData.append('email', user.email);
+        formData.append('password', user.password);
+        formData.append('username', user.username);
+        formData.append('role', user.role);
+        if (user.userImage) {
+            formData.append('userImage', user.userImage);
+        }
+        let response = await axios.post('http://localhost:8081/api/v1/participant', formData)
+            .then(response => {
+                console.log("User successfully registered", response);
+                setShowModal(false);
+            })
+            .catch(error => {
+                console.error("There was an error registering the user", error);
+            });
     }
 
     const handleSubmit = () => {
@@ -75,7 +95,7 @@ const LogginView = () => {
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>비밀번호</Form.Label>
                 <Form.Control type="password" placeholder="비밀번호 입력해주세요"
-                    name="pw"
+                    name="password"
                 />
             </Form.Group>
             <Button variant="primary" type="submit" >
