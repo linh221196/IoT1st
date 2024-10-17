@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import SignUpModal from './SignUpModal';
 import FindPwModal from './FindPwModal';
-import axios from 'axios';
+import { postCreateNewUser } from './services/apiServices';
 
 const LogginView = () => {
     const navigate = useNavigate();
@@ -59,40 +59,26 @@ const LogginView = () => {
         e.preventDefault();
         e.stopPropagation();
         const form = e.currentTarget;
-        e.preventDefault();
         if (form.checkValidity() === false) {
-            e.stopPropagation();
             setValidated(true);
             return;
         }
         setValidated(true);
+
         //call api 여기서 나중에 백엔드 만들어줄 api 넣으면돼요
-        const formData = new FormData();
-        formData.append('email', user.email);
-        formData.append('password', user.password);
-        formData.append('username', user.username);
-        formData.append('role', user.role);
-        if (user.userImage) {
-            formData.append('userImage', user.userImage);
-        }
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/participant`, formData);
-            console.log("User successfully registered", response);
-            setShowModal(false);
+            const res = await postCreateNewUser(user.email, user.password, user.username, user.role, user.userImage);
+            console.log("Check Response", res.data);
+            console.log("Check Inter Response", res);
+
+            // if (res.data && res.data.EC === 0) {
+            //     setShowModal(false);
+            //     alert("User created successfully!");
+            // } else {
+            //     alert(res.data.EM || "Something went wrong!");
+            // }
         } catch (error) {
-            if (error.response) {
-                // Server responded with a status other than 2xx
-                alert(error.response); // Example: Display specific error message from backend
-                console.error("Error response:", error.response);
-            } else if (error.request) {
-                // Request was made but no response received
-                alert("No response from server.");
-                console.error("Error request:", error.request);
-            } else {
-                // Other errors like setting up request or client-side issues
-                alert("An unexpected error occurred.");
-                console.error("Error:", error.message);
-            }
+            alert("An error occurred while creating the user. Please try again.");
         }
     }
 
