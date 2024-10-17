@@ -7,6 +7,7 @@ import { useState } from 'react';
 import SignUpModal from './SignUpModal';
 import FindPwModal from './FindPwModal';
 import axios from 'axios';
+
 const LogginView = () => {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
@@ -15,10 +16,13 @@ const LogginView = () => {
         email: "",
         password: "",
         username: "",
+        // birth:"",
+        // phone:"",
         role: "",
         userImage: ""
     })
     const [validated, setValidated] = useState(false);
+    const [isLoggin, setIsLoggin] = useState(true);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -41,6 +45,7 @@ const LogginView = () => {
 
     const handleSignUpClose = () => {
         setShowModal(false);
+
     }
 
     const handleFindPw = () => {
@@ -51,6 +56,8 @@ const LogginView = () => {
         setFindPwShowModal(false);
     }
     const handleSignUpSubmit = async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         const form = e.currentTarget;
         e.preventDefault();
         if (form.checkValidity() === false) {
@@ -68,19 +75,31 @@ const LogginView = () => {
         if (user.userImage) {
             formData.append('userImage', user.userImage);
         }
-        let response = await axios.post('http://localhost:8081/api/v1/participant', formData)
-            .then(response => {
-                console.log("User successfully registered", response);
-                setShowModal(false);
-            })
-            .catch(error => {
-                console.error("There was an error registering the user", error);
-            });
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/participant`, formData);
+            console.log("User successfully registered", response);
+            setShowModal(false);
+        } catch (error) {
+            if (error.response) {
+                // Server responded with a status other than 2xx
+                alert(error.response); // Example: Display specific error message from backend
+                console.error("Error response:", error.response);
+            } else if (error.request) {
+                // Request was made but no response received
+                alert("No response from server.");
+                console.error("Error request:", error.request);
+            } else {
+                // Other errors like setting up request or client-side issues
+                alert("An unexpected error occurred.");
+                console.error("Error:", error.message);
+            }
+        }
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         console.log("Logging in user:", user);
-        navigate('/UserHome')
+        isLoggin ? navigate('/UserHome') : alert("No Way")
     };
     return (
         <Form onSubmit={handleSubmit}>
