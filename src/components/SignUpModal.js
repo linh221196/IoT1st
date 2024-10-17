@@ -3,10 +3,15 @@ import Modal from 'react-bootstrap/Modal';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-
+import { useState } from 'react';
+import { FaRegEye } from "react-icons/fa";
+import { FaRegEyeSlash } from "react-icons/fa";
 
 const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, handleChange }) => {
-
+    const [showPw, setShowPw] = useState(false);
+    const handleShowPassword = () => {
+        setShowPw(!showPw)
+    }
 
     return (
         <Modal show={show} onHide={handleSignUpClose}>
@@ -20,7 +25,7 @@ const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, h
                         <Col sm="9">
                             <Form.Control type="email"
                                 placeholder="TopazIoT6"
-                                name="id"
+                                name="email"
                                 required
                                 onChange={handleChange}
                             />
@@ -33,10 +38,16 @@ const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, h
                         <Form.Label column sm="3">
                             비밀번호
                         </Form.Label>
-                        <Col sm="9">
-                            <Form.Control type="password" placeholder="Password"
-                                name="pw" onChange={handleChange} required />
+                        <Col sm="7">
+                            <Form.Control placeholder="Password"
+                                name="pw" onChange={handleChange} required
+                                type={showPw ? "text" : "password"} />
                             <Form.Control.Feedback type="invalid">비밀번호 입력해주세요</Form.Control.Feedback>
+                        </Col>
+                        <Col sm="2">
+                            <Button onClick={handleShowPassword}
+                                style={{ padding: '6px 11px' }}
+                            >{showPw ? <FaRegEyeSlash /> : <FaRegEye />}</Button>
                         </Col>
 
                     </Form.Group>
@@ -78,20 +89,24 @@ const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, h
                             Role
                         </Form.Label>
                         <Col>
-                            <div key={`inline-checkbox`} className="mb-3">
+                            <div key={`inline-radio`} className="mb-3">
                                 <Form.Check
                                     inline
                                     label="일반 사용자"
-                                    name="group1"
-                                    type="checkbox"
-                                    id={`inline-checkbox-1`}
+                                    name="role"
+                                    type="radio"
+                                    value="user"
+                                    id={`inline-radio-1`}
+                                    onChange={handleChange}
                                 />
                                 <Form.Check
                                     inline
                                     label="봉사자"
-                                    name="group1"
-                                    type="checkbox"
-                                    id={`inline-checkbox-2`}
+                                    name="role"
+                                    type="radio"
+                                    value="volunteer"
+                                    id={`inline-radio-2`}
+                                    onChange={handleChange}
                                 />
                             </div>
                         </Col>

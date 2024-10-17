@@ -12,7 +12,7 @@ const LogginView = () => {
     const [showModal, setShowModal] = useState(false);
     const [showFindPwModal, setFindPwShowModal] = useState(false);
     const [user, setUser] = useState({
-        id: "",
+        email: "",
         pw: "",
         userName: "",
         birth: "",
@@ -67,7 +67,7 @@ const LogginView = () => {
             <Form.Group className="mb-3" controlId="formBasicId">
                 <Form.Label>ID</Form.Label>
                 <Form.Control type="text" placeholder="예제: topaziot6"
-                    name="id"
+                    name="email"
                 />
 
             </Form.Group>
