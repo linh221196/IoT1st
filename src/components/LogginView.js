@@ -67,16 +67,14 @@ const LogginView = () => {
 
         //call api 여기서 나중에 백엔드 만들어줄 api 넣으면돼요
         try {
-            const res = await postCreateNewUser(user.email, user.password, user.username, user.role, user.userImage);
-            console.log("Check Response", res.data);
-            console.log("Check Inter Response", res);
-
-            // if (res.data && res.data.EC === 0) {
-            //     setShowModal(false);
-            //     alert("User created successfully!");
-            // } else {
-            //     alert(res.data.EM || "Something went wrong!");
-            // }
+            const data = await postCreateNewUser(user.email, user.password, user.username, user.role, user.userImage);
+            console.log("Check Inter Response", data);
+            if (data && data.EC === 0) {
+                setShowModal(false);
+                alert("User created successfully!");
+            } else {
+                alert(data.EM || "Something went wrong!");
+            }
         } catch (error) {
             alert("An error occurred while creating the user. Please try again.");
         }
