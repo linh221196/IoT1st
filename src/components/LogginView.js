@@ -7,7 +7,7 @@ import { useState } from 'react';
 import SignUpModal from './SignUpModal';
 import FindPwModal from './FindPwModal';
 import User from './User'
-function LogginView() {
+const LogginView = () => {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const [showFindPwModal, setFindPwShowModal] = useState(false);
@@ -19,6 +19,7 @@ function LogginView() {
         phone: "",
         userImage: ""
     })
+    const [validated, setValidated] = useState(false);
 
     const handleChange = (e) => {
         setUser({
@@ -44,7 +45,14 @@ function LogginView() {
         setFindPwShowModal(false);
     }
     const handleSignUpSubmit = (e) => {
+        const form = e.currentTarget;
         e.preventDefault();
+        if (form.checkValidity() === false) {
+            e.stopPropagation();
+            setValidated(true);
+            return;
+        }
+        setValidated(true);
         alert(JSON.stringify(user, null, 2));
         setShowModal(false);
         navigate('/UserHome')
@@ -95,6 +103,7 @@ function LogginView() {
                     handleSignUpSubmit={handleSignUpSubmit}
                     setUser={setUser}
                     handleChange={handleChange}
+                    validated={validated}
                 />
 
             </div>

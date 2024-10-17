@@ -7,6 +7,8 @@ import Gluco from './Gluco.png'
 import GSR from './GSR.png'
 import NIBP from './NIBP.png'
 import SPO2 from './SPO2.png'
+import airflowimoticon from './airflowimoticon.png'
+
 
 
 const Devices =
@@ -14,7 +16,8 @@ const Devices =
         id: 1,
         name: "Air FLow 호흡센서",
         img: AirFlow,
-        des: "Air FLow 호흡센서"
+        des: "Air FLow 호흡센서",
+        imoticon: airflowimoticon
     },
     {
         id: 2,
