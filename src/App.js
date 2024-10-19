@@ -5,6 +5,8 @@ import UserHome from './components/User/UserHome';
 import Volunteer from './components/User/UserCallVolunteer';
 import DeviceView from './components/User/DeviceView';
 import AdminHome from './components/Admin/AdminHome';
+import Test from './components/services/test';
+
 function App() {
   return (
     <div className="App app-container container">
@@ -15,6 +17,7 @@ function App() {
         <Route path='/Volunteer' element={<Volunteer />} />
         <Route path='/DeviceView' element={<DeviceView />} />
         <Route path="/AdminHome" element={<AdminHome />} />
+        <Route path="/Test" element={<Test />} />
       </Routes>
 
 

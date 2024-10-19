@@ -85,6 +85,10 @@ const LogginView = () => {
         console.log("Logging in user:", user);
         isLoggin ? navigate('/UserHome') : alert("No Way")
     };
+    
+    const handleCheckEmailExist =()=>{
+
+    }
     return (
         <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicId">

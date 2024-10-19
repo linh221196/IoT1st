@@ -6,12 +6,13 @@ import Row from 'react-bootstrap/Row';
 import { useState } from 'react';
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
-
+import { useFetchUser } from './services/useFetchUser';
 const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, handleChange }) => {
     const [showPw, setShowPw] = useState(false);
     const handleShowPassword = () => {
         setShowPw(!showPw)
     }
+
 
     return (
         <Modal show={show} onHide={handleSignUpClose}>
@@ -22,7 +23,7 @@ const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, h
                 <Form noValidate validated={validated} onSubmit={handleSignUpSubmit}>
                     <Form.Group as={Row} className="mb-3" controlId="formBasicEmail" hasvalidation="true">
                         <Form.Label column sm="3">Email</Form.Label>
-                        <Col sm="9">
+                        <Col sm="7">
                             <Form.Control type="email"
                                 placeholder="TopazIoT6"
                                 name="email"
@@ -30,6 +31,11 @@ const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, h
                                 onChange={handleChange}
                             />
                             <Form.Control.Feedback type="invalid">이메일 입력해주세요</Form.Control.Feedback>
+                        </Col>
+                        <Col sm="2">
+                            <Button style={{ padding: '6px 11px' }}
+                          
+                            >체크</Button>
                         </Col>
 
                     </Form.Group>
@@ -126,13 +132,13 @@ const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, h
                             feedbackType="invalid"
                         />
                     </Form.Group>
-                    <Row gap={3}>
-                        <Col >
+                    <Row gap={3} className="justify-content-center">
+                        <Col xs="auto" >
                             <Button variant="primary" type='submit' >
                                 회원가입
                             </Button>
                         </Col>
-                        <Col>
+                        <Col xs="auto">
                             <Button variant="secondary" onClick={handleSignUpClose}>
                                 닫기
                             </Button>

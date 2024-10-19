@@ -1,33 +1,19 @@
 import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
-import { useEffect, useState } from 'react';
-import { getAllUsers } from '../services/apiServices'
 import Button from 'react-bootstrap/Button';
 import { MdEdit } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
-
+import { useFetchUser } from '../services/useFetchUser';
 
 const paginationModel = { page: 0, pageSize: 10 };
 
 const UserTable = () => {
-    const [listUser, setListUser] = useState([])
-    const fetchListUser = async () => {
-        let res = await getAllUsers()
-        console.log(res)
-        if (res.EC === 0) {
-            setListUser(res.DT)
-        }
-    }
-    useEffect((res) => {
-        fetchListUser()
-    }, []);
+    const { listUser, error, isLoading } = useFetchUser()
     const handleEdit = (row) => {
         console.log("Edit user:", row);
-        // Implement your edit logic here, like opening a modal with user details
     };
     const handleDelete = (row) => {
         console.log("Delete user:", row);
-        // Implement your delete logic here, like showing a confirmation dialog
     };
 
     const columns = [
@@ -65,19 +51,26 @@ const UserTable = () => {
         },
     ];
     return (
-        listUser && listUser.length > 0 ?
-            (<Paper sx={{ height: 500, width: '100%' }}>
+        <Paper sx={{ height: 500, width: '100%' }}>
+            {isLoading ? (
+                <div>Loading data...</div>
+            ) : error ? (
+                <div>Something went wrong: {error}</div>
+            ) : (
                 <DataGrid
-                    rows={listUser}
+                    rows={listUser ? listUser : []}
                     columns={columns}
                     initialState={{ pagination: { paginationModel } }}
-                    pageSizeOptions={[ 10, 15]}
+                    pageSizeOptions={[10, 15]}
                     checkboxSelection
                     sx={{ border: 0 }}
-                />
-            </Paper>)
+                    components={{
+                        NoRowsOverlay: () => <div>No data available</div>, // Custom no data message
+                    }}
+                />)}
+        </Paper>
 
-            : <>No User </>
+
     )
 }
 export default UserTable
