@@ -15,7 +15,8 @@ const postCreateNewUser = (email, password, username, role, userImage) => {
 const getAllUsers = () => {
     return axios.get(`/participant/all`);
 }
-const getUserEmail =()=>{
-    return axios.get(`/participant/all`);
+
+const postEditUserData =()=>{
+    return axios.post(`/profile`)
 }
 export { postCreateNewUser, getAllUsers }

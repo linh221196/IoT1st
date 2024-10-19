@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import { useState } from 'react';
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
-import { useFetchUser } from './services/useFetchUser';
+
 const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, handleChange }) => {
     const [showPw, setShowPw] = useState(false);
     const handleShowPassword = () => {
@@ -34,7 +34,7 @@ const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, h
                         </Col>
                         <Col sm="2">
                             <Button style={{ padding: '6px 11px' }}
-                          
+
                             >체크</Button>
                         </Col>
 

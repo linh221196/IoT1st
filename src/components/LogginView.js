@@ -12,32 +12,41 @@ const LogginView = () => {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const [showFindPwModal, setFindPwShowModal] = useState(false);
-    const [user, setUser] = useState({
-        email: "",
-        password: "",
-        username: "",
-        // birth:"",
-        // phone:"",
-        role: "",
-        userImage: ""
-    })
+    const [email, setEmail] = useState('')
+    const [userImage, setUserImage] = useState('')
+    const [username, setUserName] = useState('')
+    const [password, setPassword] = useState('')
+    const [role, setRole] = useState('');
+    // const [phone, setPhone] = useState('')
+    // const [birth, setBirth] = useState('')
     const [validated, setValidated] = useState(false);
+
+
+
     const [isLoggin, setIsLoggin] = useState(true);
 
     const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        if (type === "checkbox") {
-            setUser({
-                ...user,
-                [name]: checked ? value : "" // Assign value if checked, empty if unchecked
-            });
-        } else {
-            setUser({
-                ...user,
-                [name]: value
-            });
+        const { name, value, files } = e.target;
+        switch (name) {
+            case 'email':
+                setEmail(value);
+                break;
+            case 'username':
+                setUserName(value);
+                break;
+            case 'password':
+                setPassword(value);
+                break;
+            case 'userImage':
+                setUserImage(files[0]);
+                break;
+            case 'role':
+                setRole(value);
+                break;
+            default:
+                break;
         }
-    }
+    };
 
     const handleSignUp = () => {
         setShowModal(true);
@@ -64,10 +73,8 @@ const LogginView = () => {
             return;
         }
         setValidated(true);
-
-        //call api 여기서 나중에 백엔드 만들어줄 api 넣으면돼요
         try {
-            const data = await postCreateNewUser(user.email, user.password, user.username, user.role, user.userImage);
+            const data = await postCreateNewUser(email, password, username, role, userImage);
             console.log("Check Inter Response", data);
             if (data && data.EC === 0) {
                 setShowModal(false);
@@ -82,11 +89,11 @@ const LogginView = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Logging in user:", user);
+        console.log("Logging in user:");
         isLoggin ? navigate('/UserHome') : alert("No Way")
     };
-    
-    const handleCheckEmailExist =()=>{
+
+    const handleCheckEmailExist = () => {
 
     }
     return (
@@ -128,13 +135,10 @@ const LogginView = () => {
                     show={showModal}
                     handleSignUpClose={handleSignUpClose}
                     handleSignUpSubmit={handleSignUpSubmit}
-                    setUser={setUser}
                     handleChange={handleChange}
                     validated={validated}
                 />
-
             </div>
-
         </Form>
     );
 }
