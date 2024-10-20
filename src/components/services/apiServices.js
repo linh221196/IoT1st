@@ -10,7 +10,7 @@ const postCreateNewUser = (email, password, username, role, userImage) => {
         formData.append('userImage', userImage);
     }
     //return axios.post(`/...`, formData);
-    // return axios.post(`/participant`, formData);
+    //return axios.post(`/participant`, formData);
 }
 
 const getAllUsers = () => {

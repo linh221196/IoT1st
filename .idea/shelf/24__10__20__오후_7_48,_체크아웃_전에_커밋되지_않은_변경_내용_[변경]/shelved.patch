@@ -1,0 +1,17 @@
+Index: src/components/utils/axiosCustomize.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import axios from \"axios\";\r\n\r\nconst instance = axios.create({\r\n    // 여기서 baseURL 앞부분을 적어주시고 services 폴더 => apiServices.js에서\r\n    // 나머지 api부분을 적어주시면됩니다\r\n    // 이 방법을 하면 나중에 api를 바꿔더라도 여기만 수정하고 힘들게 찾아서\r\n    // 수정 필요없습니다\r\n\r\n    //baseURL: http://localhost:8081/api/v1 예시\r\n\r\n    //수정이나 삭제금지\r\n    //baseURL: process.env.REACT_APP_API_URL\r\n});\r\n\r\n// Add a request interceptor\r\ninstance.interceptors.request.use(function (config) {\r\n    // Do something before request is sent\r\n    return config;\r\n}, function (error) {\r\n    // Do something with request error\r\n    return Promise.reject(error);\r\n});\r\n\r\n// Add a response interceptor\r\ninstance.interceptors.response.use(function (response) {\r\n    console.log(\"interceptors\", response)\r\n    // Any status code that lie within the range of 2xx cause this function to trigger\r\n    // Do something with response data\r\n    return response && response.data ? response.data : response;\r\n}, function (error) {\r\n    // Any status codes that falls outside the range of 2xx cause this function to trigger\r\n    // Do something with response error\r\n    return Promise.reject(error);\r\n});\r\nexport default instance
+===================================================================
+diff --git a/src/components/utils/axiosCustomize.js b/src/components/utils/axiosCustomize.js
+--- a/src/components/utils/axiosCustomize.js	(revision dad29e71c7613e085e51eda81fb643b4b92c1a31)
++++ b/src/components/utils/axiosCustomize.js	(date 1729421269949)
+@@ -10,6 +10,8 @@
+ 
+     //수정이나 삭제금지
+     //baseURL: process.env.REACT_APP_API_URL
++
++    //임시 baseURL: http://localhost:8080/
+ });
+ 
+ // Add a request interceptor
