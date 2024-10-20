@@ -22,11 +22,11 @@ const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, h
             <Modal.Body>
                 <Form noValidate validated={validated} onSubmit={handleSignUpSubmit}>
                     <Form.Group as={Row} className="mb-3" controlId="formBasicEmail" hasvalidation="true">
-                        <Form.Label column sm="3">Email</Form.Label>
+                        <Form.Label column sm="3">Email/ ID</Form.Label>
                         <Col sm="7">
-                            <Form.Control type="email"
+                            <Form.Control type="email" //type="text"
                                 placeholder="TopazIoT6"
-                                name="email"
+                                name="email" //name="User_Id"
                                 required
                                 onChange={handleChange}
                             />
@@ -93,7 +93,7 @@ const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, h
 
                     <Form.Group as={Row} className="mb-3" hasvalidation="true">
                         <Form.Label column sm="3">
-                            Role
+                            Division
                         </Form.Label>
                         <Col>
                             <div key={`inline-radio`} className="mb-3">
