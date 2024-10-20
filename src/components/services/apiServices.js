@@ -9,14 +9,17 @@ const postCreateNewUser = (email, password, username, role, userImage) => {
     if (userImage) {
         formData.append('userImage', userImage);
     }
-    return axios.post(`/participant`, formData);
+    //return axios.post(`/...`, formData);
+    //return axios.post(`/participant`, formData);
 }
 
 const getAllUsers = () => {
-    return axios.get(`/participant/all`);
+    // return axios.get(`/.../...`);
+    // return axios.get(`/participant/all`);
 }
 
-const postEditUserData =()=>{
-    return axios.post(`/profile`)
+const postEditUserData = () => {
+    //return axios.post(`/...`)
+    // return axios.post(`/profile`)
 }
 export { postCreateNewUser, getAllUsers }
