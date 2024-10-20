@@ -1,13 +1,21 @@
 import UserInfo from '../User/UserInfo'
 import Calendar from '../Calendar/Calendar'
-
+import { Row,Col } from 'react-bootstrap'
 const VolunteerHome = () => {
     return (
         <>
             Volunteer Home Page 
             user's role 
-            <Calendar/>
-            <UserInfo />
+            <Row>
+                <Col>
+                <Calendar/>
+                </Col>
+                <Col>
+                <UserInfo />
+                </Col>
+            </Row>
+            
+           
 
         </>
 

@@ -8,17 +8,18 @@ import Button from "react-bootstrap/Button";
 import { FiEdit } from "react-icons/fi";
 import UserInfoUpdateModal from "./UserInfoUpdateModal";
 import { useState } from 'react';
+import { useFetchUser } from "../services/useFetchUser";
+import { putEditUserData } from "../services/apiServices";
 
 const UserInfo = () => {
 
-    const userInfo =
-    {
-        name: "린",
-        age: "12/34/5678",
-        nurse: "노영휸"
-
-    }
+    const { listUser } = useFetchUser()
+    const userInfo = listUser.find(user => user.id === 8)
+    console.log(userInfo)
     const [showModal, setShowModal] = useState(false);
+    const [userImage, setUserImage] = useState('') //will disable
+    const [username, setUserName] = useState('') //change to Name, setName
+    const [validated, setValidated] = useState(false);
 
     const handleUpdate = () => {
         setShowModal(true);
@@ -28,10 +29,49 @@ const UserInfo = () => {
         setShowModal(false);
     }
 
+    const handleUpdateSubmit = async (e) => {
+        e.preventDefault();
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            setValidated(true);
+            return;
+        }
+        setValidated(true);
+        try {
+            const data = await putEditUserData(userInfo.id, username, userInfo.role, userImage)
+            console.log('Check response', data)
+            if (data && data.EC === 0) {
+                setShowModal(false)
+                alert('Updated')
+            } else {
+                alert(data.EM || "Something went wrong")
+            }
+        } catch (error) {
+            alert("Error occurred")
+
+        }
+    }
+
+    const handleChange = (e) => {
+        const { name, value, files } = e.target;
+        switch (name) {
+            case 'email':
+                break;
+            case 'username':
+                setUserName(value);
+                break;
+            case 'userImage':
+                setUserImage(files[0]);
+                break;
+            default:
+                break;
+        }
+    }
+
     return (
         <div>
             <Container className="user-imageContainer">
-                <Image className="user-image" src={code} rounded />
+                <Image className="user-image" src={userInfo?.image ? userInfo.image : code} rounded />
             </Container>
 
             <Container  >
@@ -40,15 +80,15 @@ const UserInfo = () => {
                         성함
                     </Col>
                     <Col className="c2-userInfo" sm="7">
-                        {userInfo.name}
+                        {userInfo?.username}
                     </Col>
                 </Row>
                 <Row className="r-userInfo">
                     <Col className="c1-userInfo" sm="5">
-                        생년월일
+                        이메일 또는 ID
                     </Col>
                     <Col className="c2-userInfo" sm="7">
-                        {userInfo.age}
+                        {userInfo?.email}
                     </Col>
                 </Row>
                 <Row className="r-userInfo">
@@ -56,20 +96,27 @@ const UserInfo = () => {
                         의료진
                     </Col>
                     <Col className="c2-userInfo" sm="7">
-                        {userInfo.nurse}
+                        {userInfo?.doctor?.name ? userInfo.doctor.name : '노영휸'}
                     </Col>
                 </Row>
             </Container>
             <div>
-                <Button variant="outline-success" onClick={handleUpdate} >
+                <Button variant="outline-success" className="me-3" onClick={handleUpdate} >
                     수정
                     <FiEdit />
+                </Button>
+                <Button variant="outline-danger" onClick={handleUpdate} >
+                    비밀번호
+
                 </Button>
 
                 <UserInfoUpdateModal
                     userInfo={userInfo}
                     show={showModal}
                     handleClose={handleClose}
+                    handleUpdateSubmit={handleUpdateSubmit}
+                    handleChange={handleChange}
+                    validated={validated}
                 />
             </div>
 
