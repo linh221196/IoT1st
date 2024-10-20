@@ -10,6 +10,7 @@ const instance = axios.create({
 
     //수정이나 삭제금지
     //baseURL: process.env.REACT_APP_API_URL
+    baseURL: 'http://localhost:8080' ,
 });
 
 // Add a request interceptor

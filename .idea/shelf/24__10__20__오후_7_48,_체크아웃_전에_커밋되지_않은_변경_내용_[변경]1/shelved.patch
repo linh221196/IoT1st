@@ -1,0 +1,145 @@
+Index: src/components/User/UserHome.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { Stack } from \"react-bootstrap\"\r\nimport '../Home.scss'\r\nimport Content from \"../Content\"\r\nimport UserInfo from \"./UserInfo\"\r\n\r\nconst UserHome = () => {\r\n\r\n  return (\r\n    <div className=\"body-container\">\r\n      <Stack direction=\"horizontal\" >\r\n        <div className=\"content-container\">\r\n          <Content />\r\n        </div>\r\n        <div className=\"loggin-container\">\r\n          <UserInfo />\r\n        </div>\r\n      </Stack>\r\n    </div>\r\n  )\r\n}\r\n\r\nexport default UserHome
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/User/UserHome.js b/src/components/User/UserHome.js
+--- a/src/components/User/UserHome.js	(revision dad29e71c7613e085e51eda81fb643b4b92c1a31)
++++ b/src/components/User/UserHome.js	(date 1729419283024)
+@@ -1,22 +1,40 @@
+-import { Stack } from "react-bootstrap"
+-import '../Home.scss'
+-import Content from "../Content"
+-import UserInfo from "./UserInfo"
++import { Stack } from "react-bootstrap";
++import '../Home.scss';
++import Content from "../Content";
++import UserInfo from "./UserInfo";
++import React, { useEffect, useState } from 'react';
++import axios from 'axios';
+ 
+ const UserHome = () => {
++  const [data, setData] = useState(null);
++
++  // API 호출
++  useEffect(() => {
++    axios.get('http://localhost:8080/UserHome')  // Spring Boot API 호출
++        .then(response => {
++          setData(response.data);  // 응답 데이터를 상태에 저장
++        })
++        .catch(error => {
++          console.error('API 호출 중 오류가 발생했습니다.', error);
++        });
++  }, []);
+ 
+   return (
+-    <div className="body-container">
+-      <Stack direction="horizontal" >
+-        <div className="content-container">
+-          <Content />
+-        </div>
+-        <div className="loggin-container">
+-          <UserInfo />
+-        </div>
+-      </Stack>
+-    </div>
+-  )
+-}
++      <div className="body-container">
++        <Stack direction="horizontal">
++          <div className="content-container">
++            <Content />
++          </div>
++          <div className="loggin-container">
++            <UserInfo />
++            {/* 데이터를 받아서 텍스트로 표시 */}
++            <div className="api-response">
++              {data ? `서버 응답: ${data}` : '데이터 로딩 중...'}
++            </div>
++          </div>
++        </Stack>
++      </div>
++  );
++};
+ 
+-export default UserHome
+\ No newline at end of file
++export default UserHome;
+Index: .idea/.gitignore
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644
+--- /dev/null	(date 1728892060024)
++++ b/.idea/.gitignore	(date 1728892060024)
+@@ -0,0 +1,8 @@
++# 디폴트 무시된 파일
++/shelf/
++/workspace.xml
++# 에디터 기반 HTTP 클라이언트 요청
++/httpRequests/
++# Datasource local storage ignored files
++/dataSources/
++/dataSources.local.xml
+Index: .idea/modules.xml
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+new file mode 100644
+--- /dev/null	(date 1728892091773)
++++ b/.idea/modules.xml	(date 1728892091773)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/IoT1st.iml" filepath="$PROJECT_DIR$/.idea/IoT1st.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/misc.xml
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+new file mode 100644
+--- /dev/null	(date 1728892091776)
++++ b/.idea/misc.xml	(date 1728892091776)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="corretto-21" project-jdk-type="JavaSDK">
++    <output url="file://$PROJECT_DIR$/out" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/IoT1st.iml
+===================================================================
+diff --git a/.idea/IoT1st.iml b/.idea/IoT1st.iml
+new file mode 100644
+--- /dev/null	(date 1728892091770)
++++ b/.idea/IoT1st.iml	(date 1728892091770)
+@@ -0,0 +1,9 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="JAVA_MODULE" version="4">
++  <component name="NewModuleRootManager" inherit-compiler-output="true">
++    <exclude-output />
++    <content url="file://$MODULE_DIR$" />
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+Index: .idea/vcs.xml
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1728892091780)
++++ b/.idea/vcs.xml	(date 1728892091780)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
