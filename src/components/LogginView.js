@@ -3,10 +3,10 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "./LogginView.scss"
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SignUpModal from './SignUpModal';
 import FindPwModal from './FindPwModal';
-import { postCreateNewUser } from './services/apiServices';
+import { postCreateNewUser, postLoggin } from './services/apiServices';
 
 const LogginView = () => {
     const navigate = useNavigate();
@@ -25,7 +25,7 @@ const LogginView = () => {
 
 
 
-    const [isLoggin, setIsLoggin] = useState(true);
+    const [isLoggin, setIsLoggin] = useState(false);
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -89,21 +89,44 @@ const LogginView = () => {
         }
     }
 
-    const handleSubmit = (e) => {
+
+    useEffect(() => {
+        if (isLoggin) {
+            navigate('/UserHome');
+        }
+    }, [isLoggin]);
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Logging in user:");
-        isLoggin ? navigate('/UserHome') : alert("No Way")
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            setValidated(true);
+            return;
+        }
+        setValidated(true);
+        try {
+            const data = await postLoggin(email, password);
+            console.log("Check Inter Response", data);
+            if (data && data.EC === 0) {
+                setIsLoggin(true)
+                alert("Login successfully!");
+            } else {
+                alert(data.EM || "Something went wrong!");
+            }
+        } catch (error) {
+            alert("An error occurred while loggin. Please try again.");
+        }
+        console.log(`Logging in user: ${email}`);
     };
 
     const handleCheckEmailExist = () => {
 
     }
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} noValidate validated={validated}>
             <Form.Group className="mb-3" controlId="formBasicId">
                 <Form.Label>ID</Form.Label>
                 <Form.Control type="text" placeholder="예제: topaziot6"
-                    name="email"
+                    name="email" onChange={handleChange}
                 />
 
             </Form.Group>
@@ -111,7 +134,7 @@ const LogginView = () => {
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>비밀번호</Form.Label>
                 <Form.Control type="password" placeholder="비밀번호 입력해주세요"
-                    name="password"
+                    name="password" onChange={handleChange}
                 />
             </Form.Group>
             <Button variant="primary" type="submit" >

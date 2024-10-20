@@ -14,7 +14,7 @@ import { putEditUserData } from "../services/apiServices";
 const UserInfo = () => {
 
     const { listUser } = useFetchUser()
-    const userInfo = listUser.find(user => user.id === 8)
+    const userInfo = listUser.find(user => user.id === 12)
     console.log(userInfo)
     const [showModal, setShowModal] = useState(false);
     const [userImage, setUserImage] = useState('') //will disable
