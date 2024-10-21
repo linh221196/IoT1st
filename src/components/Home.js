@@ -5,12 +5,12 @@ import LogginView from "./LogginView"
 const Home = () => {
 
   return (
-    <Container fluid="md">
-      <Row >
-        <Col sm={8}>
+    <Container >
+      <Row className="home-container border rounded shadow p-3 mb-5 " >
+        <Col md={8} className="border-end" >
           <Content />
         </Col>
-        <Col sm={4} >
+        <Col md={4} >
           <LogginView />
         </Col>
       </Row>
