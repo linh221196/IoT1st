@@ -181,7 +181,7 @@ const LogginView = () => {
 
                     계정이 없으세요?
                 </Form.Text>
-                <NavLink onClick={handleSignUp} >화원가입</NavLink>
+                <NavLink onClick={handleSignUp} >회원가입</NavLink>
                 <SignUpModal
                     show={showModal}
                     handleSignUpClose={handleSignUpClose}

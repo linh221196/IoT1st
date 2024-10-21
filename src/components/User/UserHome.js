@@ -1,4 +1,4 @@
-import { Stack } from "react-bootstrap"
+import { Col, Container, Row } from "react-bootstrap"
 import '../Home.scss'
 import Content from "../Content"
 import UserInfo from "./UserInfo"
@@ -6,16 +6,17 @@ import UserInfo from "./UserInfo"
 const UserHome = () => {
 
   return (
-    <div className="body-container">
-      <Stack direction="horizontal" >
-        <div className="content-container">
+    <Container >
+      <Row className="home-container border rounded shadow p-3 mb-5 " >
+        <Col md={8} className="border-end" >
           <Content />
-        </div>
-        <div className="loggin-container">
+        </Col>
+        <Col md={4} >
           <UserInfo />
-        </div>
-      </Stack>
-    </div>
+        </Col>
+      </Row>
+    </Container>
+
   )
 }
 

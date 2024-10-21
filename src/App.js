@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import UserHome from './components/User/UserHome';
 import Volunteer from './components/User/UserCallVolunteer';
 import DeviceView from './components/User/DeviceView';
-import AdminHome from './components/Admin/AdminHome';
+import AdminHome from './components/Medical/AdminHome';
 import Test from './components/services/test';
 import VolunteerHome from './components/Volunteer/VolunteerHomePage';
 
@@ -17,7 +17,7 @@ function App() {
         <Route path='/UserHome' element={<UserHome />} />
         <Route path='/Volunteer' element={<Volunteer />} />
         <Route path='/DeviceView' element={<DeviceView />} />
-        <Route path="/AdminHome" element={<AdminHome />} />
+        <Route path="/Medical" element={<AdminHome />} />
         <Route path="/Test" element={<Test />} />
         <Route path="/VolunteerHome" element={<VolunteerHome />} />
       </Routes>
