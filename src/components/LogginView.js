@@ -75,6 +75,7 @@ const LogginView = () => {
     const handleFindPwClose = () => {
         setFindPwShowModal(false);
     }
+    //회원가입의 response처리
     const handleSignUpSubmit = async (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -99,7 +100,7 @@ const LogginView = () => {
         }
     }
 
-
+    //로그인 기능
     useEffect(() => {
         if (isLoggin) {
             navigate('/UserHome');
