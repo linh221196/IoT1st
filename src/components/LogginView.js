@@ -17,7 +17,7 @@ const LogginView = () => {
     const [username, setUserName] = useState('') //change to Name, setName
     const [password, setPassword] = useState('')
     const [role, setRole] = useState(''); // change to division later, (환자, 봉사자, 의료진)
-    // const [phoneNum, setPhoneNum] = useState('')
+    const [phoneNum, setPhoneNum] = useState('')
     // const [birth, setBirth] = useState('') // change to Age?
     // const [SSN,setSSN] =useState('')
     // const [User_Id,setUser_Id]=useState('')
@@ -44,6 +44,9 @@ const LogginView = () => {
                 break;
             case 'role':
                 setRole(value);
+                break;
+            case 'phone':
+                setPhoneNum(value)
                 break;
             default:
                 break;
@@ -76,7 +79,7 @@ const LogginView = () => {
         }
         setValidated(true);
         try {
-            const data = await postCreateNewUser(email, password, username, role, userImage);
+            const data = await postCreateNewUser(email, password, username,phoneNum, role, userImage);
             console.log("Check Inter Response", data);
             if (data && data.EC === 0) {
                 setShowModal(false);

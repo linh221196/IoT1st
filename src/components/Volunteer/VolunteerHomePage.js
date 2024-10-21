@@ -7,7 +7,7 @@ const VolunteerHome = () => {
             Volunteer Home Page 
             user's role 
             <Row>
-                <Col>
+                <Col sm={8}>
                 <Calendar/>
                 </Col>
                 <Col>

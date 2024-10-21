@@ -1,10 +1,11 @@
 import axios from "../utils/axiosCustomize";
 
-const postCreateNewUser = (email, password, username, role, userImage) => {
+const postCreateNewUser = (email, password, username, phoneNum, role, userImage) => {
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
     formData.append('username', username);
+    formData.append('phoneNum', phoneNum);
     formData.append('role', role);
     if (userImage) {
         formData.append('userImage', userImage);
@@ -18,6 +19,7 @@ const getAllUsers = () => {
     // return axios.get(`/participant/all`);
 }
 
+//개인정보 수정 (pw 아님)
 const putEditUserData = (id, username, role, userImage) => {
     const formData = new FormData();
     formData.append('id', id);
@@ -32,6 +34,7 @@ const putEditUserData = (id, username, role, userImage) => {
     // return axios.put(`/participant`, formData)
 }
 
+//로그인
 const postLoggin = (email, password) => {
     const formData = new FormData();
     formData.append('email', email)

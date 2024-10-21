@@ -24,7 +24,7 @@ const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, h
                     <Form.Group as={Row} className="mb-3" controlId="formBasicEmail" hasvalidation="true">
                         <Form.Label column sm="3">Email/ ID</Form.Label>
                         <Col sm="7">
-                            <Form.Control type="email" //type="text"
+                            <Form.Control type="text" //type="text"
                                 placeholder="TopazIoT6"
                                 name="email" //name="User_Id"
                                 required
@@ -68,7 +68,7 @@ const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, h
                         </Col>
                     </Form.Group>
 
-                    {/* <Form.Group as={Row} className="mb-3" controlId="formPlaintextAge" hasValidation>
+                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextAge" hasValidation>
                         <Form.Label column sm="3">
                             생년월일
                         </Form.Label>
@@ -89,7 +89,7 @@ const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, h
                         <Col sm="2">
                             <Button style={{ padding: '6px 11px' }} >체크</Button>
                         </Col>
-                    </Form.Group> */}
+                    </Form.Group>
 
                     <Form.Group as={Row} className="mb-3" hasvalidation="true">
                         <Form.Label column sm="3">
@@ -102,7 +102,7 @@ const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, h
                                     label="일반 사용자"
                                     name="role"
                                     type="radio"
-                                    value="user"
+                                    value="Patient"
                                     id={`inline-radio-1`}
                                     onChange={handleChange}
                                 />
@@ -111,7 +111,16 @@ const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, h
                                     label="봉사자"
                                     name="role"
                                     type="radio"
-                                    value="volunteer"
+                                    value="Volunteer"
+                                    id={`inline-radio-2`}
+                                    onChange={handleChange}
+                                />
+                                <Form.Check
+                                    inline
+                                    label="의료진"
+                                    name="role"
+                                    type="radio"
+                                    value="Medical"
                                     id={`inline-radio-2`}
                                     onChange={handleChange}
                                 />
@@ -120,10 +129,10 @@ const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, h
                         </Col>
                     </Form.Group>
 
-                    <Form.Group controlId="formFile" className="mb-3" >
+                    {/* <Form.Group controlId="formFile" className="mb-3" >
                         <Form.Label>이미지</Form.Label>
                         <Form.Control type="file" name="userImage" onChange={handleChange} />
-                    </Form.Group>
+                    </Form.Group> */}
                     <Form.Group className="mb-3" hasvalidation="true">
                         <Form.Check
                             required
