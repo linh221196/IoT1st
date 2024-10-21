@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c4dad222-51d5-449c-a412-22b27b5b8509" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/services/apiServices.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/services/apiServices.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/utils/axiosCustomize.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/utils/axiosCustomize.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,24 +58,10 @@
     "project.structure.last.edited": "모듈",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.2.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="IoT1st" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="IoT1st" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -103,7 +89,8 @@
       <workItem from="1729421387238" duration="29000" />
       <workItem from="1729421419550" duration="88000" />
       <workItem from="1729421639597" duration="33000" />
-      <workItem from="1729421702295" duration="3619000" />
+      <workItem from="1729421702295" duration="4099000" />
+      <workItem from="1729470741598" duration="1456000" />
     </task>
     <servers />
   </component>
