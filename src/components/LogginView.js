@@ -6,8 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import SignUpModal from './SignUpModal';
 import FindPwModal from './FindPwModal';
-import { postCreateNewUser, postLoggin } from './services/apiServices';
+import { postCreateNewUser, postLoggin, getUserId } from './services/apiServices';
 import dayjs from 'dayjs';
+
+
 const LogginView = () => {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
@@ -19,6 +21,7 @@ const LogginView = () => {
     const [role, setRole] = useState(''); // change to division later, (환자, 봉사자, 의료진)
     const [phoneNum, setPhoneNum] = useState('')
     const [birth, setBirth] = useState('') // change to Age?
+    const [isUsable, setIsUsable] = useState(false)
     // const [SSN,setSSN] =useState('')
     // const [User_Id,setUser_Id]=useState('')
 
@@ -129,8 +132,20 @@ const LogginView = () => {
         console.log(`Logging in user: ${email}`);
     };
 
-    const handleCheckEmailExist = () => {
-
+    //Id 사용가능 여부 체크
+    const handleCheckId = async (e) => {
+        e.preventDefault();
+        try {
+            const data = await getUserId(email);
+            if (data && data.EC === 0) {
+                setIsUsable(true)
+                alert("이 ID 사용 가능합니다");
+            } else {
+                alert(data.EM || " 이 ID 사용 불가합니다");
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
     return (
         <Form onSubmit={handleSubmit} noValidate validated={validated}>
@@ -173,6 +188,7 @@ const LogginView = () => {
                     handleSignUpSubmit={handleSignUpSubmit}
                     handleChange={handleChange}
                     validated={validated}
+                    handleCheckId={handleCheckId}
                 />
             </div>
         </Form>

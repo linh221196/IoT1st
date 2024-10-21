@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 
-const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, handleChange }) => {
+const SignUpModal = ({handleCheckId, show, handleSignUpClose, handleSignUpSubmit, validated, handleChange }) => {
     const [showPw, setShowPw] = useState(false);
     const handleShowPassword = () => {
         setShowPw(!showPw)
@@ -22,7 +22,7 @@ const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, h
             <Modal.Body>
                 <Form noValidate validated={validated} onSubmit={handleSignUpSubmit}>
                     <Form.Group as={Row} className="mb-3" controlId="formBasicEmail" hasvalidation="true">
-                        <Form.Label column sm="3">Email/ ID</Form.Label>
+                        <Form.Label column sm="3">ID</Form.Label>
                         <Col sm="7">
                             <Form.Control type="text" //type="text"
                                 placeholder="TopazIoT6"
@@ -30,11 +30,11 @@ const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, h
                                 required
                                 onChange={handleChange}
                             />
-                            <Form.Control.Feedback type="invalid">이메일 입력해주세요</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">ID를 입력해주세요</Form.Control.Feedback>
                         </Col>
                         <Col sm="2">
                             <Button style={{ padding: '6px 11px' }}
-
+                            onClick={handleCheckId}
                             >체크</Button>
                         </Col>
 

@@ -59,7 +59,7 @@ const Calendar = () => {
         >
             <div className="container">
                 <Row className='g-4'>
-                    <Col className='calendar-container border '>
+                    <Col className='calendar-container border bg-body '>
                         <StaticDatePicker
                             orientation='portrait'
                             openTo={view}

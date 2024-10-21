@@ -43,4 +43,8 @@ const postLoggin = (email, password) => {
 
     // return axios.post(`/login`, formData)
 }
-export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin }
+
+const getUserId = (email) => {
+    // return axios.get(`/email/{email}`)
+}
+export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, getUserId }

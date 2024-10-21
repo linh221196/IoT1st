@@ -7,8 +7,12 @@
   border: 1px solid black;
   border-radius: 5px;
 }
+@mixin background-color {
+  background-color: rgba(248, 245, 245, 0.3);
+}
+
 .home-container {
-    background-color: rgba(248, 245, 245, 0.3);
+  @include background-color();
   .content-container {
     margin: 0;
     height: 450px;
