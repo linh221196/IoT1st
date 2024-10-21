@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c4dad222-51d5-449c-a412-22b27b5b8509" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/utils/axiosCustomize.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/utils/axiosCustomize.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +15,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="dev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -46,7 +45,7 @@
   "keyToString": {
     "Node.js.Content.js.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "js",
     "jdk.selected.JAVA_MODULE": "corretto-21",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/sunmoon/IdeaProjects/IoT1st",
@@ -90,7 +89,7 @@
       <workItem from="1729421419550" duration="88000" />
       <workItem from="1729421639597" duration="33000" />
       <workItem from="1729421702295" duration="4099000" />
-      <workItem from="1729470741598" duration="1456000" />
+      <workItem from="1729470741598" duration="2562000" />
     </task>
     <servers />
   </component>
