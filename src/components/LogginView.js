@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import SignUpModal from './SignUpModal';
 import FindPwModal from './FindPwModal';
 import { postCreateNewUser, postLoggin } from './services/apiServices';
-
+import dayjs from 'dayjs';
 const LogginView = () => {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
@@ -21,6 +21,7 @@ const LogginView = () => {
     const [birth, setBirth] = useState('') // change to Age?
     // const [SSN,setSSN] =useState('')
     // const [User_Id,setUser_Id]=useState('')
+
     const [validated, setValidated] = useState(false);
 
 
@@ -48,12 +49,14 @@ const LogginView = () => {
             case 'phone':
                 setPhoneNum(value)
                 break;
-            case 'brith':
-                setBirth(value)
+            case 'birth':
+                const formattedDate = dayjs(value).format('YYYY/MM/DD')
+                setBirth(formattedDate);
                 break;
             default:
                 break;
         }
+        console.log(name, " ", value)
     };
 
     const handleSignUp = () => {
@@ -81,6 +84,7 @@ const LogginView = () => {
             return;
         }
         setValidated(true);
+        console.log(email, password, username, birth, phoneNum, role, userImage)
         try {
             const data = await postCreateNewUser(email, password, username, birth, phoneNum, role, userImage);
             console.log("Check Inter Response", data);

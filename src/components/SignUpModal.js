@@ -68,7 +68,7 @@ const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, h
                         </Col>
                     </Form.Group>
 
-                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextAge" hasValidation>
+                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextAge" hasvalidation="true">
                         <Form.Label column sm="3">
                             생년월일
                         </Form.Label>
@@ -78,7 +78,7 @@ const SignUpModal = ({ show, handleSignUpClose, handleSignUpSubmit, validated, h
                         </Col>
                     </Form.Group>
 
-                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPhone" hasValidation>
+                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPhone" hasvalidation="true">
                         <Form.Label column sm="3">
                             전화번호
                         </Form.Label>
