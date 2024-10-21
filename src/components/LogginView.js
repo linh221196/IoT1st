@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import SignUpModal from './SignUpModal';
 import FindPwModal from './FindPwModal';
-import { postCreateNewUser, postLoggin, getUserId } from './services/apiServices';
+import { postCreateNewUser, postLoggin, postUserId } from './services/apiServices';
 import dayjs from 'dayjs';
 
 
@@ -136,7 +136,7 @@ const LogginView = () => {
     const handleCheckId = async (e) => {
         e.preventDefault();
         try {
-            const data = await getUserId(email);
+            const data = await postUserId(email);
             if (data && data.EC === 0) {
                 setIsUsable(true)
                 alert("이 ID 사용 가능합니다");
