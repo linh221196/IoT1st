@@ -13,6 +13,7 @@ const postCreateNewUser = (email, password, username, birth, phoneNum, role, use
     }
     //return axios.post(`/...`, formData);
     // return axios.post(`/participant`, formData);
+    return axios.post(`/signup`)
 }
 
 const getAllUsers = () => {
@@ -43,8 +44,12 @@ const postLoggin = (email, password) => {
 
     // return axios.post(`/login`, formData)
 }
-
-const getUserId = (email) => {
+//ID check
+const postUserId = (email) => {
     // return axios.get(`/email/{email}`)
+    const formData = new FormData();
+    formData.append('email', email)
+
+    return axios.post(`/idcheck`, formData);
 }
-export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, getUserId }
+export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId }
