@@ -5,7 +5,7 @@ import LogginView from "./LogginView"
 const Home = () => {
 
   return (
-    <Container>
+    <Container fluid="md">
       <Row >
         <Col sm={8}>
           <Content />

@@ -1,10 +1,11 @@
 import axios from "../utils/axiosCustomize";
 
-const postCreateNewUser = (email, password, username, phoneNum, role, userImage) => {
+const postCreateNewUser = (email, password, username, birth, phoneNum, role, userImage) => {
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
     formData.append('username', username);
+    formData.append('birth', birth);
     formData.append('phoneNum', phoneNum);
     formData.append('role', role);
     if (userImage) {
