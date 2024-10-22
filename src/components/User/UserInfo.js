@@ -101,7 +101,7 @@ const UserInfo = () => {
                     수정
                     <FiEdit />
                 </Button>
-                <Button variant="outline-secondary" className="me-3" onClick={handleUpdate} >
+                <Button variant="outline-primary" className="me-3" onClick={handleUpdate} >
                     비밀번호
                 </Button>
                 {isAuthenticated && 

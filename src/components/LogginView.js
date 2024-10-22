@@ -8,7 +8,7 @@ import { postCreateNewUser, postLoggin, postUserId } from './services/apiService
 import dayjs from 'dayjs';
 import { useHandleSubmit } from './services/useHandleSubmit';
 import { useDispatch } from 'react-redux';
-
+import { doLoggin } from '../redux/action/userAction'
 
 const LogginView = () => {
     const navigate = useNavigate();
@@ -84,7 +84,6 @@ const LogginView = () => {
         handleSubmitSignUp(e, email, password, username, birth, phoneNum, role, userImage)
             .then((data) => {
                 if (data) {
-
                     setShowModal(false)
                 }
             })
@@ -101,10 +100,7 @@ const LogginView = () => {
             .then((data) => {
                 if (data) {
                     setIsLoggin(true)
-                    dispatch({
-                        type: 'FETCH_USER_LOGIN_SUCCESS',
-                        payload: data
-                    })
+                    dispatch(doLoggin(data))
                 }
             })
     };
@@ -121,7 +117,6 @@ const LogginView = () => {
                     setIsUsable(true);
                 }
             })
-
     };
     return (
         <Form onSubmit={handleLogginSubmit} noValidate validated={validated}>
