@@ -4,7 +4,7 @@ import UserTable from "./UserTable"
 import './Admin.scss'
 
 
-const AdminHome = () => {
+const MedicalHome = () => {
     return (
         <Container className="container admin-container ms-0 ps-0 mt-0">
             <div className="sidebar-container">
@@ -29,4 +29,4 @@ const AdminHome = () => {
 
     )
 }
-export default AdminHome
+export default MedicalHome

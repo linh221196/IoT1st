@@ -1,7 +1,7 @@
 import { Button, Container } from "react-bootstrap"
 import { useFetchUser } from "./useFetchUser"
 import { useDispatch, useSelector } from "react-redux";
-import { increaseCounter, decreaseCounter } from '../../redux/action/counterAction'
+
 
 
 const Test = () => {
@@ -25,18 +25,18 @@ const Test = () => {
                     </ul>
                 </div> */}
                 <div>
-                    <Container>
+                    {/* <Container>
                     <h1>Redux test</h1>
                     {/* redux: 
                     1. defined dispatch + actions => react component
                     2. defined reducer + logic => reducer
                     3. Using Redux's state */}
-                    <h2>Count: {count}</h2>
+                    {/* <h2>Count: {count}</h2>
                     <div>
                         <Button onClick={() => dispatch(increaseCounter())}>Increase</Button>
                         <Button onClick={() => dispatch(decreaseCounter())}>Decrease</Button>
                     </div>
-                    </Container>
+                    </Container> */} 
                     
                 </div>
 

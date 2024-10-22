@@ -11,15 +11,18 @@
   background-color: rgba(248, 245, 245, 0.3);
 }
 
-.home-container {
-  @include background-color();
-  .content-container {
-    margin: 0;
-    height: 450px;
-  }
-  .loggin-container {
-    @include border-radius;
-    width: 400px;
-    height: 450px;
+.homecontent-container {
+  .home-container {
+    @include background-color();
+    margin-top: 40px;
+    .content-container {
+      margin: 0;
+      height: 450px;
+    }
+    .loggin-container {
+      @include border-radius;
+      width: 400px;
+      height: 450px;
+    }
   }
 }
