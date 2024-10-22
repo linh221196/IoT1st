@@ -9,6 +9,7 @@ import dayjs from 'dayjs';
 import { useHandleSubmit } from './services/useHandleSubmit';
 import { useDispatch } from 'react-redux';
 import { doLoggin } from '../redux/action/userAction'
+import { useSelector } from "react-redux";
 
 const LogginView = () => {
     const navigate = useNavigate();
@@ -25,7 +26,7 @@ const LogginView = () => {
     const dispatch = useDispatch();
     // const [SSN,setSSN] =useState('')
     // const [User_Id,setUser_Id]=useState('')
-
+    const userInfo = useSelector(state => state.user.account)
     const [validated, setValidated] = useState(false);
     const [isLoggin, setIsLoggin] = useState(false);
     const { handleSubmit: handleSubmitSignUp } = useHandleSubmit(postCreateNewUser, "User created successfully!", "Something went wrong!")
@@ -92,9 +93,20 @@ const LogginView = () => {
     //로그인 기능
     useEffect(() => {
         if (isLoggin) {
-            navigate('/UserHome');
+            console.log(userInfo.role);
+
+            if (userInfo.role === "USER" || userInfo.role === "user") {
+                navigate('/UserHome');
+            }
+            else if (userInfo.role === "ADMIN" || userInfo.role === "Medical") {
+                navigate('/MedicalHome');
+            }
+            else {
+                navigate('/VolunteerHome');
+            }
         }
-    }, [isLoggin]);
+    }, [isLoggin, navigate, userInfo.role]);
+
     const handleLogginSubmit = (e) => {
         handleSubmitLoggin(e, email, password)
             .then((data) => {

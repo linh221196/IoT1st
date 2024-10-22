@@ -7,17 +7,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import AdminHome from './components/Medical/MedicalHome';
-import { store } from '../src/redux/store'
-import Test from './components/services/test';
+import { store, persistor } from '../src/redux/store'
+import { PersistGate } from 'redux-persist/integration/react'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
   <Provider store={store} >
-    <BrowserRouter>
-      <App />
-
-
-    </BrowserRouter>
+    <PersistGate loading={null} persistor={persistor}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </PersistGate>
   </Provider>
 
 
