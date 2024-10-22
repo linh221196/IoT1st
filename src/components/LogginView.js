@@ -137,14 +137,17 @@ const LogginView = () => {
         e.preventDefault();
         try {
             const data = await postUserId(email);
-            if (data && data.EC === 0) {
-                setIsUsable(true)
-                alert("이 ID 사용 불가합니다");
-            } else {
-                alert(data.EM || "이 ID 사용 가능합니다");
+            if (data.status === "duplication") {
+                alert("해당 ID는 중복된 ID입니다.");
+                setIsUsable(false); // 사용 불가로 설정
+            } else if(data.status === "success"){
+                console.log("Server Response:", data);
+                alert("사용 가능한 아이디입니다.");
+                setIsUsable(true); // 사용 가능으로 설정
             }
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            alert("오류가 발생했습니다. 다시 시도해 주세요.");
         }
     }
     return (
