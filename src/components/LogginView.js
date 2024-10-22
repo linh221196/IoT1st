@@ -139,9 +139,9 @@ const LogginView = () => {
             const data = await postUserId(email);
             if (data && data.EC === 0) {
                 setIsUsable(true)
-                alert("이 ID 사용 가능합니다");
+                alert("이 ID 사용 불가합니다");
             } else {
-                alert(data.EM || " 이 ID 사용 불가합니다");
+                alert(data.EM || "이 ID 사용 가능합니다");
             }
         } catch (error) {
             console.log(error)
