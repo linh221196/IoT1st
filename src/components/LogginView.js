@@ -1,6 +1,4 @@
-import { NavLink } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { NavLink, Button, Form } from 'react-bootstrap';
 import "./LogginView.scss"
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -9,7 +7,7 @@ import FindPwModal from './FindPwModal';
 import { postCreateNewUser, postLoggin, postUserId } from './services/apiServices';
 import dayjs from 'dayjs';
 import { useHandleSubmit } from './services/useHandleSubmit';
-
+import { useDispatch } from 'react-redux';
 
 
 const LogginView = () => {
@@ -24,6 +22,7 @@ const LogginView = () => {
     const [phoneNum, setPhoneNum] = useState('')
     const [birth, setBirth] = useState('') // change to Age?
     const [isUsable, setIsUsable] = useState(false)
+    const dispatch = useDispatch();
     // const [SSN,setSSN] =useState('')
     // const [User_Id,setUser_Id]=useState('')
 
@@ -85,6 +84,7 @@ const LogginView = () => {
         handleSubmitSignUp(e, email, password, username, birth, phoneNum, role, userImage)
             .then((data) => {
                 if (data) {
+
                     setShowModal(false)
                 }
             })
@@ -97,10 +97,14 @@ const LogginView = () => {
         }
     }, [isLoggin]);
     const handleLogginSubmit = (e) => {
-        handleSubmitLoggin(e, username, password)
+        handleSubmitLoggin(e, email, password)
             .then((data) => {
                 if (data) {
                     setIsLoggin(true)
+                    dispatch({
+                        type: 'FETCH_USER_LOGIN_SUCCESS',
+                        payload: data
+                    })
                 }
             })
     };
@@ -136,7 +140,7 @@ const LogginView = () => {
                 />
             </Form.Group>
             <Button variant="primary" type="submit" >
-                Submit
+                로그인
             </Button>
             <div className='findPw-container'>
                 <Form.Text className="text-muted" size="sm">

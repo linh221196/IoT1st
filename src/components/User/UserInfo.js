@@ -4,19 +4,20 @@ import code from '../../assets/image.jpg'
 import { FiEdit } from "react-icons/fi";
 import UserInfoUpdateModal from "./UserInfoUpdateModal";
 import { useState } from 'react';
-import { useFetchUser } from "../services/useFetchUser";
 import { putEditUserData } from "../services/apiServices";
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
+import { useSelector } from "react-redux";
+
 
 const UserInfo = () => {
 
-    const { listUser } = useFetchUser()
-    const userInfo = listUser.find(user => user.id === 12)
-    console.log(userInfo)
+    const userInfo = useSelector(state => state.user.account)
+    const isAuthenticated = useSelector(state => state.user.isAuthenticated)
+    // console.log(userInfo)
     const [showModal, setShowModal] = useState(false);
     const [userImage, setUserImage] = useState('') //will disable
     const [username, setUserName] = useState('') //change to Name, setName
@@ -100,9 +101,14 @@ const UserInfo = () => {
                     수정
                     <FiEdit />
                 </Button>
-                <Button variant="outline-danger" onClick={handleUpdate} >
+                <Button variant="outline-secondary" className="me-3" onClick={handleUpdate} >
                     비밀번호
                 </Button>
+                {isAuthenticated && 
+                    <Button variant="outline-danger">
+                        Loggout
+                    </Button>
+                }
                 <UserInfoUpdateModal
                     userInfo={userInfo}
                     show={showModal}

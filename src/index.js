@@ -7,17 +7,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import AdminHome from './components/Medical/AdminHome';
+import { store } from '../src/redux/store'
+import Test from './components/services/test';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  //store={store}
-  //<Provider >   
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/Medical" element={<AdminHome />} />
-    </Routes>
-  </BrowserRouter>
-  //</Provider>
+
+  <Provider store={store} >
+    <BrowserRouter>
+      <App />
+
+
+    </BrowserRouter>
+  </Provider>
 
 
 );
