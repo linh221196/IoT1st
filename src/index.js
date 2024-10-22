@@ -4,14 +4,21 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter } from 'react-router-dom';
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import AdminHome from './components/Medical/AdminHome';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-
+  //store={store}
+  //<Provider >   
   <BrowserRouter>
-    <App />
+    <Routes>
+      <Route path="/" element={<App />} />
+      <Route path="/Medical" element={<AdminHome />} />
+    </Routes>
   </BrowserRouter>
+  //</Provider>
+
 
 );
 

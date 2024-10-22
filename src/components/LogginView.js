@@ -8,6 +8,8 @@ import SignUpModal from './SignUpModal';
 import FindPwModal from './FindPwModal';
 import { postCreateNewUser, postLoggin, postUserId } from './services/apiServices';
 import dayjs from 'dayjs';
+import { useHandleSubmit } from './services/useHandleSubmit';
+
 
 
 const LogginView = () => {
@@ -26,10 +28,10 @@ const LogginView = () => {
     // const [User_Id,setUser_Id]=useState('')
 
     const [validated, setValidated] = useState(false);
-
-
-
     const [isLoggin, setIsLoggin] = useState(false);
+    const { handleSubmit: handleSubmitSignUp } = useHandleSubmit(postCreateNewUser, "User created successfully!", "Something went wrong!")
+    const { handleSubmit: handleSubmitLoggin } = useHandleSubmit(postLoggin, "Login successfully!", "Something went wrong!")
+    const { handleSubmit: handleSubmitCheckId } = useHandleSubmit(postUserId, "이 ID 사용 가능합니다", " 이 ID 사용 불가합니다")
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -79,28 +81,13 @@ const LogginView = () => {
         setFindPwShowModal(false);
     }
     //회원가입의 response처리
-    const handleSignUpSubmit = async (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const form = e.currentTarget;
-        if (form.checkValidity() === false) {
-            setValidated(true);
-            return;
-        }
-        setValidated(true);
-        console.log(email, password, username, birth, phoneNum, role, userImage)
-        try {
-            const data = await postCreateNewUser(email, password, username, birth, phoneNum, role, userImage);
-            console.log("Check Inter Response", data);
-            if (data && data.EC === 0) {
-                setShowModal(false);
-                alert("User created successfully!");
-            } else {
-                alert(data.EM || "Something went wrong!");
-            }
-        } catch (error) {
-            alert("An error occurred while creating the user. Please try again.");
-        }
+    const handleSignUpSubmit = (e) => {
+        handleSubmitSignUp(e, email, password, username, birth, phoneNum, role, userImage)
+            .then((data) => {
+                if (data) {
+                    setShowModal(false)
+                }
+            })
     }
 
     //로그인 기능
@@ -109,46 +96,31 @@ const LogginView = () => {
             navigate('/UserHome');
         }
     }, [isLoggin]);
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const form = e.currentTarget;
-        if (form.checkValidity() === false) {
-            setValidated(true);
-            return;
-        }
-        setValidated(true);
-        try {
-            const data = await postLoggin(email, password);
-            console.log("Check Inter Response", data);
-            if (data && data.EC === 0) {
-                setIsLoggin(true)
-                alert("Login successfully!");
-            } else {
-                alert(data.EM || "Something went wrong!");
-            }
-        } catch (error) {
-            alert("An error occurred while loggin. Please try again.");
-        }
-        console.log(`Logging in user: ${email}`);
+    const handleLogginSubmit = (e) => {
+        handleSubmitLoggin(e, username, password)
+            .then((data) => {
+                if (data) {
+                    setIsLoggin(true)
+                }
+            })
     };
 
     //Id 사용가능 여부 체크
-    const handleCheckId = async (e) => {
-        e.preventDefault();
-        try {
-            const data = await postUserId(email);
-            if (data && data.EC === 0) {
-                setIsUsable(true)
-                alert("이 ID 사용 가능합니다");
-            } else {
-                alert(data.EM || " 이 ID 사용 불가합니다");
-            }
-        } catch (error) {
-            console.log(error)
+    const handleCheckId = (e) => {
+        if (!email) {
+            alert("ID를 입력해주세요");
+            return;
         }
-    }
+        handleSubmitCheckId(e, email)
+            .then((data) => {
+                if (data) {
+                    setIsUsable(true);
+                }
+            })
+
+    };
     return (
-        <Form onSubmit={handleSubmit} noValidate validated={validated}>
+        <Form onSubmit={handleLogginSubmit} noValidate validated={validated}>
             <Form.Group className="mb-3" controlId="formBasicId">
                 <Form.Label>ID</Form.Label>
                 <Form.Control type="text" placeholder="예제: topaziot6"

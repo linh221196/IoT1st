@@ -1,4 +1,4 @@
-import { Container, Row, Col, Button, Image } from "react-bootstrap";
+import { Container, Button, Image } from "react-bootstrap";
 import "./UserInfo.scss"
 import code from '../../assets/image.jpg'
 import { FiEdit } from "react-icons/fi";
