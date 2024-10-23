@@ -6,6 +6,7 @@ export const useHandleSubmit = (submitCallback, successMes, errorMes) => {
 
     const handleSubmit = async (e,...parameters) => {
         e.preventDefault();
+        e.stopPropagation();
         const form = e.currentTarget;
         if (form.checkValidity() === false) {
             setValidated(true)

@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 
-const SignUpModal = ({handleCheckId, show, handleSignUpClose, handleSignUpSubmit, validated, handleChange }) => {
+const SignUpModal = ({handleCheckId, show, handleSignUpClose, handleSignUpSubmit, validated, handleChange, isUsable }) => {
     const [showPw, setShowPw] = useState(false);
     const handleShowPassword = () => {
         setShowPw(!showPw)

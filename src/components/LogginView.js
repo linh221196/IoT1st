@@ -82,6 +82,10 @@ const LogginView = () => {
     }
     //회원가입의 response처리
     const handleSignUpSubmit = (e) => {
+        if (isUsable) {
+            alert('사용가능 ID를 입력해주세요')
+            return;
+        }
         handleSubmitSignUp(e, email, password, username, birth, phoneNum, role, userImage)
             .then((data) => {
                 if (data) {
@@ -172,6 +176,7 @@ const LogginView = () => {
                     handleChange={handleChange}
                     validated={validated}
                     handleCheckId={handleCheckId}
+                    isUsable={isUsable}
                 />
             </div>
         </Form>
