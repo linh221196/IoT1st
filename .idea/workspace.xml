@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c4dad222-51d5-449c-a412-22b27b5b8509" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LogginView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LogginView.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/services/apiServices.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/services/apiServices.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/utils/axiosCustomize.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/utils/axiosCustomize.js" afterDir="false" />
-    </list>
+    <list default="true" id="c4dad222-51d5-449c-a412-22b27b5b8509" name="변경" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,7 +43,7 @@
   "keyToString": {
     "Node.js.Content.js.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "js",
     "jdk.selected.JAVA_MODULE": "corretto-21",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/sunmoon/IdeaProjects/IoT1st",
