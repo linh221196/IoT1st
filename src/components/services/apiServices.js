@@ -43,6 +43,7 @@ const postLoggin = (email, password) => {
     formData.append('password', password)
 
     // return axios.post(`/login`, formData)
+    return axios.post('/login', formData)
 }
 //ID check
 const postUserId = (email) => {
