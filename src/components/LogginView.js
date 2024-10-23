@@ -120,11 +120,13 @@ const LogginView = () => {
         try {
             const data = await postLoggin(email, password);
             console.log("Check Inter Response", data);
-            if (data && data.EC === 0) {
+            if (data.status === "success") {
                 setIsLoggin(true)
                 alert("Login successfully!");
-            } else {
-                alert(data.EM || "Something went wrong!");
+            } else if (data.status === "PasswordFail"){
+                alert("비밀번호가 일치하지 않습니다.");
+            }else if(data.status === "IdFail"){
+                alert("존재하지 않는 아이디입니다.");
             }
         } catch (error) {
             alert("An error occurred while loggin. Please try again.");
