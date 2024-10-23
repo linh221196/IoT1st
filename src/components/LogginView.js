@@ -3,10 +3,12 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "./LogginView.scss"
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SignUpModal from './SignUpModal';
 import FindPwModal from './FindPwModal';
-import { postCreateNewUser } from './services/apiServices';
+import { postCreateNewUser, postLoggin, postUserId } from './services/apiServices';
+import dayjs from 'dayjs';
+
 
 const LogginView = () => {
     const navigate = useNavigate();
@@ -17,15 +19,17 @@ const LogginView = () => {
     const [username, setUserName] = useState('') //change to Name, setName
     const [password, setPassword] = useState('')
     const [role, setRole] = useState(''); // change to division later, (환자, 봉사자, 의료진)
-    // const [phoneNum, setPhoneNum] = useState('')
-    // const [birth, setBirth] = useState('') // change to Age?
+    const [phoneNum, setPhoneNum] = useState('')
+    const [birth, setBirth] = useState('') // change to Age?
+    const [isUsable, setIsUsable] = useState(false)
     // const [SSN,setSSN] =useState('')
     // const [User_Id,setUser_Id]=useState('')
+
     const [validated, setValidated] = useState(false);
 
 
 
-    const [isLoggin, setIsLoggin] = useState(true);
+    const [isLoggin, setIsLoggin] = useState(false);
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -45,9 +49,17 @@ const LogginView = () => {
             case 'role':
                 setRole(value);
                 break;
+            case 'phone':
+                setPhoneNum(value)
+                break;
+            case 'birth':
+                const formattedDate = dayjs(value).format('YYYY/MM/DD')
+                setBirth(formattedDate);
+                break;
             default:
                 break;
         }
+        console.log(name, " ", value)
     };
 
     const handleSignUp = () => {
@@ -66,6 +78,7 @@ const LogginView = () => {
     const handleFindPwClose = () => {
         setFindPwShowModal(false);
     }
+    //회원가입의 response처리
     const handleSignUpSubmit = async (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -75,8 +88,9 @@ const LogginView = () => {
             return;
         }
         setValidated(true);
+        console.log(email, password, username, birth, phoneNum, role, userImage)
         try {
-            const data = await postCreateNewUser(email, password, username, role, userImage);
+            const data = await postCreateNewUser(email, password, username, birth, phoneNum, role, userImage);
             console.log("Check Inter Response", data);
             if (data && data.EC === 0) {
                 setShowModal(false);
@@ -89,21 +103,56 @@ const LogginView = () => {
         }
     }
 
-    const handleSubmit = (e) => {
+    //로그인 기능
+    useEffect(() => {
+        if (isLoggin) {
+            navigate('/UserHome');
+        }
+    }, [isLoggin]);
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Logging in user:");
-        isLoggin ? navigate('/UserHome') : alert("No Way")
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            setValidated(true);
+            return;
+        }
+        setValidated(true);
+        try {
+            const data = await postLoggin(email, password);
+            console.log("Check Inter Response", data);
+            if (data && data.EC === 0) {
+                setIsLoggin(true)
+                alert("Login successfully!");
+            } else {
+                alert(data.EM || "Something went wrong!");
+            }
+        } catch (error) {
+            alert("An error occurred while loggin. Please try again.");
+        }
+        console.log(`Logging in user: ${email}`);
     };
 
-    const handleCheckEmailExist = () => {
-
+    //Id 사용가능 여부 체크
+    const handleCheckId = async (e) => {
+        e.preventDefault();
+        try {
+            const data = await postUserId(email);
+            if (data && data.EC === 0) {
+                setIsUsable(true)
+                alert("이 ID 사용 가능합니다");
+            } else {
+                alert(data.EM || " 이 ID 사용 불가합니다");
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} noValidate validated={validated}>
             <Form.Group className="mb-3" controlId="formBasicId">
                 <Form.Label>ID</Form.Label>
                 <Form.Control type="text" placeholder="예제: topaziot6"
-                    name="email"
+                    name="email" onChange={handleChange}
                 />
 
             </Form.Group>
@@ -111,7 +160,7 @@ const LogginView = () => {
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>비밀번호</Form.Label>
                 <Form.Control type="password" placeholder="비밀번호 입력해주세요"
-                    name="password"
+                    name="password" onChange={handleChange}
                 />
             </Form.Group>
             <Button variant="primary" type="submit" >
@@ -139,6 +188,7 @@ const LogginView = () => {
                     handleSignUpSubmit={handleSignUpSubmit}
                     handleChange={handleChange}
                     validated={validated}
+                    handleCheckId={handleCheckId}
                 />
             </div>
         </Form>

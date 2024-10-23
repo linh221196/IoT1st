@@ -1,21 +1,23 @@
-import { Stack } from "react-bootstrap"
+import { Col, Container, Row, Stack } from "react-bootstrap"
 import './Home.scss'
 import Content from "./Content"
 import LogginView from "./LogginView"
-const Home= ()=>{
+const Home = () => {
 
-    return(
-    <div className="body-container">
-      <Stack direction="horizontal" >
-        <div className="content-container">
-        <Content/>
-        </div>
-        <div className="loggin-container">
-        <LogginView/>
-        </div>
-      </Stack>
-    </div>
-    )
+  return (
+    <Container >
+      <Row className="home-container border rounded shadow p-3 mb-5 " >
+        <Col md={8} className="border-end" >
+          <Content />
+        </Col>
+        <Col md={4} >
+          <LogginView />
+        </Col>
+      </Row>
+    </Container>
+
+
+  )
 }
 
 export default Home

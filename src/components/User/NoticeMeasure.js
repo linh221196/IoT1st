@@ -1,8 +1,6 @@
-
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-const NoticeMeasure = ({ showNoticeModal,setNoticeModalShow, fullscreen }) => {
+const NoticeMeasure = ({ showNoticeModal, setNoticeModalShow, fullscreen }) => {
     return (
         <>
             <Modal show={showNoticeModal} fullscreen={fullscreen} onHide={() => setNoticeModalShow(false)}>

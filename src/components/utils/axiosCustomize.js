@@ -6,11 +6,11 @@ const instance = axios.create({
     // 이 방법을 하면 나중에 api를 바꿔더라도 여기만 수정하고 힘들게 찾아서
     // 수정 필요없습니다
 
-    //baseURL: http://localhost:8081/api/v1 예시
+    //baseURL: http://localhost:8081/api/v1  // 예시
 
     //수정이나 삭제금지
     //baseURL: process.env.REACT_APP_API_URL
-    baseURL: 'http://localhost:8081',
+    baseURL: 'http://localhost:8081'
 });
 
 // Add a request interceptor
