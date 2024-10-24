@@ -1,6 +1,6 @@
 import './App.scss';
 import Home from './components/Home';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import UserHome from './components/User/UserHome';
 import Volunteer from './components/User/UserCallVolunteer';
 import DeviceView from './components/User/DeviceView';
@@ -9,7 +9,6 @@ import VolunteerHome from './components/Volunteer/VolunteerHomePage';
 import MedicalHome from './components/Medical/MedicalHome';
 
 function App() {
-  const location = useLocation()
   return (
     <div className="App">
       {/* Conditionally render Sidebar only on the '/Medical' route */}

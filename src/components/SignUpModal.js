@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 
-const SignUpModal = ({handleCheckId, show, handleSignUpClose, handleSignUpSubmit, validated, handleChange, isUsable }) => {
+const SignUpModal = ({ handleCheckId, show, handleSignUpClose, handleSignUpSubmit, validated, handleChange, isUsable }) => {
     const [showPw, setShowPw] = useState(false);
     const handleShowPassword = () => {
         setShowPw(!showPw)
@@ -34,7 +34,7 @@ const SignUpModal = ({handleCheckId, show, handleSignUpClose, handleSignUpSubmit
                         </Col>
                         <Col sm="2">
                             <Button style={{ padding: '6px 11px' }}
-                            onClick={handleCheckId}
+                                onClick={handleCheckId}
                             >체크</Button>
                         </Col>
 
@@ -121,7 +121,7 @@ const SignUpModal = ({handleCheckId, show, handleSignUpClose, handleSignUpSubmit
                                     name="role"
                                     type="radio"
                                     value="Medical"
-                                    id={`inline-radio-2`}
+                                    id={`inline-radio-3`}
                                     onChange={handleChange}
                                 />
                                 <Form.Control.Feedback type="invalid">선택하셔야 합니다</Form.Control.Feedback>

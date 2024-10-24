@@ -64,6 +64,21 @@ const LogginView = () => {
         console.log(name, " ", value)
     };
 
+    const handleValidated = (e) => {
+        e.preventDefault(); // Ngăn submit form tự động
+        e.stopPropagation(); // Ngăn việc xử lý event tiếp tục lan ra các phần tử khác
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            setValidated(true); // Bật cờ validated lên nếu form không hợp lệ
+            return;
+        }
+        if (isUsable) {
+            alert('사용가능 ID를 입력해주세요')
+            return;
+        }
+        console.log('handle submit clicked')
+    }
+
     const handleSignUp = () => {
         setShowModal(true);
     }
@@ -82,10 +97,12 @@ const LogginView = () => {
     }
     //회원가입의 response처리
     const handleSignUpSubmit = (e) => {
-        if (isUsable) {
-            alert('사용가능 ID를 입력해주세요')
-            return;
-        }
+        handleValidated()
+        // if (isUsable) {
+        //     alert('사용가능 ID를 입력해주세요')
+        //     return;
+        // }
+        console.log('handle submit clicked')
         handleSubmitSignUp(e, email, password, username, birth, phoneNum, role, userImage)
             .then((data) => {
                 if (data) {
@@ -134,6 +151,9 @@ const LogginView = () => {
                 }
             })
     };
+
+
+
     return (
         <Form onSubmit={handleLogginSubmit} noValidate validated={validated}>
             <Form.Group className="mb-3" controlId="formBasicId">

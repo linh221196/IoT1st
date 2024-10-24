@@ -1,8 +1,5 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-import blood from '../../assets/blood.jpeg';
-import heart from '../../assets/heart.jpg';
-import brainWaves from '../../assets/brain-waves.jpg';
 import { Image, NavLink } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';

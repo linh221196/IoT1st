@@ -4,15 +4,8 @@ import { useState } from "react"
 export const useHandleSubmit = (submitCallback, successMes, errorMes) => {
     const [validated, setValidated] = useState(false)
 
-    const handleSubmit = async (e,...parameters) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const form = e.currentTarget;
-        if (form.checkValidity() === false) {
-            setValidated(true)
-            return;
-        }
-        setValidated(true)
+    const handleSubmit = async (e, ...parameters) => {
+        
         try {
             const data = await submitCallback(...parameters);
             console.log("Response data:", data);

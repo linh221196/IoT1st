@@ -103,7 +103,7 @@ const Test = () => {
                             value={phone}
                             onChange={handlePhoneChange}
                             inputProps={{
-                                pattern: "^(\d{2,3})-(\d{3,4})-(\d{4})$",
+                                //pattern: "^(\d{2,3})-(\d{3,4})-(\d{4})$",
                                 type: "tel",
                                 name: 'phone',
                                 required: true,
