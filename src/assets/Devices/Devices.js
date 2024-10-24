@@ -7,13 +7,17 @@ import Gluco from './Gluco.png'
 import GSR from './GSR.png'
 import NIBP from './NIBP.png'
 import SPO2 from './SPO2.png'
+import airflowimoticon from './airflowimoticon.png'
+
+
 
 const Devices =
     [{
         id: 1,
         name: "Air FLow 호흡센서",
         img: AirFlow,
-        des: "Air FLow 호흡센서"
+        des: "Air FLow 호흡센서",
+        imoticon: airflowimoticon
     },
     {
         id: 2,
@@ -27,12 +31,12 @@ const Devices =
         img: NIBP,
         des: "혈압 측정계"
     },
-    {
-        id: 4,
-        name: "GULOMETER 혈당 측정계",
-        img: Gluco,
-        des: "혈당 측정계"
-    },
+    // {
+    //     id: 4,
+    //     name: "GULOMETER 혈당 측정계",
+    //     img: Gluco,
+    //     des: "혈당 측정계"
+    // },
     {
         id: 5,
         name: "SPO2 산소 포화도",

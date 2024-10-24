@@ -1,4 +1,3 @@
-
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { StaticDatePicker } from '@mui/x-date-pickers';
@@ -60,7 +59,7 @@ const Calendar = () => {
         >
             <div className="container">
                 <Row className='g-4'>
-                    <Col className='calendar-container border '>
+                    <Col className='calendar-container border bg-body '>
                         <StaticDatePicker
                             orientation='portrait'
                             openTo={view}
