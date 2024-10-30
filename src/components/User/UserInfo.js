@@ -80,7 +80,7 @@ const UserInfo = () => {
                         성함
                     </Col>
                     <Col className="c2-userInfo" sm="7">
-                        {userInfo?.username}
+                        {userInfo?.username ? userInfo?.username : "데이터 삽입 예정"}
                     </Col>
                 </Row>
                 <Row className="r-userInfo">
@@ -88,7 +88,7 @@ const UserInfo = () => {
                         이메일 또는 ID
                     </Col>
                     <Col className="c2-userInfo" sm="7">
-                        {userInfo?.email}
+                        {userInfo?.email ? userInfo?.email: "데이터 삽입 예정"}
                     </Col>
                 </Row>
                 <Row className="r-userInfo">
@@ -96,7 +96,7 @@ const UserInfo = () => {
                         의료진
                     </Col>
                     <Col className="c2-userInfo" sm="7">
-                        {userInfo?.doctor?.name ? userInfo.doctor.name : '노영휸'}
+                        {userInfo?.doctor?.name ? userInfo.doctor.name : '데이터 삽입 예정'}
                     </Col>
                 </Row>
             </Container>
