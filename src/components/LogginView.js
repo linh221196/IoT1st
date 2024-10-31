@@ -1,4 +1,6 @@
-import { NavLink, Button, Form } from 'react-bootstrap';
+import { NavLink } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import "./LogginView.scss"
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -6,10 +8,7 @@ import SignUpModal from './SignUpModal';
 import FindPwModal from './FindPwModal';
 import { postCreateNewUser, postLoggin, postUserId } from './services/apiServices';
 import dayjs from 'dayjs';
-import { useHandleSubmit } from './services/useHandleSubmit';
-import { useDispatch } from 'react-redux';
-import { doLoggin } from '../redux/action/userAction'
-import { useSelector } from "react-redux";
+
 
 const LogginView = () => {
     const navigate = useNavigate();
@@ -23,15 +22,14 @@ const LogginView = () => {
     const [phoneNum, setPhoneNum] = useState('')
     const [birth, setBirth] = useState('') // change to Age?
     const [isUsable, setIsUsable] = useState(false)
-    const dispatch = useDispatch();
     // const [SSN,setSSN] =useState('')
     // const [User_Id,setUser_Id]=useState('')
-    const userInfo = useSelector(state => state.user.account)
+
     const [validated, setValidated] = useState(false);
+
+
+
     const [isLoggin, setIsLoggin] = useState(false);
-    const { handleSubmit: handleSubmitSignUp } = useHandleSubmit(postCreateNewUser, "User created successfully!", "Something went wrong!")
-    const { handleSubmit: handleSubmitLoggin } = useHandleSubmit(postLoggin, "Login successfully!", "Something went wrong!")
-    const { handleSubmit: handleSubmitCheckId } = useHandleSubmit(postUserId, "이 ID 사용 가능합니다", " 이 ID 사용 불가합니다")
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -81,61 +79,79 @@ const LogginView = () => {
         setFindPwShowModal(false);
     }
     //회원가입의 response처리
-    const handleSignUpSubmit = (e) => {
-        if (isUsable) {
-            alert('사용가능 ID를 입력해주세요')
+    const handleSignUpSubmit = async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            setValidated(true);
             return;
         }
-        handleSubmitSignUp(e, email, password, username, birth, phoneNum, role, userImage)
-            .then((data) => {
-                if (data) {
-                    setShowModal(false)
-                }
-            })
+        setValidated(true);
+        console.log(email, password, username, birth, phoneNum, role, userImage)
+        try {
+            const data = await postCreateNewUser(email, password, username, birth, phoneNum, role, userImage);
+            console.log("Check Inter Response", data);
+            if (data && data.EC === 0) {
+                setShowModal(false);
+                alert("User created successfully!");
+            } else {
+                alert(data.EM || "Something went wrong!");
+            }
+        } catch (error) {
+            alert("An error occurred while creating the user. Please try again.");
+        }
     }
 
     //로그인 기능
     useEffect(() => {
         if (isLoggin) {
-            console.log(userInfo.role);
-
-            if (userInfo.role === "USER" || userInfo.role === "user") {
-                navigate('/UserHome');
-            }
-            else if (userInfo.role === "ADMIN" || userInfo.role === "Medical") {
-                navigate('/MedicalHome');
-            }
-            else {
-                navigate('/VolunteerHome');
-            }
+            navigate('/UserHome');
         }
-    }, [isLoggin, navigate, userInfo.role]);
-
-    const handleLogginSubmit = (e) => {
-        handleSubmitLoggin(e, email, password)
-            .then((data) => {
-                if (data) {
-                    setIsLoggin(true)
-                    dispatch(doLoggin(data))
-                }
-            })
+    }, [isLoggin]);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            setValidated(true);
+            return;
+        }
+        setValidated(true);
+        try {
+            const data = await postLoggin(email, password);
+            console.log("Check Inter Response", data);
+            if (data && data.EC === 0) {
+                setIsLoggin(true)
+                alert("Login successfully!");
+            } else {
+                alert(data.EM || "Something went wrong!");
+            }
+        } catch (error) {
+            alert("An error occurred while loggin. Please try again.");
+        }
+        console.log(`Logging in user: ${email}`);
     };
 
     //Id 사용가능 여부 체크
-    const handleCheckId = (e) => {
-        if (!email) {
-            alert("ID를 입력해주세요");
-            return;
+    const handleCheckId = async (e) => {
+        e.preventDefault();
+        try {
+            const data = await postUserId(email);
+            if (data.status === "duplication") {
+                alert("해당 ID는 중복된 ID입니다.");
+                setIsUsable(false); // 사용 불가로 설정
+            } else if(data.status === "success"){
+                console.log("Server Response:", data);
+                alert("사용 가능한 아이디입니다.");
+                setIsUsable(true); // 사용 가능으로 설정
+            }
+        } catch (error) {
+            console.log(error);
+            alert("오류가 발생했습니다. 다시 시도해 주세요.");
         }
-        handleSubmitCheckId(e, email)
-            .then((data) => {
-                if (data) {
-                    setIsUsable(true);
-                }
-            })
-    };
+    }
     return (
-        <Form onSubmit={handleLogginSubmit} noValidate validated={validated}>
+        <Form onSubmit={handleSubmit} noValidate validated={validated}>
             <Form.Group className="mb-3" controlId="formBasicId">
                 <Form.Label>ID</Form.Label>
                 <Form.Control type="text" placeholder="예제: topaziot6"
@@ -151,7 +167,7 @@ const LogginView = () => {
                 />
             </Form.Group>
             <Button variant="primary" type="submit" >
-                로그인
+                Submit
             </Button>
             <div className='findPw-container'>
                 <Form.Text className="text-muted" size="sm">
@@ -168,7 +184,7 @@ const LogginView = () => {
 
                     계정이 없으세요?
                 </Form.Text>
-                <NavLink onClick={handleSignUp} >회원가입</NavLink>
+                <NavLink onClick={handleSignUp} >화원가입</NavLink>
                 <SignUpModal
                     show={showModal}
                     handleSignUpClose={handleSignUpClose}
@@ -176,7 +192,6 @@ const LogginView = () => {
                     handleChange={handleChange}
                     validated={validated}
                     handleCheckId={handleCheckId}
-                    isUsable={isUsable}
                 />
             </div>
         </Form>
