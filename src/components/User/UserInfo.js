@@ -21,6 +21,20 @@ const UserInfo = () => {
     const [username, setUserName] = useState('') //change to Name, setName
     const [validated, setValidated] = useState(false);
 
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            postUser(token)
+                .then(response => {
+                    // 응답 데이터를 통해 상태 업데이트 가능
+                    console.log('User data fetched:', response.data);
+                })
+                .catch(error => {
+                    console.error('Error fetching user data:', error);
+                });
+        }
+    }, []);
+
     const handleUpdate = () => {
         setShowModal(true);
     }
@@ -32,8 +46,6 @@ const UserInfo = () => {
     const handleUpdateSubmit = async (e) => {
         e.preventDefault();
         const form = e.currentTarget;
-
-        const data = await postUserInfo(Token);
 
         if (form.checkValidity() === false) {
             setValidated(true);

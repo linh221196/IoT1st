@@ -55,10 +55,10 @@ const postUserId = (email) => {
 }
 
 //로그인 후 개인정보 받아오기
-const postUserInfo = (Token) => {
+const postUser = (Token) => {
     const formData = new FormData();
     formData.append('token', Token)
 
-    return axios.post('/userinfo', formData);
+    return axios.post('/user', formData);
 }
-export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId }
+export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postUserInfo }
