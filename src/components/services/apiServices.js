@@ -54,11 +54,11 @@ const postUserId = (email) => {
     return axios.post(`/idcheck`, formData);
 }
 
-//로그인 후 개인정보 받아오기
+/*//로그인 후 개인정보 받아오기
 const postUser = (Token) => {
     const formData = new FormData();
     formData.append('token', Token)
 
     return axios.post('/user', formData);
-}
-export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postUserInfo }
+}*/
+export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId}

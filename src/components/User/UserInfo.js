@@ -21,7 +21,7 @@ const UserInfo = () => {
     const [username, setUserName] = useState('') //change to Name, setName
     const [validated, setValidated] = useState(false);
 
-    useEffect(() => {
+    /*useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
             postUser(token)
@@ -33,7 +33,7 @@ const UserInfo = () => {
                     console.error('Error fetching user data:', error);
                 });
         }
-    }, []);
+    }, []);*/
 
     const handleUpdate = () => {
         setShowModal(true);
