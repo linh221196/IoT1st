@@ -18,6 +18,7 @@ const postCreateNewUser = (email, password, username, birth, phoneNum, role, use
 
 const getAllUsers = () => {
     // return axios.get(`/.../...`);
+    //http://localhost:8081/api/v1/login/participant/all
     // return axios.get(`/participant/all`);
 }
 
@@ -41,10 +42,11 @@ const postLoggin = (email, password) => {
     const formData = new FormData();
     formData.append('email', email)
     formData.append('password', password)
-
+//http://localhost:8081/api/v1/login
     return axios.post(`/login`, formData)
 }
 //ID check
+
 const postUserId = (email) => {
     // return axios.get(`/email/{email}`)
     const formData = new FormData();

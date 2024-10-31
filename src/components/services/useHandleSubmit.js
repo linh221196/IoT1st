@@ -5,7 +5,17 @@ export const useHandleSubmit = (submitCallback, successMes, errorMes) => {
     const [validated, setValidated] = useState(false)
 
     const handleSubmit = async (e, ...parameters) => {
-        
+        e.preventDefault();
+        e.stopPropagation();
+        const form = e.currentTarget;
+        console.log('running handle submit1')
+        if (form.checkValidity() === false) {
+            console.log('running checkValidity() === false')
+            setValidated(true)
+            return;
+        }
+        console.log('running handle submit2')
+        setValidated(true)
         try {
             const data = await submitCallback(...parameters);
             console.log("Response data:", data);

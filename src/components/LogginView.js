@@ -98,10 +98,10 @@ const LogginView = () => {
     //회원가입의 response처리
     const handleSignUpSubmit = (e) => {
         handleValidated()
-        // if (isUsable) {
-        //     alert('사용가능 ID를 입력해주세요')
-        //     return;
-        // }
+        if (isUsable) {
+            alert('사용가능 ID를 입력해주세요')
+            return;
+        }
         console.log('handle submit clicked')
         handleSubmitSignUp(e, email, password, username, birth, phoneNum, role, userImage)
             .then((data) => {
@@ -111,7 +111,7 @@ const LogginView = () => {
             })
     }
 
-    //로그인 기능
+    //로그인 기능 //비동기 처리 SSR CSR
     useEffect(() => {
         if (isLoggin) {
             console.log(userInfo.role);
@@ -134,6 +134,7 @@ const LogginView = () => {
                 if (data) {
                     setIsLoggin(true)
                     dispatch(doLoggin(data))
+                    //navigate('/UserHome'); 안 됨
                 }
             })
     };
@@ -189,9 +190,10 @@ const LogginView = () => {
                     계정이 없으세요?
                 </Form.Text>
                 <NavLink onClick={handleSignUp} >회원가입</NavLink>
+                {/* 부모 자식 */}
                 <SignUpModal
-                    show={showModal}
-                    handleSignUpClose={handleSignUpClose}
+                    show={showModal} 
+                    handleSignUpClose={handleSignUpClose} //function
                     handleSignUpSubmit={handleSignUpSubmit}
                     handleChange={handleChange}
                     validated={validated}

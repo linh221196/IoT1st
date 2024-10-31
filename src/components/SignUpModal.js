@@ -86,9 +86,6 @@ const SignUpModal = ({ handleCheckId, show, handleSignUpClose, handleSignUpSubmi
                             <Form.Control required type="phone" name="phone" onChange={handleChange} />
                             <Form.Control.Feedback type="invalid">전화번호 입력해주세요</Form.Control.Feedback>
                         </Col>
-                        <Col sm="2">
-                            <Button style={{ padding: '6px 11px' }} >체크</Button>
-                        </Col>
                     </Form.Group>
 
                     <Form.Group as={Row} className="mb-3" hasvalidation="true">
