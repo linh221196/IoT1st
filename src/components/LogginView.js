@@ -8,6 +8,7 @@ import SignUpModal from './SignUpModal';
 import FindPwModal from './FindPwModal';
 import { postCreateNewUser, postLoggin, postUserId } from './services/apiServices';
 import dayjs from 'dayjs';
+import {useDispatch} from "react-redux";
 
 
 const LogginView = () => {
@@ -21,6 +22,7 @@ const LogginView = () => {
     const [phoneNum, setPhoneNum] = useState('')
     const [birth, setBirth] = useState('') // 
     const [isUsable, setIsUsable] = useState(false)
+    const dispatch = useDispatch();
     // const [SSN,setSSN] =useState('')
     // const [User_Id,setUser_Id]=useState('')
 
@@ -43,7 +45,7 @@ const LogginView = () => {
                 setPassword(value);
                 break;
             case 'userImage':
-                setUserImage(files[0]);
+                //setUserImage(files[0]);
                 break;
             case 'role':
                 setRole(value);
@@ -103,9 +105,9 @@ const LogginView = () => {
             return;
         }
         setValidated(true);
-        console.log(email, password, username, birth, phoneNum, role, userImage)
+        console.log(email, password, username, birth, phoneNum, role)//, userImage)
         try {
-            const data = await postCreateNewUser(email, password, username, birth, phoneNum, role, userImage);
+            const data = await postCreateNewUser(email, password, username, birth, phoneNum, role)//, userImage);
             console.log("Check Inter Response", data);
             if (data.status === "success") {
                 setShowModal(false);

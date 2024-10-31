@@ -25,6 +25,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
                     role: division, // Maps backend `division` to frontend `role`
                     phoneNum: phone_num, // Maps backend `phone_num` to frontend `phoneNum`
                     birth, // Maps directly if names match
+                    userid,
                 },
                 isAuthenticated: true
             };
