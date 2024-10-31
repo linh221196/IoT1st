@@ -122,6 +122,8 @@ const LogginView = () => {
             console.log("Check Inter Response", data);
             if (data.status === "success") {
                 setIsLoggin(true)
+                const Token = data.refreshToken
+                localStorage.setItem('token', Token);
                 alert("Login successfully!");
             } else if (data.status === "PasswordFail"){
                 alert("비밀번호가 일치하지 않습니다.");

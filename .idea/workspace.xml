@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c4dad222-51d5-449c-a412-22b27b5b8509" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/24__10__20___7_48__________1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/24__10__20__오후_7_48,_체크아웃_전에_커밋되지_않은_변경_내용_[변경]1/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/LogginView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LogginView.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/User/UserInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/User/UserInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/services/apiServices.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/services/apiServices.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

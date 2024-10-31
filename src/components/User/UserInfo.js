@@ -9,7 +9,7 @@ import { FiEdit } from "react-icons/fi";
 import UserInfoUpdateModal from "./UserInfoUpdateModal";
 import { useState } from 'react';
 import { useFetchUser } from "../services/useFetchUser";
-import { putEditUserData } from "../services/apiServices";
+import {postLoggin, putEditUserData} from "../services/apiServices";
 
 const UserInfo = () => {
 
@@ -32,6 +32,9 @@ const UserInfo = () => {
     const handleUpdateSubmit = async (e) => {
         e.preventDefault();
         const form = e.currentTarget;
+
+        const data = await postUserInfo(Token);
+
         if (form.checkValidity() === false) {
             setValidated(true);
             return;
