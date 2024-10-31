@@ -107,7 +107,7 @@ const LogginView = () => {
         try {
             const data = await postCreateNewUser(email, password, username, birth, phoneNum, role, userImage);
             console.log("Check Inter Response", data);
-            if (data && data.EC === 0) {
+            if (data.status === "success") {
                 setShowModal(false);
                 alert("User created successfully!");
             } else {
