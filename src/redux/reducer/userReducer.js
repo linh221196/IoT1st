@@ -1,37 +1,33 @@
 import { FETCH_USER_LOGIN_SUCCESS } from '../action/userAction';
 const INITIAL_STATE = {
     account: {
-        access_token: '',
-        refresh_token: '',
+        accessToken: '',
+        refreshToken: '',
         username: '',
-        image: '',
-        role: ''
+        role: '',
+        phoneNum: '',
+        birth: '',
     },
     isAuthenticated: false
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
-    const { access_token, refresh_token, username, image, role, email } = action?.payload?.DT || {};
+    const { accessToken, birth, refreshToken, name, division, userid, phone_num } = action?.payload?.DT || {};
     switch (action.type) {
         case FETCH_USER_LOGIN_SUCCESS:
             console.log(`check action: `, action)
             return {
                 ...state,
                 account: {
-                    access_token,
-                    refresh_token,
-                    username,
-                    image,
-                    role,
-                    email
+                    accessToken, // Maps to accessToken from the backend
+                    refreshToken, // Maps to refreshToken from the backend
+                    username: name, // Maps backend `name` to frontend `username`
+                    role: division, // Maps backend `division` to frontend `role`
+                    phoneNum: phone_num, // Maps backend `phone_num` to frontend `phoneNum`
+                    birth, // Maps directly if names match
                 },
                 isAuthenticated: true
             };
-
-        // case DECREMENT:
-        //     return {
-        //         ...state, count: state.count - 1,
-        //     };
         default: return state;
     }
 };

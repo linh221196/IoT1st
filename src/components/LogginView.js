@@ -14,13 +14,12 @@ const LogginView = () => {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const [showFindPwModal, setFindPwShowModal] = useState(false);
-    const [email, setEmail] = useState('') //will disable
-    const [userImage, setUserImage] = useState('') //will disable
-    const [username, setUserName] = useState('') //change to Name, setName
+    const [email, setEmail] = useState('') //userid
+    const [username, setUserName] = useState('') //name
     const [password, setPassword] = useState('')
-    const [role, setRole] = useState(''); // change to division later, (환자, 봉사자, 의료진)
+    const [role, setRole] = useState(''); //division
     const [phoneNum, setPhoneNum] = useState('')
-    const [birth, setBirth] = useState('') // change to Age?
+    const [birth, setBirth] = useState('') // 
     const [isUsable, setIsUsable] = useState(false)
     // const [SSN,setSSN] =useState('')
     // const [User_Id,setUser_Id]=useState('')
