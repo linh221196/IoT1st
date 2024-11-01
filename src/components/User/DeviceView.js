@@ -31,7 +31,13 @@ const DeviceView = () => {
                 </Card.Text>
               </Card.Body>
               <Card.Footer className="text-center">
-                <NavLink href="#"><RxVideo size={20} />더보기</NavLink>
+                  <NavLink
+                      href={device.link} // device.link 사용
+                      target="_blank"
+                      rel="noopener noreferrer"
+                  >
+                      <RxVideo size={20} />더보기
+                  </NavLink>
               </Card.Footer>
             </Card>
           </Col>
@@ -41,3 +47,5 @@ const DeviceView = () => {
   );
 }
 export default DeviceView;
+
+//<NavLink href="#"><RxVideo size={20} />더보기</NavLink>

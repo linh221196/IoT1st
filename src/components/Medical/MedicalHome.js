@@ -4,6 +4,7 @@ import UserTable from "./UserTable"
 import './Admin.scss'
 
 
+
 const MedicalHome = () => {
     return (
         <Container className="container admin-container ms-0 ps-0 mt-0">
