@@ -160,41 +160,38 @@ const LogginView = () => {
             return;
         }
         setValidated(true);
-        // try {
-        //     const data = await postLoggin(email, password);
-        //     console.log("Check Inter Response", data);
-        //     if (data.status === "success") {
-        //         setIsLoggin(true)
-        //         // const Token = data.refreshToken
-        //         // localStorage.setItem('token', Token);
-        //         dispatch(doLoggin(data));
-        //         alert("Login successfully!");
-        //     } else if (data.status === "PasswordFail") {
-        //         alert("비밀번호가 일치하지 않습니다.");
-        //     } else if (data.status === "IdFail") {
-        //         alert("존재하지 않는 아이디입니다.");
-        //     }
-        // } catch (error) {
-        //     alert("An error occurred while loggin. Please try again.");
-        // }
-
         try {
             const data = await postLoggin(email, password);
-            if (data && data.EC === 0) {
-                console.log('Handle Login Submit Data:', data)
-                alert(data?.EM)
+            console.log("Check Inter Response", data);
+            if (data.status === "success") {
                 setIsLoggin(true)
                 dispatch(doLoggin(data));
+                alert("Login successfully!");
+            } else if (data.status === "PasswordFail") {
+                alert("비밀번호가 일치하지 않습니다.");
+            } else if (data.status === "IdFail") {
+                alert("존재하지 않는 아이디입니다.");
             }
-            alert(data?.EM)
-            return;
-
-        } catch (err) {
-            alert(err)
-            console.log("Handle Login Submit Error: ", err)
-            return;
+        } catch (error) {
+            alert("An error occurred while loggin. Please try again.");
         }
-        console.log(`Logging in user: ${email}`);
+
+        // try {
+        //     const data = await postLoggin(email, password);
+        //     if (data && data.EC === 0) {
+        //         console.log('Handle Login Submit Data:', data)
+        //         alert(data?.EM)
+        //         setIsLoggin(true)
+        //         dispatch(doLoggin(data));
+        //     }
+        //     alert(data?.EM)
+        //     return;
+
+        // } catch (err) {
+        //     alert(err)
+        //     console.log("Handle Login Submit Error: ", err)
+        //     return;
+        // }
     };
 
     //Id 사용가능 여부 체크
