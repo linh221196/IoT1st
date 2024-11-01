@@ -9,6 +9,8 @@ import FindPwModal from './FindPwModal';
 import { postCreateNewUser, postLoggin, postUserId } from './services/apiServices';
 import dayjs from 'dayjs';
 import {useDispatch} from "react-redux";
+import { useSelector } from "react-redux";
+import { doLoggin } from '../redux/action/userAction'
 
 
 const LogginView = () => {
@@ -25,6 +27,8 @@ const LogginView = () => {
     const dispatch = useDispatch();
     // const [SSN,setSSN] =useState('')
     // const [User_Id,setUser_Id]=useState('')
+
+    const userInfo = useSelector(state => state.user.account)
 
     const [validated, setValidated] = useState(false);
 
@@ -138,7 +142,8 @@ const LogginView = () => {
     }, [isLoggin, navigate, userInfo.role]);
 
     const handleLogginSubmit = (e) => {
-        handleSubmitLoggin(e, email, password)
+        e.preventDefault();
+        handleSubmit(e, email, password)
             .then((data) => {
                 if (data) {
                     setIsLoggin(true);
@@ -146,6 +151,14 @@ const LogginView = () => {
                     navigate('/UserHome'); // Move navigate here if you need it to wait
                 }
             });
+        /*handleSubmitLoggin(e, email, password)
+            .then((data) => {
+                if (data) {
+                    setIsLoggin(true);
+                    dispatch(doLoggin(data));
+                    navigate('/UserHome'); // Move navigate here if you need it to wait
+                }
+            });*/
     };
 
     const handleSubmit = async (e) => {
@@ -161,8 +174,6 @@ const LogginView = () => {
             console.log("Check Inter Response", data);
             if (data.status === "success") {
                 setIsLoggin(true)
-                const Token = data.refreshToken
-                localStorage.setItem('token', Token);
                 alert("Login successfully!");
             } else if (data.status === "PasswordFail") {
                 alert("비밀번호가 일치하지 않습니다.");
