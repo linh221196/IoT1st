@@ -17,7 +17,8 @@ const Devices =
         name: "Air FLow 호흡센서",
         img: AirFlow,
         des: "Air FLow 호흡센서",
-        imoticon: airflowimoticon
+        imoticon: airflowimoticon,
+        link: "https://www.youtube.com/watch?v=KlGaa6K0BsI&t=348s"
     },
     {
         id: 2,

@@ -15,7 +15,7 @@ const Content = () => {
   }
   return (
     <div>
-      <Container>
+      <Container >
         <Row className="r-content">
           <Col className="c-content">
             <NavLink href="/DeviceView">기계안내</NavLink>

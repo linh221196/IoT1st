@@ -1,38 +1,35 @@
 import { NavLink } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import "./LogginView.scss"
+import "./LogginView.scss";
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import SignUpModal from './SignUpModal';
 import FindPwModal from './FindPwModal';
 import { postCreateNewUser, postLoggin, postUserId } from './services/apiServices';
 import dayjs from 'dayjs';
-
+import { useDispatch, useSelector } from "react-redux";
+import { doLoggin } from '../redux/action/userAction';
 
 const LogginView = () => {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const [showFindPwModal, setFindPwShowModal] = useState(false);
-    const [email, setEmail] = useState('') //will disable
-    const [userImage, setUserImage] = useState('') //will disable
-    const [username, setUserName] = useState('') //change to Name, setName
-    const [password, setPassword] = useState('')
-    const [role, setRole] = useState(''); // change to division later, (환자, 봉사자, 의료진)
-    const [phoneNum, setPhoneNum] = useState('')
-    const [birth, setBirth] = useState('') // change to Age?
-    const [isUsable, setIsUsable] = useState(false)
-    // const [SSN,setSSN] =useState('')
-    // const [User_Id,setUser_Id]=useState('')
-
+    const [email, setEmail] = useState('');
+    const [username, setUserName] = useState('');
+    const [password, setPassword] = useState('');
+    const [role, setRole] = useState('');
+    const [phoneNum, setPhoneNum] = useState('');
+    const [birth, setBirth] = useState('');
+    const [isUsable, setIsUsable] = useState(false);
     const [validated, setValidated] = useState(false);
-
-
-
     const [isLoggin, setIsLoggin] = useState(false);
 
+    const dispatch = useDispatch();
+    const userInfo = useSelector(state => state.user.account);
+
     const handleChange = (e) => {
-        const { name, value, files } = e.target;
+        const { name, value } = e.target;
         switch (name) {
             case 'email':
                 setEmail(value);
@@ -43,56 +40,39 @@ const LogginView = () => {
             case 'password':
                 setPassword(value);
                 break;
-            case 'userImage':
-                setUserImage(files[0]);
-                break;
             case 'role':
                 setRole(value);
                 break;
             case 'phone':
-                setPhoneNum(value)
+                setPhoneNum(value);
                 break;
             case 'birth':
-                const formattedDate = dayjs(value).format('YYYY/MM/DD')
-                setBirth(formattedDate);
+                setBirth(dayjs(value).format('YYYY/MM/DD'));
                 break;
             default:
                 break;
         }
-        console.log(name, " ", value)
     };
 
-    const handleSignUp = () => {
-        setShowModal(true);
-    }
-
-    const handleSignUpClose = () => {
-        setShowModal(false);
-
-    }
-
-    const handleFindPw = () => {
-        setFindPwShowModal(true);
-    }
-
-    const handleFindPwClose = () => {
-        setFindPwShowModal(false);
-    }
-    //회원가입의 response처리
-    const handleSignUpSubmit = async (e) => {
+    const handleValidated = (e) => {
         e.preventDefault();
         e.stopPropagation();
         const form = e.currentTarget;
         if (form.checkValidity() === false) {
             setValidated(true);
-            return;
+            return false;
         }
         setValidated(true);
-        console.log(email, password, username, birth, phoneNum, role, userImage)
+        return true;
+    };
+
+    const handleSignUpSubmit = async (e) => {
+        if (!handleValidated(e)) return;
+
         try {
-            const data = await postCreateNewUser(email, password, username, birth, phoneNum, role, userImage);
+            const data = await postCreateNewUser(email, password, username, birth, phoneNum, role);
             console.log("Check Inter Response", data);
-            if (data && data.EC === 0) {
+            if (data.status === "success") {
                 setShowModal(false);
                 alert("User created successfully!");
             } else {
@@ -101,97 +81,87 @@ const LogginView = () => {
         } catch (error) {
             alert("An error occurred while creating the user. Please try again.");
         }
-    }
+    };
 
-    //로그인 기능
-    useEffect(() => {
-        if (isLoggin) {
-            navigate('/UserHome');
-        }
-    }, [isLoggin]);
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        const form = e.currentTarget;
-        if (form.checkValidity() === false) {
-            setValidated(true);
-            return;
-        }
-        setValidated(true);
+        if (!handleValidated(e)) return;
+
         try {
             const data = await postLoggin(email, password);
             console.log("Check Inter Response", data);
             if (data.status === "success") {
-                setIsLoggin(true)
-                const Token = data.refreshToken
-                localStorage.setItem('token', Token);
+                setIsLoggin(true);
+                dispatch(doLoggin(data));
                 alert("Login successfully!");
-            } else if (data.status === "PasswordFail"){
+            } else if (data.status === "PasswordFail") {
                 alert("비밀번호가 일치하지 않습니다.");
-            }else if(data.status === "IdFail"){
+            } else if (data.status === "IdFail") {
                 alert("존재하지 않는 아이디입니다.");
             }
         } catch (error) {
-            alert("An error occurred while loggin. Please try again.");
+            alert("An error occurred while logging in. Please try again.");
         }
-        console.log(`Logging in user: ${email}`);
     };
 
-    //Id 사용가능 여부 체크
     const handleCheckId = async (e) => {
         e.preventDefault();
         try {
             const data = await postUserId(email);
             if (data.status === "duplication") {
                 alert("해당 ID는 중복된 ID입니다.");
-                setIsUsable(false); // 사용 불가로 설정
-            } else if(data.status === "success"){
-                console.log("Server Response:", data);
+                setIsUsable(false);
+            } else if (data.status === "success") {
                 alert("사용 가능한 아이디입니다.");
-                setIsUsable(true); // 사용 가능으로 설정
+                setIsUsable(true);
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
             alert("오류가 발생했습니다. 다시 시도해 주세요.");
         }
-    }
+    };
+
+    useEffect(() => {
+        if (isLoggin) {
+            if (userInfo.role === "Patient" || userInfo.role === "user") {
+                navigate('/UserHome');
+            } else if (userInfo.role === "ADMIN" || userInfo.role === "Medical") {
+                navigate('/MedicalHome');
+            } else {
+                navigate('/VolunteerHome');
+            }
+        }
+    }, [isLoggin, navigate, userInfo.role]);
+
     return (
         <Form onSubmit={handleSubmit} noValidate validated={validated}>
             <Form.Group className="mb-3" controlId="formBasicId">
                 <Form.Label>ID</Form.Label>
-                <Form.Control type="text" placeholder="예제: topaziot6"
-                    name="email" onChange={handleChange}
-                />
-
+                <Form.Control type="text" placeholder="예제: topaziot6" name="email" onChange={handleChange} />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>비밀번호</Form.Label>
-                <Form.Control type="password" placeholder="비밀번호 입력해주세요"
-                    name="password" onChange={handleChange}
-                />
+                <Form.Control type="password" placeholder="비밀번호 입력해주세요" name="password" onChange={handleChange} />
             </Form.Group>
-            <Button variant="primary" type="submit" >
-                Submit
-            </Button>
+
+            <Button variant="primary" type="submit">Submit</Button>
+
             <div className='findPw-container'>
                 <Form.Text className="text-muted" size="sm">
                     비밀번호 잊으세요?
                 </Form.Text>
-                <NavLink onClick={handleFindPw} >비밀번호 찾기</NavLink>
-                <FindPwModal
-                    show={showFindPwModal}
-                    handleFindPwClose={handleFindPwClose}
-                />
+                <NavLink onClick={() => setFindPwShowModal(true)}>비밀번호 찾기</NavLink>
+                <FindPwModal show={showFindPwModal} handleFindPwClose={() => setFindPwShowModal(false)} />
             </div>
+
             <div className='signUp-container'>
                 <Form.Text className="text-muted" size="sm">
-
                     계정이 없으세요?
                 </Form.Text>
-                <NavLink onClick={handleSignUp} >화원가입</NavLink>
+                <NavLink onClick={() => setShowModal(true)}>회원가입</NavLink>
                 <SignUpModal
                     show={showModal}
-                    handleSignUpClose={handleSignUpClose}
+                    handleSignUpClose={() => setShowModal(false)}
                     handleSignUpSubmit={handleSignUpSubmit}
                     handleChange={handleChange}
                     validated={validated}
@@ -200,6 +170,6 @@ const LogginView = () => {
             </div>
         </Form>
     );
-}
+};
 
 export default LogginView;

@@ -1,40 +1,27 @@
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Container, Button, Image } from "react-bootstrap";
 import "./UserInfo.scss"
-import Image from 'react-bootstrap/Image';
 import code from '../../assets/image.jpg'
-import Button from "react-bootstrap/Button";
 import { FiEdit } from "react-icons/fi";
 import UserInfoUpdateModal from "./UserInfoUpdateModal";
 import { useState } from 'react';
-import { useFetchUser } from "../services/useFetchUser";
-import {postLoggin, putEditUserData} from "../services/apiServices";
+import { putEditUserData } from "../services/apiServices";
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
+import { useSelector } from "react-redux";
+
 
 const UserInfo = () => {
 
-    const { listUser } = useFetchUser()
-    const userInfo = listUser.find(user => user.id === 12)
-    console.log(userInfo)
+    const userInfo = useSelector(state => state.user.account)
+    const isAuthenticated = useSelector(state => state.user.isAuthenticated)
+    // console.log(userInfo)
     const [showModal, setShowModal] = useState(false);
     const [userImage, setUserImage] = useState('') //will disable
     const [username, setUserName] = useState('') //change to Name, setName
     const [validated, setValidated] = useState(false);
-
-    /*useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            postUser(token)
-                .then(response => {
-                    // 응답 데이터를 통해 상태 업데이트 가능
-                    console.log('User data fetched:', response.data);
-                })
-                .catch(error => {
-                    console.error('Error fetching user data:', error);
-                });
-        }
-    }, []);*/
-
     const handleUpdate = () => {
         setShowModal(true);
     }
@@ -46,7 +33,6 @@ const UserInfo = () => {
     const handleUpdateSubmit = async (e) => {
         e.preventDefault();
         const form = e.currentTarget;
-
         if (form.checkValidity() === false) {
             setValidated(true);
             return;
@@ -88,43 +74,41 @@ const UserInfo = () => {
             <Container className="user-imageContainer">
                 <Image className="user-image" src={userInfo?.image ? userInfo.image : code} rounded />
             </Container>
+            <Paper className="paper-container" elevation={16}>
+                <Table size="small" aria-label="a dense table">
+                    <TableBody>
+                        <TableRow >
+                            <TableCell component="th" scope="row">성함</TableCell>
+                            <TableCell align="right"> {userInfo?.username} </TableCell>
+                        </TableRow>
+                        <TableRow >
+                            <TableCell component="th" scope="row">ID</TableCell>
+                            <TableCell align="right">{userInfo?.email} </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell component="th" scope="row">의료진</TableCell>
+                            <TableCell align="right">
+                                {userInfo?.doctor?.name ? userInfo.doctor.name : '노영휸'}
+                            </TableCell>
+                        </TableRow>
+                    </TableBody>
 
-            <Container  >
-                <Row className="r-userInfo">
-                    <Col className="c1-userInfo" sm="5">
-                        성함
-                    </Col>
-                    <Col className="c2-userInfo" sm="7">
-                        {userInfo?.username ? userInfo?.username : "데이터 삽입 예정"}
-                    </Col>
-                </Row>
-                <Row className="r-userInfo">
-                    <Col className="c1-userInfo" sm="5">
-                        이메일 또는 ID
-                    </Col>
-                    <Col className="c2-userInfo" sm="7">
-                        {userInfo?.email ? userInfo?.email: "데이터 삽입 예정"}
-                    </Col>
-                </Row>
-                <Row className="r-userInfo">
-                    <Col className="c1-userInfo" sm="5">
-                        의료진
-                    </Col>
-                    <Col className="c2-userInfo" sm="7">
-                        {userInfo?.doctor?.name ? userInfo.doctor.name : '데이터 삽입 예정'}
-                    </Col>
-                </Row>
-            </Container>
-            <div>
+                </Table>
+            </Paper>
+
+            <div className="button-container">
                 <Button variant="outline-success" className="me-3" onClick={handleUpdate} >
                     수정
                     <FiEdit />
                 </Button>
-                <Button variant="outline-danger" onClick={handleUpdate} >
+                <Button variant="outline-primary" className="me-3" onClick={handleUpdate} >
                     비밀번호
-
                 </Button>
-
+                {isAuthenticated && 
+                    <Button variant="outline-danger">
+                        Loggout
+                    </Button>
+                }
                 <UserInfoUpdateModal
                     userInfo={userInfo}
                     show={showModal}

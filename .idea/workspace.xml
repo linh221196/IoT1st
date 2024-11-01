@@ -5,9 +5,68 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c4dad222-51d5-449c-a412-22b27b5b8509" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/User/UserInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/User/UserInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/services/apiServices.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/services/apiServices.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/Devices/AirFlow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/Devices/BodyTemp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/Devices/Devices.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/Devices/ECG.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/Devices/EMG.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/Devices/EOG.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/Devices/GSR.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/Devices/Gluco.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/Devices/NIBP-imoticon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/Devices/NIBP.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/Devices/SPO2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/Devices/airflowimoticon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/Devices/bodytemp-imoticon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/Devices/ecg-imoticon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/Devices/emg-imoticon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/Devices/eog-imoticon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/Devices/glocometer-imoticon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/Devices/gsr-imoticon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/Devices/noimg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/Devices/spo2-imoticon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/blood.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/brain-waves.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/heart.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/image.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Admin/AdminHome.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Admin/UserTable.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Calendar/Calendar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Calendar/Calendar.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Calendar/Note.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Calendar/Note.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Calendar/NoteModal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Content.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Content.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FindPwModal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Home.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Home.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/LogginView.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/LogginView.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PhoneAuth.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SignUpModal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/User/DeviceView.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/User/DeviceView.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/User/NoticeMeasure.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/User/UserCallVolunteer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/User/UserChangePwModal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/User/UserHome.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/User/UserInfo.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/User/UserInfo.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/User/UserInfoUpdateModal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Volunteer/VolunteerHomePage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/services/apiServices.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/services/test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/services/useFetchUser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/utils/axiosCustomize.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reportWebVitals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/setupTests.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
