@@ -8,8 +8,9 @@ import SignUpModal from './SignUpModal';
 import FindPwModal from './FindPwModal';
 import { postCreateNewUser, postLoggin, postUserId } from './services/apiServices';
 import dayjs from 'dayjs';
-import {useDispatch} from "react-redux";
-
+import { useDispatch } from "react-redux";
+import { doLoggin } from '../redux/action/userAction'
+import { useSelector } from "react-redux";
 
 const LogginView = () => {
     const navigate = useNavigate();
@@ -22,9 +23,12 @@ const LogginView = () => {
     const [phoneNum, setPhoneNum] = useState('')
     const [birth, setBirth] = useState('') // 
     const [isUsable, setIsUsable] = useState(false)
+
+    //redux
     const dispatch = useDispatch();
-    // const [SSN,setSSN] =useState('')
-    // const [User_Id,setUser_Id]=useState('')
+    const userInfo = useSelector(state => state.user.account)
+
+
 
     const [validated, setValidated] = useState(false);
 
@@ -137,16 +141,16 @@ const LogginView = () => {
         }
     }, [isLoggin, navigate, userInfo.role]);
 
-    const handleLogginSubmit = (e) => {
-        handleSubmitLoggin(e, email, password)
-            .then((data) => {
-                if (data) {
-                    setIsLoggin(true);
-                    dispatch(doLoggin(data));
-                    navigate('/UserHome'); // Move navigate here if you need it to wait
-                }
-            });
-    };
+    // const handleLogginSubmit = (e) => {
+    //     handleSubmitLoggin(e, email, password)
+    //         .then((data) => {
+    //             if (data) {
+    //                 setIsLoggin(true);
+    //                 dispatch(doLoggin(data));
+    //                 navigate('/UserHome'); // Move navigate here if you need it to wait
+    //             }
+    //         });
+    // };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -156,21 +160,39 @@ const LogginView = () => {
             return;
         }
         setValidated(true);
+        // try {
+        //     const data = await postLoggin(email, password);
+        //     console.log("Check Inter Response", data);
+        //     if (data.status === "success") {
+        //         setIsLoggin(true)
+        //         // const Token = data.refreshToken
+        //         // localStorage.setItem('token', Token);
+        //         dispatch(doLoggin(data));
+        //         alert("Login successfully!");
+        //     } else if (data.status === "PasswordFail") {
+        //         alert("비밀번호가 일치하지 않습니다.");
+        //     } else if (data.status === "IdFail") {
+        //         alert("존재하지 않는 아이디입니다.");
+        //     }
+        // } catch (error) {
+        //     alert("An error occurred while loggin. Please try again.");
+        // }
+
         try {
             const data = await postLoggin(email, password);
-            console.log("Check Inter Response", data);
-            if (data.status === "success") {
+            if (data && data.EC === 0) {
+                console.log('Handle Login Submit Data:', data)
+                alert(data?.EM)
                 setIsLoggin(true)
-                const Token = data.refreshToken
-                localStorage.setItem('token', Token);
-                alert("Login successfully!");
-            } else if (data.status === "PasswordFail") {
-                alert("비밀번호가 일치하지 않습니다.");
-            } else if (data.status === "IdFail") {
-                alert("존재하지 않는 아이디입니다.");
+                dispatch(doLoggin(data));
             }
-        } catch (error) {
-            alert("An error occurred while loggin. Please try again.");
+            alert(data?.EM)
+            return;
+
+        } catch (err) {
+            alert(err)
+            console.log("Handle Login Submit Error: ", err)
+            return;
         }
         console.log(`Logging in user: ${email}`);
     };
