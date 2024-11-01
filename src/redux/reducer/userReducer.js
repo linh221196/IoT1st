@@ -12,7 +12,7 @@ const INITIAL_STATE = {
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
-    const { accessToken, birth, refreshToken, name, division, userid, phone_num } = action?.payload?.DT || {};
+    const { accessToken, birth, refreshToken, name, division, userid, phone_num } = action?.payload?.data || {};
     switch (action.type) {
         case FETCH_USER_LOGIN_SUCCESS:
             console.log(`check action: `, action)
@@ -25,7 +25,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
                     role: division, // Maps backend `division` to frontend `role`
                     phoneNum: phone_num, // Maps backend `phone_num` to frontend `phoneNum`
                     birth, // Maps directly if names match
-                    userid,
+                    email: userid, //Maps backend `userid` to frontend `email`
                 },
                 isAuthenticated: true
             };
