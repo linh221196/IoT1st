@@ -68,9 +68,8 @@ const postCallVolunteer = (email, noteDate, noteContent) => {
 
 //all desired_volunteer_date
 const postAllCallVolunteer = () => {
-    const formData = new FormData();
 
-    return axios.post(`/allcallvolunteer`, formData);
+    return axios.post(`/allcallvolunteer`);
 }
 
 export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer, postAllCallVolunteer }
