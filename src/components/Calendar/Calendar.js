@@ -82,11 +82,18 @@ const Calendar = () => {
                 const data = await postAllCallVolunteer();
                 console.log('Check response', data);
 
-                const transformedData = data.map(item => ({
-                    noteDate: item.desired_date,
-                    noteContent: item.text,
-                    name: item.app_user.name
-                }));
+                const transformedData = data.map(item => {
+                    console.log('item.app_user:', item.app_user); // app_user가 존재하는지 확인
+                    console.log('item.app_user.name:', item.app_user?.name); // name이 존재하는지 확인
+
+                    return {
+                        noteDate: item.desired_date,
+                        noteContent: item.text,
+                        noteName: item.app_user?.name || "이름 없음" // name이 없으면 기본값 설정
+                    };
+                });
+
+                console.log('Transformed data:', transformedData); // 변환된 데이터 구조 확인
                 setNoteList(transformedData);
                 /*if (data && data.EC === 0) {
                     setShowModal(false);
