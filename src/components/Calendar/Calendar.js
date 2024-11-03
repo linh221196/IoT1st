@@ -104,6 +104,7 @@ const Calendar = () => {
 
     const usercallVolunteer = async () => {
         try {
+            console.log("User email:", userInfo?.email);
             const data = await postUserCall(userInfo?.email);
             console.log('Check response', data);
 
@@ -131,7 +132,7 @@ const Calendar = () => {
     useEffect(() => {
         if (userInfo && userInfo.role) { // userInfo와 userInfo.role이 존재하는 경우에만 실행
             if (userInfo.role === "Patient" || userInfo.role === "user") {
-                allcallVolunteer();
+                usercallVolunteer();
             } else {
                 allcallVolunteer();
             }
