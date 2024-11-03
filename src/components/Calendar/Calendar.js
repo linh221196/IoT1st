@@ -104,7 +104,6 @@ const Calendar = () => {
 
     const usercallVolunteer = async () => {
         try {
-            console.log("User email:", userInfo?.email);
             const data = await postUserCall(userInfo?.email);
             console.log('Check response', data);
 
