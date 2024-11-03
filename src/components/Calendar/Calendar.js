@@ -19,9 +19,9 @@ dayjs.locale('ko');
 const Calendar = () => {
 
     //리듁스에서 꺼내오기
-
     const userInfo = useSelector(state => state.user.account)
     const isAuthenticated = useSelector(state => state.user.isAuthenticated)
+    console.log('account: ', account, ' isAuthenticated: ', isAuthenticated)
 
     const [newValue, setValue] = useState(dayjs())
     const [showModal, setShowModal] = useState(false);
@@ -50,7 +50,7 @@ const Calendar = () => {
                 noteDate: newValue.format('YYYY-MM-DD'),
                 noteContent: note
             };
-            console.log('email: ', userInfo?.id, ' noteDate: ', newNote.noteDate, 'noteContent', newNote.noteContent)
+            console.log('email: ', userInfo?.email, ' noteDate: ', newNote.noteDate, 'noteContent', newNote.noteContent)
             try {
                 const data = await postCallVolunteer(userInfo?.id, newNote.noteDate, newNote.noteContent);
                 console.log('Check response', data)
