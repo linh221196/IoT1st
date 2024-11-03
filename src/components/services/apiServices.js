@@ -45,8 +45,8 @@ const postLoggin = (email, password) => {
 //http://localhost:8081/api/v1/login
     return axios.post(`/login`, formData)
 }
-//ID check
 
+//ID check
 const postUserId = (email) => {
     // return axios.get(`/email/{email}`)
     const formData = new FormData();
@@ -54,4 +54,15 @@ const postUserId = (email) => {
 
     return axios.post(`/idcheck`, formData);
 }
-export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId }
+
+//desired_volunteer
+const postCallVolunteer = (email, noteDate, noteContent) => {
+    const formData = new FormData();
+    formData.append('email', email)
+    formData.append('noteDate', noteDate)
+    formData.append('noteContent', noteContent)
+
+    return axios.post('/CallVolunteer', formData);
+}
+
+export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer }

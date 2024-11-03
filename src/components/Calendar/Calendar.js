@@ -11,9 +11,17 @@ import Button from 'react-bootstrap/Button';
 import { TextField } from "@mui/material"
 import "./Calendar.scss"
 import Note from './Note';
+import {postCallVolunteer, putEditUserData} from "../services/apiServices";
+import userInfo from "../User/UserInfo";
+import {useSelector} from "react-redux";
 dayjs.locale('ko');
 
 const Calendar = () => {
+
+    //리듁스에서 꺼내오기
+
+    const userInfo = useSelector(state => state.user.account)
+    const isAuthenticated = useSelector(state => state.user.isAuthenticated)
 
     const [newValue, setValue] = useState(dayjs())
     const [showModal, setShowModal] = useState(false);
@@ -36,12 +44,27 @@ const Calendar = () => {
         setView('day'); // Reset view to day
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async (e) => {
         if (note.trim()) {
             const newNote = {
                 noteDate: newValue.format('YYYY-MM-DD'),
                 noteContent: note
             };
+            console.log('email: ', userInfo.id, ' noteDate: ', newNote.noteDate, 'noteContent', newNote.noteContent)
+            try {
+                const data = await postCallVolunteer(userInfo.id, newNote.noteDate, newNote.noteContent);
+                console.log('Check response', data)
+                /*if (data && data.EC === 0) {
+                    setShowModal(false)
+                    alert('Updated')
+                } else {
+                    alert(data.EM || "Something went wrong")
+                }*/
+            } catch (error) {
+                alert("Error occurred")
+
+            }
+
             setNoteList(prev => [...prev, newNote]);
             setNote("");
             setShowModal(false);
