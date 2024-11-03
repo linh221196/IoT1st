@@ -12,6 +12,7 @@ const Content = () => {
   const handleNoticeModalShow = (breakpoint) => {
     setFullscreen(breakpoint);
     setNoticeModalShow(true);
+
   }
   return (
     <div>

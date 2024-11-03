@@ -94,7 +94,6 @@ const Calendar = () => {
                 alert("Error occurred");
             }
         };
-
         if (isLoggin) {
             if (userInfo.role === "Patient" || userInfo.role === "user") {
                 allcallVolunteer();
@@ -102,6 +101,7 @@ const Calendar = () => {
                 allcallVolunteer();
             }
         }
+        allcallVolunteer();
     }, [isLoggin, userInfo.role]);
 
     return (
