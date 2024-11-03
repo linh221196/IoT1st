@@ -28,8 +28,8 @@ const Calendar = () => {
     const [showModal, setShowModal] = useState(false);
     const [note, setNote] = useState("")
     const [noteList, setNoteList] = useState([
-        { noteDate: "2024-10-01", noteContent: "1st note" },
-        { noteDate: "2024-10-02", noteContent: "2nd note" },
+        { noteName : "홍길동", noteDate: "2024-10-01", noteContent: "1st note" },
+        { noteName : "정희원", noteDate: "2024-10-02", noteContent: "2nd note" },
     ]);
     const [view, setView] = useState('day');
 
@@ -48,10 +48,11 @@ const Calendar = () => {
     const handleSubmit = async (e) => {
         if (note.trim()) {
             const newNote = {
+                noteName : userInfo?.name,
                 noteDate: newValue.format('YYYY-MM-DD'),
                 noteContent: note
             };
-            console.log('email: ', userInfo?.email, ' noteDate: ', newNote.noteDate, 'noteContent', newNote.noteContent)
+            console.log('email: ', userInfo?.email, userInfo?.name, ' noteDate: ', newNote.noteDate, 'noteContent', newNote.noteContent)
             try {
                 const data = await postCallVolunteer(userInfo?.email, newNote.noteDate, newNote.noteContent);
                 console.log('Check response', data)
@@ -81,9 +82,12 @@ const Calendar = () => {
                 const data = await postAllCallVolunteer();
                 console.log('Check response', data);
 
-                if (data && data.length > 0) {
-                    setNoteList(data); // 받아온 데이터를 noteList에 저장
-                }
+                const transformedData = data.map(item => ({
+                    noteDate: item.desired_date,
+                    noteContent: item.text,
+                    name: item.app_user.name
+                }));
+                setNoteList(transformedData);
                 /*if (data && data.EC === 0) {
                     setShowModal(false);
                     alert('Updated');
