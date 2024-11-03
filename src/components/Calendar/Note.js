@@ -53,10 +53,11 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue }) => {
                 <Card body className="card-item" style={{ marginBottom: 10 }} key={item.noteDate + index}>
                     <Row>
                         <Col sm={8}>
+                            <p>{item.noteName}</p>
                             <p>{item.noteDate}</p>
                         </Col>
                         <Col>
-                            <Button variant="success"
+                        <Button variant="success"
                                 onClick={() => handleEdit(index)}
                             ><MdEdit size={20} /></Button>
                             <Button variant="danger"
