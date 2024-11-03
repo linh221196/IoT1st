@@ -43,6 +43,7 @@ const postLoggin = (email, password) => {
     formData.append('email', email)
     formData.append('password', password)
 //http://localhost:8081/api/v1/login
+
     return axios.post(`/login`, formData)
 }
 
@@ -62,7 +63,7 @@ const postCallVolunteer = (email, noteDate, noteContent) => {
     formData.append('noteDate', noteDate)
     formData.append('noteContent', noteContent)
 
-    return axios.post('/CallVolunteer', formData);
+    return axios.post('/callvolunteer', formData);
 }
 
 export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer }
