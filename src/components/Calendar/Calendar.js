@@ -50,9 +50,9 @@ const Calendar = () => {
                 noteDate: newValue.format('YYYY-MM-DD'),
                 noteContent: note
             };
-            console.log('email: ', userInfo.id, ' noteDate: ', newNote.noteDate, 'noteContent', newNote.noteContent)
+            console.log('email: ', userInfo?.id, ' noteDate: ', newNote.noteDate, 'noteContent', newNote.noteContent)
             try {
-                const data = await postCallVolunteer(userInfo.id, newNote.noteDate, newNote.noteContent);
+                const data = await postCallVolunteer(userInfo?.id, newNote.noteDate, newNote.noteContent);
                 console.log('Check response', data)
                 /*if (data && data.EC === 0) {
                     setShowModal(false)
