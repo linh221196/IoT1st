@@ -129,14 +129,12 @@ const Calendar = () => {
     };
 
     useEffect(() => {
-        if (isLoggin) {
-            if (userInfo.role === "Patient" || userInfo.role === "user") {
-                usercallVounteer();
-            } else {
-                allcallVolunteer();
-            }
+        if (userInfo.role === "Patient" || userInfo.role === "user") {
+            usercallVounteer();
+        } else {
+            allcallVolunteer();
         }
-    }, [isLoggin, userInfo.role]);
+    }, [userInfo.role]);
 
     /*
     const renderDay = (day, selectedDate, pickersDayProps) => {
