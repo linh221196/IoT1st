@@ -5,18 +5,20 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import dayjs from 'dayjs';
 import ko from 'dayjs/locale/ko';
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { TextField } from "@mui/material"
 import "./Calendar.scss"
 import Note from './Note';
-import {postCallVolunteer, putEditUserData} from "../services/apiServices";
+import {postAllCallVolunteer, postCallVolunteer, putEditUserData} from "../services/apiServices";
 import userInfo from "../User/UserInfo";
 import {useSelector} from "react-redux";
 dayjs.locale('ko');
 
 const Calendar = () => {
+
+    const [isLoggin, setIsLoggin] = useState(false);
 
     //리듁스에서 꺼내오기
     const userInfo = useSelector(state => state.user.account)
@@ -72,6 +74,35 @@ const Calendar = () => {
             alert("내용을 입력해주세요.");
         }
     };
+
+    useEffect(() => {
+        const allcallVolunteer = async () => {
+            try {
+                const data = await postAllCallVolunteer();
+                console.log('Check response', data);
+
+                if (data && data.length > 0) {
+                    setNoteList(data); // 받아온 데이터를 noteList에 저장
+                }
+                /*if (data && data.EC === 0) {
+                    setShowModal(false);
+                    alert('Updated');
+                } else {
+                    alert(data.EM || "Something went wrong");
+                }*/
+            } catch (error) {
+                alert("Error occurred");
+            }
+        };
+
+        if (isLoggin) {
+            if (userInfo.role === "Patient" || userInfo.role === "user") {
+                allcallVolunteer();
+            } else {
+                allcallVolunteer();
+            }
+        }
+    }, [isLoggin, userInfo.role]);
 
     return (
 
