@@ -1,6 +1,4 @@
 import Calendar from "../Calendar/Calendar";
-import {postCallVolunteer} from "../services/apiServices";
-import userInfo from "./UserInfo";
 
 const UserCallVolunteer = () => {
 
