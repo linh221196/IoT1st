@@ -131,7 +131,7 @@ const Calendar = () => {
     useEffect(() => {
         if (userInfo && userInfo.role) { // userInfo와 userInfo.role이 존재하는 경우에만 실행
             if (userInfo.role === "Patient" || userInfo.role === "user") {
-                usercallVolunteer();
+                allcallVolunteer();
             } else {
                 allcallVolunteer();
             }
