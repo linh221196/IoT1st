@@ -11,6 +11,20 @@
     border-bottom-left-radius: 20px;
     border-right: none;
 
+    //강조를 위해 추가
+    .MuiBadge-dot {
+      height: 10px;
+      width: 10px;
+      background-color: #ff5722; // 강조할 색상
+      border: 1px solid #ffffff; // 점을 강조하기 위한 테두리
+    }
+    .MuiPickersDay-root.highlighted {
+      background-color: #ffcc80 !important;
+      color: #d84315 !important;
+      border: 2px solid #d84315 !important;
+      border-radius: 50% !important;
+    }
+
     .MuiPickersToolbar-root {
       border-radius: 10px;
       margin-top: 20px;

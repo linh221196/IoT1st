@@ -72,4 +72,12 @@ const postAllCallVolunteer = () => {
     return axios.get(`/allcallvolunteer`);
 }
 
-export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer, postAllCallVolunteer }
+const postUserCall = (email) => {
+    const formData = new FormData();
+    formData.append('email', email)
+
+    return axios.post(`/callpatient`, formData)
+}
+
+export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer,
+    postAllCallVolunteer, postUserCall }

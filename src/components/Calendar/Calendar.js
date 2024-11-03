@@ -28,8 +28,8 @@ const Calendar = () => {
     const [showModal, setShowModal] = useState(false);
     const [note, setNote] = useState("")
     const [noteList, setNoteList] = useState([
-        { noteName : "홍길동", noteDate: "2024-11-01", noteContent: "1st note" },
-        { noteName : "정희원", noteDate: "2024-11-02", noteContent: "2nd note" },
+        { noteName : "홍길동", noteDate: "2024-11-05", noteContent: "1st note" },
+        { noteName : "정희원", noteDate: "2024-11-08", noteContent: "2nd note" },
     ]);
     const [view, setView] = useState('day');
 
@@ -76,45 +76,71 @@ const Calendar = () => {
         }
     };
 
+    const allcallVolunteer = async () => {
+        try {
+            const data = await postAllCallVolunteer();
+            console.log('Check response', data);
+
+            const transformedData = data.map(item => {
+                return {
+                    noteDate: item.desired_date,
+                    noteContent: item.text,
+                    noteName: item.app_user?.name
+                };
+            });
+
+            console.log('Transformed data:', transformedData); // 변환된 데이터 구조 확인
+            setNoteList(transformedData);
+            /*if (data && data.EC === 0) {
+                setShowModal(false);
+                alert('Updated');
+            } else {
+                alert(data.EM || "Something went wrong");
+            }*/
+        } catch (error) {
+            alert("Error occurred");
+        }
+    };
+
+    const usercallVounteer = async () => {
+        try {
+            const data = await postUserCall();
+            console.log('Check response', data);
+
+            const transformedData = data.map(item => {
+                return {
+                    noteDate: item.desired_date,
+                    noteContent: item.text,
+                    noteName: item.app_user?.name
+                };
+            });
+
+            console.log('Transformed data:', transformedData); // 변환된 데이터 구조 확인
+            setNoteList(transformedData);
+            /*if (data && data.EC === 0) {
+                setShowModal(false);
+                alert('Updated');
+            } else {
+                alert(data.EM || "Something went wrong");
+            }*/
+        } catch (error) {
+            alert("Error occurred");
+        }
+    };
+
     useEffect(() => {
-        const allcallVolunteer = async () => {
-            try {
-                const data = await postAllCallVolunteer();
-                console.log('Check response', data);
-
-                const transformedData = data.map(item => {
-                    return {
-                        noteDate: item.desired_date,
-                        noteContent: item.text,
-                        noteName: item.app_user?.name
-                    };
-                });
-
-                console.log('Transformed data:', transformedData); // 변환된 데이터 구조 확인
-                setNoteList(transformedData);
-                /*if (data && data.EC === 0) {
-                    setShowModal(false);
-                    alert('Updated');
-                } else {
-                    alert(data.EM || "Something went wrong");
-                }*/
-            } catch (error) {
-                alert("Error occurred");
-            }
-        };
         if (isLoggin) {
             if (userInfo.role === "Patient" || userInfo.role === "user") {
-                allcallVolunteer();
+                usercallVounteer();
             } else {
                 allcallVolunteer();
             }
         }
-        allcallVolunteer();
     }, [isLoggin, userInfo.role]);
 
+    /*
     const renderDay = (day, selectedDate, pickersDayProps) => {
         const isHighlighted = noteList.some(note => day.isSame(dayjs(note.noteDate), 'day'));
-        console.log('isHighlighted:', isHighlighted, 'for date:', day.format('YYYY-MM-DD'));
 
         return (
             <Badge
@@ -123,10 +149,18 @@ const Calendar = () => {
                 color="primary"
                 variant={isHighlighted ? "dot" : undefined}
             >
-                <PickersDay {...pickersDayProps} />
+                <PickersDay
+                    {...pickersDayProps}
+                    sx={{
+                        backgroundColor: isHighlighted ? '#ffcc80' : 'inherit', // 강조된 날짜 배경색을 더 진한 색으로 설정
+                        color: isHighlighted ? '#d84315' : 'inherit', // 강조된 날짜 텍스트 색상
+                        border: isHighlighted ? '2px solid #d84315' : 'none', // 강조된 날짜 테두리
+                        borderRadius: '50%', // 강조된 날짜를 둥글게
+                    }}
+                />
             </Badge>
         );
-    };
+    };*/
 
     return (
 
@@ -143,7 +177,7 @@ const Calendar = () => {
                             value={newValue}
                             onViewChange={(newView) => setView(newView)}
                             onChange={(newValue) => setValue(newValue)}
-                            renderDay={renderDay} //이부분 추가
+                            //renderDay={renderDay} //이부분 추가
                             renderInput={(params) => <input {...params} />}
                             locale={ko}
                             views={['year', 'month', 'day']}
