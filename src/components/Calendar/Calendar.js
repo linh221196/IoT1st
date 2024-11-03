@@ -1,6 +1,6 @@
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { StaticDatePicker } from '@mui/x-date-pickers';
+import {PickersDay, StaticDatePicker} from '@mui/x-date-pickers';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import dayjs from 'dayjs';
@@ -8,7 +8,7 @@ import ko from 'dayjs/locale/ko';
 import {useEffect, useState} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import { TextField } from "@mui/material"
+import {Badge, TextField} from "@mui/material"
 import "./Calendar.scss"
 import Note from './Note';
 import {postAllCallVolunteer, postCallVolunteer, putEditUserData} from "../services/apiServices";
@@ -28,8 +28,8 @@ const Calendar = () => {
     const [showModal, setShowModal] = useState(false);
     const [note, setNote] = useState("")
     const [noteList, setNoteList] = useState([
-        { noteName : "홍길동", noteDate: "2024-10-01", noteContent: "1st note" },
-        { noteName : "정희원", noteDate: "2024-10-02", noteContent: "2nd note" },
+        { noteName : "홍길동", noteDate: "2024-11-01", noteContent: "1st note" },
+        { noteName : "정희원", noteDate: "2024-11-02", noteContent: "2nd note" },
     ]);
     const [view, setView] = useState('day');
 
@@ -83,13 +83,10 @@ const Calendar = () => {
                 console.log('Check response', data);
 
                 const transformedData = data.map(item => {
-                    console.log('item.app_user:', item.app_user); // app_user가 존재하는지 확인
-                    console.log('item.app_user.name:', item.app_user?.name); // name이 존재하는지 확인
-
                     return {
                         noteDate: item.desired_date,
                         noteContent: item.text,
-                        noteName: item.app_user?.name || "이름 없음" // name이 없으면 기본값 설정
+                        noteName: item.app_user?.name
                     };
                 });
 
@@ -115,6 +112,22 @@ const Calendar = () => {
         allcallVolunteer();
     }, [isLoggin, userInfo.role]);
 
+    const renderDay = (day, selectedDate, pickersDayProps) => {
+        const isHighlighted = noteList.some(note => day.isSame(dayjs(note.noteDate), 'day'));
+        console.log('isHighlighted:', isHighlighted, 'for date:', day.format('YYYY-MM-DD'));
+
+        return (
+            <Badge
+                key={day.toString()}
+                overlap="circular"
+                color="primary"
+                variant={isHighlighted ? "dot" : undefined}
+            >
+                <PickersDay {...pickersDayProps} />
+            </Badge>
+        );
+    };
+
     return (
 
         <LocalizationProvider
@@ -130,6 +143,7 @@ const Calendar = () => {
                             value={newValue}
                             onViewChange={(newView) => setView(newView)}
                             onChange={(newValue) => setValue(newValue)}
+                            renderDay={renderDay} //이부분 추가
                             renderInput={(params) => <input {...params} />}
                             locale={ko}
                             views={['year', 'month', 'day']}
