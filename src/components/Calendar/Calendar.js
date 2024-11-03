@@ -21,7 +21,6 @@ const Calendar = () => {
     //리듁스에서 꺼내오기
     const userInfo = useSelector(state => state.user.account)
     const isAuthenticated = useSelector(state => state.user.isAuthenticated)
-    console.log('account: ', account, ' isAuthenticated: ', isAuthenticated)
 
     const [newValue, setValue] = useState(dayjs())
     const [showModal, setShowModal] = useState(false);
