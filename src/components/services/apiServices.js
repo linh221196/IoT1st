@@ -82,7 +82,7 @@ const postUserCall = (email) => {
     return axios.post(`/callpatient`, formData)
 }
 
-//
+//봉사자 배정하기
 const postVolunteerAssignment = (email, userid, notedate, text) => {
     const formData = new FormData();
     formData.append('email', email)
@@ -93,5 +93,15 @@ const postVolunteerAssignment = (email, userid, notedate, text) => {
     return axios.post(`/volunteerassignment`, formData)
 }
 
+//봉사자 봉사 완료
+const postVolunteerComplete = (email, userid, notedate) => {
+    const formData = new FormData();
+    formData.append('email', email)
+    formData.append('userid', userid)
+    formData.append('notedate', notedate)
+
+    return axios.post(`/volunteerComplete`, formData)
+}
+
 export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer,
-    postAllCallVolunteer, postUserCall, postVolunteerAssignment }
+    postAllCallVolunteer, postUserCall, postVolunteerAssignment, postVolunteerComplete }

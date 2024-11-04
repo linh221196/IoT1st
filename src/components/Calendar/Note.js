@@ -9,7 +9,12 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { TextField } from "@mui/material"
 import {useSelector} from "react-redux";
-import {postAllCallVolunteer, postVolunteerAssignment, postVolunteerassignment} from "../services/apiServices";
+import {
+    postAllCallVolunteer,
+    postVolunteerAssignment,
+    postVolunteerassignment,
+    postVolunteerComplete
+} from "../services/apiServices";
 
 const Note = ({ noteList, setNoteList, note, setNote, newValue }) => {
     //리듁스에서 꺼내오기
@@ -47,6 +52,23 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue }) => {
     const handleDelete = (index) => {
         setNoteList(prev => prev.filter((_, i) => i !== index))
     }
+
+    const handleCompleteAction = async (index) => {
+        try {
+            const note = noteList[index];
+            console.log('front data :', userInfo.email, note.noteEmail, note.noteDate);
+            const data = await postVolunteerComplete(userInfo.email, note.noteEmail, note.noteDate);
+            console.log('Check response');
+            /*if (data && data.EC === 0) {
+                setShowModal(false);
+                alert('Updated');
+            } else {
+                alert(data.EM || "Something went wrong");
+            }*/
+        } catch (error) {
+            alert("Error occurred");
+        }
+    };
 
     //새로 추가
     const handleNewAction = async (index) => {
@@ -93,7 +115,10 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue }) => {
                                 </>
                             )}
                             {userInfo.role === "Volunteer" && (
-                                <Button variant="primary" onClick={() => handleNewAction(index)}>봉사확정</Button>
+                                <>
+                                    <Button variant="primary" onClick={() => handleNewAction(index)}>봉사확정</Button>
+                                    <Button variant="secondary" onClick={() => handleCompleteAction(index)}>추가 작업</Button>
+                                </>
                             )}
                         </Col>
                     </Row>
