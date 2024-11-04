@@ -49,10 +49,11 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue }) => {
     }
 
     //새로 추가
-    const handleNewAction = async () => {
+    const handleNewAction = async (index) => {
         try {
-            console.log('front data :', userInfo.email, noteList.email, noteList.noteDate);
-            const data = await postVolunteerassignment(userInfo.email, noteList.email, noteList.noteDate);
+            const note = noteList[index];
+            console.log('front data :', userInfo.email, note.noteEmail, note.noteDate);
+            const data = await postVolunteerassignment(userInfo.email, note.noteEmail, note.noteDate);
             console.log('Check response', data);
             /*if (data && data.EC === 0) {
                 setShowModal(false);
@@ -63,7 +64,6 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue }) => {
         } catch (error) {
             alert("Error occurred");
         }
-        console.log("");
     };
 
 
@@ -91,7 +91,7 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue }) => {
                                 </>
                             )}
                             {userInfo.role === "Volunteer" && (
-                                <Button variant="primary" onClick={handleNewAction}>봉사확정</Button>
+                                <Button variant="primary" onClick={() => handleNewAction(index)}>봉사확정</Button>
                             )}
                         </Col>
                     </Row>
