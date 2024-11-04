@@ -61,6 +61,8 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue }) => {
             } else {
                 alert(data.EM || "Something went wrong");
             }*/
+
+
         } catch (error) {
             alert("Error occurred");
         }

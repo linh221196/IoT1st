@@ -84,23 +84,26 @@ const Calendar = () => {
             const data = await postAllCallVolunteer();
             console.log('Check response', data);
 
-            const transformedData = data.map(item => {
-                return {
-                    noteDate: item.desireddate,
-                    noteContent: item.text,
-                    noteName: item.app_user?.name,
-                    noteEmail: item.userid
-                };
-            });
+            // 두 가지 리스트로 데이터를 분리
+            const desiredVolunteerDates = data.desiredVolunteerDates.map(item => ({
+                noteDate: item.desired_date,
+                noteContent: item.text,
+                noteName: item.app_user?.name,
+                noteEmail: item.userid
+            }));
 
-            console.log('Transformed data:', transformedData); // 변환된 데이터 구조 확인
-            setNoteList(transformedData);
-            /*if (data && data.EC === 0) {
-                setShowModal(false);
-                alert('Updated');
-            } else {
-                alert(data.EM || "Something went wrong");
-            }*/
+            const volunteerAssignments = data.volunteerAssignments.map(item => ({
+                noteDate: item.desired_date,
+                noteContent: item.text,
+                noteName: item.app_user?.name,
+                noteEmail: item.userid
+            }));
+
+            setNoteList(desiredVolunteerDates);
+            setSecondNoteList(volunteerAssignments);
+            console.log('Transformed typeA data:', desiredVolunteerDates);
+            console.log('Transformed typeB data:', volunteerAssignments);
+
         } catch (error) {
             alert("Error occurred");
         }
