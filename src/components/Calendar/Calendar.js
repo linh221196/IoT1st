@@ -116,17 +116,27 @@ const Calendar = () => {
             const data = await postUserCall(userInfo?.email);
             console.log('Check response', data);
 
-            const transformedData = data.map(item => {
-                return {
-                    noteDate: item.desireddate,
-                    noteContent: item.text,
-                    noteName: item.app_user?.name,
-                    noteEmail: item.userid
-                };
-            });
+            // 두 가지 리스트로 데이터를 분리
+            const desiredVolunteerDates = data.desiredVolunteerDates.map(item => ({
+                noteDate: item.desireddate,
+                noteContent: item.text,
+                noteName: item.app_user?.name,
+                noteEmail: item.userid
+            }));
 
-            console.log('Transformed data:', transformedData); // 변환된 데이터 구조 확인
-            setNoteList(transformedData);
+            const volunteerAssignments = data.volunteerAssignments.map(item => ({
+                noteDate: item.assignment_date,
+                noteContent: item.text,
+                noteName2: item.userByUserid?.name, //환자 이름
+                noteEmail2: item.userByUserid?.userid,
+                noteName: item.userByVolunteerId?.name, //봉사자 이름
+                noteEmail: item.userid
+            }));
+
+            setNoteList(desiredVolunteerDates);
+            setSecondNoteList(volunteerAssignments);
+            console.log('Transformed typeA data:', desiredVolunteerDates);
+            console.log('Transformed typeB data:', volunteerAssignments);
             /*if (data && data.EC === 0) {
                 setShowModal(false);
                 alert('Updated');
@@ -198,17 +208,16 @@ const Calendar = () => {
                         />
                     </Col>
 
-                    {userInfo.role === "Volunteer" && (
-                        <Col className='second-note-container'>
-                            <Note
-                                noteList={secondNoteList}
-                                setNoteList={setSecondNoteList}
-                                newValue={newValue}
-                                note={note}
-                                setNote={setNote}
-                            />
-                        </Col>
-                    )}
+                    <Col className='second-note-container'>
+                        <Note
+                            noteList={secondNoteList}
+                            setNoteList={setSecondNoteList}
+                            newValue={newValue}
+                            note={note}
+                            setNote={setNote}
+                        />
+                    </Col>
+
                 </Row>
 
 
