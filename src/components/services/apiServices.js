@@ -100,7 +100,7 @@ const postVolunteerComplete = (email, userid, notedate) => {
     formData.append('userid', userid)
     formData.append('notedate', notedate)
 
-    return axios.post(`/volunteerComplete`, formData)
+    return axios.post(`/volunteercomplete`, formData)
 }
 
 export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer,
