@@ -131,6 +131,7 @@ const Calendar = () => {
     };
 
     useEffect(() => {
+        console.log(userInfo?.role);
         if (userInfo && userInfo.role && !called) {
             if (userInfo.role === "Patient" || userInfo.role === "user") {
                 usercallVolunteer();
