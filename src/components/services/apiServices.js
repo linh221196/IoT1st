@@ -72,7 +72,7 @@ const postAllCallVolunteer = () => {
     return axios.get(`/allcallvolunteer`);
 }
 
-//
+//User desired_volunteer_date
 const postUserCall = (email) => {
     const formData = new FormData();
     formData.append('email', email)
@@ -80,5 +80,15 @@ const postUserCall = (email) => {
     return axios.post(`/callpatient`, formData)
 }
 
+//
+const postVolunteerassignment = (email, userid, notedate) => {
+    const formData = new FormData();
+    formData.append('email', email)
+    formData.append('userid', userid)
+    formData.append('notedate', notedate)
+
+    return axios.post(`/vounteerassignment`, formData)
+}
+
 export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer,
-    postAllCallVolunteer, postUserCall }
+    postAllCallVolunteer, postUserCall, postVolunteerassignment }

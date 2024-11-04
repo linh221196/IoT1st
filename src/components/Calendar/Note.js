@@ -9,6 +9,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { TextField } from "@mui/material"
 import {useSelector} from "react-redux";
+import {postAllCallVolunteer, postVolunteerassignment} from "../services/apiServices";
 
 const Note = ({ noteList, setNoteList, note, setNote, newValue }) => {
     //리듁스에서 꺼내오기
@@ -48,9 +49,21 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue }) => {
     }
 
     //새로 추가
-    const handleNewAction = () => {
-        // 새로 추가할 버튼에 대한 로직을 여기에 작성
-        console.log("새 버튼 동작");
+    const handleNewAction = async () => {
+        try {
+            console.log('front data :', userInfo.email, noteList.email, noteList.noteDate);
+            const data = await postVolunteerassignment(userInfo.email, noteList.email, noteList.noteDate);
+            console.log('Check response', data);
+            /*if (data && data.EC === 0) {
+                setShowModal(false);
+                alert('Updated');
+            } else {
+                alert(data.EM || "Something went wrong");
+            }*/
+        } catch (error) {
+            alert("Error occurred");
+        }
+        console.log("");
     };
 
 
