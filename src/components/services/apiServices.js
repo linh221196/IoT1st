@@ -71,7 +71,7 @@ const postAllCallVolunteer = (email) => {
     const formData = new FormData();
     formData.append('email', email)
 
-    return axios.get(`/allcallvolunteer`, formData);
+    return axios.post(`/allcallvolunteer`, formData);
 }
 
 //User desired_volunteer_date
