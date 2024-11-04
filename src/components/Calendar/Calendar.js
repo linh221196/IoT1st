@@ -31,7 +31,7 @@ const Calendar = () => {
         { noteName : "정희원", noteDate: "2024-11-08", noteContent: "2nd note", noteEmail: "5678@naver.com" },
     ]);
     const [secondNoteList, setSecondNoteList] = useState([
-        { noteName : "봉사자", noteDate: "2024-11-05", noteContent: "2nd note", noteName2 : "홍길동"}
+        { noteName : "봉사자", noteDate: "2024-11-05", noteContent: "2nd note", noteName2 : "홍길동", noteEmail: "", noteEmail2: ""}
     ]);
     const [view, setView] = useState('day');
 
@@ -96,7 +96,9 @@ const Calendar = () => {
                 noteDate: item.assignment_date,
                 noteContent: item.text,
                 noteName2: item.userByUserid?.name, //환자 이름
-                noteName: item.userByVolunteerId?.name //봉사자 이름
+                noteEmail2: item.userByUserid?.userid,
+                noteName: item.userByVolunteerId?.name, //봉사자 이름
+                noteEmail: item.userid
             }));
 
             setNoteList(desiredVolunteerDates);
