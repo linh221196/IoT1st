@@ -86,14 +86,14 @@ const Calendar = () => {
 
             // 두 가지 리스트로 데이터를 분리
             const desiredVolunteerDates = data.desiredVolunteerDates.map(item => ({
-                noteDate: item.desired_date,
+                noteDate: item.desireddate,
                 noteContent: item.text,
                 noteName: item.app_user?.name,
                 noteEmail: item.userid
             }));
 
             const volunteerAssignments = data.volunteerAssignments.map(item => ({
-                noteDate: item.desired_date,
+                noteDate: item.desireddate,
                 noteContent: item.text,
                 noteName: item.app_user?.name,
                 noteEmail: item.userid
