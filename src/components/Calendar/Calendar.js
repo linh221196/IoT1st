@@ -50,7 +50,7 @@ const Calendar = () => {
     const handleSubmit = async (e) => {
         if (note.trim()) {
             const newNote = {
-                noteName : userInfo?.name,
+                noteName : userInfo?.username,
                 noteDate: newValue.format('YYYY-MM-DD'),
                 noteContent: note,
                 noteEmail : userInfo?.email
