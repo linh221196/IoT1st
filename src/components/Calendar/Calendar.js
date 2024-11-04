@@ -81,7 +81,6 @@ const Calendar = () => {
 
     const allcallVolunteer = async () => {
         try {
-            console.log(userInfo?.email);
             const data = await postAllCallVolunteer(userInfo?.email);
             console.log('Check response', data);
 

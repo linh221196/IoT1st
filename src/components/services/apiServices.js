@@ -70,6 +70,7 @@ const postCallVolunteer = (email, noteDate, noteContent) => {
 const postAllCallVolunteer = (email) => {
     const formData = new FormData();
     formData.append('email', email)
+    console.log('Sending request to /allcallvolunteer with email:', email);
 
     return axios.post(`/allcallvolunteer`, formData);
 }
