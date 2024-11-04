@@ -81,11 +81,12 @@ const postUserCall = (email) => {
 }
 
 //
-const postVolunteerAssignment = (email, userid, notedate) => {
+const postVolunteerAssignment = (email, userid, notedate, text) => {
     const formData = new FormData();
     formData.append('email', email)
     formData.append('userid', userid)
     formData.append('notedate', notedate)
+    formData.append('text', text)
 
     return axios.post(`/volunteerassignment`, formData)
 }

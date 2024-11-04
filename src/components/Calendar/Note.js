@@ -52,8 +52,8 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue }) => {
     const handleNewAction = async (index) => {
         try {
             const note = noteList[index];
-            console.log('front data :', userInfo.email, note.noteEmail, note.noteDate);
-            const data = await postVolunteerAssignment(userInfo.email, note.noteEmail, note.noteDate);
+            console.log('front data :', userInfo.email, note.noteEmail, note.noteDate, note.noteContent);
+            const data = await postVolunteerAssignment(userInfo.email, note.noteEmail, note.noteDate, note.noteContent);
             console.log('Check response');
             /*if (data && data.EC === 0) {
                 setShowModal(false);
