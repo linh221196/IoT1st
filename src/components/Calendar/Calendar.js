@@ -18,8 +18,6 @@ dayjs.locale('ko');
 
 const Calendar = () => {
 
-    const [isLoggin, setIsLoggin] = useState(false);
-
     //리듁스에서 꺼내오기
     const userInfo = useSelector(state => state.user.account)
     const isAuthenticated = useSelector(state => state.user.isAuthenticated)
@@ -28,8 +26,8 @@ const Calendar = () => {
     const [showModal, setShowModal] = useState(false);
     const [note, setNote] = useState("")
     const [noteList, setNoteList] = useState([
-        { noteName : "홍길동", noteDate: "2024-11-05", noteContent: "1st note" },
-        { noteName : "정희원", noteDate: "2024-11-08", noteContent: "2nd note" },
+        { noteName : "홍길동", noteDate: "2024-11-05", noteContent: "1st note", noteEmail: "1234@naver.com" },
+        { noteName : "정희원", noteDate: "2024-11-08", noteContent: "2nd note", noteEmail: "5678@naver.com" },
     ]);
     const [view, setView] = useState('day');
 
@@ -50,7 +48,8 @@ const Calendar = () => {
             const newNote = {
                 noteName : userInfo?.name,
                 noteDate: newValue.format('YYYY-MM-DD'),
-                noteContent: note
+                noteContent: note,
+                noteEmail : userInfo?.email
             };
             console.log('email: ', userInfo?.email, userInfo?.name, ' noteDate: ', newNote.noteDate, 'noteContent', newNote.noteContent)
             try {
@@ -85,7 +84,8 @@ const Calendar = () => {
                 return {
                     noteDate: item.desired_date,
                     noteContent: item.text,
-                    noteName: item.app_user?.name
+                    noteName: item.app_user?.name,
+                    noteEmail: item.userid
                 };
             });
 
@@ -111,7 +111,8 @@ const Calendar = () => {
                 return {
                     noteDate: item.desired_date,
                     noteContent: item.text,
-                    noteName: item.app_user?.name
+                    noteName: item.app_user?.name,
+                    noteEmail: item.userid
                 };
             });
 
@@ -136,31 +137,9 @@ const Calendar = () => {
                 allcallVolunteer();
             }
         }
-    }, [userInfo.role]);
+    }, [userInfo.role, noteList]);
 
-    /*
-    const renderDay = (day, selectedDate, pickersDayProps) => {
-        const isHighlighted = noteList.some(note => day.isSame(dayjs(note.noteDate), 'day'));
 
-        return (
-            <Badge
-                key={day.toString()}
-                overlap="circular"
-                color="primary"
-                variant={isHighlighted ? "dot" : undefined}
-            >
-                <PickersDay
-                    {...pickersDayProps}
-                    sx={{
-                        backgroundColor: isHighlighted ? '#ffcc80' : 'inherit', // 강조된 날짜 배경색을 더 진한 색으로 설정
-                        color: isHighlighted ? '#d84315' : 'inherit', // 강조된 날짜 텍스트 색상
-                        border: isHighlighted ? '2px solid #d84315' : 'none', // 강조된 날짜 테두리
-                        borderRadius: '50%', // 강조된 날짜를 둥글게
-                    }}
-                />
-            </Badge>
-        );
-    };*/
 
     return (
 
@@ -177,7 +156,6 @@ const Calendar = () => {
                             value={newValue}
                             onViewChange={(newView) => setView(newView)}
                             onChange={(newValue) => setValue(newValue)}
-                            //renderDay={renderDay} //이부분 추가
                             renderInput={(params) => <input {...params} />}
                             locale={ko}
                             views={['year', 'month', 'day']}
@@ -211,11 +189,12 @@ const Calendar = () => {
                     </Col>
                 </Row>
 
-                <Modal show={showModal} onHide={handleClose} style={{ minHeight: '300px' }}>
+
+                <Modal show={showModal} onHide={handleClose} style={{minHeight: '300px'}}>
                     <Modal.Header closeButton>
                         <Modal.Title>{newValue.format('YYYY년 MM월 DD일')}</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body style={{ minHeight: '200px' }}>
+                    <Modal.Body style={{minHeight: '200px'}}>
                         <TextField
                             label="내용을 입력해주세요"
                             fullWidth
@@ -226,7 +205,9 @@ const Calendar = () => {
                         />
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={() => { handleSubmit() }}>추가</Button>
+                        <Button onClick={() => {
+                            handleSubmit()
+                        }}>추가</Button>
                         <Button variant="secondary" onClick={handleClose}>
                             취소
                         </Button>
