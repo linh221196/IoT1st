@@ -87,7 +87,7 @@ const postVolunteerassignment = (email, userid, notedate) => {
     formData.append('userid', userid)
     formData.append('notedate', notedate)
 
-    return axios.post(`/vounteerassignment`, formData)
+    return axios.post(`/volunteerassignment`, formData)
 }
 
 export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer,
