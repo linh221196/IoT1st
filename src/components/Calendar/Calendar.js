@@ -81,7 +81,7 @@ const Calendar = () => {
 
     const allcallVolunteer = async () => {
         try {
-            const data = await postAllCallVolunteer();
+            const data = await postAllCallVolunteer(userInfo?.email);
             console.log('Check response', data);
 
             // 두 가지 리스트로 데이터를 분리
