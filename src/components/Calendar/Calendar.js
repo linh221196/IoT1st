@@ -17,6 +17,7 @@ import {useSelector} from "react-redux";
 dayjs.locale('ko');
 
 const Calendar = () => {
+    const [called, setCalled] = useState(false);
 
     //리듁스에서 꺼내오기
     const userInfo = useSelector(state => state.user.account)
@@ -130,14 +131,15 @@ const Calendar = () => {
     };
 
     useEffect(() => {
-        if (userInfo && userInfo.role) { // userInfo와 userInfo.role이 존재하는 경우에만 실행
+        if (userInfo && userInfo.role && !called) {
             if (userInfo.role === "Patient" || userInfo.role === "user") {
                 usercallVolunteer();
             } else {
                 allcallVolunteer();
             }
+            setCalled(true); // 첫 호출 후에 called를 true로 설정하여 이후 호출 방지
         }
-    }, [userInfo.role, noteList]);
+    }, [userInfo.role, called]);
 
 
 
