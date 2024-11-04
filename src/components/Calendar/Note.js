@@ -8,8 +8,12 @@ import { MdDeleteForever } from "react-icons/md";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { TextField } from "@mui/material"
+import {useSelector} from "react-redux";
 
 const Note = ({ noteList, setNoteList, note, setNote, newValue }) => {
+    //리듁스에서 꺼내오기
+    const userInfo = useSelector(state => state.user.account)
+
     const [showModal, setShowModal] = useState(false);
     const [editIndex, setEditIndex] = useState(null);
 
@@ -42,6 +46,12 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue }) => {
     const handleDelete = (index) => {
         setNoteList(prev => prev.filter((_, i) => i !== index))
     }
+
+    //새로 추가
+    const handleNewAction = () => {
+        // 새로 추가할 버튼에 대한 로직을 여기에 작성
+        console.log("새 버튼 동작");
+    };
 
 
     return (
@@ -85,10 +95,17 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue }) => {
                     />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={() => { handleSubmit() }}>수정</Button>
-                    <Button variant="secondary" onClick={handleClose}>
-                        취소
-                    </Button>
+                    {userInfo.role === "Patient" && (
+                        <>
+                            <Button onClick={() => { handleSubmit() }}>수정</Button>
+                            <Button variant="secondary" onClick={handleClose}>
+                                취소
+                            </Button>
+                        </>
+                    )}
+                    {userInfo.role === "Volunteer" && (
+                        <Button variant="primary" onClick={handleNewAction}>봉사확정</Button>
+                    )}
                 </Modal.Footer>
             </Modal>
         </div>
