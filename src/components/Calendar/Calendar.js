@@ -55,7 +55,7 @@ const Calendar = () => {
                 noteContent: note,
                 noteEmail : userInfo?.email
             };
-            console.log('email: ', userInfo?.email, userInfo?.name, ' noteDate: ', newNote.noteDate, 'noteContent', newNote.noteContent)
+            console.log('email: ', userInfo?.email, 'name: ', userInfo?.username, ' noteDate: ', newNote.noteDate, 'noteContent', newNote.noteContent)
             try {
                 const data = await postCallVolunteer(userInfo?.email, newNote.noteDate, newNote.noteContent);
                 console.log('Check response', data)
