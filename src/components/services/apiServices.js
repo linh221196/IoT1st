@@ -81,7 +81,7 @@ const postUserCall = (email) => {
 }
 
 //
-const postVolunteerassignment = (email, userid, notedate) => {
+const postVolunteerAssignment = (email, userid, notedate) => {
     const formData = new FormData();
     formData.append('email', email)
     formData.append('userid', userid)
@@ -91,4 +91,4 @@ const postVolunteerassignment = (email, userid, notedate) => {
 }
 
 export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer,
-    postAllCallVolunteer, postUserCall, postVolunteerassignment }
+    postAllCallVolunteer, postUserCall, postVolunteerAssignment }

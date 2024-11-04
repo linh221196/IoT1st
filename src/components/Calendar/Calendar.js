@@ -30,6 +30,9 @@ const Calendar = () => {
         { noteName : "홍길동", noteDate: "2024-11-05", noteContent: "1st note", noteEmail: "1234@naver.com" },
         { noteName : "정희원", noteDate: "2024-11-08", noteContent: "2nd note", noteEmail: "5678@naver.com" },
     ]);
+    const [secondNoteList, setSecondNoteList] = useState([
+        { noteName : "봉사자", noteDate: "2024-11-05", noteName2 : "홍길동"}
+    ]);
     const [view, setView] = useState('day');
 
     const handleAddEvent = () => {
@@ -189,6 +192,18 @@ const Calendar = () => {
                             setNote={setNote}
                         />
                     </Col>
+
+                    {userInfo.role === "Volunteer" && (
+                        <Col className='second-note-container'>
+                            <Note
+                                noteList={secondNoteList}
+                                setNoteList={setSecondNoteList}
+                                newValue={newValue}
+                                note={note}
+                                setNote={setNote}
+                            />
+                        </Col>
+                    )}
                 </Row>
 
 

@@ -9,7 +9,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { TextField } from "@mui/material"
 import {useSelector} from "react-redux";
-import {postAllCallVolunteer, postVolunteerassignment} from "../services/apiServices";
+import {postAllCallVolunteer, postVolunteerAssignment, postVolunteerassignment} from "../services/apiServices";
 
 const Note = ({ noteList, setNoteList, note, setNote, newValue }) => {
     //리듁스에서 꺼내오기
@@ -53,8 +53,8 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue }) => {
         try {
             const note = noteList[index];
             console.log('front data :', userInfo.email, note.noteEmail, note.noteDate);
-            const data = await postVolunteerassignment(userInfo.email, note.noteEmail, note.noteDate);
-            console.log('Check response', data);
+            const data = await postVolunteerAssignment(userInfo.email, note.noteEmail, note.noteDate);
+            console.log('Check response');
             /*if (data && data.EC === 0) {
                 setShowModal(false);
                 alert('Updated');
