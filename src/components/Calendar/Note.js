@@ -67,12 +67,19 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue }) => {
                             <p>{item.noteDate}</p>
                         </Col>
                         <Col>
-                        <Button variant="success"
-                                onClick={() => handleEdit(index)}
-                            ><MdEdit size={20} /></Button>
-                            <Button variant="danger"
-                                onClick={() => handleDelete(index)}
-                            ><MdDeleteForever size={20} /></Button>
+                            {userInfo.role === "Patient" && (
+                                <>
+                                    <Button variant="success" onClick={() => handleEdit(index)}>
+                                        <MdEdit size={20} />
+                                    </Button>
+                                    <Button variant="danger" onClick={() => handleDelete(index)}>
+                                        <MdDeleteForever size={20} />
+                                    </Button>
+                                </>
+                            )}
+                            {userInfo.role === "Volunteer" && (
+                                <Button variant="primary" onClick={handleNewAction}>봉사확정</Button>
+                            )}
                         </Col>
                     </Row>
 
@@ -95,17 +102,10 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue }) => {
                     />
                 </Modal.Body>
                 <Modal.Footer>
-                    {userInfo.role === "Patient" && (
-                        <>
-                            <Button onClick={() => { handleSubmit() }}>수정</Button>
-                            <Button variant="secondary" onClick={handleClose}>
-                                취소
-                            </Button>
-                        </>
-                    )}
-                    {userInfo.role === "Volunteer" && (
-                        <Button variant="primary" onClick={handleNewAction}>봉사확정</Button>
-                    )}
+                    <Button onClick={() => { handleSubmit() }}>수정</Button>
+                    <Button variant="secondary" onClick={handleClose}>
+                        취소
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </div>
