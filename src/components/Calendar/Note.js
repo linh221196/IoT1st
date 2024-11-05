@@ -100,7 +100,12 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
                 <Card body className="card-item" style={{ marginBottom: 10 }} key={item.noteDate + index}>
                     <Row>
                         <Col sm={8}>
-                            <p>{item.noteName}</p>
+                            <p>환자 이름: {item.noteName}</p>
+                            {!isFirstList && (
+                                <>
+                                    <p>봉사자 이름 : {item.noteName2}</p>
+                                </>
+                            )}
                             <p>{item.noteDate}</p>
                         </Col>
                         <Col>

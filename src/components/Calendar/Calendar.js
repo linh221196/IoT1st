@@ -31,7 +31,7 @@ const Calendar = () => {
         { noteName : "정희원", noteDate: "2024-11-08", noteContent: "2nd note", noteEmail: "5678@naver.com" },
     ]);
     const [secondNoteList, setSecondNoteList] = useState([
-        { noteName : "봉사자", noteDate: "2024-11-05", noteContent: "2nd note", noteName2 : "홍길동", noteEmail: "", noteEmail2: ""}
+        { noteName : "환자", noteDate: "2024-11-05", noteContent: "2nd note", noteName2 : "봉사자", noteEmail: "", noteEmail2: ""}
     ]);
     const [view, setView] = useState('day');
 
@@ -127,10 +127,10 @@ const Calendar = () => {
             const volunteerAssignments = data.volunteerAssignments.map(item => ({
                 noteDate: item.assignmentdate,
                 noteContent: item.text,
-                noteName2: item.userByUserid?.name, //환자 이름
-                noteEmail2: item.userByUserid?.userid,
-                noteName: item.userByVolunteerId?.name, //봉사자 이름
-                noteEmail: item.userid
+                noteName: item.userByUserid?.name, //환자 이름
+                noteEmail: item.userByUserid?.userid,
+                noteName2: item.userByVolunteerId?.name, //봉사자 이름
+                noteEmail2: item.userid
             }));
 
             setNoteList(desiredVolunteerDates);
