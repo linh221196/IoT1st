@@ -114,7 +114,22 @@ const postAssignmentCancel = (email, userid, notedate, text) => {
     return axios.post(`/assignmentcancel`, formData)
 }
 
-export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer,
-    postAllCallVolunteer, postUserCall, postVolunteerAssignment, postVolunteerComplete, postAssignmentCancel
+//환자의 예약 수정
+const postCallVolunteerModify = (email, notedate, text) => {
+    const formData = new FormData();
+    formData.append('email', email)
+    formData.append('notedate', notedate)
+    formData.append('text', text)
 
+    return axios.post(`/callvolunteermodify`, formData)
+}
+
+//예약 삭제
+const postCallVolunteerDelete = (email, notedate) => {
+
+}
+
+export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer,
+    postAllCallVolunteer, postUserCall, postVolunteerAssignment, postVolunteerComplete, postAssignmentCancel,
+    postCallVolunteerModify
 }

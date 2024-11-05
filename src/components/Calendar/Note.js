@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 import { TextField } from "@mui/material"
 import {useSelector} from "react-redux";
 import {
-    postAllCallVolunteer, postAssignmentCancel,
+    postAllCallVolunteer, postAssignmentCancel, postCallVolunteerModify,
     postVolunteerAssignment,
     postVolunteerassignment,
     postVolunteerComplete
@@ -34,17 +34,25 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
         setEditIndex(null);
     };
     //list 수정
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (note.trim()) {
-            const updatedNoteList = [...noteList];
-            updatedNoteList[editIndex] = {
-                noteDate: noteList[editIndex].noteDate,
-                noteContent: note
-            };
-            setNoteList(updatedNoteList);
-            setNote("");
-            setShowModal(false);
+            try {
+                // API 호출
+                const email = userInfo.email;
+                const notedate = noteList[editIndex].noteDate;
+                const text = note;
 
+                const data = await postCallVolunteerModify(email, notedate, text);
+                console.log('Check response', data);
+                setNote("");
+                setShowModal(false);
+
+                alert("수정 요청이 완료되었습니다.");
+
+            } catch (error) {
+                console.error("Error occurred:", error);
+                alert("수정 중 오류가 발생했습니다.");
+            }
         } else {
             alert("내용을 입력해주세요.");
         }
