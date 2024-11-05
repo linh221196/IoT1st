@@ -104,21 +104,29 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
                             <p>{item.noteDate}</p>
                         </Col>
                         <Col>
-                            {isFirstList && userInfo.role === "Patient" && (
+                            {isFirstList && (
                                 <>
-                                    <Button variant="success" onClick={() => handleEdit(index)}>
-                                        <MdEdit size={20} />
-                                    </Button>
-                                    <Button variant="danger" onClick={() => handleDelete(index)}>
-                                        <MdDeleteForever size={20} />
-                                    </Button>
+                                    {userInfo.role === "Patient" && (
+                                        <>
+                                            <Button variant="success" onClick={() => handleEdit(index)}>
+                                                <MdEdit size={20} />
+                                            </Button>
+                                            <Button variant="danger" onClick={() => handleDelete(index)}>
+                                                <MdDeleteForever size={20} />
+                                            </Button>
+                                        </>
+                                    )}
+                                    {userInfo.role === "Volunteer" &&(
+                                        <>
+                                            <Button variant="primary" onClick={() => handleNewAction(index)}>봉사확정</Button>
+                                        </>
+                                    )}
                                 </>
                             )}
                             {!isFirstList && (
                                 <>
                                     {userInfo.role === "Volunteer" && (
                                         <>
-                                            <Button variant="primary" onClick={() => handleNewAction(index)}>봉사확정</Button>
                                             <Button variant="secondary" onClick={() => handleCompleteAction(index)}>봉사완료</Button>
                                         </>
                                     )}
