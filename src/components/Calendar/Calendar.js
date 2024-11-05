@@ -12,13 +12,11 @@ import {Badge, TextField} from "@mui/material"
 import "./Calendar.scss"
 import Note from './Note';
 import {
-    postAllCallVolunteer,
+    postAllVolunteerCall,
     postCallVolunteer,
-    postUserCall,
     postUserVolunteerCall,
     putEditUserData
 } from "../services/apiServices";
-import userInfo from "../User/UserInfo";
 import {useSelector} from "react-redux";
 dayjs.locale('ko');
 
@@ -114,7 +112,7 @@ const Calendar = () => {
             console.log('Transformed typeB data:', volunteerAssignments);
 
         } catch (error) {
-            alert("Error occurred");
+            alert("서버 응답이 없습니다.");
         }
     };
     //환자 기준 받아오기
@@ -151,7 +149,7 @@ const Calendar = () => {
                 alert(data.EM || "Something went wrong");
             }*/
         } catch (error) {
-            alert("Error occurred");
+            alert("서버 응답이 없습니다.");
         }
     };
 
@@ -165,7 +163,6 @@ const Calendar = () => {
             setCalled(true); // 첫 호출 후에 called를 true로 설정하여 이후 호출 방지
         }
     }, [userInfo.role, called]);
-
 
 
     return (
@@ -198,7 +195,6 @@ const Calendar = () => {
                                     actions: ['today', 'cancel', 'accept'],
                                     onAccept: handleAddEvent,
                                     onCancel: handleCancel,
-
                                 },
                             }}
                             disablePast
