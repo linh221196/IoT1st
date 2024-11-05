@@ -121,7 +121,7 @@ const postCallVolunteerModify = (email, notedate, text) => {
     formData.append('notedate', notedate)
     formData.append('text', text)
 
-    return axios.post(`/callvolunteermodify`, formData)
+    return axios.post(`/callmodify`, formData)
 }
 
 //예약 삭제
