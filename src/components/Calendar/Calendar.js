@@ -64,14 +64,9 @@ const Calendar = () => {
             try {
                 const data = await postCallVolunteer(userInfo?.email, newNote.noteDate, newNote.noteContent);
                 console.log('Check response', data)
-                /*if (data && data.EC === 0) {
-                    setShowModal(false)
-                    alert('Updated')
-                } else {
-                    alert(data.EM || "Something went wrong")
-                }*/
+
             } catch (error) {
-                alert("Error occurred")
+                alert("작성 후 저장에 실패했습니다.")
 
             }
 
@@ -142,12 +137,6 @@ const Calendar = () => {
             setSecondNoteList(volunteerAssignments);
             console.log('Transformed typeA data:', desiredVolunteerDates);
             console.log('Transformed typeB data:', volunteerAssignments);
-            /*if (data && data.EC === 0) {
-                setShowModal(false);
-                alert('Updated');
-            } else {
-                alert(data.EM || "Something went wrong");
-            }*/
         } catch (error) {
             alert("서버 응답이 없습니다.");
         }

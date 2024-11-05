@@ -48,11 +48,11 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
                 setNote("");
                 setShowModal(false);
 
-                alert("수정 요청이 완료되었습니다.");
+                alert("수정이 완료되었습니다.");
 
             } catch (error) {
                 console.error("Error occurred:", error);
-                alert("수정 중 오류가 발생했습니다.");
+                alert("수정한 것을 저장에 실패했습니다.");
             }
         } else {
             alert("내용을 입력해주세요.");
@@ -68,7 +68,7 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
             const data = await postVolunteerCallDelete(email, notedate);
             console.log('Check response', data);
 
-            alert("삭제 요청이 완료되었습니다.");
+            alert("삭제되었습니다.");
 
         } catch (error) {
             console.error("Error occurred:", error);
@@ -101,14 +101,9 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
             console.log('front data :', userInfo.email, note.noteEmail, note.noteDate);
             const data = await postVolunteerComplete(userInfo.email, note.noteEmail, note.noteDate);
             console.log('Check response');
-            /*if (data && data.EC === 0) {
-                setShowModal(false);
-                alert('Updated');
-            } else {
-                alert(data.EM || "Something went wrong");
-            }*/
+
         } catch (error) {
-            alert("Error occurred");
+            alert("예상치 못한 문제로 봉사완료에 실패했습니다.");
         }
     };
 
@@ -119,16 +114,9 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
             console.log(userInfo.email, note.noteEmail, note.noteDate, note.noteContent);
             const data = await postVolunteerAssignment(userInfo.email, note.noteEmail, note.noteDate, note.noteContent);
             console.log('Check response');
-            /*if (data && data.EC === 0) {
-                setShowModal(false);
-                alert('Updated');
-            } else {
-                alert(data.EM || "Something went wrong");
-            }*/
-
 
         } catch (error) {
-            alert("Error occurred");
+            alert("예상치 못한 문제로 봉사확정이 실패했습니다.");
         }
     };
     
