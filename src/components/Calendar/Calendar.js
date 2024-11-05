@@ -48,6 +48,7 @@ const Calendar = () => {
         setShowModal(false);
     };
 
+
     const handleCancel = () => {
         setView('day'); // Reset view to day
     };
@@ -142,6 +143,7 @@ const Calendar = () => {
         }
     };
 
+    //화면 들어왔을 때
     useEffect(() => {
         if (userInfo && userInfo.role && !called) {
             if (userInfo.role === "Patient" || userInfo.role === "user") {
@@ -230,9 +232,9 @@ const Calendar = () => {
                         />
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={() => {
-                            handleSubmit()
-                        }}>추가</Button>
+                        <Button onClick={() => {handleSubmit()}}>
+                            추가
+                        </Button>
                         <Button variant="secondary" onClick={handleClose}>
                             취소
                         </Button>
