@@ -1,5 +1,6 @@
 import axios from "../utils/axiosCustomize";
 
+//회원가입
 const postCreateNewUser = (email, password, username, birth, phoneNum, role, userImage) => {
     const formData = new FormData();
     formData.append('email', email);
@@ -15,6 +16,7 @@ const postCreateNewUser = (email, password, username, birth, phoneNum, role, use
     // return axios.post(`/participant`, formData);
     return axios.post(`/signup`, formData)
 }
+
 
 const getAllUsers = () => {
     // return axios.get(`/.../...`);
@@ -47,7 +49,7 @@ const postLoggin = (email, password) => {
     return axios.post(`/login`, formData)
 }
 
-//ID check
+//ID 중복 check
 const postUserId = (email) => {
     // return axios.get(`/email/{email}`)
     const formData = new FormData();
@@ -56,7 +58,7 @@ const postUserId = (email) => {
     return axios.post(`/idcheck`, formData);
 }
 
-//봉사자 요청하기
+//환자가 봉사자 요청하기(예약 list)
 const postCallVolunteer = (email, noteDate, noteContent) => {
     const formData = new FormData();
     formData.append('email', email)
@@ -66,7 +68,7 @@ const postCallVolunteer = (email, noteDate, noteContent) => {
     return axios.post(`/callvolunteer`, formData);
 }
 
-//all desired_volunteer_date
+//봉사자가 예약list, 출장list 요청
 const postAllCallVolunteer = (email) => {
     const formData = new FormData();
     formData.append('email', email)
@@ -74,7 +76,7 @@ const postAllCallVolunteer = (email) => {
     return axios.post(`/allcallvolunteer`, formData);
 }
 
-//User desired_volunteer_date
+//사용자가 예약list, 출장list 요청
 const postUserCall = (email) => {
     const formData = new FormData();
     formData.append('email', email)
@@ -82,7 +84,7 @@ const postUserCall = (email) => {
     return axios.post(`/callpatient`, formData)
 }
 
-//봉사자의 배정하기
+//봉사자가 예약list 선택, 출장 list에 추가
 const postVolunteerAssignment = (email, userid, notedate, text) => {
     const formData = new FormData();
     formData.append('email', email)
@@ -93,7 +95,7 @@ const postVolunteerAssignment = (email, userid, notedate, text) => {
     return axios.post(`/volunteerassignment`, formData)
 }
 
-//봉사자의 봉사 완료
+//봉사자가 봉사완료
 const postVolunteerComplete = (email, userid, notedate) => {
     const formData = new FormData();
     formData.append('email', email)
@@ -103,7 +105,7 @@ const postVolunteerComplete = (email, userid, notedate) => {
     return axios.post(`/volunteercomplete`, formData)
 }
 
-//사용자의 봉사 취소
+//환자나 봉사자가 출장list 취소
 const postAssignmentCancel = (email, userid, notedate, text) => {
     const formData = new FormData();
     formData.append('email', email) //봉사자
@@ -114,7 +116,7 @@ const postAssignmentCancel = (email, userid, notedate, text) => {
     return axios.post(`/assignmentcancel`, formData)
 }
 
-//환자의 예약 수정
+//환자가 예약list 수정
 const postCallVolunteerModify = (email, notedate, text) => {
     const formData = new FormData();
     formData.append('email', email)
@@ -124,7 +126,7 @@ const postCallVolunteerModify = (email, notedate, text) => {
     return axios.post(`/callvolunteermodify`, formData)
 }
 
-//환자의 예약 삭제
+//환자가 예약list 삭제
 const postCallVolunteerDelete = (email, notedate) => {
     const formData = new FormData();
     formData.append('email', email)
