@@ -35,6 +35,7 @@ const Calendar = () => {
     ]);
     const [view, setView] = useState('day');
 
+    
     const handleAddEvent = () => {
         setShowModal(true);
     };
@@ -78,7 +79,7 @@ const Calendar = () => {
             alert("내용을 입력해주세요.");
         }
     };
-
+    //봉사자 기준 받아오기
     const allcallVolunteer = async () => {
         try {
             const data = await postAllCallVolunteer(userInfo?.email);
@@ -95,10 +96,10 @@ const Calendar = () => {
             const volunteerAssignments = data.volunteerAssignments.map(item => ({
                 noteDate: item.assignmentdate,
                 noteContent: item.text,
-                noteName2: item.userByUserid?.name, //환자 이름
-                noteEmail2: item.userByUserid?.userid,
-                noteName: item.userByVolunteerId?.name, //봉사자 이름
-                noteEmail: item.userid
+                noteName: item.userByUserid?.name, //환자 이름
+                noteEmail: item.userByUserid?.userid,
+                noteName2: item.userByVolunteerId?.name, //봉사자 이름
+                noteEmail2: item.userByVolunteerId?.userid
             }));
 
             setNoteList(desiredVolunteerDates);
@@ -110,7 +111,7 @@ const Calendar = () => {
             alert("Error occurred");
         }
     };
-
+    //환자 기준 받아오기
     const usercallVolunteer = async () => {
         try {
             const data = await postUserCall(userInfo?.email);
@@ -130,7 +131,7 @@ const Calendar = () => {
                 noteName: item.userByUserid?.name, //환자 이름
                 noteEmail: item.userByUserid?.userid,
                 noteName2: item.userByVolunteerId?.name, //봉사자 이름
-                noteEmail2: item.userid
+                noteEmail2: item.userByVolunteerId?.userid
             }));
 
             setNoteList(desiredVolunteerDates);
