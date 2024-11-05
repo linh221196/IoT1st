@@ -126,10 +126,14 @@ const postCallVolunteerModify = (email, notedate, text) => {
 
 //예약 삭제
 const postCallVolunteerDelete = (email, notedate) => {
+    const formData = new FormData();
+    formData.append('email', email)
+    formData.append('notedate', notedate)
 
+    return axios.post(`/callvolunteerdelete`, formData)
 }
 
 export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer,
     postAllCallVolunteer, postUserCall, postVolunteerAssignment, postVolunteerComplete, postAssignmentCancel,
-    postCallVolunteerModify
+    postCallVolunteerModify, postCallVolunteerDelete
 }

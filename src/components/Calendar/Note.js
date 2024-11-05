@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 import { TextField } from "@mui/material"
 import {useSelector} from "react-redux";
 import {
-    postAllCallVolunteer, postAssignmentCancel, postCallVolunteerModify,
+    postAllCallVolunteer, postAssignmentCancel, postCallVolunteerDelete, postCallVolunteerModify,
     postVolunteerAssignment,
     postVolunteerassignment,
     postVolunteerComplete
@@ -59,10 +59,41 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
         }
     };
     //list 삭제
-    const handleDelete = (index) => {
-        setNoteList(prev => prev.filter((_, i) => i !== index))
+    const handleDelete = async (index) => {
+        try {
+            const email = userInfo.email;
+            const notedate = noteList[index].noteDate;
+
+            // 삭제 API 호출
+            const data = await postCallVolunteerDelete(email, notedate);
+            console.log('Check response', data);
+
+            alert("삭제 요청이 완료되었습니다.");
+
+        } catch (error) {
+            console.error("Error occurred:", error);
+            alert("삭제 중 오류가 발생했습니다.");
+        }
     }
 
+    //list 수정과 삭제 기존 코드
+    /*
+    if (note.trim()) {
+            const updatedNoteList = [...noteList];
+            updatedNoteList[editIndex] = {
+                noteDate: noteList[editIndex].noteDate,
+                noteContent: note
+            };
+            setNoteList(updatedNoteList);
+            setNote("");
+            setShowModal(false);
+
+        } else {
+            alert("내용을 입력해주세요.");
+        }
+
+    setNoteList(prev => prev.filter((_, i) => i !== index))
+     */
     //봉사 완료
     const handleCompleteAction = async (index) => {
         try {
