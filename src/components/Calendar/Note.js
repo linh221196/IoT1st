@@ -116,6 +116,7 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
     const handleAssignmentAction = async (index) => {
         try {
             const note = noteList[index];
+            console.log(userInfo.email, note.noteEmail, note.noteDate, note.noteContent);
             const data = await postVolunteerAssignment(userInfo.email, note.noteEmail, note.noteDate, note.noteContent);
             console.log('Check response');
             /*if (data && data.EC === 0) {
