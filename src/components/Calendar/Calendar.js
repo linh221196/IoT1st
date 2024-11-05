@@ -93,7 +93,7 @@ const Calendar = () => {
             }));
 
             const volunteerAssignments = data.volunteerAssignments.map(item => ({
-                noteDate: item.assignment_date,
+                noteDate: item.assignmentdate,
                 noteContent: item.text,
                 noteName2: item.userByUserid?.name, //환자 이름
                 noteEmail2: item.userByUserid?.userid,
@@ -125,7 +125,7 @@ const Calendar = () => {
             }));
 
             const volunteerAssignments = data.volunteerAssignments.map(item => ({
-                noteDate: item.assignment_date,
+                noteDate: item.assignmentdate,
                 noteContent: item.text,
                 noteName2: item.userByUserid?.name, //환자 이름
                 noteEmail2: item.userByUserid?.userid,
