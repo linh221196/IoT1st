@@ -11,7 +11,13 @@ import Button from 'react-bootstrap/Button';
 import {Badge, TextField} from "@mui/material"
 import "./Calendar.scss"
 import Note from './Note';
-import {postAllCallVolunteer, postCallVolunteer, postUserCall, putEditUserData} from "../services/apiServices";
+import {
+    postAllCallVolunteer,
+    postCallVolunteer,
+    postUserCall,
+    postUserVolunteerCall,
+    putEditUserData
+} from "../services/apiServices";
 import userInfo from "../User/UserInfo";
 import {useSelector} from "react-redux";
 dayjs.locale('ko');
@@ -47,7 +53,7 @@ const Calendar = () => {
     const handleCancel = () => {
         setView('day'); // Reset view to day
     };
-
+    //예약 list 작성
     const handleSubmit = async (e) => {
         if (note.trim()) {
             const newNote = {
@@ -80,9 +86,9 @@ const Calendar = () => {
         }
     };
     //봉사자 기준 받아오기
-    const allcallVolunteer = async () => {
+    const allVolunteerCall = async () => {
         try {
-            const data = await postAllCallVolunteer(userInfo?.email);
+            const data = await postAllVolunteerCall(userInfo?.email);
             console.log('Check response', data);
 
             // 두 가지 리스트로 데이터를 분리
@@ -112,9 +118,9 @@ const Calendar = () => {
         }
     };
     //환자 기준 받아오기
-    const usercallVolunteer = async () => {
+    const userVolunteerCall = async () => {
         try {
-            const data = await postUserCall(userInfo?.email);
+            const data = await postUserVolunteerCall(userInfo?.email);
             console.log('Check response', data);
 
             // 두 가지 리스트로 데이터를 분리
@@ -152,9 +158,9 @@ const Calendar = () => {
     useEffect(() => {
         if (userInfo && userInfo.role && !called) {
             if (userInfo.role === "Patient" || userInfo.role === "user") {
-                usercallVolunteer();
+                userVolunteerCall();
             } else {
-                allcallVolunteer();
+                allVolunteerCall();
             }
             setCalled(true); // 첫 호출 후에 called를 true로 설정하여 이후 호출 방지
         }

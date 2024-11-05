@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 import { TextField } from "@mui/material"
 import {useSelector} from "react-redux";
 import {
-    postAllCallVolunteer, postAssignmentCancel, postCallVolunteerDelete, postCallVolunteerModify,
+    postAllCallVolunteer, postAssignmentCancel, postVolunteerCallDelete, postVolunteerCallModify,
     postVolunteerAssignment,
     postVolunteerassignment,
     postVolunteerComplete
@@ -43,7 +43,7 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
                 const text = note;
 
                 console.log('email: ', userInfo?.email, ' noteDate: ', notedate, 'text: ', text)
-                const data = await postCallVolunteerModify(email, notedate, text);
+                const data = await postVolunteerCallModify(email, notedate, text);
                 console.log('Check response', data);
                 setNote("");
                 setShowModal(false);
@@ -65,7 +65,7 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
             const notedate = noteList[index].noteDate;
 
             // 삭제 API 호출
-            const data = await postCallVolunteerDelete(email, notedate);
+            const data = await postVolunteerCallDelete(email, notedate);
             console.log('Check response', data);
 
             alert("삭제 요청이 완료되었습니다.");
@@ -113,7 +113,7 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
     };
 
     //봉사 확정
-    const handleNewAction = async (index) => {
+    const handleAssignmentAction = async (index) => {
         try {
             const note = noteList[index];
             const data = await postVolunteerAssignment(userInfo.email, note.noteEmail, note.noteDate, note.noteContent);
@@ -182,7 +182,7 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
                                     )}
                                     {userInfo.role === "Volunteer" &&(
                                         <>
-                                            <Button variant="primary" onClick={() => handleNewAction(index)}>봉사확정</Button>
+                                            <Button variant="primary" onClick={() => handleAssignmentAction(index)}>봉사확정</Button>
                                         </>
                                     )}
                                 </>

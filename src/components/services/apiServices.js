@@ -17,7 +17,6 @@ const postCreateNewUser = (email, password, username, birth, phoneNum, role, use
     return axios.post(`/signup`, formData)
 }
 
-
 const getAllUsers = () => {
     // return axios.get(`/.../...`);
     //http://localhost:8081/api/v1/login/participant/all
@@ -58,84 +57,86 @@ const postUserId = (email) => {
     return axios.post(`/idcheck`, formData);
 }
 
+//프론트
+/*여기는 calendar관련 기능*/
 //환자가 봉사자 요청하기(예약 list)
 const postCallVolunteer = (email, noteDate, noteContent) => {
     const formData = new FormData();
-    formData.append('email', email)
-    formData.append('noteDate', noteDate)
-    formData.append('noteContent', noteContent)
+    formData.append('userid', email)
+    formData.append('desireddate', noteDate)
+    formData.append('text', noteContent)
 
     return axios.post(`/callvolunteer`, formData);
 }
 
 //봉사자가 예약list, 출장list 요청
-const postAllCallVolunteer = (email) => {
+const postAllVolunteerCall = (email) => {
     const formData = new FormData();
-    formData.append('email', email)
+    formData.append('userid', email)
 
-    return axios.post(`/allcallvolunteer`, formData);
+    return axios.post(`/allvolunteercall`, formData);
 }
 
 //사용자가 예약list, 출장list 요청
-const postUserCall = (email) => {
+const postUserVolunteerCall = (email) => {
     const formData = new FormData();
-    formData.append('email', email)
+    formData.append('userid', email)
 
-    return axios.post(`/callpatient`, formData)
+    return axios.post(`/patientvolunteercall`, formData)
 }
 
 //봉사자가 예약list 선택, 출장 list에 추가
-const postVolunteerAssignment = (email, userid, notedate, text) => {
+const postVolunteerAssignment = (email, userid, noteDate, noteContent) => {
     const formData = new FormData();
-    formData.append('email', email)
-    formData.append('userid', userid)
-    formData.append('notedate', notedate)
-    formData.append('text', text)
+    formData.append('volunteerid', email) //봉사자
+    formData.append('userid', userid) //환자
+    formData.append('desireddate', noteDate)
+    formData.append('text', noteContent)
 
     return axios.post(`/volunteerassignment`, formData)
 }
 
 //봉사자가 봉사완료
-const postVolunteerComplete = (email, userid, notedate) => {
+const postVolunteerComplete = (email, userid, noteDate) => {
     const formData = new FormData();
-    formData.append('email', email)
-    formData.append('userid', userid)
-    formData.append('notedate', notedate)
+    formData.append('volunteerid', email) //봉사자
+    formData.append('userid', userid) //환자
+    formData.append('assignmentdate', noteDate)
 
     return axios.post(`/volunteercomplete`, formData)
 }
 
 //환자나 봉사자가 출장list 취소
-const postAssignmentCancel = (email, userid, notedate, text) => {
+const postAssignmentCancel = (email, userid, noteDate, noteContent) => {
     const formData = new FormData();
-    formData.append('email', email) //봉사자
+    formData.append('volunteerid', email) //봉사자
     formData.append('userid', userid) //환자
-    formData.append('notedate', notedate)
-    formData.append('text', text)
+    formData.append('assignmentdate', noteDate)
+    formData.append('text', noteContent)
 
     return axios.post(`/assignmentcancel`, formData)
 }
 
 //환자가 예약list 수정
-const postCallVolunteerModify = (email, notedate, text) => {
+const postVolunteerCallModify = (email, noteDate, noteContent) => {
     const formData = new FormData();
-    formData.append('email', email)
-    formData.append('notedate', notedate)
-    formData.append('text', text)
+    formData.append('userid', email)
+    formData.append('desireddate', noteDate)
+    formData.append('text', noteContent)
 
-    return axios.post(`/callvolunteermodify`, formData)
+    return axios.post(`/volunteercallmodify`, formData)
 }
 
 //환자가 예약list 삭제
-const postCallVolunteerDelete = (email, notedate) => {
+const postVolunteerCallDelete = (email, noteDate) => {
     const formData = new FormData();
-    formData.append('email', email)
-    formData.append('notedate', notedate)
+    formData.append('userid', email)
+    formData.append('desireddate', noteDate)
 
-    return axios.post(`/callvolunteerdelete`, formData)
+    return axios.post(`/volunteercalldelete`, formData)
 }
 
 export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer,
-    postAllCallVolunteer, postUserCall, postVolunteerAssignment, postVolunteerComplete, postAssignmentCancel,
-    postCallVolunteerModify, postCallVolunteerDelete
+    postAllVolunteerCall, postUserVolunteerCall, postVolunteerAssignment, postVolunteerComplete, postAssignmentCancel,
+    postVolunteerCallModify, postVolunteerCallDelete
 }
