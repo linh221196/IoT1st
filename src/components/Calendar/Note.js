@@ -103,10 +103,10 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
                             <p>환자 이름: {item.noteName}</p>
                             {!isFirstList && (
                                 <>
-                                    <p>봉사자 이름 : {item.noteName2}</p>
+                                    <p>봉사자 이름: {item.noteName2}</p>
                                 </>
                             )}
-                            <p>{item.noteDate}</p>
+                            <p>날짜: {item.noteDate}</p>
                         </Col>
                         <Col>
                             {isFirstList && (
@@ -141,7 +141,7 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
                         </Col>
                     </Row>
 
-                    <p>{item.noteContent}</p>
+                    <p>내용: {item.noteContent}</p>
                 </Card>
             )}
 
