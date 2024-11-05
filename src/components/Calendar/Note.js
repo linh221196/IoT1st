@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 import { TextField } from "@mui/material"
 import {useSelector} from "react-redux";
 import {
-    postAllCallVolunteer,
+    postAllCallVolunteer, postAssignmentCancel,
     postVolunteerAssignment,
     postVolunteerassignment,
     postVolunteerComplete
@@ -22,17 +22,18 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
 
     const [showModal, setShowModal] = useState(false);
     const [editIndex, setEditIndex] = useState(null);
-
+    //수정 버튼(modal 띄우기)
     const handleEdit = (index) => {
         setEditIndex(index);
         setNote(noteList[index].noteContent);
         setShowModal(true);
     }
+    //list 수정 취소
     const handleClose = () => {
         setShowModal(false);
         setEditIndex(null);
     };
-
+    //list 수정
     const handleSubmit = () => {
         if (note.trim()) {
             const updatedNoteList = [...noteList];
@@ -48,11 +49,12 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
             alert("내용을 입력해주세요.");
         }
     };
-
+    //list 삭제
     const handleDelete = (index) => {
         setNoteList(prev => prev.filter((_, i) => i !== index))
     }
 
+    //봉사 완료
     const handleCompleteAction = async (index) => {
         try {
             const note = noteList[index];
@@ -70,11 +72,10 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
         }
     };
 
-    //새로 추가
+    //봉사 확정
     const handleNewAction = async (index) => {
         try {
             const note = noteList[index];
-            console.log('front data :', userInfo.email, note.noteEmail, note.noteDate, note.noteContent);
             const data = await postVolunteerAssignment(userInfo.email, note.noteEmail, note.noteDate, note.noteContent);
             console.log('Check response');
             /*if (data && data.EC === 0) {
@@ -89,7 +90,25 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
             alert("Error occurred");
         }
     };
+    
+    //봉사 취소
+    const handleCancel = async (index) => {
+        try {
+            const note = noteList[index];
+            console.log('front data :', note.noteEmail2, note.noteEmail, note.noteDate, note.noteContent);
+            const data = await postAssignmentCancel(note.noteEmail2, note.noteEmail, note.noteDate, note.noteContent);
+            console.log('Check response');
+            /*if (data && data.EC === 0) {
+                setShowModal(false);
+                alert('Updated');
+            } else {
+                alert(data.EM || "Something went wrong");
+            }*/
 
+        } catch (error) {
+            alert("Error occurred");
+        }
+    }
 
     return (
 
@@ -135,7 +154,7 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
                                             <Button variant="secondary" onClick={() => handleCompleteAction(index)}>봉사완료</Button>
                                         </>
                                     )}
-                                    <Button variant="info" onClick={() => console.log("공통 기능")}>취소하기</Button>
+                                    <Button variant="info" onClick={() => handleCancel(index)}>취소하기</Button>
                                 </>
                             )}
                         </Col>

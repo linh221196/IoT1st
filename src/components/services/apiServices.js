@@ -103,5 +103,18 @@ const postVolunteerComplete = (email, userid, notedate) => {
     return axios.post(`/volunteercomplete`, formData)
 }
 
+//봉사 취소
+const postAssignmentCancel = (email, userid, notedate, text) => {
+    const formData = new FormData();
+    formData.append('email', email) //봉사자
+    formData.append('userid', userid) //환자
+    formData.append('notedate', notedate)
+    formData.append('text', text)
+
+    return axios.post(`/assignmentcancel`, formData)
+}
+
 export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer,
-    postAllCallVolunteer, postUserCall, postVolunteerAssignment, postVolunteerComplete }
+    postAllCallVolunteer, postUserCall, postVolunteerAssignment, postVolunteerComplete, postAssignmentCancel
+
+}
