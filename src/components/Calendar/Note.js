@@ -42,6 +42,7 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
                 const notedate = noteList[editIndex].noteDate;
                 const text = note;
 
+                console.log('email: ', userInfo?.email, ' noteDate: ', notedate, 'text: ', text)
                 const data = await postCallVolunteerModify(email, notedate, text);
                 console.log('Check response', data);
                 setNote("");
