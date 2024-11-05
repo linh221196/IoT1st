@@ -90,7 +90,7 @@ const postVolunteerAssignment = (email, userid, noteDate, noteContent) => {
     const formData = new FormData();
     formData.append('volunteerid', email) //봉사자
     formData.append('userid', userid) //환자
-    formData.append('desireddate', noteDate)
+    formData.append('assignmentdate', noteDate)
     formData.append('text', noteContent)
 
     return axios.post(`/volunteerassignment`, formData)
