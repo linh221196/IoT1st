@@ -16,7 +16,7 @@ import {
     postVolunteerComplete
 } from "../services/apiServices";
 
-const Note = ({ noteList, setNoteList, note, setNote, newValue }) => {
+const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) => {
     //리듁스에서 꺼내오기
     const userInfo = useSelector(state => state.user.account)
 
@@ -104,7 +104,7 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue }) => {
                             <p>{item.noteDate}</p>
                         </Col>
                         <Col>
-                            {userInfo.role === "Patient" && (
+                            {isFirstList && userInfo.role === "Patient" && (
                                 <>
                                     <Button variant="success" onClick={() => handleEdit(index)}>
                                         <MdEdit size={20} />
@@ -114,10 +114,15 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue }) => {
                                     </Button>
                                 </>
                             )}
-                            {userInfo.role === "Volunteer" && (
+                            {!isFirstList && (
                                 <>
-                                    <Button variant="primary" onClick={() => handleNewAction(index)}>봉사확정</Button>
-                                    <Button variant="secondary" onClick={() => handleCompleteAction(index)}>추가 작업</Button>
+                                    {userInfo.role === "Volunteer" && (
+                                        <>
+                                            <Button variant="primary" onClick={() => handleNewAction(index)}>봉사확정</Button>
+                                            <Button variant="secondary" onClick={() => handleCompleteAction(index)}>봉사완료</Button>
+                                        </>
+                                    )}
+                                    <Button variant="info" onClick={() => console.log("공통 기능")}>취소하기</Button>
                                 </>
                             )}
                         </Col>

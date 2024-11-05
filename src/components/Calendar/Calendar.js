@@ -205,6 +205,7 @@ const Calendar = () => {
                             newValue={newValue}
                             note={note}
                             setNote={setNote}
+                            isFirstList={true}
                         />
                     </Col>
 
@@ -215,6 +216,7 @@ const Calendar = () => {
                             newValue={newValue}
                             note={note}
                             setNote={setNote}
+                            isFirstList={false}
                         />
                     </Col>
 
