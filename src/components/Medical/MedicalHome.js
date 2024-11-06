@@ -15,6 +15,7 @@ const MedicalHome = () => {
     const [patientList, setpatientList] = useState([
         { username: "이름", useremail: "이메일", userbirth: "2001-11-01" }
     ]);
+    const [selectedUserId, setSelectedUserId] = useState(null);
 
 
     //의료진이 처음 들어왔을 때 담당환자 list 불러오기
@@ -46,6 +47,12 @@ const MedicalHome = () => {
             setCalled(true); // 첫 호출 후에 called를 true로 설정하여 이후 호출 방지
         }
     }, [userInfo.role, called]);
+    //UserTable에서 선택된 사용자id 업데이트하는 함수
+    const handleUserSelect = async (userId) => {
+        setSelectedUserId(userId);
+
+    };
+
 
     return (
         <Container className="container admin-container ms-0 ps-0 mt-0">
@@ -57,7 +64,7 @@ const MedicalHome = () => {
                     <p>Header</p>
                 </Row>
                 <Row>
-                    <UserTable list={patientList} />
+                    <UserTable list={patientList} onSelectUser={handleUserSelect}/>
                 </Row>
                 <Row>
                     <NoticeMeasure />

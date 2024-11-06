@@ -2,30 +2,29 @@ import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
-import {useSelector} from "react-redux";
-import {postDeletePatient, postLoadPatient} from "../services/apiServices";
+import { useSelector } from "react-redux";
+import { postDeletePatient } from "../services/apiServices";
 
 const paginationModel = { page: 0, pageSize: 10 };
 
-const UserTable = ({ list }) => {
-    const userInfo = useSelector(state => state.user.account)
+const UserTable = ({ list, onSelectUser }) => {
+    const userInfo = useSelector(state => state.user.account);
     const [selectedRows, setSelectedRows] = useState([]);
 
     const handleSelectionChange = (selection) => {
         setSelectedRows(selection);
-        console.log("Selected row IDs:", selection);
+        if (selection.length > 0) {
+            onSelectUser(selection[0]); // 첫 번째 선택된 useremail만 전달
+        }
     };
 
     const handleDelete = async (email) => {
         try {
-            console.log("front",userInfo.email, email);
-            const data = await postDeletePatient(userInfo.email, email)
+            const data = await postDeletePatient(userInfo.email, email);
             console.log('Check response', data);
-
         } catch (error) {
             alert("서버 응답이 없습니다.");
         }
-
     };
 
     const columns = [
@@ -61,7 +60,7 @@ const UserTable = ({ list }) => {
                 components={{
                     NoRowsOverlay: () => <div>No data available</div>,
                 }}
-                getRowId={(row) => row.useremail} // useremail을 고유 ID로 사용
+                getRowId={(row) => row.useremail}
             />
             <div style={{ marginTop: '10px' }}>
                 선택된 사용자 ID: {selectedRows.join(", ")}
