@@ -5,7 +5,7 @@ import {
 
 const AddList = () => {
     const [list, setList] = useState([
-        { userid: "환자이름" }
+        { userid: "이메일", username: "이름" }
     ]); // 리스트를 저장할 상태
     const [inputText, setInputText] = useState(''); // 텍스트 필드의 입력 값
 
@@ -22,7 +22,10 @@ const AddList = () => {
 
                 // 서버 응답이 성공적일 경우 리스트에 항목 추가
                 if (data && data.success) { // 성공 여부에 따라 조건 변경 가능
-                    setList([...list, { userid: data.userid }]);
+                    setList([...list, {
+                        userid: data.userid,
+                        username: data.name
+                    }]);
                     setInputText(''); // 텍스트 필드 초기화
                 } else {
                     alert('환자를 찾을 수 없습니다.');
@@ -42,7 +45,7 @@ const AddList = () => {
                 onChange={handleInputChange}
                 placeholder="아이템을 입력하세요"
             />
-            <button onClick={handleAddItem}>추가</button>
+            <button onClick={handleAddItem}>검색</button>
 
             <ul>
                 {list.map((item, index) => (
