@@ -13,7 +13,7 @@ const MedicalHome = () => {
     const userInfo = useSelector(state => state.user.account)
     const [called, setCalled] = useState(false);
     const [patientList, setpatientList] = useState([
-        { username: "이름", useremail: "이메일" }
+        { username: "이름", useremail: "이메일", userbirth: "2001-11-01" }
     ]);
 
 
@@ -24,9 +24,10 @@ const MedicalHome = () => {
             console.log('Check response', data);
 
             //받은 데이터를 list해서 넣기
-            const newPatientList = data.map(item => ({
+            const newPatientList = data.data.map(item => ({
                 username: item.app_user?.name,
-                useremail: item.email
+                useremail: item.app_user?.userid,
+                userbirth: item.app_user?.birth,
             }));
 
             setpatientList(newPatientList);
