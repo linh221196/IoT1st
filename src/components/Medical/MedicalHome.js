@@ -7,6 +7,7 @@ import NoticeMeasure from "./NoticeMeasure";
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import { postLoadPatient } from "../services/apiServices";
+import UserList from "../PhoneAuth";
 
 
 const MedicalHome = () => {
@@ -67,7 +68,7 @@ const MedicalHome = () => {
                     <UserTable list={patientList} onSelectUser={handleUserSelect}/>
                 </Row>
                 <Row>
-                    <NoticeMeasure />
+                    <NoticeMeasure selectedUserId={selectedUserId}/>
                 </Row>
             </div>
         </Container>
