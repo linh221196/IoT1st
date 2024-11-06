@@ -137,9 +137,9 @@ const postVolunteerCallDelete = (email, noteDate) => {
 }
 
 //의료진이 환자를 추가하기 위해 검색
-const postSearchPatient = (email) => {
+const postSearchPatient = (username) => {
     const formData = new FormData();
-    formData.append('userid', email)
+    formData.append('name', username)
 
     return axios.post(`/searchpatient`, formData)
 }

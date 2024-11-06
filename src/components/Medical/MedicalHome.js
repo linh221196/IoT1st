@@ -10,13 +10,14 @@ const MedicalHome = () => {
     return (
         <Container className="container admin-container ms-0 ps-0 mt-0">
             <div className="sidebar-container">
+                <AddList />
             </div>
             <div className="content-container">
                 <Row>
                     <p>Header</p>
                 </Row>
                 <Row>
-                    <AddList />
+                    <UserTable />
                 </Row>
             </div>
         </Container>
