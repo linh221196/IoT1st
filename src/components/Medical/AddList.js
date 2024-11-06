@@ -23,7 +23,7 @@ const AddList = () => {
                 console.log('Check response', data)
 
                 // 서버 응답이 성공적일 경우 리스트에 항목 추가
-                if (response.status === "success") {
+                if (data.status === "success") {
                     const newItems = data.map((item) => ({
                         userid: item.userid,
                         username: item.name
