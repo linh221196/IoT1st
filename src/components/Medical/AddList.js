@@ -5,7 +5,7 @@ import {
 
 const AddList = () => {
     const [list, setList] = useState([
-        { userid: "이메일", username: "이름" }
+        { username: "이름", userid: "이메일" }
     ]); // 리스트를 저장할 상태
     const [inputText, setInputText] = useState(''); // 텍스트 필드의 입력 값
 
@@ -24,9 +24,9 @@ const AddList = () => {
 
                 // 서버 응답이 성공적일 경우 리스트에 항목 추가
                 if (data.status === "success") {
-                    const newItems = data.map((item) => ({
-                        userid: item.userid,
-                        username: item.name
+                    const newItems = data.data.map((item) => ({
+                        username: item.name,
+                        userid: item.userid
                     }));
                     setList([...list, ...newItems]); // 기존 리스트에 새로운 항목들 추가
                     setInputText(''); // 텍스트 필드 초기화
