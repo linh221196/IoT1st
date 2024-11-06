@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {
-    postAAssignmentPatient,
+    postAssignmentPatient,
     postSearchPatient, postVolunteerCallModify
 } from "../services/apiServices";
 import {useSelector} from "react-redux";
@@ -61,7 +61,7 @@ const AddList = () => {
             const userid = addList[index].userid;
 
             console.log('email: ', userInfo?.email, 'userid: ', userid)
-            const data = await postAAssignmentPatient(email, userid);
+            const data = await postAssignmentPatient(email, userid);
             console.log('Check response', data);
 
             // 서버 응답에 따른 처리
