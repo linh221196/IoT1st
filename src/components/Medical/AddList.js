@@ -23,11 +23,18 @@ const AddList = () => {
                 console.log('Check response', data)
 
                 // 서버 응답이 성공적일 경우 리스트에 항목 추가
-                if (data.status === "success") {
-                    const newItems = data.data.map((item) => ({
-                        username: item.name,
-                        userid: item.userid
-                    }));
+                if (data.status === "success" || data.data.status === "success") {
+                    if (Array.isArray(data)) {
+                        const newItems = data.map((item) => ({
+                            username: item.name,
+                            userid: item.userid
+                        }));
+                    } else if(Array.isArray(data.data)) {
+                        const newItems = data.data.map((item) => ({
+                            username: item.name,
+                            userid: item.userid
+                        }));
+                    }
                     setList([...list, ...newItems]); // 기존 리스트에 새로운 항목들 추가
                     setInputText(''); // 텍스트 필드 초기화
                 } else if (data.status === "DataEmpty") {
