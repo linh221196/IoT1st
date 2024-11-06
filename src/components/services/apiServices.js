@@ -136,7 +136,15 @@ const postVolunteerCallDelete = (email, noteDate) => {
     return axios.post(`/volunteercalldelete`, formData)
 }
 
+//의료진이 환자를 추가하기 위해 검색
+const postSearchPatient = (email) => {
+    const formData = new FormData();
+    formData.append('userid', email)
+
+    return axios.post(`/searchpatient`, formData)
+}
+
 export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer,
     postAllVolunteerCall, postUserVolunteerCall, postVolunteerAssignment, postVolunteerComplete, postAssignmentCancel,
-    postVolunteerCallModify, postVolunteerCallDelete
+    postVolunteerCallModify, postVolunteerCallDelete, postSearchPatient
 }
