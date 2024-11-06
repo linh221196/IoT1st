@@ -49,7 +49,9 @@ const AddList = () => {
 
             <ul>
                 {list.map((item, index) => (
-                    <li key={index}>{item.userid}</li> // 리스트 항목의 userid 출력
+                    <li key={index}>
+                        {item.userid} - {item.username}
+                    </li> // 리스트 항목의 userid 출력
                 ))}
             </ul>
         </div>
