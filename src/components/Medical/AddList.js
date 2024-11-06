@@ -60,7 +60,7 @@ const AddList = () => {
             <ul>
                 {list.map((item, index) => (
                     <li key={index}>
-                        {item.userid} - {item.username}
+                        {item.username} - {item.userid}
                         <button onClick={() => handleAddItem(index)}>추가</button>
                     </li> // 리스트 항목의 userid, username 출력
                 ))}
