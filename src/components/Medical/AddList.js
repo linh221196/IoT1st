@@ -23,14 +23,15 @@ const AddList = () => {
                 console.log('Check response', data)
 
                 // 서버 응답이 성공적일 경우 리스트에 항목 추가
-                if (data.status === "success") { // 성공 여부에 따라 조건 변경 가능
-                    setList([...list, {
-                        userid: data.userid,
-                        username: data.name
-                    }]);
+                if (response.status === "success") {
+                    const newItems = data.map((item) => ({
+                        userid: item.userid,
+                        username: item.name
+                    }));
+                    setList([...list, ...newItems]); // 기존 리스트에 새로운 항목들 추가
                     setInputText(''); // 텍스트 필드 초기화
                 } else if (data.status === "DataEmpty") {
-                    alert('그런 id의 환자는 존재하지 않습니다.');
+                    alert('해당 환자를 찾을 수 없습니다.');
                 } else { //else if문을 통해 data.status의 메세지에 따라 변경
                     alert('환자를 찾을 수 없습니다.');
                 }

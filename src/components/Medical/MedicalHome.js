@@ -22,12 +22,6 @@ const MedicalHome = () => {
             </div>
         </Container>
 
-
-
-
-
-
-
     )
 }
 export default MedicalHome
