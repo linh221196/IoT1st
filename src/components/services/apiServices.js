@@ -144,7 +144,16 @@ const postSearchPatient = (searchdata) => {
     return axios.post(`/searchpatient`, formData)
 }
 
+//의료진이 담당환자 추가
+const postAAssignmentPatient = (email, userid) => {
+    const formData = new FormData();
+    formData.append('medicalid', email)
+    formData.append('userid', userid)
+
+    return axios.post( `/assignmentpatient`, formData)
+}
+
 export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer,
     postAllVolunteerCall, postUserVolunteerCall, postVolunteerAssignment, postVolunteerComplete, postAssignmentCancel,
-    postVolunteerCallModify, postVolunteerCallDelete, postSearchPatient
+    postVolunteerCallModify, postVolunteerCallDelete, postSearchPatient, postAAssignmentPatient
 }

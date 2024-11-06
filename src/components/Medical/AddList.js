@@ -1,13 +1,16 @@
 import { useState } from "react";
 import {
-    postSearchPatient
+    postAAssignmentPatient,
+    postSearchPatient, postVolunteerCallModify
 } from "../services/apiServices";
+import {useSelector} from "react-redux";
 
 const AddList = () => {
-    const [list, setList] = useState([
+    const [addList, setaddList] = useState([
         { username: "이름", userid: "이메일" }
     ]); // 리스트를 저장할 상태
     const [inputText, setInputText] = useState(''); // 텍스트 필드의 입력 값
+    const userInfo = useSelector(state => state.user.account)
 
     //텍스트 필드 값 변경 시
     const handleInputChange = (e) => {
@@ -37,7 +40,7 @@ const AddList = () => {
                     }
 
                     // 새로운 항목들 추가
-                    setList([...list, ...newItems]);
+                    setaddList([...addList, ...newItems]);
                     setInputText('');
                 } else if (data.status === "DataEmpty" || (data.data && data.data.status === "DataEmpty")) {
                     alert('해당 환자를 찾을 수 없습니다.');
@@ -51,9 +54,20 @@ const AddList = () => {
         }
     };
     //list에서 환자를 추가 할때
-    const handleAddItem = (index) => {
-        const updatedList = list.filter((_, i) => i !== index); // 해당 index의 항목을 제외한 새 리스트
-        setList(updatedList);
+    const handleAddItem = async (index) => {
+        try {
+            // API 호출
+            const email = userInfo?.email;
+            const userid = addList[index].userid;
+
+            console.log('email: ', userInfo?.email, 'userid: ', userid)
+            const data = await postAAssignmentPatient(email, userid);
+            console.log('Check response', data);
+
+        } catch (error) {
+            console.error("Error occurred:", error);
+            alert("서버와 통신에 실패했습니다.");
+        }
     };
 
     return (
@@ -67,7 +81,7 @@ const AddList = () => {
             <button onClick={handleSearchItem}>검색</button>
 
             <ul>
-                {list.map((item, index) => (
+                {addList.map((item, index) => (
                     <li key={index}>
                         {item.username} - {item.userid}
                         <button onClick={() => handleAddItem(index)}>추가</button>
