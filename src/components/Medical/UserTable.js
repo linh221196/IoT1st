@@ -2,10 +2,13 @@ import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
+import {useSelector} from "react-redux";
+import {postDeletePatient, postLoadPatient} from "../services/apiServices";
 
 const paginationModel = { page: 0, pageSize: 10 };
 
 const UserTable = ({ list }) => {
+    const userInfo = useSelector(state => state.user.account)
     const [selectedRows, setSelectedRows] = useState([]);
 
     const handleSelectionChange = (selection) => {
@@ -13,9 +16,16 @@ const UserTable = ({ list }) => {
         console.log("Selected row IDs:", selection);
     };
 
-    const handleDelete = (email) => {
-        console.log(`Deleting patient with email: ${email}`);
-        // 실제 삭제 로직은 상위 컴포넌트에서 API 호출 등으로 구현할 수 있습니다.
+    const handleDelete = async (email) => {
+        try {
+            console.log("front",userInfo.email, email);
+            const data = await postDeletePatient(userInfo.email, email)
+            console.log('Check response', data);
+
+        } catch (error) {
+            alert("서버 응답이 없습니다.");
+        }
+
     };
 
     const columns = [

@@ -161,10 +161,17 @@ const postLoadPatient = (email) => {
     return axios.post(`/loadpatient`, formData)
 }
 
+//의료진이 담당 환자 list 삭제
+const postDeletePatient = (email, userid) => {
+    const formData = new FormData();
+    formData.append('medicalid', email)
+    formData.append('userid', userid)
 
+    return axios.post(`/deletepatient`, formData)
+}
 
 export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer,
     postAllVolunteerCall, postUserVolunteerCall, postVolunteerAssignment, postVolunteerComplete, postAssignmentCancel,
-    postVolunteerCallModify, postVolunteerCallDelete, postSearchPatient, postAssignmentPatient, postLoadPatient
-
+    postVolunteerCallModify, postVolunteerCallDelete, postSearchPatient, postAssignmentPatient, postLoadPatient,
+    postDeletePatient
 }
