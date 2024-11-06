@@ -3,8 +3,9 @@ import SideBar from "./SideBar"
 import UserTable from "./UserTable"
 import AddList from "./AddList"
 import './Admin.scss'
+import NoticeMeasure from "./NoticeMeasure";
 
-
+//여기에 처음 들어왔을 때
 
 const MedicalHome = () => {
     return (
@@ -17,7 +18,7 @@ const MedicalHome = () => {
                     <p>Header</p>
                 </Row>
                 <Row>
-                    <UserTable />
+                    <NoticeMeasure />
                 </Row>
             </div>
         </Container>

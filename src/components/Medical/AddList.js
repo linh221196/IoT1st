@@ -64,6 +64,15 @@ const AddList = () => {
             const data = await postAAssignmentPatient(email, userid);
             console.log('Check response', data);
 
+            // 서버 응답에 따른 처리
+            if (data.status === "success") {
+                alert("환자가 성공적으로 추가되었습니다.");
+            } else if (data.status === "duplication") {
+                alert("이미 담당하는 환자입니다.");
+            } else {
+                alert("환자를 추가하는 데 실패했습니다.");
+            }
+
         } catch (error) {
             console.error("Error occurred:", error);
             alert("서버와 통신에 실패했습니다.");

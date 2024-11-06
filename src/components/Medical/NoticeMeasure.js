@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 const paginationModel = { page: 0, pageSize: 10 };
 
-const UserTable = (list) => {
+const NoticeMeasure = (list) => {
     // 임시 데이터
     const listUser = [
         { id: 1, username: 'john_doe', role: 'Admin', email: 'john@example.com' },
@@ -48,4 +48,4 @@ const UserTable = (list) => {
     );
 }
 
-export default UserTable;
+export default NoticeMeasure;

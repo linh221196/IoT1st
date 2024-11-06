@@ -153,6 +153,8 @@ const postAAssignmentPatient = (email, userid) => {
     return axios.post( `/assignmentpatient`, formData)
 }
 
+//담당 환자 list 띄우기
+
 export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer,
     postAllVolunteerCall, postUserVolunteerCall, postVolunteerAssignment, postVolunteerComplete, postAssignmentCancel,
     postVolunteerCallModify, postVolunteerCallDelete, postSearchPatient, postAAssignmentPatient
