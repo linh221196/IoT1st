@@ -24,6 +24,7 @@ const AddList = () => {
 
                 // 서버 응답이 성공적일 경우 리스트에 항목 추가
                 if (data.status === "success" || data.data.status === "success") {
+                    let newItems = [];
                     if (Array.isArray(data)) { //email일 경우
                         const newItems = data.map((item) => ({
                             username: item.name,
