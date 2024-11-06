@@ -18,30 +18,30 @@ const AddList = () => {
     const handleSearchItem = async () => {
         if (inputText.trim() !== '') {
             try {
-                // postSearchPatient API 호출
                 const data = await postSearchPatient(inputText);
-                console.log('Check response', data)
-
+                console.log('Check response', data);
                 let newItems = [];
 
                 // 서버 응답이 성공적일 경우 리스트에 항목 추가
-                if (data.status === "success" || data.data.status === "success") {
-                    if (Array.isArray(data)) { //email일 경우
-                        newItems = data.map((item) => ({
-                            username: item.name,
-                            userid: item.userid
-                        }));
-                    } else if(Array.isArray(data.data)) { //이름일 경우
+                if (data.status === "success" || (data.data && data.data.status === "success")) {
+                    if (data.name && data.userid) { // 이메일로 검색한 단일 객체 결과
+                        newItems = [{
+                            username: data.name,
+                            userid: data.userid
+                        }];
+                    } else if (data.data && Array.isArray(data.data)) { // 이름으로 검색한 결과가 배열일 경우
                         newItems = data.data.map((item) => ({
                             username: item.name,
                             userid: item.userid
                         }));
                     }
-                    setList([...list, ...newItems]); // 기존 리스트에 새로운 항목들 추가
-                    setInputText(''); // 텍스트 필드 초기화
-                } else if (data.status === "DataEmpty") {
+
+                    // 새로운 항목들 추가
+                    setList([...list, ...newItems]);
+                    setInputText('');
+                } else if (data.status === "DataEmpty" || (data.data && data.data.status === "DataEmpty")) {
                     alert('해당 환자를 찾을 수 없습니다.');
-                } else { //else if문을 통해 data.status의 메세지에 따라 변경
+                } else {
                     alert('환자를 찾을 수 없습니다.');
                 }
             } catch (error) {
