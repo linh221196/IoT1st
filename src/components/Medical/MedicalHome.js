@@ -14,7 +14,8 @@ const MedicalHome = () => {
     const userInfo = useSelector(state => state.user.account)
     const [called, setCalled] = useState(false);
     const [patientList, setpatientList] = useState([
-        { username: "이름", useremail: "이메일", userbirth: "2001-11-01" }
+        { username: "환자1", useremail: "이메일1", userbirth: "2001-11-01" },
+        { username: "환자2", useremail: "이메일2", userbirth: "2001-11-02" }
     ]);
     const [selectedUserId, setSelectedUserId] = useState(null);
 
@@ -49,9 +50,9 @@ const MedicalHome = () => {
         }
     }, [userInfo.role, called]);
     //UserTable에서 선택된 사용자id 업데이트하는 함수
-    const handleUserSelect = async (userId) => {
+    const handleUserSelect = (userId) => {
+        console.log('MedicalHome에서 선택한 userId:', userId);
         setSelectedUserId(userId);
-
     };
 
 
