@@ -182,13 +182,14 @@ const postMeasurePatient = (userid) => {
 const postModifyMeasure = (userid, spo2, airflow, bodytemp, ecg, emg, gsr, nibp) => {
     const formData = new FormData();
     formData.append('userid', userid)
-    formData.append('spo2', spo2)
     formData.append('airflow', airflow)
     formData.append('bodytemp', bodytemp)
+    formData.append('nibp', nibp)
+    formData.append('spo2', spo2)
     formData.append('ecg', ecg)
     formData.append('emg', emg)
     formData.append('gsr', gsr)
-    formData.append('nibp', nibp)
+    console.log(userid, spo2, airflow, bodytemp, ecg, emg, gsr, nibp)
 
     return axios.post(`/modifymeasure`, formData)
 }

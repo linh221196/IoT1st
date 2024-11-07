@@ -56,9 +56,7 @@ const NoticeMeasure = ({ selectedUserId }) => {
                 dataToSend.gsr,
                 dataToSend.nibp
             )
-            console.log("성공")
 
-            alert("측정값이 수정되었습니다.")
 
 
         } catch (error) {
