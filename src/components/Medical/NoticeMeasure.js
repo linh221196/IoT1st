@@ -9,10 +9,10 @@ const paginationModel = { page: 0, pageSize: 10 };
 const NoticeMeasure = ({ selectedUserId }) => {
     const userInfo = useSelector(state => state.user.account);
     const [listUser, setListUser] = useState([
-        { username: 'a', userid: '001', role: true },
-        { username: 'b', userid: '002', role: false },
-        { username: 'c', userid: '003', role: false },
-        { username: 'd', userid: '004', role: true },
+        { measurement: 'a', userid: selectedUserId, status: true },
+        { measurement: 'b', userid: selectedUserId, status: false },
+        { measurement: 'c', userid: selectedUserId, status: false },
+        { measurement: 'd', userid: selectedUserId, status: true },
     ]);
 
     const LoadList = async () => {
@@ -20,13 +20,23 @@ const NoticeMeasure = ({ selectedUserId }) => {
             console.log('Selected User ID: ', selectedUserId);
             const data = await postMeasurePatient(selectedUserId);
             console.log('Check response', data);
-            // 필요한 경우 listUser 업데이트
+
+            const newList = [
+                { measurement: 'spo2', userid: selectedUserId, status: data.spo2 },
+                { measurement: 'airflow', userid: selectedUserId, status: data.airflow },
+                { measurement: 'bodytemp', userid: selectedUserId, status: data.bodytemp },
+                { measurement: 'ecg', userid: selectedUserId, status: data.ecg },
+                { measurement: 'emg', userid: selectedUserId, status: data.emg },
+                { measurement: 'gsr', userid: selectedUserId, status: data.gsr },
+                { measurement: 'nibp', userid: selectedUserId, status: data.nibp },
+            ];
+
+            setListUser(newList);
         } catch (error) {
             alert("서버 응답이 없습니다.");
         }
     };
 
-    // selectedUserId가 변경될 때마다 LoadList를 호출
     useEffect(() => {
         if (userInfo && userInfo.role && selectedUserId) {
             LoadList();
@@ -37,8 +47,8 @@ const NoticeMeasure = ({ selectedUserId }) => {
         if (userInfo.role === "Patient") return;
 
         const updatedList = listUser.map(user => {
-            if (user.username === params.row.username) {
-                return { ...user, role: !user.role };
+            if (user.measurement === params.row.measurement) {
+                return { ...user, status: !user.status };
             }
             return user;
         });
@@ -46,15 +56,15 @@ const NoticeMeasure = ({ selectedUserId }) => {
     };
 
     const columns = [
-        { field: 'username', headerName: 'User Name', width: 150 },
+        { field: 'measurement', headerName: 'Measurement', width: 150 },
         { field: 'userid', headerName: 'User ID', width: 150 },
         {
-            field: 'role',
-            headerName: 'Role',
+            field: 'status',
+            headerName: 'Status',
             width: 150,
             renderCell: (params) => (
-                <div style={{ color: params.row.role ? 'green' : 'red' }}>
-                    {params.row.role ? '선택됨' : '선택 안됨'}
+                <div style={{ color: params.row.status ? 'green' : 'red' }}>
+                    {params.row.status ? '선택됨' : '선택 안됨'}
                 </div>
             ),
         },
@@ -73,8 +83,9 @@ const NoticeMeasure = ({ selectedUserId }) => {
                 components={{
                     NoRowsOverlay: () => <div>No data available</div>,
                 }}
-                getRowId={(row) => row.username}
+                getRowId={(row) => row.measurement} // measurement를 고유 ID로 사용
             />
+            <button>추가</button>
         </Paper>
     );
 };
