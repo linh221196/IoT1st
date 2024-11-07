@@ -171,11 +171,17 @@ const postDeletePatient = (email, userid) => {
 }
 
 //담당 환자의 필요 측정 요소 list를 불러오기
+const postMeasurePatient = (userid) => {
+    const formData = new FormData();
+    formData.append('userid', userid)
+
+    return axios.post(`/loadmeasure`, formData)
+}
 
 //담당 환자의 필요 측정 요소 list를 수정하기
 
 export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer,
     postAllVolunteerCall, postUserVolunteerCall, postVolunteerAssignment, postVolunteerComplete, postAssignmentCancel,
     postVolunteerCallModify, postVolunteerCallDelete, postSearchPatient, postAssignmentPatient, postLoadPatient,
-    postDeletePatient
+    postDeletePatient, postMeasurePatient
 }

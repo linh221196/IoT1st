@@ -1,11 +1,12 @@
 import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { postDeletePatient, postMeasurePatient } from "../services/apiServices";
 
 const paginationModel = { page: 0, pageSize: 10 };
 
-const NoticeMeasure = () => {
+const NoticeMeasure = ({ selectedUserId }) => {
     // Redux에서 userInfo 가져오기
     const userInfo = useSelector(state => state.user.account);
 
@@ -17,9 +18,30 @@ const NoticeMeasure = () => {
         { username: 'd', userid: '004', role: true },
     ];
 
-    // 상태 관리
     const [listUser, setListUser] = useState(initialListUser);
+    const [called, setCalled] = useState(false);
 
+    const LoadList = async () => {
+        try {
+            console.log('userid: ', selectedUserId);
+            const data = await postMeasurePatient(selectedUserId);
+            console.log('Check response', data);
+            // data를 기반으로 listUser를 업데이트할 수 있습니다.
+        } catch (error) {
+            alert("서버 응답이 없습니다.");
+        }
+    };
+
+    useEffect(() => {
+        if (userInfo && userInfo.role && !called) {
+            if (userInfo.role === "Medical" || userInfo.role === "user") {
+                LoadList();
+            }
+            setCalled(true); // 한 번 호출 후 재호출 방지
+        }
+    }, [userInfo.role, called, selectedUserId]);
+
+    // 행을 클릭할 때 실행되는 함수
     const handleRowClick = (params) => {
         // userInfo.role이 "Patient"이면 클릭 시 아무 작업도 수행하지 않음
         if (userInfo.role === "Patient") return;
