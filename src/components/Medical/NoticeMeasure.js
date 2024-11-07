@@ -2,18 +2,13 @@ import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { postMeasurePatient } from "../services/apiServices";
+import {postMeasurePatient, postModifyMeasure} from "../services/apiServices";
 
 const paginationModel = { page: 0, pageSize: 10 };
 
 const NoticeMeasure = ({ selectedUserId }) => {
     const userInfo = useSelector(state => state.user.account);
-    const [listUser, setListUser] = useState([
-        { measurement: 'a', userid: selectedUserId, status: true },
-        { measurement: 'b', userid: selectedUserId, status: false },
-        { measurement: 'c', userid: selectedUserId, status: false },
-        { measurement: 'd', userid: selectedUserId, status: true },
-    ]);
+    const [listUser, setListUser] = useState([]);
 
     const LoadList = async () => {
         try {
@@ -36,6 +31,41 @@ const NoticeMeasure = ({ selectedUserId }) => {
             alert("서버 응답이 없습니다.");
         }
     };
+    //추가 버튼을 눌러 백엔드로 list값 보내기
+    const handleModifyMeasure = async () => {
+        try {
+            //list에서 필요 데이터 추출
+            const dataToSend = {
+                userid: selectedUserId,
+                spo2: listUser.find(item => item.measurement === 'spo2')?.status || false,
+                airflow: listUser.find(item => item.measurement === 'airflow')?.status || false,
+                bodytemp: listUser.find(item => item.measurement === 'bodytemp')?.status || false,
+                ecg: listUser.find(item => item.measurement === 'ecg')?.status || false,
+                emg: listUser.find(item => item.measurement === 'emg')?.status || false,
+                gsr: listUser.find(item => item.measurement === 'gsr')?.status || false,
+                nibp: listUser.find(item => item.measurement === 'nibp')?.status || false,
+            };
+
+            postModifyMeasure(
+                dataToSend.userid,
+                dataToSend.spo2,
+                dataToSend.airflow,
+                dataToSend.bodytemp,
+                dataToSend.ecg,
+                dataToSend.emg,
+                dataToSend.gsr,
+                dataToSend.nibp
+            )
+            console.log("성공")
+
+            alert("측정값이 수정되었습니다.")
+
+
+        } catch (error) {
+            alert("서버 응답이 없습니다.");
+        }
+
+    }
 
     useEffect(() => {
         if (userInfo && userInfo.role && selectedUserId) {
@@ -85,7 +115,7 @@ const NoticeMeasure = ({ selectedUserId }) => {
                 }}
                 getRowId={(row) => row.measurement} // measurement를 고유 ID로 사용
             />
-            <button>추가</button>
+            <button onClick={handleModifyMeasure}>추가</button>
         </Paper>
     );
 };
