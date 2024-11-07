@@ -14,27 +14,24 @@ const NoticeMeasure = ({ selectedUserId }) => {
         { username: 'c', userid: '003', role: false },
         { username: 'd', userid: '004', role: true },
     ]);
-    const [called, setCalled] = useState(false);
 
     const LoadList = async () => {
         try {
-            console.log('userid: ', selectedUserId);
+            console.log('Selected User ID: ', selectedUserId);
             const data = await postMeasurePatient(selectedUserId);
             console.log('Check response', data);
-            // data를 기반으로 listUser를 업데이트할 수 있습니다.
+            // 필요한 경우 listUser 업데이트
         } catch (error) {
             alert("서버 응답이 없습니다.");
         }
     };
 
+    // selectedUserId가 변경될 때마다 LoadList를 호출
     useEffect(() => {
-        if (userInfo && userInfo.role && selectedUserId && !called) {
-            if (userInfo.role === "Medical" || userInfo.role === "user") {
-                LoadList();
-                setCalled(true); // 호출 후 재호출 방지
-            }
+        if (userInfo && userInfo.role && selectedUserId) {
+            LoadList();
         }
-    }, [userInfo.role, selectedUserId, called]);
+    }, [userInfo.role, selectedUserId]);
 
     const handleRowClick = (params) => {
         if (userInfo.role === "Patient") return;
