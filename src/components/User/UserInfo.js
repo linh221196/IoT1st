@@ -3,8 +3,8 @@ import "./UserInfo.scss"
 import code from '../../assets/image.jpg'
 import { FiEdit } from "react-icons/fi";
 import UserInfoUpdateModal from "./UserInfoUpdateModal";
-import { useState } from 'react';
-import { putEditUserData } from "../services/apiServices";
+import { useEffect, useState } from 'react';
+import {postVolunteerTime, putEditUserData} from "../services/apiServices";
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -52,6 +52,21 @@ const UserInfo = () => {
 
         }
     }
+
+    const Volunteertime = async () => {
+        const data = await postVolunteerTime(userInfo.email);
+        console.log('Check response', data)
+    }
+
+    //여기에 처음 들어왔을 때
+    useEffect(() => {
+        if (userInfo && userInfo.role) {
+            if (userInfo.role === "Volunteer" || userInfo.role === "user") {
+                Volunteertime();
+            }// 첫 호출 후에 called를 true로 설정하여 이후 호출 방지
+        }
+    }, [userInfo.role]);
+
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;

@@ -96,6 +96,15 @@ const postVolunteerAssignment = (email, userid, noteDate, noteContent) => {
     return axios.post(`/volunteerassignment`, formData)
 }
 
+//봉사자의 봉사횟수
+const postVolunteerTime = (email) => {
+    const formData = new FormData();
+    formData.append('volunteerid', email) //봉사자
+
+    return axios.post(`/volunteertime`, formData)
+}
+
+
 //봉사자가 봉사완료
 const postVolunteerComplete = (email, userid, noteDate) => {
     const formData = new FormData();
@@ -197,5 +206,5 @@ const postModifyMeasure = (userid, spo2, airflow, bodytemp, ecg, emg, gsr, nibp)
 export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer,
     postAllVolunteerCall, postUserVolunteerCall, postVolunteerAssignment, postVolunteerComplete, postAssignmentCancel,
     postVolunteerCallModify, postVolunteerCallDelete, postSearchPatient, postAssignmentPatient, postLoadPatient,
-    postDeletePatient, postMeasurePatient, postModifyMeasure
+    postDeletePatient, postMeasurePatient, postModifyMeasure, postVolunteerTime
 }
