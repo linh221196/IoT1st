@@ -30,6 +30,7 @@ const UserInfo = () => {
     //로그아웃
     const handleLogout = () => {
         dispatch(logoutUser());
+        console.log('현재상태', userInfo);
     };
 
 
@@ -81,6 +82,8 @@ const UserInfo = () => {
         try {
             const data = await postMedicalName(userInfo.email);
             console.log('Check response', data)
+
+            console.log('name', data.name);
 
         } catch (error) {
             alert("담당의료진을 불러오지 못했습니다.")
