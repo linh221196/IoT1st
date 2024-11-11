@@ -23,7 +23,7 @@ const UserTable = ({ list, onSelectUser }) => {
             const data = await postDeletePatient(userInfo.email, email);
             console.log('Check response', data);
         } catch (error) {
-            alert("서버 응답이 없습니다.");
+            alert("삭제 기능 서버 응답이 없습니다.");
         }
     };
 
