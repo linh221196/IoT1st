@@ -72,10 +72,10 @@ const postCallVolunteer = (email, noteDate, noteContent) => {
 }
 
 //봉사자가 예약list, 출장list 요청
-const postAllVolunteerCall = (email, refreshToken) => {
+const postAllVolunteerCall = (email) => {
     const formData = new FormData();
     formData.append('userid', email)
-    formData.append('refreshToken', refreshToken);
+    formData.append('refreshToken', 1234);
     console.log('list요청 토큰', refreshToken)
 
     return axios.post(`/allvolunteercall`, formData);
@@ -101,10 +101,10 @@ const postVolunteerAssignment = (email, userid, noteDate, noteContent) => {
 }
 
 //봉사자의 봉사횟수
-const postVolunteerTime = (email, refreshToken) => {
+const postVolunteerTime = (email) => {
     const formData = new FormData();
     formData.append('volunteerid', email) //봉사자
-    formData.append('refreshToken', refreshToken);
+    formData.append('refreshToken', 1234);
     console.log('봉사횟수 토큰', refreshToken)
 
     return axios.post(`/volunteertime`, formData)
