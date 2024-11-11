@@ -1,4 +1,5 @@
-import { FETCH_USER_LOGIN_SUCCESS } from '../action/userAction';
+import { FETCH_USER_LOGIN_SUCCESS, LOGOUT_USER } from '../action/userAction';
+
 const INITIAL_STATE = {
     account: {
         accessToken: '',
@@ -46,6 +47,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 isAuthenticated: true
             };
 
+        case LOGOUT_USER:
+            return INITIAL_STATE;
         //린
         //     account: {
         //         access_token, // Maps to accessToken from the backend

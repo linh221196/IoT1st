@@ -11,6 +11,8 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { useSelector } from "react-redux";
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '../../redux/action/userAction';
 
 
 const UserInfo = () => {
@@ -23,6 +25,13 @@ const UserInfo = () => {
     const [username, setUserName] = useState('') //change to Name, setName
     const [validated, setValidated] = useState(false);
     const [volunteerCount, setVolunteerCount] = useState(0); // 봉사횟수 상태 추가
+    const dispatch = useDispatch();
+
+    //로그아웃
+    const handleLogout = () => {
+        dispatch(logoutUser());
+    };
+
 
     const handleUpdate = () => {
         setShowModal(true);
@@ -147,7 +156,7 @@ const UserInfo = () => {
                     비밀번호
                 </Button>
                 {isAuthenticated && 
-                    <Button variant="outline-danger">
+                    <Button variant="outline-danger" onClick={handleLogout}>
                         Loggout
                     </Button>
                 }
