@@ -120,7 +120,7 @@ const Calendar = () => {
     //봉사자 기준 받아오기
     const allVolunteerCall = async () => {
         try {
-            const data = await postAllVolunteerCall(userInfo?.email);
+            const data = await postAllVolunteerCall(userInfo?.email, userInfo.refreshToken);
             console.log('Check response', data);
 
             // 두 가지 리스트로 데이터를 분리

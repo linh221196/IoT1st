@@ -39,8 +39,8 @@ const AddList = () => {
                         }));
                     }
 
-                    // 새로운 항목들 추가
-                    setaddList([...addList, ...newItems]);
+                    // 기존 리스트 초기화 후 새로운 항목들 추가
+                    setaddList(newItems);
                     setInputText('');
                 } else if (data.status === "DataEmpty" || (data.data && data.data.status === "DataEmpty")) {
                     alert('해당 환자를 찾을 수 없습니다.');

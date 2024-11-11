@@ -1,4 +1,6 @@
 import axios from "../utils/axiosCustomize";
+import {useSelector} from "react-redux";
+
 
 //회원가입
 const postCreateNewUser = (email, password, username, birth, phoneNum, role, userImage) => {
@@ -70,9 +72,10 @@ const postCallVolunteer = (email, noteDate, noteContent) => {
 }
 
 //봉사자가 예약list, 출장list 요청
-const postAllVolunteerCall = (email) => {
+const postAllVolunteerCall = (email, refreshToken) => {
     const formData = new FormData();
     formData.append('userid', email)
+    formData.append('refreshToken', refreshToken);
 
     return axios.post(`/allvolunteercall`, formData);
 }
