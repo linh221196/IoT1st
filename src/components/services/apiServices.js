@@ -209,7 +209,7 @@ const postMedicalName = (email) => {
     const formData = new FormData();
     formData.append('userid', email)
 
-    return axios.post(`medicalname`, formData)
+    return axios.post(`/medicalname`, formData)
 }
 
 const postTokenCheck = (email, refreshToken) => {
