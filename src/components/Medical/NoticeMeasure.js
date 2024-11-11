@@ -28,7 +28,7 @@ const NoticeMeasure = ({ selectedUserId }) => {
 
             setListUser(newList);
         } catch (error) {
-            alert("측정 요소 서버 응답이 없습니다.");
+            alert("서버에서 필수 측정 요소를 못 받아왔습니다.");
         }
     };
     //추가 버튼을 눌러 백엔드로 list값 보내기

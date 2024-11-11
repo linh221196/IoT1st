@@ -27,8 +27,7 @@ const UserTable = ({ list, onSelectUser }) => {
                 console.error('응답 데이터가 예상과 다릅니다:', data);
             }
         } catch (error) {
-            console.error("삭제 요청 중 오류 발생:", error);
-            alert("삭제 기능 서버 응답이 없습니다.");
+            alert("서버에서 담당 환자 list에서 삭제에 실패했습니다.");
         }
     };
 

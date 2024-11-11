@@ -40,7 +40,7 @@ const MedicalHome = () => {
             }
 
         } catch (error) {
-            alert("서버 응답이 없습니다.");
+            alert("서버에서 담당 환자 list를 못 받아왔습니다.");
         }
     }
 

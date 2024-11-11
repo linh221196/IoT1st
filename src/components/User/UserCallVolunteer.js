@@ -8,6 +8,7 @@ const UserCallVolunteer = () => {
     const userInfo = useSelector(state => state.user.account);
     const navigate = useNavigate();
 
+    //토큰 체크
     const TokenCheck = async () => {
         try {
             const data = await postTokenCheck(userInfo.email, userInfo.refreshToken)

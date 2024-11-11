@@ -67,6 +67,7 @@ const UserInfo = () => {
         }
     }
 
+    //봉사 횟수 가져오기
     const Volunteertime = async () => {
         try {
             const data = await postVolunteerTime(userInfo.email);
@@ -76,11 +77,11 @@ const UserInfo = () => {
                 setVolunteerCount(parseInt(data.volunteertime));
             }
         } catch (error) {
-            alert("봉사횟수를 불러오지 못했습니다.")
+            alert("서버에서 봉사횟수를 불러오지 못했습니다.")
         }
     }
 
-    //null 값일 때 잘 되었다고 알려주기
+    //담당 의료진 이름 가져오기
     const MedicalName = async () => {
         try {
             const data = await postMedicalName(userInfo.email);

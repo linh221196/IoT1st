@@ -65,7 +65,7 @@ const Calendar = () => {
 
             alert("봉사 확정이 완료되었습니다.");
         } catch (error) {
-            alert("예상치 못한 문제로 봉사확정이 실패했습니다.");
+            alert("서버 문제로 봉사확정이 실패했습니다.");
         }
     };
 
@@ -87,7 +87,7 @@ const Calendar = () => {
 
             alert("봉사 취소가 완료되었습니다.");
         } catch (error) {
-            alert("예상치 못한 문제로 봉사취소가 실패했습니다.");
+            alert("서버 문제로 봉사취소가 실패했습니다.");
         }
     };
 
@@ -109,7 +109,7 @@ const Calendar = () => {
                 setNote("");
                 setShowModal(false);
             } catch (error) {
-                alert("작성 후 저장에 실패했습니다.")
+                alert("서버에서 작성 후 저장에 실패했습니다.")
 
             }
 
@@ -146,7 +146,7 @@ const Calendar = () => {
             console.log('Transformed typeB data:', volunteerAssignments);
 
         } catch (error) {
-            alert("서버 응답이 없습니다.");
+            alert("서버에서 예약list, 출장list를 받아오는데 실패했습니다.");
         }
     };
     //환자 기준 받아오기
@@ -177,7 +177,7 @@ const Calendar = () => {
             console.log('Transformed typeA data:', desiredVolunteerDates);
             console.log('Transformed typeB data:', volunteerAssignments);
         } catch (error) {
-            alert("서버 응답이 없습니다.");
+            alert("서버에서 예약list, 출장list를 받아오는데 실패했습니다.");
         }
     };
 

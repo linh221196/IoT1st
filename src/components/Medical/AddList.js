@@ -75,7 +75,7 @@ const AddList = () => {
 
         } catch (error) {
             console.error("Error occurred:", error);
-            alert("서버와 통신에 실패했습니다.");
+            alert("서버에서 환자 검색에 실패했습니다.");
         }
     };
 

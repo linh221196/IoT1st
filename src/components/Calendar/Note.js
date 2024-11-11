@@ -59,7 +59,7 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, han
 
             } catch (error) {
                 console.error("Error occurred:", error);
-                alert("수정한 것을 저장에 실패했습니다.");
+                alert("서버에 수정한 것을 저장하는데 실패했습니다.");
             }
         } else {
             alert("내용을 입력해주세요.");
@@ -82,7 +82,7 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, han
 
         } catch (error) {
             console.error("Error occurred:", error);
-            alert("삭제 중 오류가 발생했습니다.");
+            alert("서버에서 list 삭제 중 오류가 발생했습니다.");
         }
     }
 
@@ -100,62 +100,10 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, han
             alert("봉사가 완료되었습니다.");
 
         } catch (error) {
-            alert("예상치 못한 문제로 봉사완료에 실패했습니다.");
+            alert("서버 문제로 봉사완료에 실패했습니다.");
         }
     };
 
-    //봉사 확정
-    /*
-    const handleAssignmentAction = async (index) => {
-        try {
-            const note = noteList[index];
-            console.log(userInfo.email, note.noteEmail, note.noteDate, note.noteContent);
-            const data = await postVolunteerAssignment(userInfo.email, note.noteEmail, note.noteDate, note.noteContent);
-            console.log('Check response');
-
-            // 성공적으로 API 호출이 완료되면 noteList에서 항목 제거하고 secondNoteList에 추가
-            setNoteList(prev => prev.filter((_, i) => i !== index));
-            setSecondNoteList(prev => [
-                ...prev,
-                {
-                    ...note,
-                    noteName2: userInfo.username, // 봉사자 이름 추가
-                    noteEmail2: userInfo.email // 봉사자 이메일 추가
-                }
-            ]);
-
-        } catch (error) {
-            alert("예상치 못한 문제로 봉사확정이 실패했습니다.");
-        }
-    };
-
-     */
-
-    //봉사 취소
-    /*
-    const handleCancel = async (index) => {
-        try {
-            const note = noteList[index];
-            console.log('front data :', note.noteEmail2, note.noteEmail, note.noteDate, note.noteContent);
-            const data = await postAssignmentCancel(note.noteEmail2, note.noteEmail, note.noteDate, note.noteContent);
-            console.log('Check response');
-
-            // 성공적으로 API 호출이 완료되면 secondNoteList에서 항목 제거하고 noteList에 추가
-            setSecondNoteList(prev => prev.filter((_, i) => i !== index));
-            setNoteList(prev => [
-                ...prev,
-                {
-                    ...note,
-                    noteName: note.noteName, // 환자 이름
-                    noteEmail: note.noteEmail // 환자 이메일
-                }
-            ]);
-
-        } catch (error) {
-            alert("Error occurred");
-        }
-    }
-     */
 
     return (
 
