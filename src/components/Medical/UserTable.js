@@ -21,7 +21,7 @@ const UserTable = ({ list, onSelectUser }) => {
     const handleDelete = async (email) => {
         try {
             const data = await postDeletePatient(userInfo.email, email);
-            if (data && data.success) { // 원하는 응답 데이터와 형식에 따라 조건 설정
+            if (data && data.status === "success") { // 원하는 응답 데이터와 형식에 따라 조건 설정
                 console.log('삭제 성공:', data);
             } else {
                 console.error('응답 데이터가 예상과 다릅니다:', data);
