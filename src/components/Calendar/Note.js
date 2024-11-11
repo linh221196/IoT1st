@@ -16,7 +16,7 @@ import {
     postVolunteerComplete
 } from "../services/apiServices";
 
-const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, setSecondNoteList }) => {
+const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, handleCancelAction, handleAssignmentAction }) => {
     //리듁스에서 꺼내오기
     const userInfo = useSelector(state => state.user.account)
 
@@ -105,6 +105,7 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, set
     };
 
     //봉사 확정
+    /*
     const handleAssignmentAction = async (index) => {
         try {
             const note = noteList[index];
@@ -128,7 +129,10 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, set
         }
     };
 
+     */
+
     //봉사 취소
+    /*
     const handleCancel = async (index) => {
         try {
             const note = noteList[index];
@@ -151,9 +155,9 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, set
             alert("Error occurred");
         }
     }
+     */
 
     return (
-
 
         <div className="note-card" >
 
@@ -196,7 +200,7 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, set
                                             <Button variant="secondary" onClick={() => handleCompleteAction(index)}>봉사완료</Button>
                                         </>
                                     )}
-                                    <Button variant="info" onClick={() => handleCancel(index)}>취소하기</Button>
+                                    <Button variant="info" onClick={() => handleCancelAction(index)}>취소하기</Button>
                                 </>
                             )}
                         </Col>

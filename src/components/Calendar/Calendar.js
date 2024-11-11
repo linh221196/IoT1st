@@ -12,9 +12,9 @@ import {Badge, TextField} from "@mui/material"
 import "./Calendar.scss"
 import Note from './Note';
 import {
-    postAllVolunteerCall,
+    postAllVolunteerCall, postAssignmentCancel,
     postCallVolunteer,
-    postUserVolunteerCall,
+    postUserVolunteerCall, postVolunteerAssignment,
     putEditUserData
 } from "../services/apiServices";
 import {useSelector} from "react-redux";
@@ -43,11 +43,53 @@ const Calendar = () => {
     const handleAddEvent = () => {
         setShowModal(true);
     };
-
     const handleClose = () => {
         setShowModal(false);
     };
 
+    //봉사 확정
+    const handleAssignmentAction = async (index) => {
+        try {
+            const note = noteList[index];
+            console.log(userInfo.email, note.noteEmail, note.noteDate, note.noteContent);
+
+            const data = await postVolunteerAssignment(userInfo.email, note.noteEmail, note.noteDate, note.noteContent);
+            console.log('Check response', data);
+
+            // 성공적으로 API 호출이 완료되면 noteList에서 항목 제거하고 secondNoteList에 추가
+            setNoteList(prev => prev.filter((_, i) => i !== index));
+            setSecondNoteList(prev => [
+                ...prev,
+                { ...note, noteName2: userInfo.username, noteEmail2: userInfo.email } // 봉사자 정보 추가
+            ]);
+
+            alert("봉사 확정이 완료되었습니다.");
+        } catch (error) {
+            alert("예상치 못한 문제로 봉사확정이 실패했습니다.");
+        }
+    };
+
+    //봉사 취소하기
+    const handleCancelAction = async (index) => {
+        try {
+            const note = secondNoteList[index];
+            console.log('front data :', note.noteEmail2, note.noteEmail, note.noteDate, note.noteContent);
+
+            const data = await postAssignmentCancel(note.noteEmail2, note.noteEmail, note.noteDate, note.noteContent);
+            console.log('Check response', data);
+
+            // 성공적으로 API 호출이 완료되면 secondNoteList에서 항목 제거하고 noteList에 추가
+            setSecondNoteList(prev => prev.filter((_, i) => i !== index));
+            setNoteList(prev => [
+                ...prev,
+                { ...note, noteName: note.noteName, noteEmail: note.noteEmail } // 환자 정보 유지
+            ]);
+
+            alert("봉사 취소가 완료되었습니다.");
+        } catch (error) {
+            alert("예상치 못한 문제로 봉사취소가 실패했습니다.");
+        }
+    };
 
     //예약 list 작성
     const handleSubmit = async (e) => {
@@ -194,6 +236,8 @@ const Calendar = () => {
                             note={note}
                             setNote={setNote}
                             isFirstList={true}
+                            handleAssignmentAction={handleAssignmentAction}
+                            handleCancelAction={handleCancelAction}
                         />
                     </Col>
 
@@ -205,6 +249,7 @@ const Calendar = () => {
                             note={note}
                             setNote={setNote}
                             isFirstList={false}
+                            handleCancelAction={handleCancelAction}
                         />
                     </Col>
 
