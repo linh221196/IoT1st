@@ -85,7 +85,7 @@ const UserInfo = () => {
             if (userInfo.role === "Volunteer" || userInfo.role === "user") {
                 Volunteertime();
             } else if (userInfo.role === "Patient") {
-                MediaclName();
+                MedicalName();
             }
         }
     }, [userInfo.role]);
@@ -130,7 +130,7 @@ const UserInfo = () => {
                             <TableCell align="right">
                                 {userInfo.role === "Volunteer"
                                     ? `${volunteerCount}회`
-                                    : (name || '없음')}
+                                    : (userInfo.username || '없음')}
                             </TableCell>
                         </TableRow>
                     </TableBody>
