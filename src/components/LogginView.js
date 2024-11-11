@@ -140,8 +140,7 @@ const LogginView = () => {
 
                     console.log('status', data.status);
                     if (data.status === "TokenInvalid") {
-                        console.log("유효하지 않은 토큰");
-                        navigate('/login'); // 로그인 페이지로 이동
+                        alert("유효하지 않은 토큰");
                     } else {
                         // 유효한 토큰일 경우에만 페이지 이동
                         if (userInfo.role === "Patient" || userInfo.role === "user") {
