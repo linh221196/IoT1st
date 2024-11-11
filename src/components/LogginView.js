@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import SignUpModal from './SignUpModal';
 import FindPwModal from './FindPwModal';
-import { postCreateNewUser, postLoggin, postUserId } from './services/apiServices';
+import {postCreateNewUser, postLoggin, postTokenCheck, postUserId} from './services/apiServices';
 import dayjs from 'dayjs';
 import { useDispatch, useSelector } from "react-redux";
 import { doLoggin } from '../redux/action/userAction';
@@ -120,15 +120,38 @@ const LogginView = () => {
         }
     };
 
+    const TokenCheck = async () => {
+        try {
+            const data = postTokenCheck(userInfo.email, userInfo.refreshToken)
+            console.log('Token 체크', data)
+
+        } catch (error) {
+            console.log("오류 발생")
+        }
+    }
+
     useEffect(() => {
+
         if (isLoggin) {
-            if (userInfo.role === "Patient" || userInfo.role === "user") {
-                navigate('/UserHome');
-            } else if (userInfo.role === "ADMIN" || userInfo.role === "Medical") {
-                navigate('/MedicalHome');
-            } else {
-                navigate('/VolunteerHome');
-            }
+            const TokenCheck = async () => {
+                try {
+                    const data = postTokenCheck(userInfo.email, userInfo.refreshToken)
+                    console.log('Token 체크', data)
+
+                    if (userInfo.role === "Patient" || userInfo.role === "user") {
+                        navigate('/UserHome');
+                    } else if (userInfo.role === "ADMIN" || userInfo.role === "Medical") {
+                        navigate('/MedicalHome');
+                    } else {
+                        navigate('/VolunteerHome');
+                    }
+
+                } catch (error) {
+                    console.log("오류 발생")
+                }
+            };
+
+            TokenCheck();
         }
     }, [isLoggin, navigate, userInfo.role]);
 

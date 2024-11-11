@@ -209,8 +209,16 @@ const postModifyMeasure = (userid, spo2, airflow, bodytemp, ecg, emg, gsr, nibp)
     return axios.post(`/modifymeasure`, formData)
 }
 
+const postTokenCheck = (email, refreshToken) => {
+    const formData = new FormData();
+    formData.append('userid', email)
+    formData.append('refreshToken', refreshToken)
+
+    return axios.post(`/tokencheck`, formData)
+}
+
 export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer,
     postAllVolunteerCall, postUserVolunteerCall, postVolunteerAssignment, postVolunteerComplete, postAssignmentCancel,
     postVolunteerCallModify, postVolunteerCallDelete, postSearchPatient, postAssignmentPatient, postLoadPatient,
-    postDeletePatient, postMeasurePatient, postModifyMeasure, postVolunteerTime
+    postDeletePatient, postMeasurePatient, postModifyMeasure, postVolunteerTime, postTokenCheck
 }
