@@ -80,14 +80,17 @@ const UserInfo = () => {
         }
     }
 
+    //null 값일 때 잘 되었다고 알려주기
     const MedicalName = async () => {
         try {
             const data = await postMedicalName(userInfo.email);
             console.log('Check response', data)
 
-            setDoctor(data.name);
+            if (data && data.name) {
+                setDoctor(data.name);
+            }
         } catch (error) {
-            alert("담당의료진을 불러오지 못했습니다.")
+            alert("서버에서 담당의료진을 불러오지 못했습니다.")
         }
     }
 
