@@ -120,25 +120,13 @@ const LogginView = () => {
         }
     };
 
-    const TokenCheck = async () => {
-        try {
-            const data = postTokenCheck(userInfo.email, userInfo.refreshToken)
-            console.log('Token 체크', data)
-
-        } catch (error) {
-            console.log("오류 발생")
-        }
-    }
-
     useEffect(() => {
 
         if (isLoggin) {
             const TokenCheck = async () => {
                 try {
                     const data = await postTokenCheck(userInfo.email, userInfo.refreshToken)
-                    console.log('Token 체크', data)
 
-                    console.log('status', data.status);
                     if (data.status === "TokenInvalid") {
                         alert("유효하지 않은 토큰");
                     } else {
@@ -151,7 +139,6 @@ const LogginView = () => {
                             navigate('/VolunteerHome');
                         }
                     }
-
                 } catch (error) {
                     alert("오류가 발생했습니다. 다시 시도해 주세요.");
                 }
