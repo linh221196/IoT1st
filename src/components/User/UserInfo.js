@@ -13,10 +13,12 @@ import TableRow from '@mui/material/TableRow';
 import { useSelector } from "react-redux";
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../redux/action/userAction';
+import { useNavigate } from 'react-router-dom';
 
 
 const UserInfo = () => {
 
+    const navigate = useNavigate();
     const userInfo = useSelector(state => state.user.account)
     const isAuthenticated = useSelector(state => state.user.isAuthenticated)
     // console.log(userInfo)
@@ -33,6 +35,7 @@ const UserInfo = () => {
     const handleLogout = () => {
         dispatch(logoutUser());
         console.log('현재상태', userInfo);
+        navigate('/');
     };
 
 
