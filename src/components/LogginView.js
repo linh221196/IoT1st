@@ -136,10 +136,10 @@ const LogginView = () => {
             const TokenCheck = async () => {
                 try {
                     const data = postTokenCheck(userInfo.email, userInfo.refreshToken)
-                    console.log('Token 체크', data)
+                    console.log('Token 체크', data.dada)
 
-                    console.log('status', data.status);
-                    if (data.status === "TokenInvalid") {
+                    console.log('status', data.data.status);
+                    if (data.data.status === "TokenInvalid") {
                         console.log("유효하지 않은 토큰");
                         navigate('/login'); // 로그인 페이지로 이동
                     } else {
