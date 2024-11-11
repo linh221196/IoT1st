@@ -16,7 +16,7 @@ import {
     postVolunteerComplete
 } from "../services/apiServices";
 
-const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) => {
+const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, setSecondNoteList }) => {
     //리듁스에서 꺼내오기
     const userInfo = useSelector(state => state.user.account)
 
@@ -94,6 +94,11 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
             const data = await postVolunteerComplete(userInfo.email, note.noteEmail, note.noteDate);
             console.log('Check response');
 
+            // API 호출이 성공하면 noteList에서 항목 제거
+            setNoteList(prev => prev.filter((_, i) => i !== index));
+
+            alert("봉사가 완료되었습니다.");
+
         } catch (error) {
             alert("예상치 못한 문제로 봉사완료에 실패했습니다.");
         }
@@ -107,6 +112,17 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
             const data = await postVolunteerAssignment(userInfo.email, note.noteEmail, note.noteDate, note.noteContent);
             console.log('Check response');
 
+            // 성공적으로 API 호출이 완료되면 noteList에서 항목 제거하고 secondNoteList에 추가
+            setNoteList(prev => prev.filter((_, i) => i !== index));
+            setSecondNoteList(prev => [
+                ...prev,
+                {
+                    ...note,
+                    noteName2: userInfo.username, // 봉사자 이름 추가
+                    noteEmail2: userInfo.email // 봉사자 이메일 추가
+                }
+            ]);
+
         } catch (error) {
             alert("예상치 못한 문제로 봉사확정이 실패했습니다.");
         }
@@ -119,6 +135,17 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
             console.log('front data :', note.noteEmail2, note.noteEmail, note.noteDate, note.noteContent);
             const data = await postAssignmentCancel(note.noteEmail2, note.noteEmail, note.noteDate, note.noteContent);
             console.log('Check response');
+
+            // 성공적으로 API 호출이 완료되면 secondNoteList에서 항목 제거하고 noteList에 추가
+            setSecondNoteList(prev => prev.filter((_, i) => i !== index));
+            setNoteList(prev => [
+                ...prev,
+                {
+                    ...note,
+                    noteName: note.noteName, // 환자 이름
+                    noteEmail: note.noteEmail // 환자 이메일
+                }
+            ]);
 
         } catch (error) {
             alert("Error occurred");
