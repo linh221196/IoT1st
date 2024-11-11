@@ -221,7 +221,6 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, han
                         multiline
                         value={note} type="text"
                         onChange={e => setNote(e.target.value)}
-
                     />
                 </Modal.Body>
                 <Modal.Footer>

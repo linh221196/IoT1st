@@ -22,6 +22,8 @@ const UserInfo = () => {
     const [userImage, setUserImage] = useState('') //will disable
     const [username, setUserName] = useState('') //change to Name, setName
     const [validated, setValidated] = useState(false);
+    const [volunteerCount, setVolunteerCount] = useState(0); // 봉사횟수 상태 추가
+
     const handleUpdate = () => {
         setShowModal(true);
     }
@@ -56,14 +58,21 @@ const UserInfo = () => {
     const Volunteertime = async () => {
         const data = await postVolunteerTime(userInfo.email);
         console.log('Check response', data)
+        if (data && data.EC === 0) {
+            setVolunteerCount(data.volunteerCount); // 봉사횟수 값 설정
+        }
     }
+
+
 
     //여기에 처음 들어왔을 때
     useEffect(() => {
         if (userInfo && userInfo.role) {
             if (userInfo.role === "Volunteer" || userInfo.role === "user") {
                 Volunteertime();
-            }// 첫 호출 후에 called를 true로 설정하여 이후 호출 방지
+            } else if (userInfo.role === "Patient") {
+
+            }
         }
     }, [userInfo.role]);
 
@@ -101,9 +110,13 @@ const UserInfo = () => {
                             <TableCell align="right">{userInfo?.email} </TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell component="th" scope="row">의료진</TableCell>
+                            <TableCell component="th" scope="row">
+                                {userInfo.role === "Volunteer" ? "봉사횟수" : "의료진"}
+                            </TableCell>
                             <TableCell align="right">
-                                {userInfo?.doctor?.name ? userInfo.doctor.name : '노영휸'}
+                                {userInfo.role === "Volunteer"
+                                    ? `${volunteerCount}회`
+                                    : (userInfo?.doctor?.name || '노영휸')}
                             </TableCell>
                         </TableRow>
                     </TableBody>
