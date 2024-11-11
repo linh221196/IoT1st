@@ -153,7 +153,7 @@ const LogginView = () => {
 
             TokenCheck();
         }
-    }, [isLoggin, navigate, userInfo.role]);
+    }, [isLoggin, navigate, userInfo.email, userInfo.refreshToken, userInfo.role]);
 
     return (
         <Form onSubmit={handleSubmit} noValidate validated={validated}>
