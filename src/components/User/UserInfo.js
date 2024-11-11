@@ -25,7 +25,9 @@ const UserInfo = () => {
     const [username, setUserName] = useState('') //change to Name, setName
     const [validated, setValidated] = useState(false);
     const [volunteerCount, setVolunteerCount] = useState(0); // 봉사횟수 상태 추가
+    const [doctor, setDoctor] = useState('없음');
     const dispatch = useDispatch();
+
 
     //로그아웃
     const handleLogout = () => {
@@ -83,8 +85,7 @@ const UserInfo = () => {
             const data = await postMedicalName(userInfo.email);
             console.log('Check response', data)
 
-            console.log('name', data.name);
-
+            setDoctor(data.name);
         } catch (error) {
             alert("담당의료진을 불러오지 못했습니다.")
         }
@@ -142,7 +143,7 @@ const UserInfo = () => {
                             <TableCell align="right">
                                 {userInfo.role === "Volunteer"
                                     ? `${volunteerCount}회`
-                                    : (userInfo.username || '없음')}
+                                    : doctor}
                             </TableCell>
                         </TableRow>
                     </TableBody>
