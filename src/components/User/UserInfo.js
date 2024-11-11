@@ -88,6 +88,8 @@ const UserInfo = () => {
 
             if (data && data.name) {
                 setDoctor(data.name);
+            }else {
+                setDoctor('없음'); // 기본값 설정
             }
         } catch (error) {
             alert("서버에서 담당의료진을 불러오지 못했습니다.")
