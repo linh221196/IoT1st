@@ -212,7 +212,7 @@ const postModifyMeasure = (userid, spo2, airflow, bodytemp, ecg, emg, gsr, nibp)
 const postTokenCheck = (email, refreshToken) => {
     const formData = new FormData();
     formData.append('userid', email)
-    formData.append('refreshToken', 1234)
+    formData.append('refreshToken', refreshToken)
 
     return axios.post(`/tokencheck`, formData)
 }
