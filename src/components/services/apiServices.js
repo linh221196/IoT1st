@@ -72,7 +72,7 @@ const postCallVolunteer = (email, noteDate, noteContent) => {
 }
 
 //봉사자가 예약list, 출장list 요청
-const postAllVolunteerCall = (email) => {
+const postAllVolunteerCall = (email, refreshToken) => {
     const formData = new FormData();
     formData.append('userid', email)
     formData.append('refreshToken', 1234);
@@ -101,7 +101,7 @@ const postVolunteerAssignment = (email, userid, noteDate, noteContent) => {
 }
 
 //봉사자의 봉사횟수
-const postVolunteerTime = (email) => {
+const postVolunteerTime = (email, refreshToken) => {
     const formData = new FormData();
     formData.append('volunteerid', email) //봉사자
     formData.append('refreshToken', 1234);
