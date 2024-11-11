@@ -136,7 +136,7 @@ const LogginView = () => {
             const TokenCheck = async () => {
                 try {
                     const data = postTokenCheck(userInfo.email, userInfo.refreshToken)
-                    console.log('Token 체크', data.dada)
+                    console.log('Token 체크', data.data)
 
                     console.log('status', data.data.status);
                     if (data.data.status === "TokenInvalid") {
