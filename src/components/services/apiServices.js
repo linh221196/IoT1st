@@ -100,9 +100,10 @@ const postVolunteerAssignment = (email, userid, noteDate, noteContent) => {
 }
 
 //봉사자의 봉사횟수
-const postVolunteerTime = (email) => {
+const postVolunteerTime = (email, refreshToken) => {
     const formData = new FormData();
     formData.append('volunteerid', email) //봉사자
+    formData.append('refreshToken', refreshToken);
 
     return axios.post(`/volunteertime`, formData)
 }

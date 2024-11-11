@@ -56,7 +56,7 @@ const UserInfo = () => {
     }
 
     const Volunteertime = async () => {
-        const data = await postVolunteerTime(userInfo.email);
+        const data = await postVolunteerTime(userInfo.email, userInfo.refreshToken);
         console.log('Check response', data)
         if (data && data.EC === 0) {
             setVolunteerCount(data.volunteerCount); // 봉사횟수 값 설정
