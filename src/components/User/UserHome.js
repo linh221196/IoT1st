@@ -8,9 +8,9 @@ import {postTokenCheck} from "../services/apiServices";
 import {useEffect} from "react";
 
 const UserHome = () => {
-  const account = useSelector(state => state.user.account)
+  const userInfo = useSelector(state => state.user.account);
   const isAuthenticated = useSelector(state => state.user.isAuthenticated)
-  console.log('account: ', account, ' isAuthenticated: ', isAuthenticated)
+  console.log('account: ', userInfo, ' isAuthenticated: ', isAuthenticated)
 
   const navigate = useNavigate();
 
