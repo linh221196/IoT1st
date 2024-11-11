@@ -75,7 +75,7 @@ const postCallVolunteer = (email, noteDate, noteContent) => {
 const postAllVolunteerCall = (email, refreshToken) => {
     const formData = new FormData();
     formData.append('userid', email)
-    formData.append('refreshToken', 1234);
+    formData.append('refreshToken', refreshToken);
     console.log('list요청 토큰', refreshToken)
 
     return axios.post(`/allvolunteercall`, formData);
@@ -104,7 +104,7 @@ const postVolunteerAssignment = (email, userid, noteDate, noteContent) => {
 const postVolunteerTime = (email, refreshToken) => {
     const formData = new FormData();
     formData.append('volunteerid', email) //봉사자
-    formData.append('refreshToken', 1234);
+    formData.append('refreshToken', refreshToken);
     console.log('봉사횟수 토큰', refreshToken)
 
     return axios.post(`/volunteertime`, formData)
