@@ -57,7 +57,7 @@ const UserInfo = () => {
 
     const Volunteertime = async () => {
         try {
-            const data = await postVolunteerTime(userInfo.email, userInfo.refreshToken);
+            const data = await postVolunteerTime(userInfo.email);
             console.log('Check response', data)
 
             if (data && data.volunteertime) { // "volunteertime" 값이 있을 때만 설정
