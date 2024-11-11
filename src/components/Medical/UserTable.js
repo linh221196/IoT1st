@@ -21,8 +21,13 @@ const UserTable = ({ list, onSelectUser }) => {
     const handleDelete = async (email) => {
         try {
             const data = await postDeletePatient(userInfo.email, email);
-            console.log('Check response', data);
+            if (data && data.success) { // 원하는 응답 데이터와 형식에 따라 조건 설정
+                console.log('삭제 성공:', data);
+            } else {
+                console.error('응답 데이터가 예상과 다릅니다:', data);
+            }
         } catch (error) {
+            console.error("삭제 요청 중 오류 발생:", error);
             alert("삭제 기능 서버 응답이 없습니다.");
         }
     };
