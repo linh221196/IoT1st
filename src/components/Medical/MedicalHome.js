@@ -26,14 +26,18 @@ const MedicalHome = () => {
             const data = await postLoadPatient(userInfo?.email);
             console.log('Check response', data);
 
-            //받은 데이터를 list해서 넣기
-            const newPatientList = data.data.map(item => ({
-                username: item.app_user?.name,
-                useremail: item.app_user?.userid,
-                userbirth: item.app_user?.birth,
-            }));
-
-            setpatientList(newPatientList);
+            if (data.status === 'DataEmpty') {
+                // DataEmpty일 경우 리스트를 비워줌
+                setpatientList([]);
+            } else if (data.status === 'success') {
+                // success일 경우 받은 데이터를 list해서 넣기
+                const newPatientList = data.data.map(item => ({
+                    username: item.app_user?.name,
+                    useremail: item.app_user?.userid,
+                    userbirth: item.app_user?.birth,
+                }));
+                setpatientList(newPatientList);
+            }
 
         } catch (error) {
             alert("서버 응답이 없습니다.");

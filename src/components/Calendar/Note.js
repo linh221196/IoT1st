@@ -45,6 +45,13 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
                 console.log('email: ', userInfo?.email, ' noteDate: ', notedate, 'text: ', text)
                 const data = await postVolunteerCallModify(email, notedate, text);
                 console.log('Check response', data);
+                //수정 내용 반영
+                const updatedNoteList = [...noteList];
+                updatedNoteList[editIndex] = {
+                    noteDate: noteList[editIndex].noteDate,
+                    noteContent: note
+                };
+                setNoteList(updatedNoteList);
                 setNote("");
                 setShowModal(false);
 
@@ -68,6 +75,9 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
             const data = await postVolunteerCallDelete(email, notedate);
             console.log('Check response', data);
 
+            // API 호출이 성공한 후 noteList에서 항목 제거
+            setNoteList(prev => prev.filter((_, i) => i !== index));
+
             alert("삭제되었습니다.");
 
         } catch (error) {
@@ -76,24 +86,6 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
         }
     }
 
-    //list 수정과 삭제 기존 코드
-    /*
-    if (note.trim()) {
-            const updatedNoteList = [...noteList];
-            updatedNoteList[editIndex] = {
-                noteDate: noteList[editIndex].noteDate,
-                noteContent: note
-            };
-            setNoteList(updatedNoteList);
-            setNote("");
-            setShowModal(false);
-
-        } else {
-            alert("내용을 입력해주세요.");
-        }
-
-    setNoteList(prev => prev.filter((_, i) => i !== index))
-     */
     //봉사 완료
     const handleCompleteAction = async (index) => {
         try {
@@ -119,7 +111,7 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
             alert("예상치 못한 문제로 봉사확정이 실패했습니다.");
         }
     };
-    
+
     //봉사 취소
     const handleCancel = async (index) => {
         try {
@@ -127,12 +119,6 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList }) =
             console.log('front data :', note.noteEmail2, note.noteEmail, note.noteDate, note.noteContent);
             const data = await postAssignmentCancel(note.noteEmail2, note.noteEmail, note.noteDate, note.noteContent);
             console.log('Check response');
-            /*if (data && data.EC === 0) {
-                setShowModal(false);
-                alert('Updated');
-            } else {
-                alert(data.EM || "Something went wrong");
-            }*/
 
         } catch (error) {
             alert("Error occurred");

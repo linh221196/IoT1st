@@ -30,11 +30,11 @@ const Calendar = () => {
     const [newValue, setValue] = useState(dayjs())
     const [showModal, setShowModal] = useState(false);
     const [note, setNote] = useState("")
-    const [noteList, setNoteList] = useState([
+    const [noteList, setNoteList] = useState([ //예약 list
         { noteName : "홍길동", noteDate: "2024-11-05", noteContent: "1st note", noteEmail: "1234@naver.com" },
         { noteName : "정희원", noteDate: "2024-11-08", noteContent: "2nd note", noteEmail: "5678@naver.com" },
     ]);
-    const [secondNoteList, setSecondNoteList] = useState([
+    const [secondNoteList, setSecondNoteList] = useState([ //출장 list
         { noteName : "환자", noteDate: "2024-11-05", noteContent: "2nd note", noteName2 : "봉사자", noteEmail: "", noteEmail2: ""}
     ]);
     const [view, setView] = useState('day');
@@ -49,9 +49,6 @@ const Calendar = () => {
     };
 
 
-    const handleCancel = () => {
-        setView('day'); // Reset view to day
-    };
     //예약 list 작성
     const handleSubmit = async (e) => {
         if (note.trim()) {
@@ -66,14 +63,13 @@ const Calendar = () => {
                 const data = await postCallVolunteer(userInfo?.email, newNote.noteDate, newNote.noteContent);
                 console.log('Check response', data)
 
+                setNoteList(prev => [...prev, newNote]);
+                setNote("");
+                setShowModal(false);
             } catch (error) {
                 alert("작성 후 저장에 실패했습니다.")
 
             }
-
-            setNoteList(prev => [...prev, newNote]);
-            setNote("");
-            setShowModal(false);
 
         } else {
             alert("내용을 입력해주세요.");
@@ -177,15 +173,13 @@ const Calendar = () => {
                             format='MM월 DD일'
                             localeText={{
                                 toolbarTitle: '날짜 선택',
-                                cancelButtonLabel: '취소',
                                 todayButtonLabel: '오늘',
                                 okButtonLabel: '추가',
                             }}
                             slotProps={{
                                 actionBar: {
-                                    actions: ['today', 'cancel', 'accept'],
-                                    onAccept: handleAddEvent,
-                                    onCancel: handleCancel,
+                                    actions: userInfo.role === "Patient" ? ['today', 'accept'] : [],
+                                    onAccept: handleAddEvent
                                 },
                             }}
                             disablePast
