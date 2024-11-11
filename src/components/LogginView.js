@@ -138,12 +138,18 @@ const LogginView = () => {
                     const data = postTokenCheck(userInfo.email, userInfo.refreshToken)
                     console.log('Token 체크', data)
 
-                    if (userInfo.role === "Patient" || userInfo.role === "user") {
-                        navigate('/UserHome');
-                    } else if (userInfo.role === "ADMIN" || userInfo.role === "Medical") {
-                        navigate('/MedicalHome');
+                    if (data.status === "TokenInvalid") {
+                        console.log("유효하지 않은 토큰");
+                        navigate('/login'); // 로그인 페이지로 이동
                     } else {
-                        navigate('/VolunteerHome');
+                        // 유효한 토큰일 경우에만 페이지 이동
+                        if (userInfo.role === "Patient" || userInfo.role === "user") {
+                            navigate('/UserHome');
+                        } else if (userInfo.role === "ADMIN" || userInfo.role === "Medical") {
+                            navigate('/MedicalHome');
+                        } else {
+                            navigate('/VolunteerHome');
+                        }
                     }
 
                 } catch (error) {
