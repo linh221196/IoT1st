@@ -136,7 +136,7 @@ const LogginView = () => {
             const TokenCheck = async () => {
                 try {
                     const data = postTokenCheck(userInfo.email, userInfo.refreshToken)
-                    console.log('Token 체크', data.data)
+                    console.log('Token 체크', data)
 
                     console.log('status', data.data.status);
                     if (data.data.status === "TokenInvalid") {
@@ -154,7 +154,7 @@ const LogginView = () => {
                     }
 
                 } catch (error) {
-                    console.log("오류 발생")
+                    alert("오류가 발생했습니다. 다시 시도해 주세요.");
                 }
             };
 
