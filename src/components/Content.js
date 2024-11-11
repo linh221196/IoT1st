@@ -3,7 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./Content.scss";
 import { NavLink } from "react-bootstrap";
-import NoticeMeasure from "./User/NoticeMeasure";
+import PatientNoticeMeasure from "./User/PatientNoticeMeasure";
 import { useState } from 'react';
 
 const Content = () => {
@@ -23,7 +23,7 @@ const Content = () => {
           </Col>
           <Col className="c-content">
             <NavLink onClick={handleNoticeModalShow}>주의 할 요소</NavLink>
-            <NoticeMeasure
+            <PatientNoticeMeasure
               showNoticeModal={showNoticeModal}
               handleNoticeModalShow={handleNoticeModalShow}
               setNoticeModalShow={setNoticeModalShow}
@@ -37,7 +37,6 @@ const Content = () => {
           </Col>
           <Col className="c-content">
             <NavLink href="/Volunteer" >자원 봉사</NavLink>
-
           </Col>
         </Row>
       </Container>
