@@ -5,7 +5,7 @@ import {
 } from "../services/apiServices";
 import {useSelector} from "react-redux";
 
-const AddList = () => {
+const AddList = ({ PatientCall }) => {
     const [addList, setaddList] = useState([
         { username: "이름", userid: "이메일" }
     ]); // 리스트를 저장할 상태
@@ -67,6 +67,7 @@ const AddList = () => {
             // 서버 응답에 따른 처리
             if (data.status === "success") {
                 alert("환자가 성공적으로 추가되었습니다.");
+                PatientCall();
             } else if (data.status === "duplication") {
                 alert("이미 담당하는 환자입니다.");
             } else {
