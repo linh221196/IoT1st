@@ -4,7 +4,7 @@ import code from '../../assets/image.jpg'
 import { FiEdit } from "react-icons/fi";
 import UserInfoUpdateModal from "./UserInfoUpdateModal";
 import { useEffect, useState } from 'react';
-import {postVolunteerTime, putEditUserData} from "../services/apiServices";
+import {postMedicalName, postVolunteerTime, putEditUserData} from "../services/apiServices";
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -64,10 +64,19 @@ const UserInfo = () => {
                 setVolunteerCount(parseInt(data.volunteertime));
             }
         } catch (error) {
-            alert("Error occurred")
+            alert("봉사횟수를 불러오지 못했습니다.")
         }
     }
 
+    const MedicalName = async () => {
+        try {
+            const data = await postMedicalName(userInfo.email);
+            console.log('Check response', data)
+
+        } catch (error) {
+            alert("담당의료진을 불러오지 못했습니다.")
+        }
+    }
 
 
     //여기에 처음 들어왔을 때
@@ -76,7 +85,7 @@ const UserInfo = () => {
             if (userInfo.role === "Volunteer" || userInfo.role === "user") {
                 Volunteertime();
             } else if (userInfo.role === "Patient") {
-
+                MediaclName();
             }
         }
     }, [userInfo.role]);
@@ -121,7 +130,7 @@ const UserInfo = () => {
                             <TableCell align="right">
                                 {userInfo.role === "Volunteer"
                                     ? `${volunteerCount}회`
-                                    : (userInfo?.doctor?.name || '노영휸')}
+                                    : (name || '없음')}
                             </TableCell>
                         </TableRow>
                     </TableBody>
