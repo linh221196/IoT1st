@@ -1,17 +1,24 @@
-// UserTable.js
 import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import { useSelector } from "react-redux";
 import { postDeletePatient } from "../services/apiServices";
+import { useEffect, useState } from "react";
 
 const paginationModel = { page: 0, pageSize: 10 };
 
-const UserTable = ({ list, onSelectUser }) => {
+const UserTable = ({ list, onSelectUser, disableClick }) => {
     const userInfo = useSelector(state => state.user.account);
+    const [tableList, setTableList] = useState(list);
+
+    // 외부 list가 변경되면 tableList 업데이트
+    useEffect(() => {
+        setTableList(list);
+    }, [list]);
 
     // onRowClick 콜백 함수
     const handleRowClick = (params) => {
+        if (disableClick) return;
         const selectedUserId = params.row.useremail;
         console.log('UserTable에서 선택한 userId (onRowClick):', selectedUserId);
         onSelectUser(selectedUserId);
@@ -21,8 +28,9 @@ const UserTable = ({ list, onSelectUser }) => {
     const handleDelete = async (email) => {
         try {
             const data = await postDeletePatient(userInfo.email, email);
-            if (data && data.status === "success") { // 원하는 응답 데이터와 형식에 따라 조건 설정
+            if (data && data.status === "success") {
                 console.log('삭제 성공:', data);
+                setTableList(tableList.filter(item => item.useremail !== email));
             } else {
                 console.error('응답 데이터가 예상과 다릅니다:', data);
             }
@@ -55,12 +63,12 @@ const UserTable = ({ list, onSelectUser }) => {
     return (
         <Paper sx={{ height: 500, width: '100%' }}>
             <DataGrid
-                rows={list}
+                rows={tableList} // tableList를 rows로 전달하여 업데이트 반영
                 columns={columns}
                 initialState={{ pagination: { paginationModel } }}
                 pageSizeOptions={[10, 15]}
                 checkboxSelection={false}
-                onRowClick={(params) => handleRowClick(params)} // 인라인으로 콜백 전달
+                onRowClick={(params) => handleRowClick(params)}
                 sx={{ border: 0 }}
                 components={{
                     NoRowsOverlay: () => <div>No data available</div>,

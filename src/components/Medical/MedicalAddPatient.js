@@ -1,23 +1,20 @@
-import { Container, Row, Col } from "react-bootstrap"
-import SideBar from "./SideBar"
-import UserTable from "./UserTable"
-import AddList from "./AddList"
-import './Admin.scss'
-import NoticeMeasure from "./NoticeMeasure";
-import {useEffect, useState} from "react";
+import {Container, Row} from "react-bootstrap";
+import SideBar from "./SideBar";
+import AddList from "./AddList";
+import UserTable from "./UserTable";
 import {useSelector} from "react-redux";
-import { postLoadPatient } from "../services/apiServices";
-import UserList from "../PhoneAuth";
+import {postLoadPatient} from "../services/apiServices";
+import {useEffect, useState} from "react";
+import Col from "react-bootstrap/Col";
 
 
-const MedicalHome = () => {
+const MedicalAddPatient = () => {
     const userInfo = useSelector(state => state.user.account)
     const [called, setCalled] = useState(false);
     const [patientList, setpatientList] = useState([
         { username: "환자1", useremail: "이메일1", userbirth: "2001-11-01" },
         { username: "환자2", useremail: "이메일2", userbirth: "2001-11-02" }
     ]);
-    const [selectedUserId, setSelectedUserId] = useState(null);
 
 
     //의료진이 처음 들어왔을 때 담당환자 list 불러오기
@@ -53,11 +50,6 @@ const MedicalHome = () => {
             setCalled(true); // 첫 호출 후에 called를 true로 설정하여 이후 호출 방지
         }
     }, [userInfo.role, called]);
-    //UserTable에서 선택된 사용자id 업데이트하는 함수
-    const handleUserSelect = (userId) => {
-        console.log('MedicalHome에서 선택한 userId:', userId);
-        setSelectedUserId(userId);
-    };
 
 
     return (
@@ -66,14 +58,17 @@ const MedicalHome = () => {
             </div>
             <div className="content-container">
                 <Row>
-                    <UserTable list={patientList} onSelectUser={handleUserSelect}/>
-                </Row>
-                <Row>
-                    <NoticeMeasure selectedUserId={selectedUserId}/>
+                    <Col md={3}>
+                        <AddList PatientCall={PatientCall} />
+                    </Col>
+                    <Col md={9}>
+                        <UserTable list={patientList} disableClick={true}/>
+                    </Col>
                 </Row>
             </div>
         </Container>
 
     )
 }
-export default MedicalHome
+
+export default MedicalAddPatient

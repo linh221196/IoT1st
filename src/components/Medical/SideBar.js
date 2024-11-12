@@ -15,10 +15,8 @@ const HeaderBar = () => {
             zIndex: 1000
         }}>
             <Menu style={{ display: 'flex', flexDirection: 'row' }}>
-                <MenuItem>Pie charts</MenuItem>
-                <MenuItem>Line charts</MenuItem>
-                <MenuItem>Google maps</MenuItem>
-                <MenuItem>Open street maps</MenuItem>
+                <MenuItem>MedicalHome</MenuItem>
+                <MenuItem>MedicalAddPatient</MenuItem>
             </Menu>
         </div>
     );

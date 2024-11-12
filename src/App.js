@@ -7,6 +7,7 @@ import DeviceView from './components/User/DeviceView';
 import Test from './components/services/test';
 import VolunteerHome from './components/Volunteer/VolunteerHomePage';
 import MedicalHome from './components/Medical/MedicalHome';
+import MedicalAddPatient from "./components/Medical/MedicalAddPatient";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/Test" element={<Test />} />
           <Route path="/VolunteerHome" element={<VolunteerHome />} />
           <Route path="/MedicalHome" element={<MedicalHome />} />
+          <Route path="/MedicalAdd" element={<MedicalAddPatient />} />
         </Routes>
       </div>
     </div>
