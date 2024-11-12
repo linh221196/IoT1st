@@ -66,10 +66,12 @@ const MedicalHome = () => {
             </div>
             <div className="content-container">
                 <Row>
-                    <UserTable list={patientList} onSelectUser={handleUserSelect}/>
-                </Row>
-                <Row>
-                    <NoticeMeasure selectedUserId={selectedUserId}/>
+                    <Col>
+                        <UserTable list={patientList} onSelectUser={handleUserSelect}/>
+                    </Col>
+                    <Col>
+                        <NoticeMeasure selectedUserId={selectedUserId}/>
+                    </Col>
                 </Row>
             </div>
         </Container>

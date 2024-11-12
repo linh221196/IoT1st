@@ -11,7 +11,7 @@ const UserTable = ({ list, onSelectUser, disableClick }) => {
     const userInfo = useSelector(state => state.user.account);
     const [tableList, setTableList] = useState(list);
 
-    // 외부 list가 변경되면 tableList 업데이트
+    // 외부 list가 변경되면 자동으로 tableList 업데이트
     useEffect(() => {
         setTableList(list);
     }, [list]);
@@ -61,7 +61,7 @@ const UserTable = ({ list, onSelectUser, disableClick }) => {
     ];
 
     return (
-        <Paper sx={{ height: 500, width: '100%' }}>
+        <Paper sx={{ height: 500, width: '100%', margin: 'auto' }}>
             <DataGrid
                 rows={tableList} // tableList를 rows로 전달하여 업데이트 반영
                 columns={columns}
