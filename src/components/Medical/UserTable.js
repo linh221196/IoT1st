@@ -10,6 +10,10 @@ const paginationModel = { page: 0, pageSize: 10 };
 const UserTable = ({ list, onSelectUser, disableClick, onUpdateList }) => {
     const userInfo = useSelector(state => state.user.account);
 
+    useEffect(() => {
+        // `list` prop이 변경될 때마다 DataGrid가 리렌더링되도록 강제
+    }, [list]);
+
     // onRowClick 콜백 함수
     const handleRowClick = (params) => {
         if (disableClick) return;
