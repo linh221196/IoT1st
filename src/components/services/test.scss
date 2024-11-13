@@ -1,3 +1,4 @@
+
 // common 코드 믹스인
 @mixin size($width: 14px, $height: 14px) {
   width: $width;
@@ -64,9 +65,16 @@ $dark-gray-color: #686868;
 .calendar {
   width: 800px;
   height: 600px;
+  background-color: white; // 하얀색 배경 추가
+  border-radius: 10px; // 모서리를 둥글게 (선택 사항)
+  padding: 20px; // 내부 여백 추가 (선택 사항)
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // 그림자 효과 추가 (선택 사항)
   .header {
     @include size(100%, 7%);
     @include flex-row(space-between, baseline);
+    font-size: 1.5em;
+    color: $main-color;
+    align-items: center;
     .col.col-first {
       @include size(80%, 100%);
       @include flex-column(center, flex-start);
