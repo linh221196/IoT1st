@@ -11,7 +11,7 @@ import Col from "react-bootstrap/Col";
 const MedicalAddPatient = () => {
     const userInfo = useSelector(state => state.user.account)
     const [called, setCalled] = useState(false);
-    const [patientList, setpatientList] = useState([
+    const [patientList, setPatientList] = useState([
         { username: "환자1", useremail: "이메일1", userbirth: "2001-11-01" },
         { username: "환자2", useremail: "이메일2", userbirth: "2001-11-02" }
     ]);
@@ -25,7 +25,7 @@ const MedicalAddPatient = () => {
 
             if (data.status === 'DataEmpty') {
                 // DataEmpty일 경우 리스트를 비워줌
-                setpatientList([]);
+                setPatientList([]);
             } else if (data.status === 'success') {
                 // success일 경우 받은 데이터를 list해서 넣기
                 const newPatientList = data.data.map(item => ({
@@ -33,7 +33,7 @@ const MedicalAddPatient = () => {
                     useremail: item.app_user?.userid,
                     userbirth: item.app_user?.birth,
                 }));
-                setpatientList(newPatientList);
+                setPatientList(newPatientList);
             }
 
         } catch (error) {
@@ -67,7 +67,9 @@ const MedicalAddPatient = () => {
                         <AddList PatientCall={PatientCall} />
                     </Col>
                     <Col md={9}>
-                        <UserTable list={patientList} disableClick={true}/>
+                        <UserTable list={patientList}
+                                   disableClick={true}
+                                   onUpdateList={handleUpdateList}/>
                     </Col>
                 </Row>
             </div>

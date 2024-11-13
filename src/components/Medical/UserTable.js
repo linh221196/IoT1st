@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 const paginationModel = { page: 0, pageSize: 10 };
 
-const UserTable = ({ list, onSelectUser, disableClick }) => {
+const UserTable = ({ list, onSelectUser, disableClick, onUpdateList }) => {
     const userInfo = useSelector(state => state.user.account);
     const [tableList, setTableList] = useState(list);
 
@@ -30,7 +30,11 @@ const UserTable = ({ list, onSelectUser, disableClick }) => {
             const data = await postDeletePatient(userInfo.email, email);
             if (data && data.status === "success") {
                 console.log('삭제 성공:', data);
-                setTableList(tableList.filter(item => item.useremail !== email));
+                setTableList(prevList => {
+                    const updatedList = prevList.filter(item => item.useremail !== email);
+                    onUpdateList(updatedList); // 상위 컴포넌트에 업데이트된 리스트 전달
+                    return updatedList; // tableList 상태 업데이트
+                });
             } else {
                 console.error('응답 데이터가 예상과 다릅니다:', data);
             }
