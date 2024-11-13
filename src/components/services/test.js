@@ -1,142 +1,123 @@
-import { Button, Row, Col, Container, Form, FormControl } from "react-bootstrap"
-import { useEffect, useState } from "react";
-import PhoneInput from "react-phone-input-2";
-import 'react-phone-input-2/lib/style.css'
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import app from '../utils/firebase.config'; // adjust the path accordingly
-import { auth } from "../utils/firebase.config";
+import React, { useState } from 'react';
+import { Icon } from '@iconify/react';
+import { format, addMonths, subMonths, startOfMonth, endOfMonth, startOfWeek, endOfWeek, isSameMonth, isSameDay, addDays } from 'date-fns';
+import './test.scss'; // SCSS 파일을 import
 
-const Test = () => {
-    const [phone, setPhone] = useState('')
-    const [showOTP, setShowOTP] = useState(false)
-    const [authCode, setAuthCode] = useState('')
-    const [user, setUser] = useState(null)
-    const auth = getAuth(app);
-    auth.useDeviceLanguage()
-    console.log(auth)
-    useEffect(() => {
-        if (!window.recaptchaVerifier) {
-            window.recaptchaVerifier = new RecaptchaVerifier(auth, 'sign-in-button', {
-                'size': 'invisible',
-                'callback': (response) => {
-                    console.log("ReCaptcha solved:", response);
-                },
-                'expired-callback': () => {
-                    alert("Recaptcha expired. Please try again.");
-                }
-            });
-        }
-    }, [auth]);
-    
-    let phone1 = phone;
+const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
+    return (
+        <div className="header row">
+            <div className="col col-start">
+                <span className="text">
+                    <span className="text month">
+                        {format(currentMonth, 'M')}월
+                    </span>
+                    {format(currentMonth, 'yyyy')}
+                </span>
+            </div>
+            <div className="col col-end">
+                <Icon icon="bi:arrow-left-circle-fill" onClick={prevMonth} />
+                <Icon icon="bi:arrow-right-circle-fill" onClick={nextMonth} />
+            </div>
+        </div>
+    );
+};
 
-    // Check if the first character is '0' and remove it
-    if (phone1.startsWith("0")) {
-        phone1 = phone1.slice(1);
+// 나머지 코드 동일
+const RenderDays = () => {
+    const days = [];
+    const date = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+    for (let i = 0; i < 7; i++) {
+        days.push(
+            <div className="col" key={i}>
+                {date[i]}
+            </div>,
+        );
     }
 
-    console.log(phone1);  // Output: "10 xxxxxxx"
+    return <div className="days row">{days}</div>;
+};
 
-    const handleCheckPhone = (e) => {
-        e.preventDefault();
-        if (!phone) {
-            alert("Please type a phone number");
-            return;
+const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
+    const monthStart = startOfMonth(currentMonth);
+    const monthEnd = endOfMonth(monthStart);
+    const startDate = startOfWeek(monthStart);
+    const endDate = endOfWeek(monthEnd);
+
+    const rows = [];
+    let days = [];
+    let day = startDate;
+    let formattedDate = '';
+
+    while (day <= endDate) {
+        for (let i = 0; i < 7; i++) {
+            formattedDate = format(day, 'd');
+            const cloneDay = day;
+            days.push(
+                <div
+                    className={`col cell ${
+                        !isSameMonth(day, monthStart)
+                            ? 'disabled'
+                            : isSameDay(day, selectedDate)
+                                ? 'selected'
+                                : format(currentMonth, 'M') !== format(day, 'M')
+                                    ? 'not-valid'
+                                    : 'valid'
+                    }`}
+                    key={day.toString()} // key 속성 수정
+                    onClick={() => onDateClick(new Date(cloneDay))} // parse 제거
+                >
+                    <span
+                        className={
+                            format(currentMonth, 'M') !== format(day, 'M')
+                                ? 'text not-valid'
+                                : ''
+                        }
+                    >
+                        {formattedDate}
+                    </span>
+                </div>,
+            );
+            day = addDays(day, 1);
         }
+        rows.push(
+            <div className="row" key={day.toString()}>
+                {days}
+            </div>,
+        );
+        days = [];
+    }
+    return <div className="body">{rows}</div>;
+};
 
-        console.log(`OTP sent to phone 1: +${phone}`, phone);
-        const appVerifier = window.recaptchaVerifier;
-        signInWithPhoneNumber(auth, `+${phone}`, appVerifier)
-            .then((confirmationResult) => {
-                window.confirmationResult = confirmationResult;
-                console.log("OTP sent to phone:", phone);
-                setShowOTP(true);
-            }).catch((error) => {
-                console.error("Error during signInWithPhoneNumber", error);
-                alert("Failed to send OTP. Try again.");
-            });
+const Test = () => {
+    const [currentMonth, setCurrentMonth] = useState(new Date());
+    const [selectedDate, setSelectedDate] = useState(new Date());
+
+    const prevMonth = () => {
+        setCurrentMonth(subMonths(currentMonth, 1));
     };
-
-
-    const handlePhoneChange = (value) => {
-        // Check if the phone number starts with "0"
-        let phone = value;
-        if (phone.startsWith(0)) {
-            // Remove the leading "0"
-            phone = phone.slice(1);
-        }
-
-        // Set the processed phone number back into the state
-        setPhone(phone);
-
-        // Log the processed phone number for debugging
-        console.log(phone);
+    const nextMonth = () => {
+        setCurrentMonth(addMonths(currentMonth, 1));
     };
-
-    const handleCheckCode = async () => {
-        const confirmationResult = window.confirmationResult;
-        if (!confirmationResult || !authCode) {
-            alert("Invalid code or verification process");
-            return;
-        }
-
-        try {
-            const result = await confirmationResult.confirm(authCode);
-            setUser(result.user);
-            console.log("Phone verified, user:", result.user);
-            alert("Phone number verified successfully!");
-        } catch (error) {
-            console.error("Error verifying OTP:", error);
-            alert("Invalid OTP, please try again.");
-        }
+    const onDateClick = (day) => {
+        setSelectedDate(day);
     };
     return (
-        <>
-            test page
-            <div className="container w-200">
-                <Form >
-                    <Form.Group>
-                        <Form.Label>Phone Number</Form.Label>
-                        <h1>{phone}</h1>
-                        <PhoneInput className="container "
-                            country={'kr'}
-                            value={phone}
-                            onChange={handlePhoneChange}
-                            inputProps={{
-                                //pattern: "^(\d{2,3})-(\d{3,4})-(\d{4})$",
-                                type: "tel",
-                                name: 'phone',
-                                required: true,
-                                autoFocus: true,
-                                placeholder: "010-XXXX-XXXX"
-                            }}
-                        />
-                        <Button className="btn btn-sm"
-                            onClick={handleCheckPhone}>Check</Button>
-                    </Form.Group>
-                    {
-                        showOTP &&
-                        (<Form.Group>
-                            <h1>{authCode}</h1>
-                            <Row>
-                                <Col><Form.Label>OTP Code</Form.Label></Col>
-                                <Col><Form.Control type="number" name='auth-phone'
-                                    onChange={e => setAuthCode(e.target.value)} /></Col>
-                                <Col>
-                                    <Button className="btn btn-sm"
-                                        onClick={handleCheckCode}
-                                    >Check</Button>
-                                </Col>
-                            </Row>
+        <div className="calendar">
+            <RenderHeader
+                currentMonth={currentMonth}
+                prevMonth={prevMonth}
+                nextMonth={nextMonth}
+            />
+            <RenderDays />
+            <RenderCells
+                currentMonth={currentMonth}
+                selectedDate={selectedDate}
+                onDateClick={onDateClick}
+            />
+        </div>
+    );
+};
 
-                        </Form.Group>)
-                    }
-                    <Button type="submit" className="btn btn-success">Send</Button>
-                </Form>
-                <div id="sign-in-button"></div> {/* Recaptcha verifier */}
-            </div>
-
-        </>)
-
-}
-export default Test
+export default Test;
