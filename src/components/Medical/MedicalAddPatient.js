@@ -43,7 +43,8 @@ const MedicalAddPatient = () => {
 
     //삭제 등 업데이트가 되었을때
     const handleUpdateList = (updatedList) => {
-        setPatientList(updatedList);
+        console.log("삭제 이벤트 발생")
+        setPatientList([...updatedList]);
     };
     useEffect(() => {
         console.log("patientList가 변경되었습니다:", patientList);
