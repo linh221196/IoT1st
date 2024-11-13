@@ -9,9 +9,10 @@ const paginationModel = { page: 0, pageSize: 10 };
 
 const UserTable = ({ list, onSelectUser, disableClick, onUpdateList }) => {
     const userInfo = useSelector(state => state.user.account);
+    const [tableList, setTableList] = useState(list);
 
     useEffect(() => {
-        // `list` prop이 변경될 때마다 DataGrid가 리렌더링되도록 강제
+        setTableList(list);
     }, [list]);
 
     // onRowClick 콜백 함수
@@ -28,7 +29,8 @@ const UserTable = ({ list, onSelectUser, disableClick, onUpdateList }) => {
             const data = await postDeletePatient(userInfo.email, email);
             if (data && data.status === "success") {
                 console.log('삭제 성공:', data);
-                const updatedList = list.filter(item => item.useremail !== email);
+                const updatedList = tableList.filter((item) => item.useremail !== email);
+                setTableList(updatedList); // UserTable 내에서 상태 업데이트
                 onUpdateList(updatedList);
             } else {
                 console.error('응답 데이터가 예상과 다릅니다:', data);

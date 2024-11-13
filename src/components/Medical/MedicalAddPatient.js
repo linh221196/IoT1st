@@ -45,6 +45,10 @@ const MedicalAddPatient = () => {
     const handleUpdateList = (updatedList) => {
         setPatientList(updatedList);
     };
+    useEffect(() => {
+        console.log("patientList가 변경되었습니다:", patientList);
+    }, [patientList]);
+
 
     //여기에 처음 들어왔을 때
     useEffect(() => {
@@ -54,7 +58,7 @@ const MedicalAddPatient = () => {
             }
             setCalled(true); // 첫 호출 후에 called를 true로 설정하여 이후 호출 방지
         }
-    }, [userInfo.role, called]);
+    }, [userInfo.role, called, patientList]);
 
 
     return (
