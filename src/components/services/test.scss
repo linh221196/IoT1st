@@ -141,22 +141,44 @@ $dark-gray-color: #686868;
           opacity: 0.1;
         }
       }
-      .col.cell.valid {
-        &:hover {
-          @include hover-event();
-          @include shadow(1.5px, $dark-gray-color, 0.1);
-          transform: scale(1.01);
-          border: none;
-          background: transparentize($gray-color, 0.5);
+      .col.cell {
+        position: relative; /* 셀 내에서 아이콘을 위치시키기 위해 */
+
+        .note-indicator {
+          position: absolute;
+          bottom: 5px; /* 셀의 아래쪽 5px 위치에 배치 */
+          //기존코드 font-size: 20px;
+          left: 50%; /* 셀의 가운데로 위치 */
+          transform: translateX(-50%); /* 정확히 중앙에 배치되도록 */
+          display: flex;
+          align-items: center; /* 아이콘과 숫자를 세로로 정렬 */
+          gap: 3px;
+
+          .note-count {
+            font-size: 14px; /* 숫자의 크기 */
+            color: black; /* 숫자의 색상 */
+            font-weight: bold;
+          }
         }
-      }
-      .col.cell.selected {
-        @include shadow(1.5px, $main-color, 0.1);
-        transform: scale(1.02);
-        border: none;
-        background: $sub-color;
-        color: $main-color;
-        font-weight: 600;
+
+        &.valid {
+          &:hover {
+            @include hover-event();
+            @include shadow(1.5px, $dark-gray-color, 0.1);
+            transform: scale(1.01);
+            border: none;
+            background: transparentize($gray-color, 0.5);
+          }
+        }
+
+        &.selected {
+          @include shadow(1.5px, $main-color, 0.1);
+          transform: scale(1.02);
+          border: none;
+          background: $sub-color;
+          color: $main-color;
+          font-weight: 600;
+        }
       }
     }
   }
