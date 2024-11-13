@@ -65,7 +65,7 @@ const NoticeMeasure = ({ selectedUserId }) => {
                 dataToSend.nibp
             )
 
-
+            alert("필수 측정 요소 저장되었습니다.");
 
         } catch (error) {
             alert("서버 응답이 없습니다.");

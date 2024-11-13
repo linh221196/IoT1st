@@ -41,6 +41,11 @@ const MedicalAddPatient = () => {
         }
     }
 
+    //삭제 등 업데이트가 되었을때
+    const handleUpdateList = (updatedList) => {
+        setPatientList(updatedList);
+    };
+
     //여기에 처음 들어왔을 때
     useEffect(() => {
         if (userInfo && userInfo.role && !called) {
