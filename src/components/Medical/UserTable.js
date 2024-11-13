@@ -9,12 +9,6 @@ const paginationModel = { page: 0, pageSize: 10 };
 
 const UserTable = ({ list, onSelectUser, disableClick, onUpdateList }) => {
     const userInfo = useSelector(state => state.user.account);
-    const [tableList, setTableList] = useState(list);
-
-    // 외부 list가 변경되면 자동으로 tableList 업데이트
-    useEffect(() => {
-        setTableList(list);
-    }, [list]);
 
     // onRowClick 콜백 함수
     const handleRowClick = (params) => {
@@ -64,7 +58,7 @@ const UserTable = ({ list, onSelectUser, disableClick, onUpdateList }) => {
     return (
         <Paper sx={{ height: 500, width: '100%', margin: 'auto' }}>
             <DataGrid
-                rows={tableList} // tableList를 rows로 전달하여 업데이트 반영
+                rows={list} // tableList를 rows로 전달하여 업데이트 반영
                 columns={columns}
                 initialState={{ pagination: { paginationModel } }}
                 pageSizeOptions={[10, 15]}
