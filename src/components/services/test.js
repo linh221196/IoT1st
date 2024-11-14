@@ -142,6 +142,7 @@ const Test = () => {
     };
 
     return (
+        <>
         <div className="calendar">
             <RenderHeader
                 currentMonth={currentMonth}
@@ -156,6 +157,10 @@ const Test = () => {
                 notes={notes}
             />
         </div>
+            <div>
+                {/*측정 값이 나올 곳*/}
+            </div>
+        </>
     );
 };
 
