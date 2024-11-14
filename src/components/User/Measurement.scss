@@ -1,0 +1,204 @@
+
+// common 코드 믹스인
+@mixin size($width: 14px, $height: 14px) {
+  width: $width;
+  height: $height;
+}
+
+@mixin shape(
+  $background: transparent,
+  $border: transparent,
+  $border-radius: 0
+) {
+  background: $background;
+  border: $border;
+  border-radius: $border-radius;
+}
+
+@mixin shadow($size: 3px, $color: black, $amount: 0.5) {
+  box-shadow: $size $size 0px 0px transparentize($color, $amount);
+}
+
+@mixin font(
+  $color: black,
+  $font-family: $description-font,
+  $font-size: 1em,
+  $font-weight: 500
+) {
+  color: $color;
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+@mixin hover-event {
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+@mixin flex-column($justify-content: center, $align-items: center) {
+  display: flex;
+  flex-direction: column;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin flex-row($justify-content: center, $align-items: center) {
+  display: flex;
+  flex-direction: row;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+// 기존 스타일 코드
+$main-color: #aa5b42;
+$sub-color: #f3c5b6;
+$login-color: #f4e7e3;
+$dashboard-color: #fffcfb;
+$dashboard-icon-color: #d6a291;
+$step-color: #ebcfc6;
+$dark-step-color: #cea193;
+$gray-color: #c4c4c4;
+$dark-gray-color: #686868;
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; // 세로 정렬
+  gap: 20px; // 캘린더와 노트 목록 간의 간격
+  padding: 20px; // 전체 컨테이너에 여백 추가
+}
+
+.note-list {
+  flex: 1;
+  width: 100%;
+  max-width: 50%; // 화면의 50%까지만 차지하도록 제한
+  height: auto;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+//@include size(60%, 90%);
+.calendar {
+  width: 800px;
+  height: 600px;
+  background-color: white; // 하얀색 배경 추가
+  border-radius: 10px; // 모서리를 둥글게 (선택 사항)
+  padding: 20px; // 내부 여백 추가 (선택 사항)
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // 그림자 효과 추가 (선택 사항)
+  .header {
+    @include size(100%, 7%);
+    @include flex-row(space-between, baseline);
+    font-size: 1.5em;
+    color: $main-color;
+    align-items: center;
+    .col.col-first {
+      @include size(80%, 100%);
+      @include flex-column(center, flex-start);
+      margin-left: 1%;
+      .text {
+        font-size: 0.8em;
+      }
+      .text.month {
+        margin-right: 5px;
+        font-size: 1.6em;
+        font-weight: 600;
+      }
+    }
+    .col.col-end {
+      @include size(20%, 100%);
+      @include flex-row(flex-end, baseline);
+      svg {
+        @include size(11%, fit-content);
+        margin-left: 5%;
+        color: transparentize(gray, 0.2);
+        &:hover {
+          @include hover-event();
+          transform: scale(1.15);
+          color: $dark-gray-color;
+        }
+      }
+    }
+  }
+  .days {
+    @include size(100%, fit-content);
+    @include flex-row(space-between, center);
+    font-weight: 600;
+    font-size: 0.65em;
+    padding: 2px;
+    color: $dark-gray-color;
+    .col {
+      @include size(12.9%, 100%);
+      @include flex-column(flex-end, flex-start);
+      padding-left: 1%;
+      background: transparentize($step-color, 0.6);
+      border-radius: 10px;
+    }
+  }
+  .body {
+    @include size(100%, 89%);
+    @include flex-column();
+    .row {
+      @include size(100%, 100%);
+      @include flex-row(space-between, center);
+      .col {
+        @include size(13.5%, 93%);
+        @include flex-row(flex-start, flex-start);
+
+        border: 0.4px solid transparentize(gray, 0.4);
+        border-radius: 3px;
+        font-size: 0.8em;
+        span {
+          margin: 4px 0 0 4px;
+        }
+        .not-valid {
+          color: $gray-color;
+        }
+        img {
+          opacity: 0.1;
+        }
+      }
+      .col.cell {
+        position: relative; /* 셀 내에서 아이콘을 위치시키기 위해 */
+
+        .note-indicator {
+          position: absolute;
+          bottom: 5px; /* 셀의 아래쪽 5px 위치에 배치 */
+          //기존코드 font-size: 20px;
+          left: 50%; /* 셀의 가운데로 위치 */
+          transform: translateX(-50%); /* 정확히 중앙에 배치되도록 */
+          display: flex;
+          align-items: center; /* 아이콘과 숫자를 세로로 정렬 */
+          gap: 3px;
+
+          .note-count {
+            font-size: 14px; /* 숫자의 크기 */
+            color: black; /* 숫자의 색상 */
+            font-weight: bold;
+          }
+        }
+
+        &.valid {
+          &:hover {
+            @include hover-event();
+            @include shadow(1.5px, $dark-gray-color, 0.1);
+            transform: scale(1.01);
+            border: none;
+            background: transparentize($gray-color, 0.5);
+          }
+        }
+
+        &.selected {
+          @include shadow(1.5px, $main-color, 0.1);
+          transform: scale(1.02);
+          border: none;
+          background: $sub-color;
+          color: $main-color;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}

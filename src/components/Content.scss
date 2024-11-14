@@ -11,16 +11,23 @@
 .r-content {
   display: flex;
   justify-content: space-around;
+
   .c-content {
     @include flex-center();
     @include border-radius();
+    flex: 1 1 300px; // 모든 Col 요소의 기본 크기를 180px로 설정
+    min-width: 180px; // 최소 너비를 고정하여 요소가 너무 작아지지 않도록 설정
+    max-width: 300px;
     width: calc(25% - 20px);
-    min-width: 100px;
     margin: 10px;
     height: 100px;
+
+
+
     .nav-link {
       position: relative;
       padding-bottom: 2px;
+
       &:hover {
         font-size: larger;
         text-decoration: none; // Disable default underline

@@ -8,6 +8,7 @@ import Test from './components/services/test';
 import VolunteerHome from './components/Volunteer/VolunteerHomePage';
 import MedicalHome from './components/Medical/MedicalHome';
 import MedicalAddPatient from "./components/Medical/MedicalAddPatient";
+import Measurement from "./components/User/Measurement";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/VolunteerHome" element={<VolunteerHome />} />
           <Route path="/MedicalHome" element={<MedicalHome />} />
           <Route path="/MedicalAdd" element={<MedicalAddPatient />} />
+          <Route path="/Measurement" element={<Measurement />} />
         </Routes>
       </div>
     </div>
