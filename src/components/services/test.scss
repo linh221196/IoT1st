@@ -61,6 +61,25 @@ $dark-step-color: #cea193;
 $gray-color: #c4c4c4;
 $dark-gray-color: #686868;
 
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; // 세로 정렬
+  gap: 20px; // 캘린더와 노트 목록 간의 간격
+  padding: 20px; // 전체 컨테이너에 여백 추가
+}
+
+.note-list {
+  flex: 1;
+  width: 100%;
+  max-width: 50%; // 화면의 50%까지만 차지하도록 제한
+  height: auto;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 //@include size(60%, 90%);
 .calendar {
   width: 800px;

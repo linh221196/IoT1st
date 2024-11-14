@@ -80,20 +80,21 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick, notes }) => {
                         {formattedDate}
                     </span>
                     {/* 메모가 있는 날짜에 표시 */}
-                    {/* 정상 및 비정상 상태 개수에 따라 아이콘 및 숫자 표시 */}
                     {dayNotes.length > 0 && (
                         <div className="note-indicator">
-                            {abnormalCount > 0 && (
+                            {/* 비정상이 있는 경우 비정상만 표시 */}
+                            {abnormalCount > 0 ? (
                                 <>
                                     <Icon icon="bi:circle-fill" style={{ color: '#e74c3c', fontSize: '20px' }} />
                                     <span className="note-count">x{abnormalCount}</span>
                                 </>
-                            )}
-                            {normalCount > 0 && (
-                                <>
-                                    <Icon icon="bi:circle-fill" style={{ color: '#2ecc71', fontSize: '20px' }} />
-                                    <span className="note-count">x{normalCount}</span>
-                                </>
+                            ) : (
+                                // 비정상이 없고 정상만 있는 경우 정상 표시
+                                normalCount > 0 && (
+                                    <>
+                                        <Icon icon="bi:circle-fill" style={{ color: '#2ecc71', fontSize: '20px' }} />
+                                    </>
+                                )
                             )}
                         </div>
                     )}
@@ -126,14 +127,14 @@ const Test = () => {
             const data = {
                 '2024-11-14': [
                     { measurement: 'spo2', status: '비정상' },
-                    { measurement: 'airflow', status: '비정상' },
+                    { measurement: 'airflow', status: '정상' },
                     { measurement: 'bodytemp', status: '정상' },
                     { measurement: 'ecg', status: '정상' },
                     { measurement: 'emg', status: '정상' },
-                    { measurement: 'gsr', status: '정상' },
+                    { measurement: 'gsr', status: '비정상' },
                     { measurement: 'nibp', status: '정상' },
                 ],
-                '2024-11-15': [
+                '2024-12-16': [
                     { measurement: 'spo2', status: '정상' },
                     { measurement: 'airflow', status: '정상' },
                     { measurement: 'bodytemp', status: '정상' },
@@ -167,25 +168,26 @@ const Test = () => {
     const selectedDateString = selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '';
 
     return (
-        <>
-        <div className="calendar">
-            <RenderHeader
-                currentMonth={currentMonth}
-                prevMonth={prevMonth}
-                nextMonth={nextMonth}
-            />
-            <RenderDays />
-            <RenderCells
-                currentMonth={currentMonth}
-                selectedDate={selectedDate}
-                onDateClick={onDateClick}
-                notes={measurementsByDate}
-            />
-        </div>
-            <div className="note-list">
-                <NoteList measurements={measurementsByDate[selectedDateString] || []} date={selectedDateString} userid={userid} />
+        <div className="container">
+            <div className="calendar">
+                <RenderHeader
+                    currentMonth={currentMonth}
+                    prevMonth={prevMonth}
+                    nextMonth={nextMonth}
+                />
+                <RenderDays/>
+                <RenderCells
+                    currentMonth={currentMonth}
+                    selectedDate={selectedDate}
+                    onDateClick={onDateClick}
+                    notes={measurementsByDate}
+                />
             </div>
-        </>
+            <div className="note-list">
+                <NoteList measurements={measurementsByDate[selectedDateString] || []} date={selectedDateString}
+                          userid={userid}/>
+            </div>
+        </div>
     );
 };
 
