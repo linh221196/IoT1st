@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Icon } from '@iconify/react';
 import { format, addMonths, subMonths, startOfMonth, endOfMonth, startOfWeek, endOfWeek, isSameMonth, isSameDay, addDays } from 'date-fns';
 import './test.scss'; // SCSS 파일을 import
+import NoteList from '../User/NoteList'
 
 const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
     return (
@@ -53,6 +54,11 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick, notes }) => {
             formattedDate = format(day, 'd');
             const cloneDay = day;
             const dateString = format(day, 'yyyy-MM-dd'); // 날짜를 문자열로 변환하여 저장
+            const dayNotes = notes[dateString] || [];
+
+            // 정상과 비정상 상태 개수 카운트
+            const normalCount = dayNotes.filter(note => note.status === '정상').length;
+            const abnormalCount = dayNotes.filter(note => note.status === '비정상').length;
 
             days.push(
                 <div
@@ -74,16 +80,21 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick, notes }) => {
                         {formattedDate}
                     </span>
                     {/* 메모가 있는 날짜에 표시 */}
-                    {notes[dateString] && (
+                    {/* 정상 및 비정상 상태 개수에 따라 아이콘 및 숫자 표시 */}
+                    {dayNotes.length > 0 && (
                         <div className="note-indicator">
-                            {/* 빨간 원 */}
-                            <Icon icon="bi:circle-fill" style={{ color: '#e74c3c', fontSize: '20px' }} />
-                            <span className="note-count">x5</span> {/* 곱하기 숫자 */}
-                            {/* 주황 원 */}
-                            {/* <Icon icon="bi:circle-fill" style={{ color: '#f39c12', fontSize: '20px' }} /> */}
-                            {/* 초록 원 */}
-                             <Icon icon="bi:circle-fill" style={{ color: '#2ecc71', fontSize: '20px' }} />
-                            <span className="note-count">x3</span> {/* 곱하기 숫자 */}
+                            {abnormalCount > 0 && (
+                                <>
+                                    <Icon icon="bi:circle-fill" style={{ color: '#e74c3c', fontSize: '20px' }} />
+                                    <span className="note-count">x{abnormalCount}</span>
+                                </>
+                            )}
+                            {normalCount > 0 && (
+                                <>
+                                    <Icon icon="bi:circle-fill" style={{ color: '#2ecc71', fontSize: '20px' }} />
+                                    <span className="note-count">x{normalCount}</span>
+                                </>
+                            )}
                         </div>
                     )}
                 </div>
@@ -104,24 +115,36 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick, notes }) => {
 const Test = () => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [notes, setNotes] = useState({
-        '2024-11-12': '메모 내용'
-    }); // 날짜별 메모 상태 관리
+    const [measurements, setMeasurements] = useState([]);
+    const [measurementsByDate, setMeasurementsByDate] = useState({});
+    const [userid, setUserid] = useState('user123'); // 예시 사용자 ID
 
     // 백엔드에서 메모 데이터를 가져오는 함수
     const fetchNotes = async (month) => {
         try {
            //api 코드
-            const data = [
-                { date: '2024-12-16', content: '메모 내용' },
-                { date: '2024-11-14', content: '다른 메모 내용' }
-            ];
+            const data = {
+                '2024-11-14': [
+                    { measurement: 'spo2', status: '비정상' },
+                    { measurement: 'airflow', status: '비정상' },
+                    { measurement: 'bodytemp', status: '정상' },
+                    { measurement: 'ecg', status: '정상' },
+                    { measurement: 'emg', status: '정상' },
+                    { measurement: 'gsr', status: '정상' },
+                    { measurement: 'nibp', status: '정상' },
+                ],
+                '2024-11-15': [
+                    { measurement: 'spo2', status: '정상' },
+                    { measurement: 'airflow', status: '정상' },
+                    { measurement: 'bodytemp', status: '정상' },
+                    { measurement: 'ecg', status: '정상' },
+                    { measurement: 'emg', status: '정상' },
+                    { measurement: 'gsr', status: '정상' },
+                    { measurement: 'nibp', status: '정상' },
+                ]
+            };
 
-            const notesByDate = {};
-            data.forEach(note => {
-                notesByDate[note.date] = note.content; // 예: { '2024-11-13': '메모 내용' }
-            });
-            setNotes(notesByDate);
+            setMeasurementsByDate(data);
         } catch (error) {
             console.error("메모 데이터를 가져오는 데 실패했습니다.", error);
         }
@@ -141,6 +164,8 @@ const Test = () => {
         setSelectedDate(day);
     };
 
+    const selectedDateString = selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '';
+
     return (
         <>
         <div className="calendar">
@@ -154,11 +179,11 @@ const Test = () => {
                 currentMonth={currentMonth}
                 selectedDate={selectedDate}
                 onDateClick={onDateClick}
-                notes={notes}
+                notes={measurementsByDate}
             />
         </div>
-            <div>
-                {/*측정 값이 나올 곳*/}
+            <div className="note-list">
+                <NoteList measurements={measurementsByDate[selectedDateString] || []} date={selectedDateString} userid={userid} />
             </div>
         </>
     );
