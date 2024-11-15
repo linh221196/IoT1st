@@ -14,7 +14,7 @@ const UserHome = () => {
 
   const navigate = useNavigate();
 
-  const TokenCheck = async () => {
+  /*const TokenCheck = async () => {
     try {
       const data = await postTokenCheck(userInfo.email, userInfo.refreshToken)
 
@@ -31,7 +31,7 @@ const UserHome = () => {
 
   useEffect(() => {
     TokenCheck();
-  }, []);
+  }, []);*/
 
   return (
     <Container >

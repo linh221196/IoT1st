@@ -92,7 +92,9 @@ const LogginView = () => {
             if (data.status === "success") {
                 setIsLoggin(true);
                 dispatch(doLoggin(data));
+                localStorage.setItem('accessToken', userInfo.accessToken)
                 alert("Login successfully!");
+                //alert(localStorage.getItem('accessToken'))
             } else if (data.status === "PasswordFail") {
                 alert("비밀번호가 일치하지 않습니다.");
             } else if (data.status === "IdFail") {
@@ -123,6 +125,15 @@ const LogginView = () => {
     useEffect(() => {
 
         if (isLoggin) {
+            if (userInfo.role === "Patient" || userInfo.role === "user") {
+                navigate('/UserHome');
+            } else if (userInfo.role === "ADMIN" || userInfo.role === "Medical") {
+                navigate('/MedicalHome');
+            } else {
+                navigate('/VolunteerHome');
+            }
+        }
+        /*if (isLoggin) {
             const TokenCheck = async () => {
                 try {
                     const data = await postTokenCheck(userInfo.email, userInfo.refreshToken)
@@ -145,8 +156,8 @@ const LogginView = () => {
             };
 
             TokenCheck();
-        }
-    }, [isLoggin, navigate, userInfo.email, userInfo.refreshToken, userInfo.role]);
+        }*/
+    }, [isLoggin, navigate, userInfo.role]);
 
     return (
         <Form onSubmit={handleSubmit} noValidate validated={validated}>

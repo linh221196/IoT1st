@@ -1,6 +1,19 @@
 import axios from "../utils/axiosCustomize";
 import {useSelector} from "react-redux";
-
+import userInfo from "../User/UserInfo";
+// 토큰 갱신 함수
+export async function refreshAccessToken() {
+    const refreshToken = userInfo.refreshToken;
+    try {
+        const response = await axios.post('/refresh', { refreshToken });
+        const { accessToken } = response;
+        localStorage.setItem('accessToken', accessToken);
+        return accessToken;
+    } catch (error) {
+        window.location.href = '/';
+        return null;
+    }
+}
 
 //회원가입
 const postCreateNewUser = (email, password, username, birth, phoneNum, role, userImage) => {
@@ -40,15 +53,17 @@ const putEditUserData = (id, username, role, userImage) => {
     // return axios.put(`/participant`, formData)
 }
 
-//로그인
+// 로그인
 const postLoggin = (email, password) => {
-    const formData = new FormData();
-    formData.append('email', email)
-    formData.append('password', password)
-//http://localhost:8081/api/v1/login
+    // JSON 형식으로 데이터를 생성
+    const data = {
+        email: email,
+        password: password
+    };
 
-    return axios.post(`/login`, formData)
-}
+    return axios.post('/login', data);
+};
+
 
 //ID 중복 check
 const postUserId = (email) => {
@@ -212,17 +227,40 @@ const postMedicalName = (email) => {
     return axios.post(`/medicalname`, formData)
 }
 
-const postTokenCheck = (email, refreshToken) => {
-    const formData = new FormData();
-    formData.append('userid', email)
-    formData.append('refreshToken', refreshToken)
+/*const postTokenCheck = (email, refreshToken) => {
+    const accessToken = localStorage.getItem('accessToken');
 
-    return axios.post(`/tokencheck`, formData)
-}
+    console.log("postTokenCheck 호출됨:", email, refreshToken, accessToken);
+
+    return axios.post(
+        `/tokencheck`,
+        {
+            userid: email,
+            refreshToken: refreshToken
+        },
+        {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+            },
+            withCredentials: true
+        }
+    ).then(response => {
+        console.log("응답 데이터:", response.data);
+        return response;
+    }).catch(error => {
+        console.error("에러 발생:", error);
+        throw error;
+    });
+};*/
+
+
+
+
 
 export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer,
     postAllVolunteerCall, postUserVolunteerCall, postVolunteerAssignment, postVolunteerComplete, postAssignmentCancel,
     postVolunteerCallModify, postVolunteerCallDelete, postSearchPatient, postAssignmentPatient, postLoadPatient,
-    postDeletePatient, postMeasurePatient, postModifyMeasure, postVolunteerTime, postTokenCheck, postMedicalName
+    postDeletePatient, postMeasurePatient, postModifyMeasure, postVolunteerTime, /*postTokenCheck, */postMedicalName
 
 }
