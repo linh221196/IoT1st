@@ -33,7 +33,7 @@ const Content = () => {
         </Row>
         <Row className="r-content">
           <Col className="c-content">
-            <NavLink>측정 치수</NavLink>
+            <NavLink href="/Measurement">측정 치수</NavLink>
           </Col>
           <Col className="c-content">
             <NavLink href="/Volunteer" >자원 봉사</NavLink>

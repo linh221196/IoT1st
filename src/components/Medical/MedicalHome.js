@@ -1,6 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap"
 import SideBar from "./SideBar"
 import UserTable from "./UserTable"
+import Chart from "./Chart"
 import AddList from "./AddList"
 import './Admin.scss'
 import NoticeMeasure from "./NoticeMeasure";
@@ -71,6 +72,9 @@ const MedicalHome = () => {
                     </Col>
                     <Col>
                         <NoticeMeasure selectedUserId={selectedUserId}/>
+                    </Col>
+                    <Col>
+                        <Chart />
                     </Col>
                 </Row>
             </div>
