@@ -1,5 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap"
-import SideBar from "./SideBar"
+import HeaderBar from "./HeaderBar"
 import UserTable from "./UserTable"
 import Chart from "./Chart"
 import AddList from "./AddList"
@@ -63,23 +63,22 @@ const MedicalHome = () => {
 
     return (
         <Container className="container admin-container ms-0 ps-0 mt-0">
-            <div className="sidebar-container">
+            {/* 헤더 */}
+            <div className="HeadBar">
+                <HeaderBar />
             </div>
-            <div className="content-container">
-                <Row>
-                    <Col>
-                        <UserTable list={patientList} onSelectUser={handleUserSelect}/>
-                    </Col>
-                    <Col>
-                        <NoticeMeasure selectedUserId={selectedUserId}/>
-                    </Col>
-                    <Col>
+
+            {/* 헤더 높이만큼 마진 추가 */}
+            <div style={{ marginTop: "70px" }}>
+                <div className="content-container">
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                        <UserTable list={patientList} onSelectUser={handleUserSelect} />
+                        <NoticeMeasure selectedUserId={selectedUserId} />
                         <Chart />
-                    </Col>
-                </Row>
+                    </div>
+                </div>
             </div>
         </Container>
-
-    )
+    );
 }
 export default MedicalHome

@@ -1,11 +1,14 @@
 import {Container, Row} from "react-bootstrap";
-import SideBar from "./SideBar";
+import SideBar from "./HeaderBar";
 import AddList from "./AddList";
 import UserTable from "./UserTable";
 import {useSelector} from "react-redux";
 import {postLoadPatient} from "../services/apiServices";
 import {useEffect, useState} from "react";
 import Col from "react-bootstrap/Col";
+import HeaderBar from "./HeaderBar";
+import NoticeMeasure from "./NoticeMeasure";
+import Chart from "./Chart";
 
 
 const MedicalAddPatient = () => {
@@ -64,22 +67,24 @@ const MedicalAddPatient = () => {
 
     return (
         <Container className="container admin-container ms-0 ps-0 mt-0">
-            <div className="sidebar-container">
+            {/* 헤더 */}
+            <div className="HeadBar">
+                <HeaderBar />
             </div>
-            <div className="content-container">
-                <Row>
-                    <Col md={3}>
+            {/* 헤더 높이만큼 마진 추가 */}
+            <div style={{ marginTop: "70px" }}>
+                <div className="content-container">
+                    <div style={{ display: "flex", flexDirection: "row" }}>
                         <AddList PatientCall={PatientCall} />
-                    </Col>
-                    <Col md={9}>
                         <UserTable list={patientList}
                                    disableClick={true}
                                    onUpdateList={(updatedList) => {
                                        console.log("onUpdateList 함수 호출됨");
                                        handleUpdateList(updatedList);}}/>
-                    </Col>
-                </Row>
+                    </div>
+                </div>
             </div>
+
         </Container>
 
     )

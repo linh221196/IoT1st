@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Test = () => {
+const HeaderBar = () => {
     return (
         <div
             style={{
@@ -66,4 +66,4 @@ const Test = () => {
     );
 };
 
-export default Test;
+export default HeaderBar;
