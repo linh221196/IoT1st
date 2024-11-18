@@ -267,7 +267,6 @@ const Calendar = () => {
                             multiline
                             value={note} type="text"
                             onChange={e => setNote(e.target.value)}
-
                         />
                     </Modal.Body>
                     <Modal.Footer>

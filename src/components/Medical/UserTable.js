@@ -29,6 +29,7 @@ const UserTable = ({ list, onSelectUser, disableClick, onUpdateList }) => {
             const data = await postDeletePatient(userInfo.email, email);
             const updatedList = list.filter((item) => item.useremail !== email);
             onUpdateList(updatedList);
+            console.log(data);
             if (data && data.status === "success") {
                 console.log('삭제 성공:', data);
             } else {
