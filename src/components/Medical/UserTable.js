@@ -30,6 +30,10 @@ const UserTable = ({ list, onSelectUser, disableClick, onUpdateList }) => {
             const updatedList = list.filter((item) => item.useremail !== email);
             onUpdateList(updatedList);
             console.log(data);
+            console.log(data);
+            console.log(data);
+            console.log(data);
+
         } catch (error) {
             alert("서버에서 담당 환자 list에서 삭제에 실패했습니다.");
         }

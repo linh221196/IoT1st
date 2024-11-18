@@ -25,13 +25,13 @@ const NoticeMeasure = ({ selectedUserId }) => {
             console.log('Check response', data);
 
             const newList = [
-                { measurement: 'spo2', userid: selectedUserId, status: data.spo2 },
-                { measurement: 'airflow', userid: selectedUserId, status: data.airflow },
-                { measurement: 'bodytemp', userid: selectedUserId, status: data.bodytemp },
-                { measurement: 'ecg', userid: selectedUserId, status: data.ecg },
-                { measurement: 'emg', userid: selectedUserId, status: data.emg },
-                { measurement: 'gsr', userid: selectedUserId, status: data.gsr },
-                { measurement: 'nibp', userid: selectedUserId, status: data.nibp },
+                { measurement: 'spo2', userid: selectedUserId, status: data.spo2 === "true" },
+                { measurement: 'airflow', userid: selectedUserId, status: data.airflow === "true" },
+                { measurement: 'bodytemp', userid: selectedUserId, status: data.bodytemp === "true" },
+                { measurement: 'ecg', userid: selectedUserId, status: data.ecg === "true" },
+                { measurement: 'emg', userid: selectedUserId, status: data.emg === "true" },
+                { measurement: 'gsr', userid: selectedUserId, status: data.gsr === "true" },
+                { measurement: 'nibp', userid: selectedUserId, status: data.nibp === "true" },
             ];
 
             setListUser(newList);

@@ -79,7 +79,6 @@ const MedicalAddPatient = () => {
                         <UserTable list={patientList}
                                    disableClick={true}
                                    onUpdateList={(updatedList) => {
-                                       console.log("onUpdateList 함수 호출됨");
                                        handleUpdateList(updatedList);}}/>
                     </div>
                 </div>

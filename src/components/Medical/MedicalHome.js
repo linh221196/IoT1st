@@ -72,7 +72,8 @@ const MedicalHome = () => {
             <div style={{ marginTop: "70px" }}>
                 <div className="content-container">
                     <div style={{ display: "flex", flexDirection: "row" }}>
-                        <UserTable list={patientList} onSelectUser={handleUserSelect} />
+                        <UserTable list={patientList} onSelectUser={handleUserSelect}
+                                   onUpdateList={(updatedList) => setPatientList([...updatedList])}/>
                         <NoticeMeasure selectedUserId={selectedUserId} />
                         <Chart />
                     </div>
