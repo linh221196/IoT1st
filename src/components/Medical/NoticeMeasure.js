@@ -45,13 +45,13 @@ const NoticeMeasure = ({ selectedUserId }) => {
             //list에서 필요 데이터 추출
             const dataToSend = {
                 userid: selectedUserId,
-                spo2: listUser.find(item => item.measurement === 'spo2')?.status || false,
-                airflow: listUser.find(item => item.measurement === 'airflow')?.status || false,
-                bodytemp: listUser.find(item => item.measurement === 'bodytemp')?.status || false,
-                ecg: listUser.find(item => item.measurement === 'ecg')?.status || false,
-                emg: listUser.find(item => item.measurement === 'emg')?.status || false,
-                gsr: listUser.find(item => item.measurement === 'gsr')?.status || false,
-                nibp: listUser.find(item => item.measurement === 'nibp')?.status || false,
+                spo2: listUser.find(item => item.measurement === 'spo2')?.status || false.toString(),
+                airflow: listUser.find(item => item.measurement === 'airflow')?.status || false.toString(),
+                bodytemp: listUser.find(item => item.measurement === 'bodytemp')?.status || false.toString(),
+                ecg: listUser.find(item => item.measurement === 'ecg')?.status || false.toString(),
+                emg: listUser.find(item => item.measurement === 'emg')?.status || false.toString(),
+                gsr: listUser.find(item => item.measurement === 'gsr')?.status || false.toString(),
+                nibp: listUser.find(item => item.measurement === 'nibp')?.status || false.toString(),
             };
 
             postModifyMeasure(
