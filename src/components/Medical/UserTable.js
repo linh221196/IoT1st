@@ -27,13 +27,14 @@ const UserTable = ({ list, onSelectUser, disableClick, onUpdateList }) => {
     const handleDelete = async (email) => {
         try {
             const data = await postDeletePatient(userInfo.email, email);
-            const updatedList = list.filter((item) => item.useremail !== email);
-            onUpdateList(updatedList);
-            console.log(data);
-            console.log(data);
-            console.log(data);
-            console.log(data);
-
+            // 성공 여부 확인
+            if (data.success) {
+                const updatedList = list.filter((item) => item.useremail !== email);
+                onUpdateList(updatedList);
+                alert("삭제에 성공했습니다.");
+            } else {
+                alert("삭제에 실패했습니다. 다시 시도해주세요.");
+            }
         } catch (error) {
             alert("서버에서 담당 환자 list에서 삭제에 실패했습니다.");
         }
