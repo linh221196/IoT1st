@@ -45,6 +45,21 @@ const MedicalHome = () => {
         }
     }
 
+    //삭제 이벤트 발생시
+    const handleUpdateList = (updatedList) => {
+        setPatientList([...updatedList]);
+
+        // 삭제된 사용자를 확인
+        const deletedUserId = patientList.find(
+            (patient) => !updatedList.some((item) => item.useremail === patient.useremail)
+        )?.useremail;
+
+        // 삭제된 사용자가 선택된 사용자라면 초기화
+        if (deletedUserId && deletedUserId === selectedUserId) {
+            setSelectedUserId(null);
+        }
+    };
+
     //여기에 처음 들어왔을 때
     useEffect(() => {
         if (userInfo && userInfo.role && !called) {
@@ -73,7 +88,8 @@ const MedicalHome = () => {
                 <div className="content-container">
                     <div style={{ display: "flex", flexDirection: "row" }}>
                         <UserTable list={patientList} onSelectUser={handleUserSelect}
-                                   onUpdateList={(updatedList) => setPatientList([...updatedList])}/>
+                                   onUpdateList={(updatedList) => {
+                                       handleUpdateList(updatedList);}}/>
                         <NoticeMeasure selectedUserId={selectedUserId} />
                         <Chart />
                     </div>
