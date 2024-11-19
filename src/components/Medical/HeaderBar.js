@@ -3,6 +3,11 @@ import {useSelector} from "react-redux";
 
 const HeaderBar = () => {
     const userInfo = useSelector(state => state.user.account)
+    console.log("userInfo:", userInfo);
+    console.log("userInfo:", userInfo);
+    console.log("userInfo:", userInfo);
+    console.log("userInfo:", userInfo);
+
 
     return (
         <div
@@ -63,7 +68,7 @@ const HeaderBar = () => {
                     fontStyle: 'italic',
                 }}
             >
-                {userInfo && userInfo.name && userInfo.email
+                {userInfo
                     ? `${userInfo.name}님 (${userInfo.email}) 환영합니다.`
                     : "로그인 정보를 확인할 수 없습니다."}
             </div>
