@@ -9,13 +9,13 @@ const paginationModel = { page: 0, pageSize: 10 };
 const NoticeMeasure = ({ selectedUserId }) => {
     const userInfo = useSelector(state => state.user.account);
     const [listUser, setListUser] = useState([
-        { measurement: 'spo2', userid: selectedUserId, status: 'spo2' },
+        /*{ measurement: 'spo2', userid: selectedUserId, status: 'spo2' },
         { measurement: 'airflow', userid: selectedUserId, status: 'airflow' },
         { measurement: 'bodytemp', userid: selectedUserId, status: 'bodytemp' },
         { measurement: 'ecg', userid: selectedUserId, status: 'ecg' },
         { measurement: 'emg', userid: selectedUserId, status: 'emg' },
         { measurement: 'gsr', userid: selectedUserId, status: 'gsr' },
-        { measurement: 'nibp', userid: selectedUserId, status: 'nibp' },
+        { measurement: 'nibp', userid: selectedUserId, status: 'nibp' },*/
     ]);
 
     const LoadList = async () => {
