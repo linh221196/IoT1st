@@ -76,6 +76,8 @@ const NoticeMeasure = ({ selectedUserId }) => {
     useEffect(() => {
         if (userInfo && userInfo.role && selectedUserId) {
             LoadList();
+        } else {
+            setListUser(null);
         }
     }, [userInfo.role, selectedUserId]);
 
