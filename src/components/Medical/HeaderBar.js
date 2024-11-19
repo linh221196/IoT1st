@@ -5,6 +5,12 @@ import './HeaderBar.scss'; // SCSS 파일을 연결해 스타일을 분리
 const HeaderBar = () => {
     const userInfo = useSelector(state => state.user.account);
 
+    console.log(userInfo);
+    console.log(userInfo);
+    console.log(userInfo);
+    console.log(userInfo);
+
+
     return (
         <header className="header-bar">
             {/* 로고 */}
