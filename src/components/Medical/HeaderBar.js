@@ -68,7 +68,7 @@ const HeaderBar = () => {
                     fontStyle: 'italic',
                 }}
             >
-                {userInfo
+                {userInfo && userInfo.role === "Medical"
                     ? `${userInfo.name}님 (${userInfo.email}) 환영합니다.`
                     : "로그인 정보를 확인할 수 없습니다."}
             </div>
