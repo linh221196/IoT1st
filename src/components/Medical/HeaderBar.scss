@@ -1,0 +1,46 @@
+.header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+/*  background-color: #172A45; !* 어두운 네이비 색상 *!*/
+/*  background-color: #F5F5F5; !*밝은 회색*!*/
+/*  background-color: #324B78; !*미드나이트 블루*!*/
+/*  background-color: #FFFFFF; !*투명한 흰색*!*/
+  background-color: #3D5A80; /*코발트 블루*/
+  color: #fff;
+  padding: 10px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .header-logo {
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .header-nav {
+    display: flex;
+    gap: 20px;
+
+    .header-link {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      transition: color 0.3s;
+
+      &:hover {
+        color: #1abc9c; /* 링크에 마우스를 올릴 때의 색상 */
+      }
+    }
+  }
+
+  .header-user-info {
+    font-size: 16px;
+    font-style: italic;
+    color: #ddd;
+  }
+}
