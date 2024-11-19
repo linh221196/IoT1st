@@ -57,7 +57,7 @@ const PatientNoticeMeasure = ({ showNoticeModal, setNoticeModalShow, fullscreen,
                                 </li>
                             ))
                     ) : (
-                        <li>활성화된 항목이 없습니다.</li>
+                        <li>필수로 검사할 요소가 없습니다.</li>
                     )}
                 </ul>
             </Modal.Body>

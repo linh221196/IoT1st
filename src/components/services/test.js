@@ -1,67 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { postMeasurePatient } from "../services/apiServices";
+import './test.scss';
 
 const Test = () => {
+    const [listUser, setListUser] = useState([
+        { measurement: 'spo2', status: false },
+        { measurement: 'airflow', status: true },
+        { measurement: 'bodytemp', status: false },
+        { measurement: 'ecg', status: true },
+        { measurement: 'emg', status: false },
+        { measurement: 'gsr', status: true },
+        { measurement: 'nibp', status: false }
+    ]);
+
+
     return (
-        <div
-            style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                backgroundColor: '#333',
-                color: '#fff',
-                padding: '10px 20px',
-                position: 'fixed',
-                width: '100%',
-                top: 0,
-                zIndex: 1000,
-            }}
-        >
-            {/* 로고 */}
-            <div
-                style={{
-                    fontSize: '24px',
-                    fontWeight: 'bold',
-                    cursor: 'pointer',
-                }}
-            >
-                케어 메이트
-            </div>
-
-            {/* 메뉴 링크 */}
-            <nav style={{ display: 'flex', gap: '20px' }}>
-                <a
-                    href="/MedicalHome"
-                    style={{
-                        color: '#fff',
-                        textDecoration: 'none',
-                        fontSize: '16px',
-                        fontWeight: '500',
-                    }}
-                >
-                    MedicalHome
-                </a>
-                <a
-                    href="/MedicalAdd"
-                    style={{
-                        color: '#fff',
-                        textDecoration: 'none',
-                        fontSize: '16px',
-                        fontWeight: '500',
-                    }}
-                >
-                    MedicalAddPatient
-                </a>
-            </nav>
-
-            {/* 오른쪽 글귀 */}
-            <div
-                style={{
-                    fontSize: '16px',
-                    fontStyle: 'italic',
-                }}
-            >
-                User1님 환영합니다.
-            </div>
+        <div className="note-list">
+            <h3>측정 필요 요소</h3>
+            <ul>
+                {listUser.filter(item => item.status).length > 0 ? (
+                    listUser
+                        .filter(item => item.status)
+                        .map((item, index) => (
+                            <li key={index} className="note-item">
+                                <div className="note-date">{item.measurement}</div>
+                            </li>
+                        ))
+                ) : (
+                    <p>필수로 검사할 요소가 없습니다.</p>
+                )}
+            </ul>
         </div>
     );
 };

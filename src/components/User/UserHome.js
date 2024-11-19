@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import {useNavigate} from "react-router-dom";
 import {postTokenCheck} from "../services/apiServices";
 import {useEffect} from "react";
+import Test from "../services/test";
 
 const UserHome = () => {
   const userInfo = useSelector(state => state.user.account);
@@ -43,6 +44,7 @@ const UserHome = () => {
           <UserInfo />
         </Col>
       </Row>
+      <Test />
     </Container>
 
   )
