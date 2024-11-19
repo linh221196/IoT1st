@@ -5,12 +5,6 @@ import './HeaderBar.scss'; // SCSS 파일을 연결해 스타일을 분리
 const HeaderBar = () => {
     const userInfo = useSelector(state => state.user.account);
 
-    console.log(userInfo);
-    console.log(userInfo);
-    console.log(userInfo);
-    console.log(userInfo);
-
-
     return (
         <header className="header-bar">
             {/* 로고 */}
@@ -25,7 +19,7 @@ const HeaderBar = () => {
             {/* 오른쪽 정보 */}
             <div className="header-user-info">
                 {userInfo && userInfo.role === "Medical"
-                    ? `${userInfo.name}님 (${userInfo.email}) 환영합니다.`
+                    ? `${userInfo.username}님 (${userInfo.email}) 환영합니다.`
                     : "로그인 정보를 확인할 수 없습니다."}
             </div>
         </header>
