@@ -18,6 +18,7 @@ import {
     putEditUserData
 } from "../services/apiServices";
 import {useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 dayjs.locale('ko');
 
 const Calendar = () => {
@@ -26,6 +27,8 @@ const Calendar = () => {
     //리듁스에서 꺼내오기
     const userInfo = useSelector(state => state.user.account)
     const isAuthenticated = useSelector(state => state.user.isAuthenticated)
+
+    const navigate = useNavigate();
 
     const [newValue, setValue] = useState(dayjs())
     const [showModal, setShowModal] = useState(false);
@@ -190,6 +193,9 @@ const Calendar = () => {
                 allVolunteerCall();
             }
             setCalled(true); // 첫 호출 후에 called를 true로 설정하여 이후 호출 방지
+        } else {
+/*            alert("로그인 후 이용하세요");
+            navigate('/');*/
         }
     }, [userInfo.role, called]);
 
