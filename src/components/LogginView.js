@@ -9,7 +9,7 @@ import FindPwModal from './FindPwModal';
 import {postCreateNewUser, postLoggin, postTokenCheck, postUserId} from './services/apiServices';
 import dayjs from 'dayjs';
 import { useDispatch, useSelector } from "react-redux";
-import { doLoggin } from '../redux/action/userAction';
+import {doLoggin, logoutUser} from '../redux/action/userAction';
 
 const LogginView = () => {
     const navigate = useNavigate();
@@ -132,6 +132,10 @@ const LogginView = () => {
             } else {
                 navigate('/VolunteerHome');
             }
+        } else {
+            dispatch(logoutUser());
+            console.log(userInfo);
+            navigate('/');
         }
     }, [isLoggin, navigate, userInfo.role]);
 
