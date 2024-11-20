@@ -28,12 +28,13 @@
       margin: 0;
       height: 450px;
     }
-    .login-container {
+    .userinfo-container, .login-container {
       display: flex;
-      align-items: center; /* 수직 정렬 */
-      justify-content: center; /* 가로 정렬 */
-      height: 100%; /* 부모 Row의 높이를 채움 */
-      min-height: 400px; /* 최소 높이를 명시적으로 설정 */
+      align-items: center;
+      justify-content: center;
+      height: 100%; /* 부모의 높이를 기준으로 설정 */
+      max-height: 400px; /* 필요하면 최대 높이 제한 */
+      min-height: 400px; /* 최소 높이 제한 */
     }
   }
 }

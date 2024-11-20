@@ -3,6 +3,7 @@ import { Icon } from '@iconify/react';
 import { format, addMonths, subMonths, startOfMonth, endOfMonth, startOfWeek, endOfWeek, isSameMonth, isSameDay, addDays } from 'date-fns';
 import './Measurement.scss'; // SCSS 파일을 import
 import NoteList from '../User/NoteList'
+import {useSelector} from "react-redux";
 
 const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
     return (
@@ -118,7 +119,8 @@ const Measurement = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [measurements, setMeasurements] = useState([]);
     const [measurementsByDate, setMeasurementsByDate] = useState({});
-    const [userid, setUserid] = useState('user123'); // 예시 사용자 ID
+
+    const userInfo = useSelector(state => state.user.account);
 
     // 백엔드에서 메모 데이터를 가져오는 함수
     const fetchNotes = async (month) => {
@@ -185,7 +187,7 @@ const Measurement = () => {
             </div>
             <div className="note-list">
                 <NoteList measurements={measurementsByDate[selectedDateString] || []} date={selectedDateString}
-                          userid={userid}/>
+                          userid={userInfo.email}/>
             </div>
         </div>
     );

@@ -8,29 +8,42 @@
   h3 {
     font-size: 1.2rem;
     color: #333;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem; /* 기본적인 아래쪽 여백 */
+    text-align: center;
   }
 
-  p {
-    color: #666;
-    font-style: italic;
+  /* h3와 NoteItem들 사이 간격 추가 */
+  h3:last-of-type {
+    margin-bottom: 1.5rem; /* 마지막 h3와 NoteItem 사이 간격 */
   }
 }
 
 .note-item {
-  margin-bottom: 1rem;
-  padding: 1rem;
+  display: flex; /* Flexbox로 가로 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  margin-bottom: 0.5rem; /* NoteItem 간 간격 */
+  padding: 0.5rem 1rem; /* 내부 여백 */
   border-radius: 4px;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-  .note-date {
+  .note-measurement {
+    flex: 1; /* 측정값이 남은 공간을 차지 */
     font-weight: bold;
+    font-size: 1rem;
     color: #333;
-    margin-bottom: 0.5rem;
+    text-align: left; /* 항상 왼쪽 정렬 */
   }
 
-  .note-content {
-    color: #666;
+  .note-status {
+    width: 120px; /* 상태 텍스트의 고정 너비 */
+    text-align: left; /* 상태 텍스트와 아이콘 정렬 */
+    display: flex; /* 아이콘과 텍스트를 같은 줄에 정렬 */
+    align-items: center;
+    gap: 0.5rem; /* 아이콘과 텍스트 사이 간격 */
+  }
+
+  .status-icon {
+    font-size: 1rem; /* 상태 아이콘 크기 */
   }
 }

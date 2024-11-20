@@ -130,18 +130,26 @@ const UserInfo = () => {
     }
 
     return (
-        <div>
+        <div
+            style={{
+                width: '100%',
+                maxWidth: '400px',
+                height: 'auto',
+                margin: '0 auto',
+                transform: 'translateY(80px)', // 아래로 100px 이동
+            }}
+        >
             <Container className="user-imageContainer">
-                <Image className="user-image" src={userInfo?.image ? userInfo.image : code} rounded />
+                <Image className="user-image" src={userInfo?.image ? userInfo.image : code} rounded/>
             </Container>
             <Paper className="paper-container" elevation={16}>
                 <Table size="small" aria-label="a dense table">
                     <TableBody>
-                        <TableRow >
+                        <TableRow>
                             <TableCell component="th" scope="row">성함</TableCell>
                             <TableCell align="right"> {userInfo?.username} </TableCell>
                         </TableRow>
-                        <TableRow >
+                        <TableRow>
                             <TableCell component="th" scope="row">ID</TableCell>
                             <TableCell align="right">{userInfo?.email} </TableCell>
                         </TableRow>
@@ -161,18 +169,16 @@ const UserInfo = () => {
             </Paper>
 
             <div className="button-container">
-                <Button variant="outline-success" className="me-3" onClick={handleUpdate} >
+                {/*<Button variant="outline-success" className="me-3" onClick={handleUpdate} >
                     수정
                     <FiEdit />
                 </Button>
                 <Button variant="outline-primary" className="me-3" onClick={handleUpdate} >
                     비밀번호
+                </Button>*/}
+                <Button variant="outline-danger" onClick={handleLogout}>
+                    Loggout
                 </Button>
-                {isAuthenticated && 
-                    <Button variant="outline-danger" onClick={handleLogout}>
-                        Loggout
-                    </Button>
-                }
                 <UserInfoUpdateModal
                     userInfo={userInfo}
                     show={showModal}

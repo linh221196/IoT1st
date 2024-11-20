@@ -13,26 +13,7 @@ const UserHome = () => {
   const isAuthenticated = useSelector(state => state.user.isAuthenticated)
   console.log('account: ', userInfo, ' isAuthenticated: ', isAuthenticated)
 
-  const navigate = useNavigate();
 
-  /*const TokenCheck = async () => {
-    try {
-      const data = await postTokenCheck(userInfo.email, userInfo.refreshToken)
-
-      if (data.status === "TokenInvalid") {
-        alert("유효하지 않은 토큰");
-        navigate('/');
-      } else {
-        console.log('토큰사용자 인증완료')
-      }
-    } catch (error) {
-      alert("오류가 발생했습니다. 다시 시도해 주세요.");
-    }
-  }
-
-  useEffect(() => {-/.
-    TokenCheck();
-  }, []);*/
 
   return (
     <Container className="homecontent-container">
@@ -40,7 +21,7 @@ const UserHome = () => {
         <Col md={8} className="border-end" >
           <Content />
         </Col>
-        <Col md={4} >
+        <Col md={4} className="userinfo-container">
           <UserInfo />
         </Col>
       </Row>
