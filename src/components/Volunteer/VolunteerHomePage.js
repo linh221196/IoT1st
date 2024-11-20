@@ -11,13 +11,10 @@ const VolunteerHome = () => {
                 <Col sm={8}>
                 <Calendar/>
                 </Col>
-                <Col>
+                <Col sm={4}>
                 <UserInfo />
                 </Col>
             </Row>
-            
-           
-
         </>
 
     )

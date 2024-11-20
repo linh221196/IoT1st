@@ -15,32 +15,32 @@ const Content = () => {
 
   }
   return (
-    <div>
-      <Container >
-        <Row className="r-content">
-          <Col className="c-content">
-            <NavLink href="/DeviceView">기계 안내</NavLink>
-          </Col>
-          <Col className="c-content">
-            <NavLink onClick={handleNoticeModalShow}>주의 할 요소</NavLink>
-            <PatientNoticeMeasure
-              showNoticeModal={showNoticeModal}
-              handleNoticeModalShow={handleNoticeModalShow}
-              setNoticeModalShow={setNoticeModalShow}
-              fullscreen={fullscreen}
-            />
-          </Col>
-        </Row>
-        <Row className="r-content">
-          <Col className="c-content">
-            <NavLink href="/Measurement">측정 치수</NavLink>
-          </Col>
-          <Col className="c-content">
-            <NavLink href="/Volunteer" >자원 봉사</NavLink>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+      <div className="content-wrapper">
+        <div className="inner-container">
+          <Row className="r-content">
+            <Col className="c-content">
+              <NavLink href="/DeviceView">기계 안내</NavLink>
+            </Col>
+            <Col className="c-content">
+              <NavLink onClick={handleNoticeModalShow}>주의 할 요소</NavLink>
+              <PatientNoticeMeasure
+                  showNoticeModal={showNoticeModal}
+                  handleNoticeModalShow={handleNoticeModalShow}
+                  setNoticeModalShow={setNoticeModalShow}
+                  fullscreen={fullscreen}
+              />
+            </Col>
+          </Row>
+          <Row className="r-content">
+            <Col className="c-content">
+              <NavLink href="/Measurement">측정 치수</NavLink>
+            </Col>
+            <Col className="c-content">
+              <NavLink href="/Volunteer">자원 봉사</NavLink>
+            </Col>
+          </Row>
+        </div>
+      </div>
   );
 };
 

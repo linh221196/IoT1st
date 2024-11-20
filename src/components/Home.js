@@ -10,13 +10,11 @@ const Home = () => {
         <Col md={8} className="border-end" >
           <Content />
         </Col>
-        <Col md={4} >
+        <Col md={4} className="login-container">
           <LogginView />
         </Col>
       </Row>
     </Container>
-
-
   )
 }
 

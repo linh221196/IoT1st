@@ -133,30 +133,6 @@ const LogginView = () => {
                 navigate('/VolunteerHome');
             }
         }
-        /*if (isLoggin) {
-            const TokenCheck = async () => {
-                try {
-                    const data = await postTokenCheck(userInfo.email, userInfo.refreshToken)
-
-                    if (data.status === "TokenInvalid") {
-                        alert("유효하지 않은 토큰");
-                    } else {
-                        // 유효한 토큰일 경우에만 페이지 이동
-                        if (userInfo.role === "Patient" || userInfo.role === "user") {
-                            navigate('/UserHome');
-                        } else if (userInfo.role === "ADMIN" || userInfo.role === "Medical") {
-                            navigate('/MedicalHome');
-                        } else {
-                            navigate('/VolunteerHome');
-                        }
-                    }
-                } catch (error) {
-                    alert("오류가 발생했습니다. 다시 시도해 주세요.");
-                }
-            };
-
-            TokenCheck();
-        }*/
     }, [isLoggin, navigate, userInfo.role]);
 
     return (
@@ -173,13 +149,13 @@ const LogginView = () => {
 
             <Button variant="primary" type="submit">Submit</Button>
 
-            <div className='findPw-container'>
+{/*            <div className='findPw-container'>
                 <Form.Text className="text-muted" size="sm">
                     비밀번호 잊으세요?
                 </Form.Text>
                 <NavLink onClick={() => setFindPwShowModal(true)}>비밀번호 찾기</NavLink>
                 <FindPwModal show={showFindPwModal} handleFindPwClose={() => setFindPwShowModal(false)} />
-            </div>
+            </div>*/}
 
             <div className='signUp-container'>
                 <Form.Text className="text-muted" size="sm">

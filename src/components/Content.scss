@@ -1,3 +1,5 @@
+
+
 @mixin flex-center {
   display: flex;
   justify-content: center;
@@ -8,32 +10,76 @@
   border-radius: 5px;
 }
 
+.content-wrapper {
+  width: 100%; /* Col의 너비를 100% 사용 */
+  height: 100%; /* Col의 높이를 100% 사용 */
+  display: flex;
+  flex-direction: column;
+}
+
+.inner-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; // 행 간 간격 조정
+  gap: 10px; // 행 간 간격
+  align-items: stretch; // 행 너비를 균일하게 맞춤
+}
+
 .r-content {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly; // 열 간 간격 균등 배치
+  align-items: center; // 세로 정렬
+  flex: 1;
+  gap: 5px; // 열 사이 간격
+  height: auto;
 
   .c-content {
     @include flex-center();
     @include border-radius();
-    flex: 1 1 300px; // 모든 Col 요소의 기본 크기를 180px로 설정
-    min-width: 180px; // 최소 너비를 고정하여 요소가 너무 작아지지 않도록 설정
-    max-width: 300px;
-    width: calc(25% - 20px);
-    margin: 10px;
-    height: 100px;
+    flex: 1 1 280px; // 기본 크기를 280px로 조정
+    min-width: 160px; // 최소 너비를 조정
+    max-width: 280px; // 최대 너비를 조정
+    width: calc(22% - 10px); // 줄어든 간격에 맞춰 너비 설정
+    margin: 4px; // 줄어든 여백에 맞춰 조정
+    height: 240px; // 높이를 살짝 줄임
 
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     .nav-link {
       position: relative;
+      text-align: center;
       padding-bottom: 2px;
+      font-size: 22px; // 글자 크기를 키움 (기본값을 변경)
 
       &:hover {
-        font-size: larger;
-        text-decoration: none; // Disable default underline
-        border-bottom: 1px solid; // Add custom underline
+        font-size: 24px;
+        text-decoration: none;
+        border-bottom: 1px solid;
         border-color: rgb(247, 247, 248);
       }
     }
+  }
+}
+
+// 첫 번째 행의 아래 여백 줄임
+.r-content:first-of-type {
+  margin-bottom: 8px; // 기존 여백보다 더 줄임
+}
+// 두 번째 행의 위 여백 줄임
+.r-content:nth-of-type(2) {
+  margin-top: 8px; // 첫 번째와 동일한 여백 설정
+}
+
+
+.homepage-links-container {
+  height: 450px; /* .content-container와 동일한 높이 */
+  display: flex;
+  flex-direction: column;
+
+  .r-content {
+    flex: 1; /* Row가 동일한 높이를 채우도록 설정 */
   }
 }

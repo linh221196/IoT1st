@@ -35,7 +35,7 @@ const UserHome = () => {
   }, []);*/
 
   return (
-    <Container >
+    <Container className="homecontent-container">
       <Row className="home-container border rounded shadow p-3 mb-5 " >
         <Col md={8} className="border-end" >
           <Content />
@@ -44,7 +44,6 @@ const UserHome = () => {
           <UserInfo />
         </Col>
       </Row>
-      <Test />
     </Container>
 
   )
