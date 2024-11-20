@@ -132,10 +132,6 @@ const LogginView = () => {
             } else {
                 navigate('/VolunteerHome');
             }
-        } else {
-            dispatch(logoutUser());
-            console.log(userInfo);
-            navigate('/');
         }
     }, [isLoggin, navigate, userInfo.role]);
 
