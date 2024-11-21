@@ -1,6 +1,8 @@
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import {PickersDay, StaticDatePicker} from '@mui/x-date-pickers';
+import ReactCalendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import dayjs from 'dayjs';
@@ -41,6 +43,12 @@ const Calendar = () => {
         { noteName : "환자", noteDate: "2024-11-05", noteContent: "2nd note", noteName2 : "봉사자", noteEmail: "", noteEmail2: ""}
     ]);
     const [view, setView] = useState('day');
+
+    const [date, setDate] = useState(new Date()); // 현재 날짜를 기본값으로 설정
+
+    const handleDateChange = (newDate) => {
+        setDate(newDate); // 날짜를 선택하면 업데이트
+    };
 
     
     const handleAddEvent = () => {
@@ -209,7 +217,7 @@ const Calendar = () => {
             <div className="container">
                 <Row className='g-4'>
                     <Col className='calendar-container border bg-body '>
-                        <StaticDatePicker
+                        {/*<StaticDatePicker
                             orientation='portrait'
                             openTo={view}
                             value={newValue}
@@ -231,7 +239,21 @@ const Calendar = () => {
                                 },
                             }}
                             disablePast
+                        />*/}
+                        <ReactCalendar
+                            onChange={handleDateChange}
+                            value={date} // 선택된 날짜를 표시
                         />
+                        <style>
+                            {`
+                            .highlight {
+                                background-color: #ffcc80;
+                                border-radius: 50%;
+                                color: #d84315;
+                                font-weight: bold;
+                            }
+                        `}
+                        </style>
                     </Col>
 
                 </Row>
