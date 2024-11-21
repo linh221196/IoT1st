@@ -234,32 +234,32 @@ const Calendar = () => {
                         />
                     </Col>
 
-                    <Col className='note-container '>
-                        <Note
-                            noteList={noteList}
-                            setNoteList={setNoteList}
-                            newValue={newValue}
-                            note={note}
-                            setNote={setNote}
-                            isFirstList={true}
-                            handleAssignmentAction={handleAssignmentAction}
-                            handleCancelAction={handleCancelAction}
-                        />
-                    </Col>
-
-                    <Col className='second-note-container'>
-                        <Note
-                            noteList={secondNoteList}
-                            setNoteList={setSecondNoteList}
-                            newValue={newValue}
-                            note={note}
-                            setNote={setNote}
-                            isFirstList={false}
-                            handleCancelAction={handleCancelAction}
-                        />
-                    </Col>
-
                 </Row>
+
+                <Col className='note-container '>
+                    <Note
+                        noteList={noteList}
+                        setNoteList={setNoteList}
+                        newValue={newValue}
+                        note={note}
+                        setNote={setNote}
+                        isFirstList={true}
+                        handleAssignmentAction={handleAssignmentAction}
+                        handleCancelAction={handleCancelAction}
+                    />
+                </Col>
+
+                <Col className='second-note-container'>
+                    <Note
+                        noteList={secondNoteList}
+                        setNoteList={setSecondNoteList}
+                        newValue={newValue}
+                        note={note}
+                        setNote={setNote}
+                        isFirstList={false}
+                        handleCancelAction={handleCancelAction}
+                    />
+                </Col>
 
 
                 <Modal show={showModal} onHide={handleClose} style={{minHeight: '300px'}}>
