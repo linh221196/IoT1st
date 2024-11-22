@@ -34,19 +34,11 @@ const UserInfo = () => {
     const handleLogout = () => {
         console.log('logoutUser 디스패치 호출');
         dispatch(logoutUser());
-
-        setTimeout(() => {
-            console.log('로그아웃 후 상태 확인:', { userInfo, isAuthenticated });
-            navigate('/');
-        }, 100); // 상태 변경 확인을 위해 지연 추가
+        navigate('/');
     };
 
     useEffect(() => {
         console.log('Redux 상태 변경 감지:', { userInfo, isAuthenticated });
-    }, [userInfo, isAuthenticated]);
-
-    useEffect(() => {
-        console.log('Redux 상태 변경:', { userInfo, isAuthenticated });
     }, [userInfo, isAuthenticated]);
 
 

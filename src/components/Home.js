@@ -2,7 +2,27 @@ import { Col, Container, Row, Stack } from "react-bootstrap"
 import './Home.scss'
 import Content from "./Content"
 import LogginView from "./LogginView"
+import {useSelector} from "react-redux";
+import { useNavigate } from 'react-router-dom';
+import {useEffect} from "react";
+import userInfo from "./User/UserInfo";
+
 const Home = () => {
+  const navigate = useNavigate();
+  const isAuthenticated = useSelector(state => state.user.isAuthenticated)
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      if (userInfo.role === "Patient" || userInfo.role === "user") {
+        navigate('/UserHome');
+      } else if (userInfo.role === "ADMIN" || userInfo.role === "Medical") {
+        navigate('/MedicalHome');
+      } else if (userInfo.role === "Volunteer") {
+        navigate('/VolunteerHome');
+      }
+    }
+  }, [navigate, userInfo.role, isAuthenticated]);
+
 
   return (
     <Container className="homecontent-container" >
