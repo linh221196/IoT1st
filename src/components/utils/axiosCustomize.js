@@ -69,7 +69,7 @@ instance.interceptors.response.use(
             try {
                 const newAccessToken = await refreshAccessToken();
                 if (newAccessToken) {
-                    alert("갱신 진행중");
+                    alert("토큰 갱신 진행중");
                     // 갱신된 토큰으로 Authorization 헤더 업데이트
                     instance.defaults.headers.common['Authorization'] = `Bearer ${newAccessToken}`;
                     processQueue(null, newAccessToken);
