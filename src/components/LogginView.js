@@ -93,9 +93,10 @@ const LogginView = () => {
                 setIsLoggin(true);
                 dispatch(doLoggin(data));
                 const accessToken = data.data.accessToken
+                const refreshToken = data.data.refreshToken
                 localStorage.setItem('accessToken', accessToken)
+                localStorage.setItem('refreshToken', refreshToken)
                 alert("Login successfully!");
-                //alert(localStorage.getItem('accessToken'))
             } else if (data.status === "PasswordFail") {
                 alert("비밀번호가 일치하지 않습니다.");
             } else if (data.status === "IdFail") {
@@ -150,7 +151,7 @@ const LogginView = () => {
 
             <Button variant="primary" type="submit">Submit</Button>
 
-{/*            <div className='findPw-container'>
+            {/*            <div className='findPw-container'>
                 <Form.Text className="text-muted" size="sm">
                     비밀번호 잊으세요?
                 </Form.Text>

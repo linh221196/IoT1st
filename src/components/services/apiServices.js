@@ -2,18 +2,18 @@ import axios from "../utils/axiosCustomize";
 
 // 토큰 갱신 함수
 export async function refreshAccessToken() {
-    //const refreshToken = userInfo.refreshToken; // 리프레시 토큰 가져오기
+    const refreshToken = localStorage.getItem('refreshToken');
 
-    const refreshToken = 100;
     try {
         const response = await axios.post('/refresh', { refreshToken });
-        const { accessToken } = response.data; // 응답에서 새로운 억세스 토큰 추출
+        console.log("서버 응답 전체:", response); // 전체 응답 확인
+        const accessToken = response; // 응답에서 새로운 억세스 토큰 추출
+        console.log("새로운 억세스 토큰 : ", accessToken)
         localStorage.setItem('accessToken', accessToken); // 새로운 토큰을 로컬 스토리지에 저장
         alert("갱신 진행중");
         return accessToken;
     } catch (error) {
         alert("Failed to refresh access token:", error);
-        window.location.href = '/'; // 실패 시 로그인 페이지로 이동
         return null;
     }
 }
