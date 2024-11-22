@@ -92,7 +92,8 @@ const LogginView = () => {
             if (data.status === "success") {
                 setIsLoggin(true);
                 dispatch(doLoggin(data));
-                localStorage.setItem('accessToken', userInfo.accessToken)
+                const accessToken = data.data.accessToken
+                localStorage.setItem('accessToken', accessToken)
                 alert("Login successfully!");
                 //alert(localStorage.getItem('accessToken'))
             } else if (data.status === "PasswordFail") {
