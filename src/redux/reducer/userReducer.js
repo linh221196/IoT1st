@@ -48,6 +48,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
             };
 
         case LOGOUT_USER:
+            console.log(`check action: `, action)
             return INITIAL_STATE;
         //린
         //     account: {

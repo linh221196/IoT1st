@@ -1,6 +1,7 @@
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import {PickersDay, StaticDatePicker} from '@mui/x-date-pickers';
+import { DateCalendar } from '@mui/x-date-pickers';
 import ReactCalendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import Row from 'react-bootstrap/Row';
@@ -21,6 +22,7 @@ import {
 } from "../services/apiServices";
 import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
+
 dayjs.locale('ko');
 
 const Calendar = () => {
@@ -47,7 +49,8 @@ const Calendar = () => {
     const [date, setDate] = useState(new Date()); // 현재 날짜를 기본값으로 설정
 
     const handleDateChange = (newDate) => {
-        setDate(newDate); // 날짜를 선택하면 업데이트
+        const today = dayjs(); // 오늘 날짜를 가져옴
+        setValue(today);
     };
 
     
@@ -217,33 +220,33 @@ const Calendar = () => {
             <div className="container">
                 <Row className='g-4'>
                     <Col className='calendar-container border bg-body '>
-                        {/*<StaticDatePicker
-                            orientation='portrait'
-                            openTo={view}
-                            value={newValue}
-                            onViewChange={(newView) => setView(newView)}
-                            onChange={(newValue) => setValue(newValue)}
-                            renderInput={(params) => <input {...params} />}
-                            locale={ko}
-                            views={['year', 'month', 'day']}
-                            format='MM월 DD일'
-                            localeText={{
-                                toolbarTitle: '날짜 선택',
-                                todayButtonLabel: '오늘',
-                                okButtonLabel: '추가',
-                            }}
-                            slotProps={{
-                                actionBar: {
-                                    actions: userInfo.role === "Patient" ? ['today', 'accept'] : [],
-                                    onAccept: handleAddEvent
-                                },
-                            }}
-                            disablePast
-                        />*/}
-                        <ReactCalendar
+                        <div style={{padding: '20px', width: '100%', margin: '0 auto', border: '1px solid #ddd'}}>
+                            {/* Toolbar */}
+                            <div style={{textAlign: 'center', marginBottom: '10px'}}>
+                                <strong>{newValue.format('YYYY년 MM월 DD일')}</strong>
+                            </div>
+
+                            {/* Calendar */}
+                            <DateCalendar
+                                value={newValue}
+                                onChange={(newValue) => setValue(newValue)}
+                                disablePast
+                                views={['year', 'month', 'day']}
+                                view={view}
+                                onViewChange={(newView) => setView(newView)}
+                                locale="ko"
+                            />
+
+                            {/* Action Bar */}
+                            <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '10px'}}>
+                                <button onClick={handleDateChange}>오늘</button>
+                                <button onClick={handleAddEvent}>확인</button>
+                            </div>
+                        </div>
+                        {/*<ReactCalendar
                             onChange={handleDateChange}
                             value={date} // 선택된 날짜를 표시
-                        />
+                        />*/}
                         <style>
                             {`
                             .highlight {
