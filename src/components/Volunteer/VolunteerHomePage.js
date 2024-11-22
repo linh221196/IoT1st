@@ -1,21 +1,17 @@
 import UserInfo from '../User/UserInfo'
 import Calendar from '../Calendar/Calendar'
-import { Row,Col } from 'react-bootstrap'
+import { Container, Row,Col } from 'react-bootstrap'
+import './VolunteerHome.scss';
 
 const VolunteerHome = () => {
     return (
-        <>
-            Volunteer Home Page 
-            user's role 
+        <Container className="vol-container">
             <Row>
-                <Col sm={8}>
-                <Calendar/>
-                </Col>
-                <Col sm={4}>
-                <UserInfo />
+                <Col>
+                    <Calendar/>
                 </Col>
             </Row>
-        </>
+        </Container>
 
     )
 }

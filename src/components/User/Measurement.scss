@@ -115,7 +115,7 @@ $dark-gray-color: #686868;
       @include size(20%, 100%);
       @include flex-row(flex-end, baseline);
       svg {
-        @include size(11%, fit-content);
+        @include size(8%, fit-content);
         margin-left: 5%;
         color: transparentize(gray, 0.2);
         &:hover {
@@ -131,10 +131,10 @@ $dark-gray-color: #686868;
     @include flex-row(space-between, center);
     font-weight: 600;
     font-size: 0.65em;
-    padding: 0;
+    padding: 10px;
     color: $dark-gray-color;
     .col {
-      @include size(12.9%, 100%);
+      @include size(13%, 100%);
       @include flex-column(flex-end, flex-start);
       padding-left: 1%;
       background: transparentize($step-color, 0.6);
@@ -150,7 +150,6 @@ $dark-gray-color: #686868;
       .col {
         @include size(13.5%, 93%);
         @include flex-row(flex-start, flex-start);
-
         border: 0.4px solid transparentize(gray, 0.4);
         border-radius: 3px;
         font-size: 0.8em;
