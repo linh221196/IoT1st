@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { refreshAccessToken } from '../services/apiServices';
+import { store } from '../../redux/store';
+import { logoutUser } from '../../redux/action/userAction';
 
 const instance = axios.create({
     baseURL: 'http://localhost:8081/',
@@ -74,11 +76,13 @@ instance.interceptors.response.use(
                     return instance(originalRequest); // 재시도
                 } else {
                     processQueue(new Error('Failed to refresh token'), null);
+                    store.dispatch(logoutUser());
                     window.location.href = '/'; // 토큰 갱신 실패 시 리다이렉트
                     return Promise.reject(error);
                 }
             } catch (refreshError) {
                 processQueue(refreshError, null);
+                store.dispatch(logoutUser());
                 window.location.href = '/';
                 return Promise.reject(refreshError);
             } finally {

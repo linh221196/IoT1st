@@ -1,10 +1,10 @@
 import axios from "../utils/axiosCustomize";
-import {useSelector} from "react-redux";
-import userInfo from "../User/UserInfo";
+
 // 토큰 갱신 함수
 export async function refreshAccessToken() {
-    const refreshToken = userInfo.refreshToken; // 리프레시 토큰 가져오기
+    //const refreshToken = userInfo.refreshToken; // 리프레시 토큰 가져오기
 
+    const refreshToken = 100;
     try {
         const response = await axios.post('/refresh', { refreshToken });
         const { accessToken } = response.data; // 응답에서 새로운 억세스 토큰 추출
