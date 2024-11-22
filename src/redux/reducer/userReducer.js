@@ -48,7 +48,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
             };
 
         case LOGOUT_USER:
-            console.log(`check action: `, action)
+            console.log(`current state before reset: `, state);
             return INITIAL_STATE;
         //린
         //     account: {

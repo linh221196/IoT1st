@@ -34,9 +34,12 @@ const UserInfo = () => {
     //로그아웃
     const handleLogout = () => {
         dispatch(logoutUser());
-        console.log('현재상태', userInfo);
         navigate('/');
     };
+
+    useEffect(() => {
+        console.log('Redux 상태 변경:', { userInfo, isAuthenticated });
+    }, [userInfo, isAuthenticated]);
 
 
     const handleUpdate = () => {
