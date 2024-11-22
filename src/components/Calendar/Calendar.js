@@ -22,6 +22,7 @@ import {
 } from "../services/apiServices";
 import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
+import {MdDeleteForever, MdEdit} from "react-icons/md";
 
 dayjs.locale('ko');
 
@@ -218,15 +219,14 @@ const Calendar = () => {
             adapterLocale="ko"
         >
             <div className="container">
-                <Row className='g-4'>
-                    <Col className='calendar-container border bg-body '>
-                        <div style={{padding: '20px', width: '100%', margin: '0 auto', border: '1px solid #ddd'}}>
-                            {/* Toolbar */}
+                <Row className="g-4" style={{ width: '100%' }}>
+                    {/* 캘린더 열: 2/4 비율 (md=6) */}
+                    <Col md={4} className="calendar-container border bg-body">
+                        <div style={{ padding: '20px', width: '100%', margin: '0 auto', border: '1px solid #ddd' }}>
                             <div className="calendar-toolbar">
                                 <strong>{newValue.format('YYYY년 MM월 DD일')}</strong>
                             </div>
 
-                            {/* Calendar */}
                             <DateCalendar
                                 value={newValue}
                                 onChange={(newValue) => setValue(newValue)}
@@ -237,44 +237,48 @@ const Calendar = () => {
                                 locale="ko"
                             />
 
-                            {/* Action Bar */}
                             <div className="calendar-action-bar">
-                                <button className="action-button today-button" onClick={handleDateChange}>
-                                    오늘
-                                </button>
-                                <button className="action-button confirm-button" onClick={handleAddEvent}>
-                                    확인
-                                </button>
+                                {userInfo.role === "Patient" && (
+                                    <>
+                                        <button className="action-button today-button" onClick={handleDateChange}>
+                                            오늘
+                                        </button>
+                                        <button className="action-button confirm-button" onClick={handleAddEvent}>
+                                            추가
+                                        </button>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </Col>
 
+                    {/* 첫 번째 Note 열: 1/4 비율 (md=3) */}
+                    <Col md={4} className="note-container">
+                        <Note
+                            noteList={noteList}
+                            setNoteList={setNoteList}
+                            newValue={newValue}
+                            note={note}
+                            setNote={setNote}
+                            isFirstList={true}
+                            handleAssignmentAction={handleAssignmentAction}
+                            handleCancelAction={handleCancelAction}
+                        />
+                    </Col>
+
+                    {/* 두 번째 Note 열: 1/4 비율 (md=3) */}
+                    <Col md={4} className="second-note-container">
+                        <Note
+                            noteList={secondNoteList}
+                            setNoteList={setSecondNoteList}
+                            newValue={newValue}
+                            note={note}
+                            setNote={setNote}
+                            isFirstList={false}
+                            handleCancelAction={handleCancelAction}
+                        />
+                    </Col>
                 </Row>
-
-                <Col className='note-container '>
-                    <Note
-                        noteList={noteList}
-                        setNoteList={setNoteList}
-                        newValue={newValue}
-                        note={note}
-                        setNote={setNote}
-                        isFirstList={true}
-                        handleAssignmentAction={handleAssignmentAction}
-                        handleCancelAction={handleCancelAction}
-                    />
-                </Col>
-
-                <Col className='second-note-container'>
-                    <Note
-                        noteList={secondNoteList}
-                        setNoteList={setSecondNoteList}
-                        newValue={newValue}
-                        note={note}
-                        setNote={setNote}
-                        isFirstList={false}
-                        handleCancelAction={handleCancelAction}
-                    />
-                </Col>
 
 
                 <Modal show={showModal} onHide={handleClose} style={{minHeight: '300px'}}>

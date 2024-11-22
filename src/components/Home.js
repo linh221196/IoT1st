@@ -13,7 +13,7 @@ const Home = () => {
   const isAuthenticated = useSelector(state => state.user.isAuthenticated)
 
   useEffect(() => {
-    console.log("redux 상태", userInfo);
+    console.log("redux 상태", userInfo.role);
     if (isAuthenticated) {
       if (userInfo.role === "Patient" || userInfo.role === "user") {
         navigate('/UserHome');

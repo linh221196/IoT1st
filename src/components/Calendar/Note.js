@@ -124,16 +124,16 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, han
                         <Col>
                             {isFirstList && (
                                 <>
-                                    {userInfo.role === "Patient" && (
-                                        <>
+                                    {/*{userInfo.role === "Patient" && (
+                                        <>*/}
                                             <Button variant="success" onClick={() => handleEdit(index)}>
                                                 <MdEdit size={20} />
                                             </Button>
                                             <Button variant="danger" onClick={() => handleDelete(index)}>
                                                 <MdDeleteForever size={20} />
                                             </Button>
-                                        </>
-                                    )}
+                                        {/*</>
+                                    )}*/}
                                     {userInfo.role === "Volunteer" &&(
                                         <>
                                             <Button variant="primary" onClick={() => handleAssignmentAction(index)}>봉사확정</Button>

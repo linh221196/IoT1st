@@ -26,7 +26,6 @@ const UserHome = () => {
         </Col>
       </Row>
     </Container>
-
   )
 }
 
