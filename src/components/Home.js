@@ -9,9 +9,11 @@ import userInfo from "./User/UserInfo";
 
 const Home = () => {
   const navigate = useNavigate();
+  const userInfo = useSelector(state => state.user.account)
   const isAuthenticated = useSelector(state => state.user.isAuthenticated)
 
   useEffect(() => {
+    console.log("redux 상태", userInfo);
     if (isAuthenticated) {
       if (userInfo.role === "Patient" || userInfo.role === "user") {
         navigate('/UserHome');

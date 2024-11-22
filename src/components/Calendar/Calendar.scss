@@ -1,0 +1,38 @@
+/* Toolbar 스타일 */
+.calendar-toolbar {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Action Bar 스타일 */
+.calendar-action-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+
+  .action-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+
+    &.today-button {
+      background-color: #ffeb3b; /* 노란색 배경 */
+      color: #000; /* 검은 텍스트 */
+    }
+
+    &.confirm-button {
+      background-color: #4caf50; /* 초록색 배경 */
+      color: #fff; /* 흰색 텍스트 */
+    }
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

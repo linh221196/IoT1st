@@ -222,7 +222,7 @@ const Calendar = () => {
                     <Col className='calendar-container border bg-body '>
                         <div style={{padding: '20px', width: '100%', margin: '0 auto', border: '1px solid #ddd'}}>
                             {/* Toolbar */}
-                            <div style={{textAlign: 'center', marginBottom: '10px'}}>
+                            <div className="calendar-toolbar">
                                 <strong>{newValue.format('YYYY년 MM월 DD일')}</strong>
                             </div>
 
@@ -238,25 +238,15 @@ const Calendar = () => {
                             />
 
                             {/* Action Bar */}
-                            <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '10px'}}>
-                                <button onClick={handleDateChange}>오늘</button>
-                                <button onClick={handleAddEvent}>확인</button>
+                            <div className="calendar-action-bar">
+                                <button className="action-button today-button" onClick={handleDateChange}>
+                                    오늘
+                                </button>
+                                <button className="action-button confirm-button" onClick={handleAddEvent}>
+                                    확인
+                                </button>
                             </div>
                         </div>
-                        {/*<ReactCalendar
-                            onChange={handleDateChange}
-                            value={date} // 선택된 날짜를 표시
-                        />*/}
-                        <style>
-                            {`
-                            .highlight {
-                                background-color: #ffcc80;
-                                border-radius: 50%;
-                                color: #d84315;
-                                font-weight: bold;
-                            }
-                        `}
-                        </style>
                     </Col>
 
                 </Row>
