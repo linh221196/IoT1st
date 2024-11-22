@@ -8,77 +8,85 @@ const instance = axios.create({
     },
 });
 
-// 요청 인터셉터 설정
+let isRefreshing = false; // 토큰 갱신 중인지 상태 관리
+let failedQueue = []; // 갱신 중 대기 중인 요청을 저장
+
+// 실패한 요청을 재시도
+const processQueue = (error, token = null) => {
+    failedQueue.forEach((prom) => {
+        if (token) {
+            prom.resolve(token);
+        } else {
+            prom.reject(error);
+        }
+    });
+    failedQueue = [];
+};
+
+// 요청 인터셉터
 instance.interceptors.request.use(
     (config) => {
-        try {
-            // 디버깅용 URL 확인
-            console.log(`[Axios Request] 요청 URL: ${config.url}`);
+        const noAuthRequired = ['/login', '/signup', '/idcheck'];
+        const isNoAuthRequired = noAuthRequired.some((path) => config.url && config.url.includes(path));
 
-            // 로그인, 회원가입, 아이디 체크 요청이 아닐 때만 Authorization 헤더 추가
-            const noAuthRequired = ['/login', '/signup', '/idcheck'];
-            const isNoAuthRequired = noAuthRequired.some((path) => config.url && config.url.includes(path));
-
-            if (!isNoAuthRequired) {
-                const accessToken = localStorage.getItem('accessToken');
-                if (accessToken) {
-                    config.headers['Authorization'] = `Bearer ${accessToken}`;
-                    console.log(`[Axios Request] Authorization 헤더 추가됨: ${config.headers['Authorization']}`);
-                } else {
-                    console.warn(`[Axios Request] Authorization 헤더 추가 실패: 토큰이 존재하지 않음`);
-                }
-            } else {
-                console.log(`[Axios Request] Authorization 헤더 추가하지 않음: ${config.url}`);
+        if (!isNoAuthRequired) {
+            const accessToken = localStorage.getItem('accessToken');
+            if (accessToken) {
+                config.headers['Authorization'] = `Bearer ${accessToken}`;
             }
-
-            // 최종적으로 설정된 헤더를 콘솔에 출력
-            console.log('[Axios Request] 최종 요청 헤더:', config.headers);
-
-            return config;
-        } catch (error) {
-            console.error('[Axios Request] 요청 인터셉터 오류:', error);
-            throw error;
         }
+
+        return config;
     },
-    (error) => {
-        console.error('[Axios Request] 요청 인터셉터 에러:', error);
-        return Promise.reject(error);
-    }
+    (error) => Promise.reject(error)
 );
 
-// 응답 인터셉터 설정
+// 응답 인터셉터
 instance.interceptors.response.use(
-    (response) => {
-        console.log(`[Axios Response] 성공:`, response);
-        return response && response.data ? response.data : response;
-    },
+    (response) => response.data,
     async (error) => {
-        try {
-            const originalRequest = error.config;
-            console.error(`[Axios Response] 오류 발생: ${error.response?.status || '네트워크 오류'}`, error);
+        const originalRequest = error.config;
 
-            // 토큰 만료 (401) 처리
-            if (error.response && error.response.status === 401 && !originalRequest._retry) {
-                console.warn('[Axios Response] 401 오류: 토큰 갱신 시도');
-                originalRequest._retry = true;
+        if (error.response && error.response.status === 401 && !originalRequest._retry) {
+            // 중복 요청 방지 플래그 설정
+            originalRequest._retry = true;
 
-                const newAccessToken = await refreshAccessToken();
-                if (newAccessToken) {
-                    localStorage.setItem('accessToken', newAccessToken);
-                    instance.defaults.headers.common['Authorization'] = `Bearer ${newAccessToken}`;
-                    originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
-                    console.log('[Axios Response] 토큰 갱신 성공, 요청 재시도');
-                    return instance(originalRequest);
-                } else {
-                    console.error('[Axios Response] 토큰 갱신 실패');
-                }
+            if (isRefreshing) {
+                // 이미 토큰 갱신 중인 경우, 실패한 요청을 대기열에 추가
+                return new Promise((resolve, reject) => {
+                    failedQueue.push({ resolve, reject });
+                })
+                    .then((token) => {
+                        originalRequest.headers['Authorization'] = `Bearer ${token}`;
+                        return instance(originalRequest);
+                    })
+                    .catch((err) => Promise.reject(err));
             }
 
-            return Promise.reject(error);
-        } catch (interceptorError) {
-            console.error('[Axios Response] 응답 인터셉터 오류:', interceptorError);
-            return Promise.reject(interceptorError);
+            isRefreshing = true; // 갱신 중 상태 설정
+            try {
+                const newAccessToken = await refreshAccessToken();
+                if (newAccessToken) {
+                    alert("갱신 진행중");
+                    // 갱신된 토큰으로 Authorization 헤더 업데이트
+                    instance.defaults.headers.common['Authorization'] = `Bearer ${newAccessToken}`;
+                    processQueue(null, newAccessToken);
+                    return instance(originalRequest); // 재시도
+                } else {
+                    processQueue(new Error('Failed to refresh token'), null);
+                    window.location.href = '/'; // 토큰 갱신 실패 시 리다이렉트
+                    return Promise.reject(error);
+                }
+            } catch (refreshError) {
+                processQueue(refreshError, null);
+                window.location.href = '/';
+                return Promise.reject(refreshError);
+            } finally {
+                isRefreshing = false; // 갱신 중 상태 해제
+            }
         }
+
+        return Promise.reject(error); // 다른 에러는 그대로 반환
     }
 );
 
