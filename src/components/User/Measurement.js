@@ -4,6 +4,7 @@ import { format, addMonths, subMonths, startOfMonth, endOfMonth, startOfWeek, en
 import './Measurement.scss'; // SCSS 파일을 import
 import NoteList from '../User/NoteList'
 import {useSelector} from "react-redux";
+import UserHeadBar from "./UserHeaderBar";
 
 const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
     return (
@@ -170,26 +171,31 @@ const Measurement = () => {
     const selectedDateString = selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '';
 
     return (
+        <>
+        <div className="HeadBar">
+            <UserHeadBar/>
+        </div>
         <div className="container">
             <div className="calendar">
-                <RenderHeader
-                    currentMonth={currentMonth}
-                    prevMonth={prevMonth}
-                    nextMonth={nextMonth}
-                />
-                <RenderDays/>
-                <RenderCells
-                    currentMonth={currentMonth}
-                    selectedDate={selectedDate}
-                    onDateClick={onDateClick}
-                    notes={measurementsByDate}
-                />
+                    <RenderHeader
+                        currentMonth={currentMonth}
+                        prevMonth={prevMonth}
+                        nextMonth={nextMonth}
+                    />
+                    <RenderDays/>
+                    <RenderCells
+                        currentMonth={currentMonth}
+                        selectedDate={selectedDate}
+                        onDateClick={onDateClick}
+                        notes={measurementsByDate}
+                    />
+                </div>
+                <div className="note-list">
+                    <NoteList measurements={measurementsByDate[selectedDateString] || []} date={selectedDateString}
+                              userid={userInfo.email}/>
+                </div>
             </div>
-            <div className="note-list">
-                <NoteList measurements={measurementsByDate[selectedDateString] || []} date={selectedDateString}
-                          userid={userInfo.email}/>
-            </div>
-        </div>
+        </>
     );
 };
 

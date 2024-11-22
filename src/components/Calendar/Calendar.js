@@ -213,7 +213,6 @@ const Calendar = () => {
 
 
     return (
-        <>
         <LocalizationProvider
             dateAdapter={AdapterDayjs}
             adapterLocale="ko"
@@ -307,7 +306,6 @@ const Calendar = () => {
             </div>
 
         </LocalizationProvider>
-        </>
     )
 }
 export default Calendar

@@ -26,6 +26,7 @@
   border-radius: 4px;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-height: 60px; /* 최소 높이를 60px로 설정 */
 
   .note-measurement {
     flex: 1; /* 측정값이 남은 공간을 차지 */

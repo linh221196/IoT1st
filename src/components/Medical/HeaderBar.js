@@ -1,9 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useSelector } from "react-redux";
-import './HeaderBar.scss'; // SCSS 파일을 연결해 스타일을 분리
+import './HeaderBar.scss';
+import {logoutUser} from "../../redux/action/userAction";
+import {Button} from "react-bootstrap"; // SCSS 파일을 연결해 스타일을 분리
+import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
+
 
 const HeaderBar = () => {
     const userInfo = useSelector(state => state.user.account);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+        console.log('logoutUser 디스패치 호출');
+        dispatch(logoutUser());
+        navigate('/');
+    };
 
     return (
         <header className="header-bar">
@@ -22,6 +35,9 @@ const HeaderBar = () => {
                     ? `${userInfo.username}님 (${userInfo.email}) 환영합니다.`
                     : "로그인 정보를 확인할 수 없습니다."}
             </div>
+            <Button variant="outline-danger" onClick={handleLogout}>
+                Loggout
+            </Button>
         </header>
     );
 };

@@ -37,9 +37,6 @@ const UserInfo = () => {
         navigate('/');
     };
 
-    useEffect(() => {
-        console.log('Redux 상태 변경 감지:', { userInfo, isAuthenticated });
-    }, [userInfo, isAuthenticated]);
 
 
     const handleUpdate = () => {
