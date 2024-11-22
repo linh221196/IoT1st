@@ -17,7 +17,7 @@ const Home = () => {
         navigate('/UserHome');
       } else if (userInfo.role === "ADMIN" || userInfo.role === "Medical") {
         navigate('/MedicalHome');
-      } else if (userInfo.role === "Volunteer") {
+      } else {
         navigate('/VolunteerHome');
       }
     }
