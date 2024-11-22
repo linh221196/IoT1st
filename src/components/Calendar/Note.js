@@ -5,6 +5,11 @@ import Card from 'react-bootstrap/Card';
 import "./Note.scss"
 import { MdEdit } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
+import { MdCancelPresentation } from "react-icons/md"; //x표시
+import { MdDisabledByDefault } from "react-icons/md"; //x표시 1
+import { MdCheckBox } from "react-icons/md"; //체크 표시
+import { MdCheckBoxOutlineBlank } from "react-icons/md"; //빈표시
+import { MdOutlineAddBox } from "react-icons/md"; //+표시
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { TextField } from "@mui/material"
@@ -108,7 +113,11 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, han
     return (
 
         <div className="note-card" >
-
+            {isFirstList ? (
+                <h5 style={{ marginBottom: '10px', color: '#007bff' }}>예약</h5>
+            ) : (
+                <h5 style={{ marginBottom: '10px', color: '#17a2b8' }}>출장</h5>
+            )}
             {noteList.map((item, index) =>
                 <Card body className="card-item" style={{ marginBottom: 10 }} key={item.noteDate + index}>
                     <Row>
@@ -124,19 +133,21 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, han
                         <Col>
                             {isFirstList && (
                                 <>
-                                    {/*{userInfo.role === "Patient" && (
-                                        <>*/}
+                                    {userInfo.role === "Patient" && (
+                                        <>
                                             <Button variant="success" onClick={() => handleEdit(index)}>
                                                 <MdEdit size={20} />
                                             </Button>
                                             <Button variant="danger" onClick={() => handleDelete(index)}>
                                                 <MdDeleteForever size={20} />
                                             </Button>
-                                        {/*</>
-                                    )}*/}
+                                        </>
+                                    )}
                                     {userInfo.role === "Volunteer" &&(
                                         <>
-                                            <Button variant="primary" onClick={() => handleAssignmentAction(index)}>봉사확정</Button>
+                                            <Button variant="primary" onClick={() => handleAssignmentAction(index)}>
+                                                출장예약
+                                            </Button>
                                         </>
                                     )}
                                 </>
@@ -145,10 +156,12 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, han
                                 <>
                                     {userInfo.role === "Volunteer" && (
                                         <>
-                                            <Button variant="secondary" onClick={() => handleCompleteAction(index)}>봉사완료</Button>
+                                            <Button variant="complete" onClick={() => handleCompleteAction(index)}>봉사완료</Button>
                                         </>
                                     )}
-                                    <Button variant="info" onClick={() => handleCancelAction(index)}>취소하기</Button>
+                                    <Button variant="cancel" onClick={() => handleCancelAction(index)}>
+                                        출장취소
+                                    </Button>
                                 </>
                             )}
                         </Col>

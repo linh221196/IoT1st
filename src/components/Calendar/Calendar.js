@@ -213,16 +213,17 @@ const Calendar = () => {
 
 
     return (
-
+        <>
         <LocalizationProvider
             dateAdapter={AdapterDayjs}
             adapterLocale="ko"
         >
             <div className="container">
+
                 <Row className="g-4" style={{ width: '100%' }}>
                     {/* 캘린더 열: 2/4 비율 (md=6) */}
                     <Col md={4} className="calendar-container border bg-body">
-                        <div style={{ padding: '20px', width: '100%', margin: '0 auto', border: '1px solid #ddd' }}>
+                        <div style={{ padding: '10px', width: '100%', margin: '0 auto' }}>
                             <div className="calendar-toolbar">
                                 <strong>{newValue.format('YYYY년 MM월 DD일')}</strong>
                             </div>
@@ -306,6 +307,7 @@ const Calendar = () => {
             </div>
 
         </LocalizationProvider>
+        </>
     )
 }
 export default Calendar
