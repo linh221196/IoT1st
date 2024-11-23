@@ -9,6 +9,11 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
   margin-bottom: 20px;
 
+  position: relative; /* 자식 요소의 위치를 조정 가능하도록 설정 */
+  overflow: hidden; /* 자식 요소가 컨테이너를 초과하면 숨김 처리 */
+  max-width: 300px; /* 부모 컨테이너 너비 제한 */
+  box-sizing: border-box; /* 패딩 포함 크기 계산 */
+
   /* Toolbar 스타일 */
   .calendar-toolbar {
     background-color: #d4f0ff; /* 연파랑 배경 */

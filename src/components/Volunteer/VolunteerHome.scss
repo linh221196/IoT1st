@@ -1,42 +1,60 @@
-.user-info {
-  width: 100%;
-  max-width: 300px; /* 최대 너비를 300px로 제한 */
-  margin: 0 auto; /* 중앙 정렬 */
-  transform: translateY(50px); /* 아래로 약간 이동 */
-  padding: 20px; /* 내부 여백 */
-}
-
-.user-imageContainer {
+/* 부모 컨테이너 */
+.container {
+  height: 100vh; /* 화면 전체 높이 */
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0; /* 위아래 마진 추가 */
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-.user-image {
-  width: 100px; /* 이미지 크기를 조정 */
-  height: 100px;
-  border-radius: 50%; /* 동그랗게 처리 */
-  margin-bottom: 10px; /* 아래쪽 간격 */
-}
-
-.paper-container {
-  padding: 10px;
-  margin: 10px auto; /* 중앙 정렬 */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
-}
-
-.table-container {
-  width: 100%;
-}
-
-button {
-  margin-top: 10px;
-}
-
-.button-container {
+/* Row 설정 */
+.r-container {
   display: flex;
-  flex-direction: column; /* 버튼을 세로로 정렬 */
-  gap: 10px; /* 버튼 사이 간격 */
-  align-items: center; /* 중앙 정렬 */
+  width: 100%; /* 전체 가로 공간 */
+  justify-content: center; /* 자식 요소를 가로 중앙에 배치 */
+  align-items: stretch; /* 자식 요소의 높이를 동일하게 */
+  gap: 20px; /* Calendar와 UserInfo 사이의 간격 */
+}
+
+/* Calendar 섹션 */
+.calendar-section {
+  flex: none; /* 크기를 고정 */
+  width: 1000px; /* Calendar 섹션의 고정 너비 */
+  min-width: 1000px; /* 최소 너비 1000px로 강제 */
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff; /* 배경색 */
+  border-radius: 10px; /* 둥근 테두리 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 */
+  padding: 20px;
+}
+
+/* UserInfo 섹션 */
+.userinfo-section {
+  flex: 1; /* 남는 공간을 차지 */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #f9f9f9; /* 배경색 */
+  border-radius: 10px; /* 둥근 테두리 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 */
+  padding: 20px;
+}
+
+/* 반응형 처리 */
+@media (max-width: 1200px) {
+  .r-container {
+    flex-direction: column; /* 작은 화면에서는 세로로 배치 */
+  }
+
+  .calendar-section {
+    width: 100%; /* 화면 크기에 따라 가로 너비를 줄임 */
+    min-width: unset; /* 최소 너비 제거 */
+  }
+
+  .userinfo-section {
+    width: 100%; /* UserInfo도 가로 너비 100% */
+  }
 }

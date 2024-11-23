@@ -5,12 +5,12 @@ import './VolunteerHome.scss';
 
 const VolunteerHome = () => {
     return (
-        <Container className="homecontent-container">
-            <Row className="home-container border rounded shadow p-3 mb-5 " >
-                <Col md={8}>
+        <Container className="container">
+            <Row className="r-container">
+                <Col className="calendar-section">
                     <Calendar />
                 </Col>
-                <Col md={4} className="userinfo-container">
+                <Col className="userinfo-section">
                     <UserInfo />
                 </Col>
             </Row>

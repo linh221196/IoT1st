@@ -235,6 +235,15 @@ const Calendar = () => {
                                 view={view}
                                 onViewChange={(newView) => setView(newView)}
                                 locale="ko"
+                                sx={{
+                                    maxWidth: '100%', // 최대 너비를 부모 컨테이너에 맞춤
+                                    width: '300px', // 기본 너비 설정
+                                    margin: '0 auto', // 중앙 정렬
+                                    '& .MuiPickersCalendarHeader-root': {
+                                        backgroundColor: '#00bcd4', // 헤더 색상
+                                        color: '#fff',
+                                    },
+                                }}
                             />
 
                             <div className="calendar-action-bar">

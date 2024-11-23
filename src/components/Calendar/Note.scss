@@ -1,5 +1,5 @@
 .container .note-container {
-  height: 539.2px; /* Set the height */
+  //height: 539.2px; /* Set the height */
   overflow-y: auto; /* Allow horizontal scrolling */
   overflow-x: hidden;
   justify-content: flex-start;
@@ -11,6 +11,12 @@
   border-right: 2px solid #ccc; /* 오른쪽 테두리 추가 */
   border-left: none;
   padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%; /* 부모 컨테이너 높이에 맞춤 */
+  box-sizing: border-box;
 
   ::-webkit-scrollbar {
     height: 8px;
@@ -69,6 +75,11 @@
   background-color: #e0f7fa;
   border-left: none;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%; /* 부모 컨테이너 높이에 맞춤 */
+  box-sizing: border-box;
 
   ::-webkit-scrollbar {
     height: 8px;
