@@ -153,7 +153,7 @@ const Calendar = () => {
                 noteEmail: item.userByUserid?.userid,
                 noteName2: item.userByVolunteerId?.name, //봉사자 이름
                 noteEmail2: item.userByVolunteerId?.userid,
-                notePhone: item.userByVolunteerId?.patientphone
+                notePhone: item.userByUserid?.phone_num
             }));
 
             setNoteList(desiredVolunteerDates);
@@ -186,7 +186,7 @@ const Calendar = () => {
                 noteEmail: item.userByUserid?.userid,
                 noteName2: item.userByVolunteerId?.name, //봉사자 이름
                 noteEmail2: item.userByVolunteerId?.userid,
-                notePhone: item.userByVolunteerId?.volunteerphone
+                notePhone: item.userByVolunteerId?.phone_num
             }));
 
             setNoteList(desiredVolunteerDates);
