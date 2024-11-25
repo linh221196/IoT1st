@@ -220,8 +220,8 @@ const Calendar = () => {
             <div className="container">
 
                 <Row className="g-4" style={{ width: '100%' }}>
-                    {/* 캘린더 열: 2/4 비율 (md=6) */}
-                    <Col md={4} className="calendar-container border bg-body">
+                    {/* 캘린더 열: 2/4 비율 (md=4) */}
+                    <Col className="calendar-container border bg-body" style={{ flexGrow: 5}}>
                         <div style={{ padding: '10px', width: '100%', margin: '0 auto' }}>
                             <div className="calendar-toolbar">
                                 <strong>{newValue.format('YYYY년 MM월 DD일')}</strong>
@@ -247,11 +247,11 @@ const Calendar = () => {
                             />
 
                             <div className="calendar-action-bar">
+                                <button className="action-button today-button" onClick={handleDateChange}>
+                                    오늘
+                                </button>
                                 {userInfo.role === "Patient" && (
                                     <>
-                                        <button className="action-button today-button" onClick={handleDateChange}>
-                                            오늘
-                                        </button>
                                         <button className="action-button confirm-button" onClick={handleAddEvent}>
                                             추가
                                         </button>
@@ -261,8 +261,8 @@ const Calendar = () => {
                         </div>
                     </Col>
 
-                    {/* 첫 번째 Note 열: 1/4 비율 (md=3) */}
-                    <Col md={4} className="note-container">
+                    {/* 첫 번째 Note 열: 1/4 비율 (md=4) */}
+                    <Col className="note-container" style={{ flexGrow: 4}}>
                         <Note
                             noteList={noteList}
                             setNoteList={setNoteList}
@@ -275,8 +275,8 @@ const Calendar = () => {
                         />
                     </Col>
 
-                    {/* 두 번째 Note 열: 1/4 비율 (md=3) */}
-                    <Col md={4} className="second-note-container">
+                    {/* 두 번째 Note 열: 1/4 비율 (md=4) */}
+                    <Col className="second-note-container" style={{ flexGrow: 4}}>
                         <Note
                             noteList={secondNoteList}
                             setNoteList={setSecondNoteList}

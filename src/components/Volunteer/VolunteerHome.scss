@@ -1,60 +1,24 @@
-/* 부모 컨테이너 */
-.container {
-  height: 100vh; /* 화면 전체 높이 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-/* Row 설정 */
-.r-container {
-  display: flex;
-  width: 100%; /* 전체 가로 공간 */
-  justify-content: center; /* 자식 요소를 가로 중앙에 배치 */
-  align-items: stretch; /* 자식 요소의 높이를 동일하게 */
-  gap: 20px; /* Calendar와 UserInfo 사이의 간격 */
-}
-
-/* Calendar 섹션 */
-.calendar-section {
-  flex: none; /* 크기를 고정 */
-  width: 1000px; /* Calendar 섹션의 고정 너비 */
-  min-width: 1000px; /* 최소 너비 1000px로 강제 */
-  display: flex;
-  flex-direction: column;
-  background-color: #ffffff; /* 배경색 */
-  border-radius: 10px; /* 둥근 테두리 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 */
-  padding: 20px;
-}
-
-/* UserInfo 섹션 */
 .userinfo-section {
-  flex: 1; /* 남는 공간을 차지 */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: #f9f9f9; /* 배경색 */
-  border-radius: 10px; /* 둥근 테두리 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 */
-  padding: 20px;
-}
+  display: flex; /* Flexbox로 정렬 */
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  flex-direction: column; /* 내부 요소를 세로로 정렬 */
+  padding: 0; /* 필요에 따라 패딩 조정 */
 
-/* 반응형 처리 */
-@media (max-width: 1200px) {
-  .r-container {
-    flex-direction: column; /* 작은 화면에서는 세로로 배치 */
+  .user-imageContainer {
+    display: inline;
+    margin: 10px;
+    align-items: center;
+    justify-content: center; /* 이미지 중앙 정렬 */
+
+    .user-image {
+      width: 130px;
+      height: 130px;
+      margin-bottom: 20px;
+    }
   }
-
-  .calendar-section {
-    width: 100%; /* 화면 크기에 따라 가로 너비를 줄임 */
-    min-width: unset; /* 최소 너비 제거 */
-  }
-
-  .userinfo-section {
-    width: 100%; /* UserInfo도 가로 너비 100% */
+  .paper-container {
+    margin-left: 12px;
+    margin-bottom: 20px;
   }
 }

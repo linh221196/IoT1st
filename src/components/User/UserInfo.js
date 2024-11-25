@@ -129,6 +129,16 @@ const UserInfo = () => {
         }
     }
 
+    //userInfo.role에 따라 위치 조정
+    const getTransformValue = (role) => {
+        switch (role) {
+            case 'Volunteer':
+                return 'translateY(-50px)';
+            default:
+                return 'translateY(80px)';
+        }
+    };
+
     return (
         <div
             style={{
@@ -136,7 +146,7 @@ const UserInfo = () => {
                 maxWidth: '400px',
                 height: 'auto',
                 margin: '0 auto',
-                transform: 'translateY(80px)', // 아래로 100px 이동
+                transform: getTransformValue(userInfo.role), // UserInfo의 세로 위치 조정
             }}
         >
             <Container className="user-imageContainer">
