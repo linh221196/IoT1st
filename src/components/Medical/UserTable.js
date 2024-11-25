@@ -47,7 +47,7 @@ const UserTable = ({ list, onSelectUser, disableClick, onUpdateList }) => {
         { field: 'userbirth', headerName: '생년월일', width: 150 },
         {
             field: 'action',
-            headerName: '액션',
+            headerName: '',
             width: 100,
             renderCell: (params) => (
                 <Button

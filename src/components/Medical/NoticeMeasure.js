@@ -3,19 +3,19 @@ import Paper from '@mui/material/Paper';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {postMeasurePatient, postModifyMeasure} from "../services/apiServices";
-
-const paginationModel = { page: 0, pageSize: 10 };
+import { MdCheckBox } from "react-icons/md"; //체크 표시
+import { MdCheckBoxOutlineBlank } from "react-icons/md"; //빈표시
 
 const NoticeMeasure = ({ selectedUserId }) => {
     const userInfo = useSelector(state => state.user.account);
     const [listUser, setListUser] = useState([
-        /*{ measurement: 'spo2', userid: selectedUserId, status: 'spo2' },
+        { measurement: 'spo2', userid: selectedUserId, status: 'spo2' },
         { measurement: 'airflow', userid: selectedUserId, status: 'airflow' },
         { measurement: 'bodytemp', userid: selectedUserId, status: 'bodytemp' },
         { measurement: 'ecg', userid: selectedUserId, status: 'ecg' },
         { measurement: 'emg', userid: selectedUserId, status: 'emg' },
         { measurement: 'gsr', userid: selectedUserId, status: 'gsr' },
-        { measurement: 'nibp', userid: selectedUserId, status: 'nibp' },*/
+        { measurement: 'nibp', userid: selectedUserId, status: 'nibp' },
     ]);
 
     const LoadList = async () => {
@@ -77,7 +77,7 @@ const NoticeMeasure = ({ selectedUserId }) => {
         if (userInfo && userInfo.role && selectedUserId) {
             LoadList();
         } else {
-            setListUser(null);
+            //setListUser(null);
         }
     }, [userInfo.role, selectedUserId]);
 
@@ -101,29 +101,65 @@ const NoticeMeasure = ({ selectedUserId }) => {
             headerName: 'Status',
             width: 150,
             renderCell: (params) => (
-                <div style={{ color: params.row.status ? 'green' : 'red' }}>
-                    {params.row.status ? '선택됨' : '선택 안됨'}
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    {params.row.status ? (
+                        <MdCheckBox style={{color: 'green', fontSize: '40px'}}/>
+                    ) : (
+                        <MdCheckBoxOutlineBlank style={{color: 'skyblue', fontSize: '40px'}}/>
+                    )}
                 </div>
             ),
         },
     ];
 
     return (
-        <Paper sx={{ height: 500, width: '100%' }}>
-            <DataGrid
-                rows={listUser}
-                columns={columns}
-                initialState={{ pagination: { paginationModel } }}
-                pageSizeOptions={[10, 15]}
-                checkboxSelection={false}
-                onRowClick={handleRowClick}
-                sx={{ border: 0 }}
-                components={{
-                    NoRowsOverlay: () => <div>No data available</div>,
-                }}
-                getRowId={(row) => row.measurement} // measurement를 고유 ID로 사용
-            />
-            <button onClick={handleModifyMeasure}>추가</button>
+        <Paper
+            sx={{
+                height: 500,
+                width: '100%',
+                display: 'flex', // Flexbox 활성화
+                flexDirection: 'row', // DataGrid와 버튼을 가로 정렬
+                alignItems: 'flex-start', // 수직 정렬
+                justifyContent: 'space-between', // 공간 분배
+                padding: '10px',
+            }}
+        >
+            <div style={{flex: 1}}>
+                <DataGrid
+                    rows={listUser}
+                    columns={columns}
+                    pagination={false} // 페이지네이션 비활성화
+                    pageSizeOptions={[10, 15]}
+                    checkboxSelection={false}
+                    onRowClick={handleRowClick}
+                    sx={{border: 0}}
+                    components={{
+                        NoRowsOverlay: () => <div>No data available</div>,
+                    }}
+                    getRowId={(row) => row.measurement} // measurement를 고유 ID로 사용
+                />
+            </div>
+            <div style={{marginLeft: '10px', alignSelf: 'flex-start'}}>
+                <button
+                    onClick={handleModifyMeasure}
+                    style={{
+                        padding: '0', // 내부 여백 제거
+                        fontSize: '15px',
+                        width: '80px', // 행 크기와 동일하게 설정
+                        height: '40px', // DataGrid 행 높이에 맞춤
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center', // 중앙 정렬
+                        backgroundColor: '#d3d3d3', // 버튼 배경색 (밝은 회색)
+                        color: '#000', // 텍스트 색상 (검은색)
+                        border: 'none',
+                        borderRadius: '4px',
+                        cursor: 'pointer',
+                    }}
+                >
+                    저장
+                </button>
+            </div>
         </Paper>
     );
 };

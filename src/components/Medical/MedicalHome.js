@@ -84,14 +84,28 @@ const MedicalHome = () => {
             </div>
 
             {/* 헤더 높이만큼 마진 추가 */}
-            <div style={{ marginTop: "70px" }}>
-                <div className="content-container">
-                    <div style={{ display: "flex", flexDirection: "row" }}>
-                        <UserTable list={patientList} onSelectUser={handleUserSelect}
-                                   onUpdateList={(updatedList) => {
-                                       handleUpdateList(updatedList);}}/>
-                        <NoticeMeasure selectedUserId={selectedUserId} />
-                        <Chart />
+            <div className="admin-container">
+                <div className="content-container" style={{display: "flex", flexDirection: "row", gap: "20px"}}>
+                    {/* User Table Container */}
+                    <div className="user-table-container" style={{flex: 1}}>
+                        <UserTable
+                            list={patientList}
+                            onSelectUser={handleUserSelect}
+                            onUpdateList={handleUpdateList}
+                        />
+                    </div>
+
+                    {/* Notice Measure Container */}
+                    <div className="notice-measure-container" style={{flex: 1}}>
+                        <NoticeMeasure selectedUserId={selectedUserId}/>
+                    </div>
+
+                    {/* Chart Container */}
+                    <div className="chart-container" style={{flex: 2}}>
+                        <Chart/>
+                        <Chart/>
+                        <Chart/>
+                        <Chart/>
                     </div>
                 </div>
             </div>

@@ -36,7 +36,7 @@ const HeaderBar = () => {
                     : "로그인 정보를 확인할 수 없습니다."}
             </div>
             <Button variant="outline-danger" onClick={handleLogout}>
-                Loggout
+                Logout
             </Button>
         </header>
     );

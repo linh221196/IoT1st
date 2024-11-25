@@ -15,9 +15,9 @@ const Content = () => {
   const [showNoticeModal, setNoticeModalShow] = useState(false);
   const [list, setList] = useState(false);
   const [listUser, setListUser] = useState([
-    { measurement: 'spo2', status: false },
+    { measurement: 'spo2', status: true },
     { measurement: 'airflow', status: true },
-    { measurement: 'bodytemp', status: false },
+    { measurement: 'bodytemp', status: true },
     { measurement: 'ecg', status: true },
     { measurement: 'emg', status: false },
     { measurement: 'gsr', status: true },

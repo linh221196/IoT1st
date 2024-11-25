@@ -187,7 +187,7 @@ const UserInfo = () => {
                     비밀번호
                 </Button>*/}
                 <Button variant="outline-danger" onClick={handleLogout}>
-                    Loggout
+                    Logout
                 </Button>
                 <UserInfoUpdateModal
                     userInfo={userInfo}
