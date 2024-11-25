@@ -166,9 +166,14 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, han
                             )}
                         </Col>
                     </Row>
-                    {!isFirstList && (
+                    {!isFirstList && userInfo.role === "Volunteer" && (
                         <>
-                            <p>전화번호: {item.notePhone}</p>
+                            <p>환자 전화번호: {item.notePhone}</p>
+                        </>
+                    )}
+                    {!isFirstList && userInfo.role === "Patient" && (
+                        <>
+                            <p>봉사자 전화번호: {item.notePhone}</p>
                         </>
                     )}
                     <p>내용: {item.noteContent}</p>
