@@ -14,6 +14,7 @@ import Chart from "./Chart";
 const MedicalAddPatient = () => {
     const userInfo = useSelector(state => state.user.account)
     const [called, setCalled] = useState(false);
+    const [selectedUserId, setSelectedUserId] = useState(null);
     const [patientList, setPatientList] = useState([
         { username: "환자1", useremail: "이메일1", userbirth: "2001-11-01" },
         { username: "환자2", useremail: "이메일2", userbirth: "2001-11-02" }
@@ -62,7 +63,12 @@ const MedicalAddPatient = () => {
             }
             setCalled(true); // 첫 호출 후에 called를 true로 설정하여 이후 호출 방지
         }
-    }, [userInfo.role, called, patientList]);
+    }, [userInfo.role, called]);
+    //UserTable에서 선택된 사용자id 업데이트하는 함수
+    const handleUserSelect = (userId) => {
+        console.log('MedicalHome에서 선택한 userId:', userId);
+        setSelectedUserId(userId);
+    };
 
 
     return (
@@ -80,7 +86,7 @@ const MedicalAddPatient = () => {
                        className="container admin-container">
                 {/* 헤더 높이만큼 마진 추가 */}
                 <div className="custom-admin-container">
-                    <div className="content-container" style={{display: "flex", flexDirection: "row", gap: "40px"}}>
+                    <div className="content-container" style={{display: "flex", flexDirection: "row", gap: "20px"}}>
                         <div>
                             <AddList PatientCall={PatientCall}/>
                         </div>
