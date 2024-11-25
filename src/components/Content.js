@@ -15,13 +15,13 @@ const Content = () => {
   const [showNoticeModal, setNoticeModalShow] = useState(false);
   const [list, setList] = useState(false);
   const [listUser, setListUser] = useState([
-    { measurement: 'spo2', status: true },
-    { measurement: 'airflow', status: true },
-    { measurement: 'bodytemp', status: true },
-    { measurement: 'ecg', status: true },
-    { measurement: 'emg', status: false },
-    { measurement: 'gsr', status: true },
-    { measurement: 'nibp', status: false }
+    { measurement: 'spo2', status: true, text: '산소포화도' },
+    { measurement: 'airflow', status: true, text: '호흡센서' },
+    { measurement: 'bodytemp', status: true, text: '체온센서' },
+    { measurement: 'ecg', status: true, text: '심전도' },
+    { measurement: 'emg', status: false, text: '근전도' },
+    { measurement: 'gsr', status: true, text: '피부반응' },
+    { measurement: 'nibp', status: false, text: '혈압측정' }
   ]);
 
 
@@ -124,33 +124,39 @@ const Content = () => {
                         overflowY: "auto", // 스크롤 추가
                       }}
                   >
-                    {listUser.filter((item) => item.status).length > 0 ? (
-                        listUser
-                            .filter((item) => item.status)
-                            .map((item, index) => (
-                                <li
-                                    key={index}
-                                    style={{
-                                      padding: "8px",
-                                      margin: "5px 0",
-                                      borderRadius: "3px",
-                                      backgroundColor: "#f9f9f9", // 리스트 항목의 배경
-                                      transition: "background-color 0.2s ease",
-                                      cursor: "pointer",
-                                    }}
-                                    onMouseOver={(e) =>
-                                        (e.target.style.backgroundColor = "#e0e0e0")
-                                    }
-                                    onMouseOut={(e) =>
-                                        (e.target.style.backgroundColor = "#f9f9f9")
-                                    }
-                                >
-                                  {item.measurement}: 활성
-                                </li>
-                            ))
-                    ) : (
-                        <li>필수로 검사할 요소가 없습니다.</li>
-                    )}
+                      {userInfo.role === "Patient" ? (
+                          listUser.filter((item) => item.status).length > 0 ? (
+                              listUser
+                                  .filter((item) => item.status)
+                                  .map((item, index) => (
+                                      <li
+                                          key={index}
+                                          style={{
+                                              padding: "8px",
+                                              margin: "5px 0",
+                                              borderRadius: "3px",
+                                              backgroundColor: "#f9f9f9", // 리스트 항목의 배경
+                                              transition: "background-color 0.2s ease",
+                                              cursor: "pointer",
+                                          }}
+                                          onMouseOver={(e) =>
+                                              (e.target.style.backgroundColor = "#e0e0e0")
+                                          }
+                                          onMouseOut={(e) =>
+                                              (e.target.style.backgroundColor = "#f9f9f9")
+                                          }
+                                      >
+                                          {item.measurement}: {item.text}
+                                      </li>
+                                  ))
+                          ) : (
+                              <li>필수로 검사할 요소가 없습니다.</li>
+                          )
+                      ) : (
+                          <li style={{ color: "red", fontWeight: "bold" }}>
+                              로그인 후 이용하십시오.
+                          </li>
+                      )}
                   </ul>
                 </div>
               </div>

@@ -53,7 +53,7 @@ const PatientNoticeMeasure = ({ showNoticeModal, setNoticeModalShow, fullscreen,
                             .filter(item => item.status)
                             .map((item, index) => (
                                 <li key={index}>
-                                    {item.measurement}: 활성
+                                    {item.measurement}:측정필요
                                 </li>
                             ))
                     ) : (

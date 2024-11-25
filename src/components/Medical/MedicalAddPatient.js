@@ -66,29 +66,37 @@ const MedicalAddPatient = () => {
 
 
     return (
-        <Container className="container admin-container ms-0 ps-0 mt-0">
-            {/* 헤더 */}
+        <>
+        {/* 헤더 */}
             <div className="HeadBar">
                 <HeaderBar />
             </div>
-            {/* 헤더 높이만큼 마진 추가 */}
-            <div className="admin-container">
-                <div className="content-container" style={{display: "flex", flexDirection: "row", gap: "20px"}}>
-                    <div>
-                        <AddList PatientCall={PatientCall}/>
-                    </div>
-                    <div>
-                        <UserTable list={patientList}
-                                   disableClick={true}
-                                   onUpdateList={(updatedList) => {
-                                       handleUpdateList(updatedList);
-                                   }}/>
+            <Container style={{
+                maxWidth: '1200px',
+                margin: '0 auto',
+                padding: '0',
+                boxSizing: 'border-box',
+            }}
+                       className="container admin-container">
+                {/* 헤더 높이만큼 마진 추가 */}
+                <div className="custom-admin-container">
+                    <div className="content-container" style={{display: "flex", flexDirection: "row", gap: "40px"}}>
+                        <div>
+                            <AddList PatientCall={PatientCall}/>
+                        </div>
+                        <div>
+                            <UserTable
+                                list={patientList}
+                                disableClick={true}
+                                onUpdateList={(updatedList) => {
+                                    handleUpdateList(updatedList);
+                                }}
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
-
-        </Container>
-
+            </Container>
+        </>
     )
 }
 

@@ -77,12 +77,18 @@ const MedicalHome = () => {
 
 
     return (
-        <Container className="container admin-container ms-0 ps-0 mt-0">
+        <>
             {/* 헤더 */}
             <div className="HeadBar">
                 <HeaderBar />
             </div>
-
+            <Container style={{
+                maxWidth: '100%',
+                margin: '0 auto',
+                padding: '0',
+                boxSizing: 'border-box',
+            }}
+                       className="container admin-container">
             {/* 헤더 높이만큼 마진 추가 */}
             <div className="admin-container">
                 <div className="content-container" style={{display: "flex", flexDirection: "row", gap: "20px"}}>
@@ -101,7 +107,7 @@ const MedicalHome = () => {
                     </div>
 
                     {/* Chart Container */}
-                    <div className="chart-container" style={{flex: 2}}>
+                    <div className="chart-container" style={{flex: 3}}>
                         <Chart/>
                         <Chart/>
                         <Chart/>
@@ -110,6 +116,7 @@ const MedicalHome = () => {
                 </div>
             </div>
         </Container>
+        </>
     );
 }
 export default MedicalHome

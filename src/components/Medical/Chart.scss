@@ -3,32 +3,32 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 30px; /* 패딩을 늘려 더 넉넉한 공간 확보 */
   background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 15px; /* 모서리를 더 둥글게 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* 그림자를 더 강조 */
 
   h2 {
-    font-size: 1.8em;
+    font-size: 2em; /* 제목 크기 증가 */
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 30px; /* 제목과 차트 간격 증가 */
     text-align: center;
   }
 
   .chart-wrapper {
     width: 100%;
-    max-width: 800px; /* 그래프 최대 크기 */
+    max-width: 1000px; /* 차트의 최대 크기 증가 */
     height: auto;
-    padding: 20px;
+    padding: 30px; /* 내부 패딩 증가 */
     background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
   .chart {
     canvas {
       width: 100% !important;
-      height: 400px !important;
+      height: 600px !important; /* 차트의 높이 증가 */
     }
   }
 }

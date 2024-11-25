@@ -84,6 +84,8 @@ const Chart = () => {
                 fill: false,
                 borderColor: 'blue',
                 backgroundColor: 'blue',
+                pointRadius: 0, // 포인트 제거
+                pointHoverRadius: 0, // 호버 포인트도 제거
             },
         ],
     };

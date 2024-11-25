@@ -34,10 +34,10 @@ const HeaderBar = () => {
                 {userInfo && userInfo.role === "Medical"
                     ? `${userInfo.username}님 (${userInfo.email}) 환영합니다.`
                     : "로그인 정보를 확인할 수 없습니다."}
+                <Button variant="outline-danger" onClick={handleLogout} style={{ marginLeft: '20px' }}>
+                    Logout
+                </Button>
             </div>
-            <Button variant="outline-danger" onClick={handleLogout}>
-                Logout
-            </Button>
         </header>
     );
 };
