@@ -8,7 +8,12 @@ import {useSelector} from "react-redux";
 
 const AddList = ({ PatientCall }) => {
     const [addList, setaddList] = useState([
-        { username: "이름", userid: "이메일" }
+        { username: "이름", userid: "이메일" },
+        { username: "이름1", userid: "이메일" },
+        { username: "이름2", userid: "이메일" },
+        /*{ username: "이름3", userid: "이메일" },
+        { username: "이름4", userid: "이메일" },
+        { username: "이름5", userid: "이메일" },*/
     ]); // 리스트를 저장할 상태
     const [inputText, setInputText] = useState(''); // 텍스트 필드의 입력 값
     const userInfo = useSelector(state => state.user.account)
@@ -82,25 +87,116 @@ const AddList = ({ PatientCall }) => {
     };
 
     return (
-        <div>
-            <input
-                type="text"
-                value={inputText}
-                onChange={handleInputChange}
-                placeholder="아이템을 입력하세요"
-            />
-            <button onClick={handleSearchItem}>검색</button>
+        <div style={styles.container}>
+            <div style={styles.searchContainer}>
+                <input
+                    type="text"
+                    value={inputText}
+                    onChange={handleInputChange}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                            handleSearchItem(); // Enter 키를 누르면 handleSearchItem 호출
+                        }
+                    }}
+                    placeholder="환자 입력하세요"
+                    style={styles.input}
+                />
+                <button onClick={handleSearchItem} style={styles.searchButton}>
+                    검색
+                </button>
+            </div>
 
-            <ul>
+            {/* Divider Line */}
+            <div style={styles.divider}></div>
+
+            {/* List with Scroll */}
+            <ul style={styles.list}>
                 {addList.map((item, index) => (
-                    <li key={index}>
-                        {item.username} - {item.userid}
-                        <button onClick={() => handleAddItem(index)}>추가</button>
-                    </li> // 리스트 항목의 userid, username 출력
+                    <li key={index} style={styles.listItem}>
+                        <span style={styles.listText}>
+                            {item.username} - {item.userid}
+                        </span>
+                        <button onClick={() => handleAddItem(index)} style={styles.addButton}>
+                            추가
+                        </button>
+                    </li>
                 ))}
             </ul>
         </div>
     );
 };
+
+const styles = {
+    container: {
+        width: '100%',
+        maxWidth: '500px',
+        height: '500px', // 전체 높이를 제한
+        margin: '0 auto',
+        padding: '20px',
+        backgroundColor: '#f9f9f9',
+        borderRadius: '8px',
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+        display: 'flex',
+        flexDirection: 'column',
+        boxSizing: 'border-box',
+    },
+    searchContainer: {
+        display: 'flex',
+        marginBottom: '20px',
+    },
+    input: {
+        flex: 1,
+        padding: '10px',
+        fontSize: '16px',
+        borderRadius: '4px',
+        border: '1px solid #ccc',
+        marginRight: '10px',
+    },
+    searchButton: {
+        padding: '10px 20px',
+        fontSize: '16px',
+        borderRadius: '4px',
+        border: 'none',
+        backgroundColor: '#007bff',
+        color: '#fff',
+        cursor: 'pointer',
+    },
+    divider: {
+        height: '1px',
+        backgroundColor: '#ccc',
+        margin: '20px 0',
+        width: '100%',
+    },
+    list: {
+        listStyleType: 'none',
+        padding: 0,
+        margin: 0,
+        overflowY: 'auto', // 스크롤 가능
+        flex: 1, // 리스트가 남은 공간을 모두 차지
+    },
+    listItem: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '10px',
+        marginBottom: '10px',
+        backgroundColor: '#fff',
+        borderRadius: '4px',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    },
+    listText: {
+        fontSize: '16px',
+    },
+    addButton: {
+        padding: '8px 12px',
+        fontSize: '14px',
+        borderRadius: '4px',
+        border: 'none',
+        backgroundColor: '#28a745',
+        color: '#fff',
+        cursor: 'pointer',
+    },
+};
+
 
 export default AddList;

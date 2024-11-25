@@ -72,14 +72,17 @@ const MedicalAddPatient = () => {
                 <HeaderBar />
             </div>
             {/* 헤더 높이만큼 마진 추가 */}
-            <div style={{ marginTop: "70px" }}>
-                <div className="content-container">
-                    <div style={{ display: "flex", flexDirection: "row" }}>
-                        <AddList PatientCall={PatientCall} />
+            <div className="admin-container">
+                <div className="content-container" style={{display: "flex", flexDirection: "row", gap: "20px"}}>
+                    <div>
+                        <AddList PatientCall={PatientCall}/>
+                    </div>
+                    <div>
                         <UserTable list={patientList}
                                    disableClick={true}
                                    onUpdateList={(updatedList) => {
-                                       handleUpdateList(updatedList);}}/>
+                                       handleUpdateList(updatedList);
+                                   }}/>
                     </div>
                 </div>
             </div>

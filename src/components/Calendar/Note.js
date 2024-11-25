@@ -166,7 +166,11 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, han
                             )}
                         </Col>
                     </Row>
-
+                    {!isFirstList && (
+                        <>
+                            <p>전화번호: {item.notePhone}</p>
+                        </>
+                    )}
                     <p>내용: {item.noteContent}</p>
                 </Card>
             )}
