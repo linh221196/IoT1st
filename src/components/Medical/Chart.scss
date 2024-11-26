@@ -15,16 +15,6 @@
     text-align: center;
   }
 
-  .chart-wrapper {
-    width: 100%;
-    max-width: 1000px; /* 차트의 최대 크기 증가 */
-    height: auto;
-    padding: 30px; /* 내부 패딩 증가 */
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-
   .chart {
     canvas {
       width: 100% !important;

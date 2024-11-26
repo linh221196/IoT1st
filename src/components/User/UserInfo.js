@@ -1,6 +1,6 @@
 import { Container, Button, Image } from "react-bootstrap";
 import "./UserInfo.scss"
-import code from '../../assets/image.jpg'
+import code from '../../assets/userimage.png'
 import { FiEdit } from "react-icons/fi";
 import UserInfoUpdateModal from "./UserInfoUpdateModal";
 import { useEffect, useState } from 'react';
@@ -133,9 +133,9 @@ const UserInfo = () => {
     const getTransformValue = (role) => {
         switch (role) {
             case 'Volunteer':
-                return 'translateY(-50px)';
+                return 'translateY(-40px)';
             default:
-                return 'translateY(80px)';
+                return 'translateY(40px)';
         }
     };
 

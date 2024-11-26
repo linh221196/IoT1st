@@ -8,7 +8,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 const Chart = () => {
     // 예시 데이터: {datetime, value} 형태의 리스트
-    const exampleData = [
+    /*const exampleData = [
         {'datetime': '2024-11-14T08:00:00', 'value': 10},
         {'datetime': '2024-11-14T08:00:00.500000', 'value': 11},
         {'datetime': '2024-11-14T08:00:01', 'value': 12},
@@ -69,6 +69,10 @@ const Chart = () => {
         {'datetime': '2024-11-14T08:00:28.500000', 'value': 27},
         {'datetime': '2024-11-14T08:00:29', 'value': 28},
         {'datetime': '2024-11-14T08:00:29.500000', 'value': 29}
+    ];*/
+
+    const exampleData = [
+        {'datetime': '2024-11-14T08:00:00', 'value': 0},
     ];
 
     // 초 단위 라벨 생성
@@ -82,8 +86,8 @@ const Chart = () => {
                 label: '측정 데이터', // 그래프 라벨
                 data: dataValues, // Y축 값
                 fill: false,
-                borderColor: 'blue',
-                backgroundColor: 'blue',
+                borderColor: 'red',
+                backgroundColor: 'red',
                 pointRadius: 0, // 포인트 제거
                 pointHoverRadius: 0, // 호버 포인트도 제거
             },
@@ -115,10 +119,8 @@ const Chart = () => {
 
     return (
         <div className="chart-container">
-            <h2>시간별 측정 데이터</h2>
-            <div className="chart-wrapper">
-                <Line data={data} options={options} />
-            </div>
+            <li>데이터 없음</li>
+            <Line data={data} options={options} />
         </div>
     );
 };

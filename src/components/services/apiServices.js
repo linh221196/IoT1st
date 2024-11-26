@@ -230,33 +230,12 @@ const postMedicalName = (email) => {
     return axios.post(`/medicalname`, formData)
 }
 
-/*const postTokenCheck = (email, refreshToken) => {
-    const accessToken = localStorage.getItem('accessToken');
+const postMedicalChart = (email) => {
+    const formData = new FormData();
+    formData.append('userid', email)
 
-    console.log("postTokenCheck 호출됨:", email, refreshToken, accessToken);
-
-    return axios.post(
-        `/tokencheck`,
-        {
-            userid: email,
-            refreshToken: refreshToken
-        },
-        {
-            headers: {
-                'Authorization': `Bearer ${accessToken}`,
-                'Content-Type': 'application/json'
-            },
-            withCredentials: true
-        }
-    ).then(response => {
-        console.log("응답 데이터:", response.data);
-        return response;
-    }).catch(error => {
-        console.error("에러 발생:", error);
-        throw error;
-    });
-};*/
-
+    return axios.post(`/medicalchart`, formData)
+}
 
 
 
@@ -264,6 +243,6 @@ const postMedicalName = (email) => {
 export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer,
     postAllVolunteerCall, postUserVolunteerCall, postVolunteerAssignment, postVolunteerComplete, postAssignmentCancel,
     postVolunteerCallModify, postVolunteerCallDelete, postSearchPatient, postAssignmentPatient, postLoadPatient,
-    postDeletePatient, postMeasurePatient, postModifyMeasure, postVolunteerTime, /*postTokenCheck, */postMedicalName
+    postDeletePatient, postMeasurePatient, postModifyMeasure, postVolunteerTime, postMedicalName, postMedicalChart
 
 }

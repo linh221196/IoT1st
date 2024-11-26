@@ -10,6 +10,10 @@
         width: 100%; /* 내부 콘텐츠가 전체 너비를 사용 */
         display: flex;
         gap: 20px; /* 각 컨테이너 간 간격 */
+
+        .chart-container {
+            max-width: 1200px;
+        }
     }
 }
 

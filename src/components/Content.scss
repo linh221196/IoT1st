@@ -44,14 +44,29 @@
     margin: 4px; // 줄어든 여백에 맞춰 조정
     height: 240px; // 높이를 살짝 줄임
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column; // Flexbox를 수직 방향으로 설정
+    justify-content: center; // 수직으로 중앙 정렬
+    align-items: center; // 가로로 중앙 정렬
+
+    .user-image {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 5px; // 이미지와 NavLink 사이 간격
+    }
+
+    /* 선 추가 */
+    .divider {
+      width: 80%;
+      border: none;
+      border-top: 2px solid rgba(0, 0, 0, 0.2); // 연한 검은색 선
+      background: linear-gradient(to right, rgba(0, 0, 0, 0), black, rgba(0, 0, 0, 0)); // 그라데이션 효과
+      margin: 10px 0; // 위아래 간격
+    }
 
     .nav-link {
       position: relative;
       text-align: center;
-      padding-bottom: 2px;
+      padding-bottom: 0;
       font-size: 22px; // 글자 크기를 키움 (기본값을 변경)
 
       &:hover {

@@ -8,7 +8,7 @@ const UserHeaderBar = () => {
     const navigate = useNavigate();
 
     const handleLogoClick = () => {
-        navigate('/UserHome'); // 로고 클릭 시 홈으로 이동
+        navigate('/'); // 로고 클릭 시 홈으로 이동
     };
 
     return (

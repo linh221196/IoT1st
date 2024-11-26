@@ -2,12 +2,17 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./Content.scss";
-import { NavLink } from "react-bootstrap";
+import {Image, NavLink} from "react-bootstrap";
 import PatientNoticeMeasure from "./User/PatientNoticeMeasure";
 import React, { useState } from 'react';
 import {postMeasurePatient} from "./services/apiServices";
 import userInfo from "./User/UserInfo";
 import {useSelector} from "react-redux";
+import measure from '../assets/white_measure_icon_with_border.png'
+import device from '../assets/smaller_high_res_icon.png'
+import volunteer from '../assets/white_volunteer_icon_with_border.png'
+import notice from '../assets/white_icon_with_border.png'
+
 
 const Content = () => {
   const userInfo = useSelector(state => state.user.account);
@@ -56,11 +61,16 @@ const Content = () => {
       <div className="content-wrapper">
         <div className="inner-container">
           <Row className="r-content">
-            <Col className="c-content">
-              <NavLink href="/DeviceView">기계 안내</NavLink>
-            </Col>
-            <Col
-                className={`c-content ${list ? "flipped" : ""}`} // 상태에 따라 클래스 추가
+              <Col className="c-content">
+                  <Image
+                      className="user-image"
+                      src={device}
+                  />
+                  <div className="divider"></div>
+                  <NavLink href="/DeviceView">기계 안내</NavLink>
+              </Col>
+              <Col
+                  className={`c-content ${list ? "flipped" : ""}`} // 상태에 따라 클래스 추가
                 style={{
                   perspective: "1000px", // 3D 효과를 위한 원근감
                   position: "relative",  // 자식의 절대 위치 기준
@@ -91,11 +101,21 @@ const Content = () => {
                       height: "100%",
                       backfaceVisibility: "hidden", // 뒷면 숨기기
                       display: "flex",
+                      flexDirection: "column", // 세로 정렬로 변경
                       justifyContent: "center",
                       alignItems: "center",
                     }}
                 >
-                  {!list && <NavLink onClick={handleNoticeModalShow}>주의 할 요소</NavLink>}
+                  {!list &&(
+                      <>
+                          <Image
+                              className="user-image"
+                              src={notice}
+                          />
+                          <div className="divider"></div>
+                          <NavLink onClick={handleNoticeModalShow}>주의 할 요소</NavLink>
+                      </>
+                      )}
                 </div>
 
                 {/* 뒷면 */}
@@ -122,6 +142,10 @@ const Content = () => {
                         width: "100%",
                         height: "100%",
                         overflowY: "auto", // 스크롤 추가
+                          display: "flex", // Flexbox 활성화
+                          justifyContent: "center", // 가로 중앙 정렬
+                          alignItems: "center", // 세로 중앙 정렬
+                          flexDirection: "column", // 세로로 리스트 정렬
                       }}
                   >
                       {userInfo.role === "Patient" ? (
@@ -150,18 +174,32 @@ const Content = () => {
                                       </li>
                                   ))
                           ) : (
-                              <li>필수로 검사할 요소가 없습니다.</li>
+                              <li
+                                  style={{
+                                      color: "gray",
+                                      fontWeight: "bold",
+                                  }}
+                              >
+                                  필수로 검사할 요소가 없습니다.
+                              </li>
                           )
                       ) : (
-                          <li style={{ color: "red", fontWeight: "bold" }}>
+                          <li
+                              style={{
+                                  color: "red",
+                                  fontWeight: "bold",
+                                  textAlign: "center", // 텍스트 가운데 정렬
+                                  fontSize: "22px", // 글자 크기를 크게 설정
+                              }}
+                          >
                               로그인 후 이용하십시오.
                           </li>
                       )}
                   </ul>
                 </div>
               </div>
-            </Col>
-            {/*<PatientNoticeMeasure
+              </Col>
+              {/*<PatientNoticeMeasure
                   showNoticeModal={showNoticeModal}
                   handleNoticeModalShow={handleNoticeModalShow}
                   setNoticeModalShow={setNoticeModalShow}
@@ -170,9 +208,19 @@ const Content = () => {
           </Row>
           <Row className="r-content">
             <Col className="c-content">
+                <Image
+                    className="user-image"
+                    src={measure}
+                />
+                <div className="divider"></div>
               <NavLink href="/Measurement">측정 치수</NavLink>
             </Col>
             <Col className="c-content">
+                <Image
+                    className="user-image"
+                    src={volunteer}
+                />
+                <div className="divider"></div>
               <NavLink href="/Volunteer">자원 봉사</NavLink>
             </Col>
           </Row>

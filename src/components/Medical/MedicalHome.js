@@ -105,14 +105,6 @@ const MedicalHome = () => {
                     <div className="notice-measure-container" style={{flex: 1}}>
                         <NoticeMeasure selectedUserId={selectedUserId}/>
                     </div>
-
-                    {/* Chart Container */}
-                    <div className="chart-container" style={{flex: 3}}>
-                        <Chart/>
-                        <Chart/>
-                        <Chart/>
-                        <Chart/>
-                    </div>
                 </div>
             </div>
         </Container>
