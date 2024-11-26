@@ -64,7 +64,7 @@ const SignUpModal = ({ handleCheckId, show, handleSignUpClose, handleSignUpSubmi
                         </Row>
                     </Form.Group>
 
-                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextName" hasvalidation="true">
+                    <Form.Group className="mb-3" controlId="formPlaintextName" hasvalidation="true">
                         <Form.Label column sm="3">
                             이름
                         </Form.Label>
@@ -74,7 +74,7 @@ const SignUpModal = ({ handleCheckId, show, handleSignUpClose, handleSignUpSubmi
                         </Col>
                     </Form.Group>
 
-                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextAge" hasvalidation="true">
+                    <Form.Group className="mb-3" controlId="formPlaintextAge" hasvalidation="true">
                         <Form.Label column sm="3">
                             생년월일
                         </Form.Label>
@@ -84,7 +84,7 @@ const SignUpModal = ({ handleCheckId, show, handleSignUpClose, handleSignUpSubmi
                         </Col>
                     </Form.Group>
 
-                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPhone" hasvalidation="true">
+                    <Form.Group className="mb-3" controlId="formPlaintextPhone" hasvalidation="true">
                         <Form.Label column sm="3">
                             전화번호
                         </Form.Label>
@@ -94,7 +94,7 @@ const SignUpModal = ({ handleCheckId, show, handleSignUpClose, handleSignUpSubmi
                         </Col>
                     </Form.Group>
 
-                    <Form.Group as={Row} className="mb-3" hasvalidation="true">
+                    <Form.Group className="mb-3" hasvalidation="true">
                         <Form.Label column sm="3">
                             Division
                         </Form.Label>

@@ -26,6 +26,7 @@ const HeaderBar = () => {
             {/* 메뉴 링크 */}
             <nav className="header-nav">
                 <a href="/MedicalHome" className="header-link">MedicalHome</a>
+                <a href="/MedicalChart" className="header-link">MedicalChart</a>
                 <a href="/MedicalAdd" className="header-link">MedicalAddPatient</a>
             </nav>
 
@@ -34,9 +35,11 @@ const HeaderBar = () => {
                 {userInfo && userInfo.role === "Medical"
                     ? `${userInfo.username}님 (${userInfo.email}) 환영합니다.`
                     : "로그인 정보를 확인할 수 없습니다."}
-                <Button variant="outline-danger" onClick={handleLogout} style={{ marginLeft: '20px' }}>
-                    Logout
-                </Button>
+                {userInfo?.email && (
+                    <Button variant="outline-danger" onClick={handleLogout} style={{ marginLeft: '20px' }}>
+                        Logout
+                    </Button>
+                )}
             </div>
         </header>
     );

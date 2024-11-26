@@ -28,6 +28,7 @@ const LogginView = () => {
     const dispatch = useDispatch();
     const userInfo = useSelector(state => state.user.account);
 
+    //회원가입 모달 창 변경시 값 저장
     const handleChange = (e) => {
         const { name, value } = e.target;
         switch (name) {
@@ -54,6 +55,7 @@ const LogginView = () => {
         }
     };
 
+    //인풋값 유효성 검사
     const handleValidated = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -69,6 +71,7 @@ const LogginView = () => {
     //회원가입
     const handleSignUpSubmit = async (e) => {
         if (!handleValidated(e)) return;
+        if (isUsable) return;
 
         try {
             const data = await postCreateNewUser(email, password, username, birth, phoneNum, role);
@@ -84,6 +87,7 @@ const LogginView = () => {
         }
     };
 
+    //로그인
     const handleSubmit = async (e) => {
         if (!handleValidated(e)) return;
 
@@ -108,6 +112,7 @@ const LogginView = () => {
         }
     };
 
+    //아이디 중복 체크
     const handleCheckId = async (e) => {
         e.preventDefault();
         try {
@@ -125,6 +130,7 @@ const LogginView = () => {
         }
     };
 
+    //로그인에 따라 이동
     useEffect(() => {
 
         if (isLoggin) {
