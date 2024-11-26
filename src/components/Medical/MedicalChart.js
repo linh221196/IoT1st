@@ -56,14 +56,13 @@ const MedicalChart = () => {
 
     //UserTable에서 선택된 사용자id 업데이트하는 함수
     const handleUserSelect = (userId) => {
-        console.log('Chart페이지 선택된 id',userId);
         loadChart(userId);
     };
 
     //환자의 측정값 받아오기
     const loadChart = async (userId) => {
         try {
-            const data = await postMedicalChart();
+            const data = await postMedicalChart(userId);
             console.log('측정값 양식', data);
 
             if (data.status === 'DataEmpty') {
