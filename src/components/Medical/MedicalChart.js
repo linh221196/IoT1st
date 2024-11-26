@@ -56,6 +56,7 @@ const MedicalChart = () => {
 
     //UserTable에서 선택된 사용자id 업데이트하는 함수
     const handleUserSelect = (userId) => {
+        console.log('Chart페이지 선택된 id',userId);
         loadChart(userId);
     };
 

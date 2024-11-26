@@ -66,6 +66,7 @@ const LogginView = () => {
         return true;
     };
 
+    //회원가입
     const handleSignUpSubmit = async (e) => {
         if (!handleValidated(e)) return;
 
