@@ -26,7 +26,8 @@ const Content = () => {
     { measurement: 'ecg', status: true, text: '심전도' },
     { measurement: 'emg', status: false, text: '근전도' },
     { measurement: 'gsr', status: true, text: '피부반응' },
-    { measurement: 'nibp', status: false, text: '혈압측정' }
+    { measurement: 'nibp', status: false, text: '혈압측정' },
+      { measurement: 'eog', status: false, text: '안구전도' },
   ]);
 
 
@@ -49,6 +50,7 @@ const Content = () => {
         { measurement: 'emg', status: data.emg },
         { measurement: 'gsr', status: data.gsr },
         { measurement: 'nibp', status: data.nibp },
+          { measurement: 'eog', status: data.eog },
       ];
 
       setListUser(newList); // 데이터를 newList 형태로 listUser에 저장

@@ -16,6 +16,7 @@ const NoticeMeasure = ({ selectedUserId }) => {
         { measurement: 'emg', userid: selectedUserId, status: 'emg' },
         { measurement: 'gsr', userid: selectedUserId, status: 'gsr' },
         { measurement: 'nibp', userid: selectedUserId, status: 'nibp' },
+        { measurement: 'eog', userid: selectedUserId, status: 'eog' },
     ]);
 
     const LoadList = async () => {
@@ -32,6 +33,7 @@ const NoticeMeasure = ({ selectedUserId }) => {
                 { measurement: 'emg', userid: selectedUserId, status: data.emg === "true" },
                 { measurement: 'gsr', userid: selectedUserId, status: data.gsr === "true" },
                 { measurement: 'nibp', userid: selectedUserId, status: data.nibp === "true" },
+                { measurement: 'eog', userid: selectedUserId, status: data.eog === "true" },
             ];
 
             setListUser(newList);
@@ -52,6 +54,7 @@ const NoticeMeasure = ({ selectedUserId }) => {
                 emg: listUser.find(item => item.measurement === 'emg')?.status || false.toString(),
                 gsr: listUser.find(item => item.measurement === 'gsr')?.status || false.toString(),
                 nibp: listUser.find(item => item.measurement === 'nibp')?.status || false.toString(),
+                eog: listUser.find(item => item.measurement === 'eog')?.status || false.toString(),
             };
 
             postModifyMeasure(
@@ -62,7 +65,8 @@ const NoticeMeasure = ({ selectedUserId }) => {
                 dataToSend.ecg,
                 dataToSend.emg,
                 dataToSend.gsr,
-                dataToSend.nibp
+                dataToSend.nibp,
+                dataToSend.eog,
             )
 
             alert("필수 측정 요소 저장되었습니다.");
@@ -115,7 +119,7 @@ const NoticeMeasure = ({ selectedUserId }) => {
     return (
         <Paper
             sx={{
-                height: 500,
+                height: 540,
                 width: '100%',
                 display: 'flex', // Flexbox 활성화
                 flexDirection: 'row', // DataGrid와 버튼을 가로 정렬
