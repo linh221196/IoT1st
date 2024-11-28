@@ -124,6 +124,44 @@ const Measurement = () => {
 
     const userInfo = useSelector(state => state.user.account);
 
+    const transformMeasurements = (data) => {
+        const transformedData = {};
+
+        const mapResults = (results, measurementKey) => {
+            results.forEach((item) => {
+                const date = item.date;
+                const status = item[measurementKey];
+
+                if (!transformedData[date]) {
+                    transformedData[date] = [];
+                }
+
+                transformedData[date].push({
+                    measurement: measurementKey.toLowerCase(),
+                    status: status,
+                });
+            });
+        };
+
+        if (data.airFlowResults) {
+            mapResults(data.airFlowResults, "airFlowResult");
+        }
+        if (data.bodyTempResults) {
+            mapResults(data.bodyTempResults, "bodyTempResult");
+        }
+        if (data.ecgResults) {
+            mapResults(data.ecgResults, "ecgResult");
+        }
+        if (data.emgResults) {
+            mapResults(data.emgResults, "emgResult");
+        }
+        if (data.eogResults) {
+            mapResults(data.eogResults, "eogResult");
+        }
+
+        return transformedData;
+    };
+
     // 백엔드에서 메모 데이터를 가져오는 함수
     const fetchNotes = async () => {
         try {
@@ -131,7 +169,10 @@ const Measurement = () => {
             const data = await postMeasureList(userInfo.email)
             console.log('측정결과 환자 :', data)
 
-            setMeasurementsByDate(data);
+            const transformedData = transformMeasurements(data);
+            console.log('받아온 데이터 변환', transformedData);
+
+            setMeasurementsByDate(transformedData);
         } catch (error) {
             console.error("메모 데이터를 가져오는 데 실패했습니다.", error);
         }
