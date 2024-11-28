@@ -119,7 +119,7 @@ const MedicalChart = () => {
     };
 
     //환자의 측정값 받아오기
-    const loadChart = async (userId) => {
+    /*const loadChart = async (userId) => {
         try {
             const data = await postMedicalChart(userId);
             console.log('측정값 양식', data);
@@ -135,7 +135,85 @@ const MedicalChart = () => {
         } catch (error) {
             alert("서버에서 담당 환자 list를 못 받아왔습니다.");
         }
-    }
+    }*/
+    const loadChart = async (userId) => {
+        try {
+            const data = await postMedicalChart(userId);
+            console.log('측정값 양식', data);
+
+            // EcgAverageValues 데이터 처리
+            if (data?.EcgAverageValues && Array.isArray(data.EcgAverageValues)) {
+                setEcgData({
+                    name: "ECG",
+                    values: data.EcgAverageValues,
+                });
+            }
+
+            // EmgAverageValues 데이터 처리
+            if (data?.EmgAverageValues && Array.isArray(data.EmgAverageValues)) {
+                setEmgData({
+                    name: "EMG",
+                    values: data.EmgAverageValues,
+                });
+            }
+
+            // AirFlowAverageValues 데이터 처리
+            if (data?.AirFlowAverageValues && Array.isArray(data.AirFlowAverageValues)) {
+                setAirflowData({
+                    name: "AirFlow",
+                    values: data.AirFlowAverageValues,
+                });
+            }
+
+            // GsrAverageValues 데이터 처리
+            if (data?.GsrAverageValues && Array.isArray(data.GsrAverageValues)) {
+                setGsrData({
+                    name: "GSR",
+                    values: data.GsrAverageValues,
+                });
+            }
+
+            // Spo2DataList 데이터 처리
+            if (data?.spo2DataList && Array.isArray(data.spo2DataList)) {
+                const spo2Value = data.spo2DataList[0]?.spo2 || "N/A";
+                setChartData((prev) =>
+                    prev.map((item) =>
+                        item.name === "Spo2" ? { ...item, value: `${spo2Value}%` } : item
+                    )
+                );
+            }
+
+            // NibpDataList 데이터 처리
+            if (data?.nibpDataList && Array.isArray(data.nibpDataList)) {
+                const nibpData = data.nibpDataList[0] || { systolic: "N/A", diastolic: "N/A" };
+                setChartData((prev) =>
+                    prev.map((item) =>
+                        item.name === "NIBP"
+                            ? {
+                                ...item,
+                                value: {
+                                    systolic: `${nibpData.systolic || "N/A"}mmHg`,
+                                    diastolic: `${nibpData.diastolic || "N/A"}mmHg`,
+                                },
+                            }
+                            : item
+                    )
+                );
+            }
+
+            // TempData 데이터 처리
+            if (data?.tempData && Array.isArray(data.tempData)) {
+                const bodyTemp = data.tempData[0] || "N/A";
+                setChartData((prev) =>
+                    prev.map((item) =>
+                        item.name === "BodyTemp" ? { ...item, value: `${bodyTemp}°C` } : item
+                    )
+                );
+            }
+        } catch (error) {
+            console.error("서버에서 데이터를 받아오는 중 에러가 발생했습니다.", error);
+        }
+    };
 
     return(
         <>
