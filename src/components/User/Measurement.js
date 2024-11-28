@@ -135,7 +135,7 @@ const Measurement = () => {
             emgResult: "근전도",
             eogResult: "눈전도",
             gsrResult: "피부 전도도",
-            nibpResult: "혈압",
+            nibpresult: "혈압",
             spo2Result: "산소포화도",
         };
 
