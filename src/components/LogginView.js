@@ -34,6 +34,7 @@ const LogginView = () => {
         switch (name) {
             case 'email':
                 setEmail(value);
+                setIsUsable(false);
                 break;
             case 'username':
                 setUserName(value);
@@ -71,7 +72,11 @@ const LogginView = () => {
     //회원가입
     const handleSignUpSubmit = async (e) => {
         if (!handleValidated(e)) return;
-        if (isUsable) return;
+
+        if (!isUsable) {
+            alert("ID중복체크를 해주세요.")
+            return;
+        }
 
         try {
             const data = await postCreateNewUser(email, password, username, birth, phoneNum, role);
