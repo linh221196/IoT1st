@@ -144,19 +144,28 @@ const Measurement = () => {
         };
 
         if (data.airFlowResults) {
-            mapResults(data.airFlowResults, "airFlowResult");
+            mapResults(data.airFlowResults, "airflow");
         }
         if (data.bodyTempResults) {
-            mapResults(data.bodyTempResults, "bodyTempResult");
+            mapResults(data.bodyTempResults, "bodytemp");
         }
         if (data.ecgResults) {
-            mapResults(data.ecgResults, "ecgResult");
+            mapResults(data.ecgResults, "ecg");
         }
         if (data.emgResults) {
-            mapResults(data.emgResults, "emgResult");
+            mapResults(data.emgResults, "emg");
         }
         if (data.eogResults) {
-            mapResults(data.eogResults, "eogResult");
+            mapResults(data.eogResults, "eog");
+        }
+        if (data.gsrResults) {
+            mapResults(data.gsrResults, "gsr");
+        }
+        if (data.nibpResults) {
+            mapResults(data.nibpResults, "nibp");
+        }
+        if (data.spo2Results) {
+            mapResults(data.spo2Results, "spo2");
         }
 
         return transformedData;
