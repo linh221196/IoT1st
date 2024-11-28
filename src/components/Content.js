@@ -30,14 +30,15 @@ const Content = () => {
       { measurement: 'eog', status: false, text: '안구전도' },
   ]);
 
-
+  //사용자가 주의할 요소를 클릭했을때 뒤집히는 이벤트와 fetchData함수 실행
   const handleNoticeModalShow = (breakpoint) => {
     setFullscreen(breakpoint);
     // setNoticeModalShow(true);
-    //fetchData();
+    fetchData();
     setList(true);
   }
 
+  //사용자의 주의할 요소를 불러오는 함수
   const fetchData = async () => {
     try {
       const data = await postMeasurePatient(userInfo.email);

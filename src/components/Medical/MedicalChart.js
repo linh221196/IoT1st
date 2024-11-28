@@ -1,4 +1,4 @@
-import HeaderBar from "./HeaderBar";
+import HeaderBar from "../HeadBar/HeaderBar";
 import UserTable from "./UserTable";
 import {Container, Row, Col} from "react-bootstrap";
 import {useEffect, useState} from "react";
@@ -139,10 +139,6 @@ const MedicalChart = () => {
 
     return(
         <>
-            {/* 헤더 */}
-            <div className="HeadBar">
-                <HeaderBar />
-            </div>
             <Container style={{
                 maxWidth: '1500px',
                 margin: '0 auto',

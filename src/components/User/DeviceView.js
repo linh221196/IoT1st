@@ -9,7 +9,7 @@ import { RxVideo } from "react-icons/rx";
 import { CiImageOn } from "react-icons/ci";
 import noimg from '../../assets/Devices/noimg.png'
 import Modal from "react-bootstrap/Modal";
-import UserHeadBar from './UserHeaderBar'
+import UserHeadBar from '../HeadBar/UserHeaderBar'
 
 
 const DeviceView = () => {
@@ -29,9 +29,6 @@ const DeviceView = () => {
 
     return (
         <div>
-            <div className="HeadBar">
-                <UserHeadBar/>
-            </div>
             <div className='container'>
                 <Row xs={1} md={2} xl={4} className="g-4">
                     {devices.map((device) =>

@@ -4,7 +4,7 @@ import { format, addMonths, subMonths, startOfMonth, endOfMonth, startOfWeek, en
 import './Measurement.scss'; // SCSS 파일을 import
 import NoteList from '../User/NoteList'
 import {useSelector} from "react-redux";
-import UserHeadBar from "./UserHeaderBar";
+import UserHeadBar from "../HeadBar/UserHeaderBar";
 
 const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
     return (
@@ -136,6 +136,7 @@ const Measurement = () => {
                     { measurement: 'emg', status: '정상' },
                     { measurement: 'gsr', status: '비정상' },
                     { measurement: 'nibp', status: '정상' },
+                    { measurement: 'nibp', status: '비정상' },
                 ],
                 '2024-12-16': [
                     { measurement: 'spo2', status: '정상' },
@@ -144,6 +145,7 @@ const Measurement = () => {
                     { measurement: 'ecg', status: '정상' },
                     { measurement: 'emg', status: '정상' },
                     { measurement: 'gsr', status: '정상' },
+                    { measurement: 'nibp', status: '정상' },
                     { measurement: 'nibp', status: '정상' },
                 ]
             };
@@ -172,9 +174,6 @@ const Measurement = () => {
 
     return (
         <>
-        <div className="HeadBar">
-            <UserHeadBar/>
-        </div>
         <div className="container">
             <div className="calendar">
                     <RenderHeader

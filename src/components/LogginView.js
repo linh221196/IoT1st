@@ -130,7 +130,7 @@ const LogginView = () => {
         }
     };
 
-    //로그인에 따라 이동
+    //로그인 결과에 따라 이동
     useEffect(() => {
 
         if (isLoggin) {

@@ -1,5 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap"
-import HeaderBar from "./HeaderBar"
+import HeaderBar from "../HeadBar/HeaderBar"
 import UserTable from "./UserTable"
 import Chart from "./Chart"
 import AddList from "./AddList"
@@ -8,7 +8,7 @@ import NoticeMeasure from "./NoticeMeasure";
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import { postLoadPatient } from "../services/apiServices";
-import UserList from "../PhoneAuth";
+import UserList from "../NotFound";
 
 
 const MedicalHome = () => {
@@ -78,10 +78,6 @@ const MedicalHome = () => {
 
     return (
         <>
-            {/* 헤더 */}
-            <div className="HeadBar">
-                <HeaderBar />
-            </div>
             <Container style={{
                 maxWidth: '100%',
                 margin: '0 auto',

@@ -12,8 +12,8 @@ const Home = () => {
   const userInfo = useSelector(state => state.user.account)
   const isAuthenticated = useSelector(state => state.user.isAuthenticated)
 
+  //home에 왔을 때, 사용자의 role에 따라 맞는 페이지 이동
   useEffect(() => {
-    console.log("redux 상태", userInfo.role);
     if (isAuthenticated) {
       if (userInfo.role === "Patient" || userInfo.role === "user") {
         navigate('/UserHome');

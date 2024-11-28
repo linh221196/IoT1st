@@ -1,12 +1,12 @@
 import {Container, Row} from "react-bootstrap";
-import SideBar from "./HeaderBar";
+import SideBar from "../HeadBar/HeaderBar";
 import AddList from "./AddList";
 import UserTable from "./UserTable";
 import {useSelector} from "react-redux";
 import {postLoadPatient} from "../services/apiServices";
 import {useEffect, useState} from "react";
 import Col from "react-bootstrap/Col";
-import HeaderBar from "./HeaderBar";
+import HeaderBar from "../HeadBar/HeaderBar";
 import NoticeMeasure from "./NoticeMeasure";
 import Chart from "./Chart";
 
@@ -73,10 +73,6 @@ const MedicalAddPatient = () => {
 
     return (
         <>
-        {/* 헤더 */}
-            <div className="HeadBar">
-                <HeaderBar />
-            </div>
             <Container style={{
                 maxWidth: '1200px',
                 margin: '0 auto',
