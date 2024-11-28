@@ -136,9 +136,19 @@ const Measurement = () => {
                     transformedData[date] = [];
                 }
 
+                // 상태값을 문자열로 처리
+                let normalizedStatus;
+                if (status === "정상") {
+                    normalizedStatus = "정상";
+                } else if (status === "비정상") {
+                    normalizedStatus = "비정상";
+                } else {
+                    normalizedStatus = "알 수 없음"; // 예외 처리
+                }
+
                 transformedData[date].push({
                     measurement: measurementKey.toLowerCase(),
-                    status: status,
+                    status: normalizedStatus, // 처리된 문자열 값을 저장
                 });
             });
         };
