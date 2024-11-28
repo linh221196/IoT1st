@@ -43,16 +43,22 @@ const Content = () => {
     try {
       const data = await postMeasurePatient(userInfo.email);
 
-      const newList = [
-        { measurement: 'spo2', status: data.spo2 },
-        { measurement: 'airflow', status: data.airflow },
-        { measurement: 'bodytemp', status: data.bodytemp },
-        { measurement: 'ecg',  status: data.ecg },
-        { measurement: 'emg', status: data.emg },
-        { measurement: 'gsr', status: data.gsr },
-        { measurement: 'nibp', status: data.nibp },
-          { measurement: 'eog', status: data.eog },
+      const predefinedList = [
+          { measurement: 'spo2', status: true, text: '산소포화도' },
+          { measurement: 'airflow', status: true, text: '호흡센서' },
+          { measurement: 'bodytemp', status: true, text: '체온센서' },
+          { measurement: 'ecg', status: true, text: '심전도' },
+          { measurement: 'emg', status: false, text: '근전도' },
+          { measurement: 'gsr', status: true, text: '피부반응' },
+          { measurement: 'nibp', status: false, text: '혈압측정' },
+          { measurement: 'eog', status: false, text: '안구전도' },
       ];
+
+        // data에서 받아온 값을 status에 반영
+        const newList = predefinedList.map((item) => ({
+            ...item, // 기존 구조 유지
+            status: data[item.measurement] === 'true', // data 값이 'true' 문자열이면 true로 변환
+        }));
 
       setListUser(newList); // 데이터를 newList 형태로 listUser에 저장
     } catch (error) {
