@@ -139,38 +139,46 @@ const MedicalChart = () => {
     const loadChart = async (userId) => {
         try {
             const data = await postMedicalChart(userId);
-            console.log('측정값 양식', data);
+            console.log('받아온 데이터:', data); // 전체 데이터 출력
 
             // EcgAverageValues 데이터 처리
             if (data?.EcgAverageValues && Array.isArray(data.EcgAverageValues)) {
-                setEcgData({
+                const ecgFormatted = {
                     name: "ECG",
                     values: data.EcgAverageValues,
-                });
+                };
+                setEcgData(ecgFormatted);
+                console.log('ECG 데이터:', ecgFormatted); // ECG 데이터 출력
             }
 
             // EmgAverageValues 데이터 처리
             if (data?.EmgAverageValues && Array.isArray(data.EmgAverageValues)) {
-                setEmgData({
+                const emgFormatted = {
                     name: "EMG",
                     values: data.EmgAverageValues,
-                });
+                };
+                setEmgData(emgFormatted);
+                console.log('EMG 데이터:', emgFormatted); // EMG 데이터 출력
             }
 
             // AirFlowAverageValues 데이터 처리
             if (data?.AirFlowAverageValues && Array.isArray(data.AirFlowAverageValues)) {
-                setAirflowData({
+                const airflowFormatted = {
                     name: "AirFlow",
                     values: data.AirFlowAverageValues,
-                });
+                };
+                setAirflowData(airflowFormatted);
+                console.log('AirFlow 데이터:', airflowFormatted); // AirFlow 데이터 출력
             }
 
             // GsrAverageValues 데이터 처리
             if (data?.GsrAverageValues && Array.isArray(data.GsrAverageValues)) {
-                setGsrData({
+                const gsrFormatted = {
                     name: "GSR",
                     values: data.GsrAverageValues,
-                });
+                };
+                setGsrData(gsrFormatted);
+                console.log('GSR 데이터:', gsrFormatted); // GSR 데이터 출력
             }
 
             // Spo2DataList 데이터 처리
@@ -181,24 +189,25 @@ const MedicalChart = () => {
                         item.name === "Spo2" ? { ...item, value: `${spo2Value}%` } : item
                     )
                 );
+                console.log('Spo2 데이터:', { name: "Spo2", value: `${spo2Value}%` }); // Spo2 데이터 출력
             }
 
             // NibpDataList 데이터 처리
             if (data?.nibpDataList && Array.isArray(data.nibpDataList)) {
                 const nibpData = data.nibpDataList[0] || { systolic: "N/A", diastolic: "N/A" };
+                const nibpFormatted = {
+                    name: "NIBP",
+                    value: {
+                        systolic: `${nibpData.systolic || "N/A"}mmHg`,
+                        diastolic: `${nibpData.diastolic || "N/A"}mmHg`,
+                    },
+                };
                 setChartData((prev) =>
                     prev.map((item) =>
-                        item.name === "NIBP"
-                            ? {
-                                ...item,
-                                value: {
-                                    systolic: `${nibpData.systolic || "N/A"}mmHg`,
-                                    diastolic: `${nibpData.diastolic || "N/A"}mmHg`,
-                                },
-                            }
-                            : item
+                        item.name === "NIBP" ? nibpFormatted : item
                     )
                 );
+                console.log('NIBP 데이터:', nibpFormatted); // NIBP 데이터 출력
             }
 
             // TempData 데이터 처리
@@ -209,11 +218,13 @@ const MedicalChart = () => {
                         item.name === "BodyTemp" ? { ...item, value: `${bodyTemp}°C` } : item
                     )
                 );
+                console.log('BodyTemp 데이터:', { name: "BodyTemp", value: `${bodyTemp}°C` }); // BodyTemp 데이터 출력
             }
         } catch (error) {
             console.error("서버에서 데이터를 받아오는 중 에러가 발생했습니다.", error);
         }
     };
+
 
     return(
         <>
