@@ -127,59 +127,64 @@ const Measurement = () => {
     const transformMeasurements = (data) => {
         const transformedData = {};
 
+        // 측정 항목 이름 매핑
+        const measurementNames = {
+            airFlowResult: "공기 흐름",
+            bodyTempResult: "체온",
+            ecgResult: "심전도",
+            emgResult: "근전도",
+            eogResult: "눈전도",
+            gsrResult: "피부 전도도",
+            nibpResult: "혈압",
+            spo2Result: "산소포화도",
+        };
+
         const mapResults = (results, measurementKey) => {
             results.forEach((item) => {
                 const date = item.date;
-                const status = item[measurementKey];
+                const statusString = item[measurementKey];
+                const statusBoolean = statusString === "정상"; // "정상" → true, 나머지 → false
 
                 if (!transformedData[date]) {
                     transformedData[date] = [];
                 }
 
-                // 상태값을 문자열로 처리
-                let normalizedStatus;
-                if (status === "정상") {
-                    normalizedStatus = "정상";
-                } else if (status === "비정상") {
-                    normalizedStatus = "비정상";
-                } else {
-                    normalizedStatus = "알 수 없음"; // 예외 처리
-                }
-
                 transformedData[date].push({
-                    measurement: measurementKey.toLowerCase(),
-                    status: normalizedStatus, // 처리된 문자열 값을 저장
+                    measurement: measurementNames[measurementKey], // 매핑된 이름 사용
+                    status: statusBoolean, // boolean 값으로 변환
                 });
             });
         };
 
+        // 데이터를 처리
         if (data.airFlowResults) {
-            mapResults(data.airFlowResults, "airflow");
+            mapResults(data.airFlowResults, "airFlowResult");
         }
         if (data.bodyTempResults) {
-            mapResults(data.bodyTempResults, "bodytemp");
+            mapResults(data.bodyTempResults, "bodyTempResult");
         }
         if (data.ecgResults) {
-            mapResults(data.ecgResults, "ecg");
+            mapResults(data.ecgResults, "ecgResult");
         }
         if (data.emgResults) {
-            mapResults(data.emgResults, "emg");
+            mapResults(data.emgResults, "emgResult");
         }
         if (data.eogResults) {
-            mapResults(data.eogResults, "eog");
+            mapResults(data.eogResults, "eogResult");
         }
         if (data.gsrResults) {
-            mapResults(data.gsrResults, "gsr");
+            mapResults(data.gsrResults, "gsrResult");
         }
         if (data.nibpResults) {
-            mapResults(data.nibpResults, "nibp");
+            mapResults(data.nibpResults, "nibpResult");
         }
         if (data.spo2Results) {
-            mapResults(data.spo2Results, "spo2");
+            mapResults(data.spo2Results, "spo2Result");
         }
 
         return transformedData;
     };
+
 
     // 백엔드에서 메모 데이터를 가져오는 함수
     const fetchNotes = async () => {
