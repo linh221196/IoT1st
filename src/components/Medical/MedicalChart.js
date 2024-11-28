@@ -162,13 +162,23 @@ const MedicalChart = () => {
             }
 
             // AirFlowAverageValues 데이터 처리
-            if (data?.AirFlowAverageValues && Array.isArray(data.AirFlowAverageValues)) {
+            if (data?.AirflowAverageValues && Array.isArray(data.AirFlowAverageValues)) {
                 const airflowFormatted = {
                     name: "AirFlow",
                     values: data.AirFlowAverageValues,
                 };
                 setAirflowData(airflowFormatted);
                 console.log('AirFlow 데이터:', airflowFormatted); // AirFlow 데이터 출력
+            }
+
+            // EogAverageValues 데이터 처리
+            if (data?.EogAverageValues && Array.isArray(data.EogAverageValues)) {
+                const eogFormatted = {
+                    name: "Eog",
+                    values: data.EogAverageValues,
+                };
+                setAirflowData(eogFormatted);
+                console.log('eog 데이터:', eogFormatted); // AirFlow 데이터 출력
             }
 
             // GsrAverageValues 데이터 처리
@@ -183,7 +193,7 @@ const MedicalChart = () => {
 
             // Spo2DataList 데이터 처리
             if (data?.spo2DataList && Array.isArray(data.spo2DataList)) {
-                const spo2Value = data.spo2DataList[0]?.spo2 || "N/A";
+                const spo2Value = data.spo2DataList[0] || "N/A"; // 데이터 배열의 첫 번째 값을 가져옴
                 setChartData((prev) =>
                     prev.map((item) =>
                         item.name === "Spo2" ? { ...item, value: `${spo2Value}%` } : item
@@ -211,8 +221,8 @@ const MedicalChart = () => {
             }
 
             // TempData 데이터 처리
-            if (data?.tempData && Array.isArray(data.tempData)) {
-                const bodyTemp = data.tempData[0] || "N/A";
+            if (data?.tempdata && Array.isArray(data.tempdata)) {
+                const bodyTemp = data.tempdata[0] || "N/A"; // 데이터 배열의 첫 번째 값을 가져옴
                 setChartData((prev) =>
                     prev.map((item) =>
                         item.name === "BodyTemp" ? { ...item, value: `${bodyTemp}°C` } : item
