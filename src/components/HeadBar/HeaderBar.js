@@ -21,7 +21,7 @@ const HeaderBar = () => {
     return (
         <header className="header-bar">
             {/* 로고 */}
-            <div className="header-logo">케어 메이트</div>
+            <div className="header-logo">헬스케어 웹서비스</div>
 
             {/* 메뉴 링크 */}
             <nav className="header-nav">

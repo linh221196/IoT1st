@@ -20,7 +20,7 @@ function App() {
 
   // 헤더 표시 조건 설정
   let HeaderComponent = null;
-  if (['/DeviceView', '/Volunteer', '/Measurement'].includes(location.pathname)) {
+  if (['/DeviceView', '/Volunteer', '/Measurement', '/UserHome', '/', '/VolunteerHome'].includes(location.pathname)) {
     HeaderComponent = <PatientHeader />; // PatientHeader를 표시할 경로
   } else if (['/MedicalHome', '/MedicalAdd', '/MedicalChart'].includes(location.pathname)) {
     HeaderComponent = <MedicalHeader />; // MedicalHeader를 표시할 경로

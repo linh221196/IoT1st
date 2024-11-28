@@ -5,6 +5,7 @@ import './Measurement.scss'; // SCSS 파일을 import
 import NoteList from '../User/NoteList'
 import {useSelector} from "react-redux";
 import UserHeadBar from "../HeadBar/UserHeaderBar";
+import {postMeasureList} from "../services/apiServices";
 
 const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
     return (
@@ -124,31 +125,11 @@ const Measurement = () => {
     const userInfo = useSelector(state => state.user.account);
 
     // 백엔드에서 메모 데이터를 가져오는 함수
-    const fetchNotes = async (month) => {
+    const fetchNotes = async () => {
         try {
             //api 코드
-            const data = {
-                '2024-11-14': [
-                    { measurement: 'spo2', status: '비정상' },
-                    { measurement: 'airflow', status: '정상' },
-                    { measurement: 'bodytemp', status: '정상' },
-                    { measurement: 'ecg', status: '정상' },
-                    { measurement: 'emg', status: '정상' },
-                    { measurement: 'gsr', status: '비정상' },
-                    { measurement: 'nibp', status: '정상' },
-                    { measurement: 'nibp', status: '비정상' },
-                ],
-                '2024-12-16': [
-                    { measurement: 'spo2', status: '정상' },
-                    { measurement: 'airflow', status: '정상' },
-                    { measurement: 'bodytemp', status: '정상' },
-                    { measurement: 'ecg', status: '정상' },
-                    { measurement: 'emg', status: '정상' },
-                    { measurement: 'gsr', status: '정상' },
-                    { measurement: 'nibp', status: '정상' },
-                    { measurement: 'nibp', status: '정상' },
-                ]
-            };
+            const data = await postMeasureList(userInfo.email)
+            console.log('측정결과 환자 :', data)
 
             setMeasurementsByDate(data);
         } catch (error) {

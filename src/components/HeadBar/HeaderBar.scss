@@ -16,13 +16,17 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   .header-logo {
+    /*flex: 0; !* 로고를 왼쪽에 배치 *!*/
     font-size: 24px;
     font-weight: bold;
     cursor: pointer;
+    /*margin-left: 0; !* 로고를 왼쪽 끝으로 *!*/
   }
 
   .header-nav {
+    /*flex: 2; !* 메뉴를 가운데 배치 *!*/
     display: flex;
+    /*justify-content: center; !* 메뉴 항목을 중앙 정렬 *!*/
     gap: 20px;
 
     .header-link {
@@ -39,9 +43,14 @@
   }
 
   .header-user-info {
+    /*flex: 1; !* 사용자 정보를 오른쪽에 배치 *!*/
     font-size: 16px;
+    /*text-align: right; !* 텍스트를 오른쪽 정렬 *!*/
     font-style: italic;
     color: #ddd;
+  }
+  .header-user-info.hidden {
+    color: transparent;
   }
 
   .btn-outline-danger {

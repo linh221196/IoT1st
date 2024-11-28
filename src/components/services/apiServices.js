@@ -223,6 +223,7 @@ const postModifyMeasure = (userid, spo2, airflow, bodytemp, ecg, emg, gsr, nibp)
     return axios.post(`/modifymeasure`, formData)
 }
 
+
 const postMedicalName = (email) => {
     const formData = new FormData();
     formData.append('userid', email)
@@ -237,12 +238,17 @@ const postMedicalChart = (email) => {
     return axios.post(`/medicalchart`, formData)
 }
 
+const postMeasureList = (email) => {
+    const formData = new FormData();
+    formData.append('userid', email)
 
+    return axios.post(`/loadmeasurement`, formData)
+}
 
 
 export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer,
     postAllVolunteerCall, postUserVolunteerCall, postVolunteerAssignment, postVolunteerComplete, postAssignmentCancel,
     postVolunteerCallModify, postVolunteerCallDelete, postSearchPatient, postAssignmentPatient, postLoadPatient,
-    postDeletePatient, postMeasurePatient, postModifyMeasure, postVolunteerTime, postMedicalName, postMedicalChart
-
+    postDeletePatient, postMeasurePatient, postModifyMeasure, postVolunteerTime, postMedicalName, postMedicalChart,
+    postMeasureList
 }
