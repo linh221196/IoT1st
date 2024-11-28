@@ -175,7 +175,7 @@ const Measurement = () => {
             mapResults(data.gsrResults, "gsrResult");
         }
         if (data.nibpResults) {
-            mapResults(data.nibpResults, "nibpResult");
+            mapResults(data.nibpResults, "nibpresult");
         }
         if (data.spo2Results) {
             mapResults(data.spo2Results, "spo2Result");
