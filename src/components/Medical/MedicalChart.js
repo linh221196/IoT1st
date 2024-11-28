@@ -162,10 +162,10 @@ const MedicalChart = () => {
             }
 
             // AirFlowAverageValues 데이터 처리
-            if (data?.AirflowAverageValues && Array.isArray(data.AirFlowAverageValues)) {
+            if (data?.AirflowAverageValues && Array.isArray(data.AirflowAverageValues)) {
                 const airflowFormatted = {
                     name: "AirFlow",
-                    values: data.AirFlowAverageValues,
+                    values: data.AirflowAverageValues,
                 };
                 setAirflowData(airflowFormatted);
                 console.log('AirFlow 데이터:', airflowFormatted); // AirFlow 데이터 출력
@@ -177,7 +177,7 @@ const MedicalChart = () => {
                     name: "Eog",
                     values: data.EogAverageValues,
                 };
-                setAirflowData(eogFormatted);
+                setEogData(eogFormatted);
                 console.log('eog 데이터:', eogFormatted); // AirFlow 데이터 출력
             }
 
