@@ -14,7 +14,6 @@ const NoteList = ({ measurements, date, userid }) => {
     return (
         <div className={styles['note-list']}>
             <h3>{date ? `${date} 측정 상태` : '날짜를 선택하세요'}</h3>
-            <h3>(ID: {userid ? userid : '로그인 정보 없음'})</h3>
             {sortedMeasurements.length > 0 ? (
                 sortedMeasurements.map((item, index) => (
                     <NoteItem

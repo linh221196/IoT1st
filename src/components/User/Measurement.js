@@ -142,8 +142,7 @@ const Measurement = () => {
         const mapResults = (results, measurementKey) => {
             results.forEach((item) => {
                 const date = item.date;
-                const statusString = item[measurementKey];
-                const statusBoolean = statusString === "정상"; // "정상" → true, 나머지 → false
+                const statusString = item[measurementKey]; // "정상" 또는 "비정상" 문자열 그대로 사용
 
                 if (!transformedData[date]) {
                     transformedData[date] = [];
@@ -151,7 +150,7 @@ const Measurement = () => {
 
                 transformedData[date].push({
                     measurement: measurementNames[measurementKey], // 매핑된 이름 사용
-                    status: statusBoolean, // boolean 값으로 변환
+                    status: statusString, // 문자열 값을 그대로 저장
                 });
             });
         };
