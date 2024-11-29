@@ -21,12 +21,12 @@ const Content = () => {
   const [list, setList] = useState(false);
   const [listUser, setListUser] = useState([
     { measurement: 'spo2', status: true, text: '산소포화도' },
-    { measurement: 'airflow', status: true, text: '호흡센서' },
-    { measurement: 'bodytemp', status: true, text: '체온센서' },
+    { measurement: 'airflow', status: true, text: '호흡' },
+    { measurement: 'bodytemp', status: true, text: '체온' },
     { measurement: 'ecg', status: true, text: '심전도' },
     { measurement: 'emg', status: true, text: '근전도' },
     { measurement: 'gsr', status: true, text: '피부반응' },
-    { measurement: 'nibp', status: true, text: '혈압측정' },
+    { measurement: 'nibp', status: true, text: '혈압' },
       { measurement: 'eog', status: true, text: '안구전도' },
   ]);
 

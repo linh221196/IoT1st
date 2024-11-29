@@ -73,6 +73,12 @@ const LogginView = () => {
     const handleSignUpSubmit = async (e) => {
         if (!handleValidated(e)) return;
 
+        // 생년월일 유효성 검사
+        if (!isBirthDateValid(birth)) {
+            alert("생년월일은 오늘 날짜보다 이전이어야 합니다.");
+            return;
+        }
+
         if (!isUsable) {
             alert("ID중복체크를 해주세요.")
             return;
@@ -90,6 +96,12 @@ const LogginView = () => {
         } catch (error) {
             alert("An error occurred while creating the user. Please try again.");
         }
+    };
+
+    //회원가입 날짜 유효성 검사
+    const isBirthDateValid = (birthDate) => {
+        const today = dayjs().format('YYYY/MM/DD'); // 오늘 날짜 가져오기
+        return birthDate <= today; // 입력된 날짜가 오늘보다 낮거나 같은지 확인
     };
 
     //로그인

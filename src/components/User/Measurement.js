@@ -122,35 +122,35 @@ const Measurement = () => {
     const [measurements, setMeasurements] = useState([]);
     const [measurementsByDate, setMeasurementsByDate] = useState({
         "2024-11-02": [
-            { measurement: "spo2", status: "정상", text: "산소포화도" },
-            { measurement: "ecg", status: "정상", text: "심전도" },
-            { measurement: "airflow", status: "정상", text: "공기 흐름" },
-            { measurement: "bodytemp", status: "정상", text: "체온" },
-            { measurement: "emg", status: "정상", text: "근전도" },
-            { measurement: "eog", status: "정상", text: "눈전도" },
-            { measurement: "gsr", status: "정상", text: "피부 전도도" },
-            { measurement: "nibp", status: "정상", text: "혈압" },
+            { "measurement": "산소포화도", "status": "정상" },
+            { "measurement": "심전도", "status": "정상" },
+            { "measurement": "호흡", "status": "정상" },
+            { "measurement": "체온", "status": "정상" },
+            { "measurement": "근전도", "status": "정상" },
+            { "measurement": "안구전도", "status": "정상" },
+            { "measurement": "피부반응", "status": "정상" },
+            { "measurement": "혈압", "status": "정상" }
         ],
         "2024-11-14": [
-            { measurement: "spo2", status: "정상", text: "산소포화도" },
-            { measurement: "ecg", status: "비정상", text: "심전도" },
-            { measurement: "airflow", status: "정상", text: "공기 흐름" },
-            { measurement: "bodytemp", status: "정상", text: "체온" },
-            { measurement: "emg", status: "정상", text: "근전도" },
-            { measurement: "eog", status: "비정상", text: "눈전도" },
-            { measurement: "gsr", status: "정상", text: "피부 전도도" },
-            { measurement: "nibp", status: "비정상", text: "혈압" },
+            { "measurement": "산소포화도", "status": "정상" },
+            { "measurement": "심전도", "status": "정상" },
+            { "measurement": "호흡", "status": "비정상" },
+            { "measurement": "체온", "status": "정상" },
+            { "measurement": "근전도", "status": "비정상" },
+            { "measurement": "안구전도", "status": "정상" },
+            { "measurement": "피부반응", "status": "비정상" },
+            { "measurement": "혈압", "status": "정상" }
         ],
         "2024-11-29": [
-            { measurement: "spo2", status: "정상", text: "산소포화도" },
-            { measurement: "ecg", status: "정상", text: "심전도" },
-            { measurement: "airflow", status: "정상", text: "공기 흐름" },
-            { measurement: "bodytemp", status: "정상", text: "체온" },
-            { measurement: "emg", status: "정상", text: "근전도" },
-            { measurement: "eog", status: "정상", text: "눈전도" },
-            { measurement: "gsr", status: "비정상", text: "피부 전도도" },
-            { measurement: "nibp", status: "정상", text: "혈압" },
-        ],
+            { "measurement": "산소포화도", "status": "정상" },
+            { "measurement": "심전도", "status": "정상" },
+            { "measurement": "호흡", "status": "정상" },
+            { "measurement": "체온", "status": "정상" },
+            { "measurement": "근전도", "status": "정상" },
+            { "measurement": "안구전도", "status": "정상" },
+            { "measurement": "피부반응", "status": "비정상" },
+            { "measurement": "혈압", "status": "정상" }
+        ]
     });
 
     const userInfo = useSelector(state => state.user.account);
@@ -160,12 +160,12 @@ const Measurement = () => {
 
         // 측정 항목 이름 매핑
         const measurementNames = {
-            airFlowResult: "공기 흐름",
+            airFlowResult: "호흡",
             bodyTempResult: "체온",
             ecgResult: "심전도",
             emgResult: "근전도",
-            eogResult: "눈전도",
-            gsrResult: "피부 전도도",
+            eogResult: "안구전도",
+            gsrResult: "피부반응",
             nibpresult: "혈압",
             spo2Result: "산소포화도",
         };
