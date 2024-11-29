@@ -31,9 +31,6 @@ const Calendar = () => {
 
     //리듁스에서 꺼내오기
     const userInfo = useSelector(state => state.user.account)
-    const isAuthenticated = useSelector(state => state.user.isAuthenticated)
-
-    const navigate = useNavigate();
 
     const [newValue, setValue] = useState(dayjs())
     const [showModal, setShowModal] = useState(false);
@@ -43,69 +40,24 @@ const Calendar = () => {
         /*{ noteName : "홍길동", noteDate: "2024-12-16", noteContent: "3주차 검진", noteEmail: "5678@naver.com" },*/
     ]);
     const [secondNoteList, setSecondNoteList] = useState([ //출장 list
-        { noteName : "정규혁", noteDate: "2024-12-02", noteContent: "1주차 검진", noteName2 : "봉사자", noteEmail: "", noteEmail2: "", notePhone: "010-1234-5678"}
+        { noteName : "정규혁", noteDate: "2024-12-02", noteContent: "1주차 검진", noteName2 : "봉사자", noteEmail: "", noteEmail2: "", notePhone: "010-4634-1091"}
     ]);
     const [view, setView] = useState('day');
 
-    const [date, setDate] = useState(new Date()); // 현재 날짜를 기본값으로 설정
-
+    //달력에서 오늘 날짜로 이동
     const handleDateChange = (newDate) => {
         const today = dayjs(); // 오늘 날짜를 가져옴
         setValue(today);
     };
-
-    
+    //추가 버튼을 눌렀을 때 모달 띄우기
     const handleAddEvent = () => {
         setShowModal(true);
     };
+
+    //모달에서 취소 버튼을 눌러서 모달 없애기
     const handleClose = () => {
         setShowModal(false);
     };
-
-    //봉사 확정
-    const handleAssignmentAction = async (index) => {
-        try {
-            const note = noteList[index];
-            console.log(userInfo.email, note.noteEmail, note.noteDate, note.noteContent);
-
-            const data = await postVolunteerAssignment(userInfo.email, note.noteEmail, note.noteDate, note.noteContent);
-            console.log('Check response', data);
-
-            // 성공적으로 API 호출이 완료되면 noteList에서 항목 제거하고 secondNoteList에 추가
-            setNoteList(prev => prev.filter((_, i) => i !== index));
-            setSecondNoteList(prev => [
-                ...prev,
-                { ...note, noteName2: userInfo.username, noteEmail2: userInfo.email } // 봉사자 정보 추가
-            ]);
-
-            alert("봉사 확정이 완료되었습니다.");
-        } catch (error) {
-            alert("서버 문제로 봉사확정이 실패했습니다.");
-        }
-    };
-
-    //봉사 취소하기
-    const handleCancelAction = async (index) => {
-        try {
-            const note = secondNoteList[index];
-            console.log('front data :', note.noteEmail2, note.noteEmail, note.noteDate, note.noteContent);
-
-            const data = await postAssignmentCancel(note.noteEmail2, note.noteEmail, note.noteDate, note.noteContent);
-            console.log('Check response', data);
-
-            // 성공적으로 API 호출이 완료되면 secondNoteList에서 항목 제거하고 noteList에 추가
-            setSecondNoteList(prev => prev.filter((_, i) => i !== index));
-            setNoteList(prev => [
-                ...prev,
-                { ...note, noteName: note.noteName, noteEmail: note.noteEmail } // 환자 정보 유지
-            ]);
-
-            alert("봉사 취소가 완료되었습니다.");
-        } catch (error) {
-            alert("서버 문제로 봉사취소가 실패했습니다.");
-        }
-    };
-
     //예약 list 작성
     const handleSubmit = async (e) => {
         if (note.trim()) {
@@ -132,30 +84,81 @@ const Calendar = () => {
             alert("내용을 입력해주세요.");
         }
     };
+
+    //봉사 확정
+    const handleAssignmentAction = async (index) => {
+        try {
+            const note = noteList[index];
+            console.log(userInfo.email, note.noteEmail, note.noteDate, note.noteContent);
+
+            const data = await postVolunteerAssignment(userInfo.email, note.noteEmail, note.noteDate, note.noteContent);
+            console.log('Check response', data);
+
+            // 성공적으로 API 호출이 완료되면 noteList에서 항목 제거하고 secondNoteList에 추가
+            setNoteList(prev => prev.filter((_, i) => i !== index));
+            setSecondNoteList(prev => [
+                ...prev,
+                { ...note, noteName2: userInfo.username, noteEmail2: userInfo.email } // 봉사자 정보 추가
+            ]);
+
+            alert("봉사 확정이 완료되었습니다.");
+        } catch (error) {
+            alert("서버 문제로 봉사확정이 실패했습니다.");
+        }
+    };
+    //봉사 취소하기
+    const handleCancelAction = async (index) => {
+        try {
+            const note = secondNoteList[index];
+            console.log('front data :', note.noteEmail2, note.noteEmail, note.noteDate, note.noteContent);
+
+            const data = await postAssignmentCancel(note.noteEmail2, note.noteEmail, note.noteDate, note.noteContent);
+            console.log('Check response', data);
+
+            // 성공적으로 API 호출이 완료되면 secondNoteList에서 항목 제거하고 noteList에 추가
+            setSecondNoteList(prev => prev.filter((_, i) => i !== index));
+            setNoteList(prev => [
+                ...prev,
+                { ...note, noteName: note.noteName, noteEmail: note.noteEmail } // 환자 정보 유지
+            ]);
+
+            alert("봉사 취소가 완료되었습니다.");
+        } catch (error) {
+            alert("서버 문제로 봉사취소가 실패했습니다.");
+        }
+    };
+
+    //예약list, 출장list api 받아온 데이터 가공
+    const processVolunteerData = (data, isVolunteer) => {
+        const desiredVolunteerDates = data.desiredVolunteerDates.map(item => ({
+            noteDate: item.desireddate,
+            noteContent: item.text,
+            noteName: item.app_user?.name,
+            noteEmail: item.userid
+        }));
+
+        const volunteerAssignments = data.volunteerAssignments.map(item => ({
+            noteDate: item.assignmentdate,
+            noteContent: item.text,
+            noteName: item.userByUserid?.name, // 환자 이름
+            noteEmail: item.userByUserid?.userid,
+            noteName2: item.userByVolunteerId?.name, // 봉사자 이름
+            noteEmail2: item.userByVolunteerId?.userid,
+            notePhone: !isVolunteer
+                ? item.userByVolunteerId?.phone_num // 봉사자 전화번호
+                : item.userByUserid?.phone_num // 환자 전화번호
+        }));
+
+        return { desiredVolunteerDates, volunteerAssignments };
+    };
     //봉사자 기준 받아오기
     const allVolunteerCall = async () => {
         try {
             const data = await postAllVolunteerCall(userInfo?.email);
             console.log('Check response', data);
 
-            // 두 가지 리스트로 데이터를 분리
-            const desiredVolunteerDates = data.desiredVolunteerDates.map(item => ({
-                noteDate: item.desireddate,
-                noteContent: item.text,
-                noteName: item.app_user?.name,
-                noteEmail: item.userid
-            }));
-
-            const volunteerAssignments = data.volunteerAssignments.map(item => ({
-                noteDate: item.assignmentdate,
-                noteContent: item.text,
-                noteName: item.userByUserid?.name, //환자 이름
-                noteEmail: item.userByUserid?.userid,
-                noteName2: item.userByVolunteerId?.name, //봉사자 이름
-                noteEmail2: item.userByVolunteerId?.userid,
-                notePhone: item.userByUserid?.phone_num
-            }));
-
+            //받아온 api 데이터 가공 함수 호출
+            const { desiredVolunteerDates, volunteerAssignments } = processVolunteerData(data, true);
             setNoteList(desiredVolunteerDates);
             setSecondNoteList(volunteerAssignments);
             console.log('Transformed typeA data:', desiredVolunteerDates);
@@ -171,24 +174,8 @@ const Calendar = () => {
             const data = await postUserVolunteerCall(userInfo?.email);
             console.log('Check response', data);
 
-            // 두 가지 리스트로 데이터를 분리
-            const desiredVolunteerDates = data.desiredVolunteerDates.map(item => ({
-                noteDate: item.desireddate,
-                noteContent: item.text,
-                noteName: item.app_user?.name,
-                noteEmail: item.userid
-            }));
-
-            const volunteerAssignments = data.volunteerAssignments.map(item => ({
-                noteDate: item.assignmentdate,
-                noteContent: item.text,
-                noteName: item.userByUserid?.name, //환자 이름
-                noteEmail: item.userByUserid?.userid,
-                noteName2: item.userByVolunteerId?.name, //봉사자 이름
-                noteEmail2: item.userByVolunteerId?.userid,
-                notePhone: item.userByVolunteerId?.phone_num
-            }));
-
+            //받아온 api 데이터 가공 함수 호출
+            const { desiredVolunteerDates, volunteerAssignments } = processVolunteerData(data, false);
             setNoteList(desiredVolunteerDates);
             setSecondNoteList(volunteerAssignments);
             console.log('Transformed typeA data:', desiredVolunteerDates);
@@ -252,13 +239,13 @@ const Calendar = () => {
                                 <button className="action-button today-button" onClick={handleDateChange}>
                                     오늘
                                 </button>
-                                {/*{userInfo.role === "Patient" && (
-                                    <>*/}
+                                {userInfo.role === "Patient" && (
+                                    <>
                                         <button className="action-button confirm-button" onClick={handleAddEvent}>
                                             추가
                                         </button>
-                                    {/*</>
-                                )}*/}
+                                    </>
+                                )}
                             </div>
                         </div>
                     </Col>

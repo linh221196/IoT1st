@@ -1,3 +1,42 @@
+@mixin background-color {
+  background-color: rgba(248, 245, 245, 0.3);
+}
+
+.custom-homecontent-container {
+  max-width: none !important;
+  width: 1500px; /* 고정 너비 */
+  height: 800px; /* 고정 높이 */
+  margin: 0 auto; /* 중앙 정렬 */
+  display: flex;
+  flex-direction: column; /* 세로로 배치 */
+
+  .home-container {
+    @include background-color();
+    width: 100%; /* 부모 컨테이너에 맞춤 */
+    height: 100%; /* 부모 컨테이너의 높이를 채움 */
+    display: flex; /* 내부 요소들을 가로로 배치 */
+    flex-direction: row; /* 가로 정렬 */
+    justify-content: space-between; /* 좌우 여백 분배 */
+
+    margin: 0; /* Bootstrap의 여백 제거 */
+    padding: 5px; /* Bootstrap의 여백 제거 */
+    align-items: center; /* 수직 중앙 정렬 */
+  }
+
+  .calendar-section {
+    width: 70%; /* 비율로 나눔 */
+    height: 100%;
+  }
+
+  .userinfo-section {
+    width: 30%; /* 비율로 나눔 */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 .userinfo-section {
   display: flex; /* Flexbox로 정렬 */
   justify-content: center; /* 수평 중앙 정렬 */

@@ -27,6 +27,7 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, han
 
     const [showModal, setShowModal] = useState(false);
     const [editIndex, setEditIndex] = useState(null);
+
     //수정 버튼(modal 띄우기)
     const handleEdit = (index) => {
         setEditIndex(index);
@@ -133,32 +134,32 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, han
                         <Col>
                             {isFirstList && (
                                 <>
-                                    {/*{userInfo.role === "Patient" && (
-                                        <>*/}
+                                    {userInfo.role === "Patient" && (
+                                        <>
                                             <Button variant="success" onClick={() => handleEdit(index)}>
                                                 <MdEdit size={20} />
                                             </Button>
                                             <Button variant="danger" onClick={() => handleDelete(index)}>
                                                 <MdDeleteForever size={20} />
                                             </Button>
-                                        {/*</>
-                                    )}*/}
-                                    {userInfo.role === "Volunteer" &&(
-                                        <>
+                                        </>
+                                    )}
+                                    {/*{userInfo.role === "Volunteer" &&(
+                                        <>*/}
                                             <Button variant="primary" onClick={() => handleAssignmentAction(index)}>
                                                 출장신청
                                             </Button>
-                                        </>
-                                    )}
+                                        {/*</>
+                                    )}*/}
                                 </>
                             )}
                             {!isFirstList && (
                                 <>
-                                    {userInfo.role === "Volunteer" && (
-                                        <>
+                                    {/*{userInfo.role === "Volunteer" && (
+                                        <>*/}
                                             <Button variant="complete" onClick={() => handleCompleteAction(index)}>봉사완료</Button>
-                                        </>
-                                    )}
+                                        {/*</>
+                                    )}*/}
                                     <Button variant="cancel" onClick={() => handleCancelAction(index)}>
                                         요청취소
                                     </Button>
@@ -166,9 +167,7 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, han
                             )}
                         </Col>
                     </Row>
-                    {!isFirstList && (
-                        <p>봉사자 전화번호 : {item.notePhone}</p>
-                    )}
+                    {!isFirstList && ( <p>환자 전화번호: {item.notePhone}</p>)}
                     {!isFirstList && userInfo.role === "Volunteer" && (
                         <>
                             <p>환자 전화번호: {item.notePhone}</p>

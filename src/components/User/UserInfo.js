@@ -135,7 +135,7 @@ const UserInfo = () => {
             case 'Volunteer':
                 return 'translateY(-40px)';
             default:
-                return 'translateY(40px)';
+                return 'translateY(-40px)';//'translateY(40px)';
         }
     };
 
@@ -165,12 +165,14 @@ const UserInfo = () => {
                         </TableRow>
                         <TableRow>
                             <TableCell component="th" scope="row">
-                                {userInfo.role === "Volunteer" ? "봉사횟수" : "의료진"}
+                                {/*{userInfo.role === "Volunteer" ? "봉사횟수" : "담당의료진"}*/}
+                                봉사횟수
                             </TableCell>
                             <TableCell align="right">
-                                {userInfo.role === "Volunteer"
+                                {/*{userInfo.role === "Volunteer"
                                     ? `${volunteerCount}회`
-                                    : doctor}
+                                    : doctor}*/}
+                                2회
                             </TableCell>
                         </TableRow>
                     </TableBody>

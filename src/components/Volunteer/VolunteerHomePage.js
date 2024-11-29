@@ -6,8 +6,8 @@ import Content from "../Content";
 
 const VolunteerHome = () => {
     return (
-        <Container className="homecontent-container">
-            <Row className="home-container border rounded shadow p-3 mb-5 " >
+        <Container className="custom-homecontent-container">
+            <Row className="home-container border rounded shadow">
                 <Col md={9} className="calendar-section">
                     <Calendar/>
                 </Col>
