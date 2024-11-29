@@ -160,7 +160,7 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, han
                                         </>
                                     )}
                                     <Button variant="cancel" onClick={() => handleCancelAction(index)}>
-                                        출장취소
+                                        요청취소
                                     </Button>
                                 </>
                             )}
