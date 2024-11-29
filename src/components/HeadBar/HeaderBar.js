@@ -25,10 +25,12 @@ const HeaderBar = () => {
 
             {/* 메뉴 링크 */}
             <nav className="header-nav">
-                <a href="/MedicalHome" className="header-link">MedicalHome</a>
-                <a href="/MedicalChart" className="header-link">MedicalChart</a>
-                <a href="/MedicalAdd" className="header-link">MedicalAddPatient</a>
+                <a href="/MedicalHome" className="header-link">Home</a>
+                <a href="/MedicalChart" className="header-link">Charts</a>
+                <a href="/MedicalAdd" className="header-link">AddPatient</a>
             </nav>
+
+
 
             {/* 오른쪽 정보 */}
             <div className="header-user-info">

@@ -21,9 +21,9 @@ const UserHeaderBar = () => {
             {/* 메뉴 링크 */}
             {userInfo.role !== "Volunteer" && (
                 <nav className="header-nav">
-                    <a href="/DeviceView" className="header-link">기기안내</a>
-                    <a href="/Measurement" className="header-link">측정지수</a>
-                    <a href="/Volunteer" className="header-link">봉사자요청</a>
+                        <a href="/DeviceView" className="header-link">기기안내</a>
+                        <a href="/Measurement" className="header-link">측정지수</a>
+                        <a href="/Volunteer" className="header-link">봉사자요청</a>
                 </nav>
             )}
 

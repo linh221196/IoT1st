@@ -133,16 +133,16 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, han
                         <Col>
                             {isFirstList && (
                                 <>
-                                    {userInfo.role === "Patient" && (
-                                        <>
+                                    {/*{userInfo.role === "Patient" && (
+                                        <>*/}
                                             <Button variant="success" onClick={() => handleEdit(index)}>
                                                 <MdEdit size={20} />
                                             </Button>
                                             <Button variant="danger" onClick={() => handleDelete(index)}>
                                                 <MdDeleteForever size={20} />
                                             </Button>
-                                        </>
-                                    )}
+                                        {/*</>
+                                    )}*/}
                                     {userInfo.role === "Volunteer" &&(
                                         <>
                                             <Button variant="primary" onClick={() => handleAssignmentAction(index)}>
@@ -166,6 +166,7 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, han
                             )}
                         </Col>
                     </Row>
+                    <p>봉사자 전화번호 : {item.notePhone}</p>
                     {!isFirstList && userInfo.role === "Volunteer" && (
                         <>
                             <p>환자 전화번호: {item.notePhone}</p>

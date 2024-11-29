@@ -39,11 +39,11 @@ const Calendar = () => {
     const [showModal, setShowModal] = useState(false);
     const [note, setNote] = useState("")
     const [noteList, setNoteList] = useState([ //예약 list
-        { noteName : "홍길동", noteDate: "2024-11-05", noteContent: "1st note", noteEmail: "1234@naver.com" },
-        { noteName : "정희원", noteDate: "2024-11-08", noteContent: "2nd note", noteEmail: "5678@naver.com" },
+        { noteName : "정규혁", noteDate: "2024-12-9", noteContent: "2주차 검진", noteEmail: "1234@naver.com" },
+        /*{ noteName : "홍길동", noteDate: "2024-12-16", noteContent: "3주차 검진", noteEmail: "5678@naver.com" },*/
     ]);
     const [secondNoteList, setSecondNoteList] = useState([ //출장 list
-        { noteName : "환자", noteDate: "2024-11-05", noteContent: "2nd note", noteName2 : "봉사자", noteEmail: "", noteEmail2: "", notePhone: ""}
+        { noteName : "정규혁", noteDate: "2024-12-02", noteContent: "1주차 검진", noteName2 : "봉사자", noteEmail: "", noteEmail2: "", notePhone: "010-1234-5678"}
     ]);
     const [view, setView] = useState('day');
 
@@ -252,13 +252,13 @@ const Calendar = () => {
                                 <button className="action-button today-button" onClick={handleDateChange}>
                                     오늘
                                 </button>
-                                {userInfo.role === "Patient" && (
-                                    <>
+                                {/*{userInfo.role === "Patient" && (
+                                    <>*/}
                                         <button className="action-button confirm-button" onClick={handleAddEvent}>
                                             추가
                                         </button>
-                                    </>
-                                )}
+                                    {/*</>
+                                )}*/}
                             </div>
                         </div>
                     </Col>
