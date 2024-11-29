@@ -9,15 +9,21 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 const Chart = ({ data = { name: '', values: [] } }) => {
     const { name, values: list } = data; // props에서 name과 list를 추출
 
-    // X축 라벨 생성: 0부터 리스트 길이까지의 숫자
-    const labels = list ? list.map((_, index) => index) : []; // 리스트가 없으면 빈 배열 반환
+    // X축 라벨 생성: 0부터 60까지 0.5 간격으로 생성
+    const totalLabels = Array.from({ length: 60 }, (_, index) => (index * 0.5).toFixed(1));
+
+    // X축 라벨을 30개로 간격 조정
+    const reducedLabels = totalLabels.filter((_, index) => index % 2 === 0);
+
+    // 마지막 라벨이 "30.0"으로 표시되도록 강제 설정
+    reducedLabels[reducedLabels.length - 1] = "30.0";
 
     // Y축 데이터는 전달받은 list 그대로 사용
     const dataValues = list || []; // 리스트가 없으면 빈 배열 반환
 
     // Chart.js 데이터 구성
     const chartData = {
-        labels: labels, // X축 라벨
+        labels: reducedLabels, // X축 라벨
         datasets: [
             {
                 label: name, // 그래프 라벨
