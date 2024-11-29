@@ -24,17 +24,17 @@ const Content = () => {
     { measurement: 'airflow', status: true, text: '호흡센서' },
     { measurement: 'bodytemp', status: true, text: '체온센서' },
     { measurement: 'ecg', status: true, text: '심전도' },
-    { measurement: 'emg', status: false, text: '근전도' },
+    { measurement: 'emg', status: true, text: '근전도' },
     { measurement: 'gsr', status: true, text: '피부반응' },
-    { measurement: 'nibp', status: false, text: '혈압측정' },
-      { measurement: 'eog', status: false, text: '안구전도' },
+    { measurement: 'nibp', status: true, text: '혈압측정' },
+      { measurement: 'eog', status: true, text: '안구전도' },
   ]);
 
   //사용자가 주의할 요소를 클릭했을때 뒤집히는 이벤트와 fetchData함수 실행
   const handleNoticeModalShow = (breakpoint) => {
     setFullscreen(breakpoint);
     // setNoticeModalShow(true);
-    fetchData();
+    //fetchData();
     setList(true);
   }
 
@@ -141,56 +141,64 @@ const Content = () => {
                       alignItems: "center",
                     }}
                 >
-                  <ul
-                      onClick={() => setList(false)}
-                      style={{
-                        padding: "10px",
-                        listStyleType: "none",
-                        margin: 0,
-                        textAlign: "center",
-                        width: "100%",
-                        height: "100%",
-                        overflowY: "auto", // 스크롤 추가
-                          display: "flex", // Flexbox 활성화
-                          justifyContent: "center", // 가로 중앙 정렬
-                          alignItems: "center", // 세로 중앙 정렬
-                          flexDirection: "column", // 세로로 리스트 정렬
-                      }}
-                  >
+                    <ul
+                        onClick={() => setList(false)}
+                        style={{
+                            padding: "10px",
+                            listStyleType: "none",
+                            margin: 0,
+                            textAlign: "center",
+                            width: "100%",
+                            height: "100%",
+                            overflowY: "auto", // 스크롤 추가
+                            display: "block", // Flexbox 해제
+                            flexDirection: "column", // 세로로 리스트 정렬
+                            boxSizing: "border-box", // 패딩 포함 크기 계산
+                        }}
+                    >
                       {userInfo.role === "Patient" ? (
                           listUser.filter((item) => item.status).length > 0 ? (
-                              listUser
-                                  .filter((item) => item.status)
-                                  .map((item, index) => (
-                                      <li
-                                          key={index}
-                                          style={{
-                                              padding: "8px",
-                                              margin: "5px 0",
-                                              borderRadius: "3px",
-                                              backgroundColor: "#f9f9f9", // 리스트 항목의 배경
-                                              transition: "background-color 0.2s ease",
-                                              cursor: "pointer",
-                                          }}
-                                          onMouseOver={(e) =>
-                                              (e.target.style.backgroundColor = "#e0e0e0")
-                                          }
-                                          onMouseOut={(e) =>
-                                              (e.target.style.backgroundColor = "#f9f9f9")
-                                          }
-                                      >
-                                          {item.measurement}: {item.text}
-                                      </li>
-                                  ))
-                          ) : (
-                              <li
-                                  style={{
-                                      color: "gray",
-                                      fontWeight: "bold",
-                                  }}
-                              >
-                                  필수로 검사할 요소가 없습니다.
-                              </li>
+                            listUser
+                                .filter((item) => item.status)
+                                .map((item, index) => (
+                                    <li
+                                        key={index}
+                                        style={{
+                                            width: "100%", // 모든 li 요소의 너비 동일
+                                            height: "40px", // 고정된 높이로 설정
+                                            display: "flex", // Flexbox로 내부 중앙 정렬
+                                            alignItems: "center", // 수직 중앙 정렬
+                                            justifyContent: "center", // 수평 중앙 정렬
+                                            backgroundColor: "#f9f9f9", // 리스트 항목의 배경
+                                            borderRadius: "3px",
+                                            cursor: "pointer",
+                                            transition: "background-color 0.2s ease",
+                                        }}
+                                        onMouseOver={(e) =>
+                                            (e.target.style.backgroundColor = "#e0e0e0")
+                                        }
+                                        onMouseOut={(e) =>
+                                            (e.target.style.backgroundColor = "#f9f9f9")
+                                        }
+                                    >
+                                        {item.measurement}: {item.text}
+                                    </li>
+                                ))
+                        ) : (
+                            <li
+                                style={{
+                                    width: "100%",
+                                    height: "40px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    backgroundColor: "#f2f2f2",
+                                    borderRadius: "3px",
+                                    color: "#999",
+                                }}
+                            >
+                                필수로 검사할 요소가 없습니다.
+                            </li>
                           )
                       ) : (
                           <li
