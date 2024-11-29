@@ -76,7 +76,7 @@ const Content = () => {
                       src={device}
                   />
                   <div className="divider"></div>
-                  <NavLink href="/DeviceView">기계 안내</NavLink>
+                  <NavLink href="/DeviceView">기기 안내</NavLink>
               </Col>
               <Col
                   className={`c-content ${list ? "flipped" : ""}`} // 상태에 따라 클래스 추가
@@ -156,7 +156,50 @@ const Content = () => {
                             boxSizing: "border-box", // 패딩 포함 크기 계산
                         }}
                     >
-                      {userInfo.role === "Patient" ? (
+                        {listUser.filter((item) => item.status).length > 0 ? (
+                            listUser
+                                .filter((item) => item.status)
+                                .map((item, index) => (
+                                    <li
+                                        key={index}
+                                        style={{
+                                            width: "100%", // 모든 li 요소의 너비 동일
+                                            height: "40px", // 고정된 높이로 설정
+                                            display: "flex", // Flexbox로 내부 중앙 정렬
+                                            alignItems: "center", // 수직 중앙 정렬
+                                            justifyContent: "center", // 수평 중앙 정렬
+                                            backgroundColor: "#f9f9f9", // 리스트 항목의 배경
+                                            borderRadius: "3px",
+                                            cursor: "pointer",
+                                            transition: "background-color 0.2s ease",
+                                        }}
+                                        onMouseOver={(e) =>
+                                            (e.target.style.backgroundColor = "#e0e0e0")
+                                        }
+                                        onMouseOut={(e) =>
+                                            (e.target.style.backgroundColor = "#f9f9f9")
+                                        }
+                                    >
+                                        {item.measurement}: {item.text}
+                                    </li>
+                                ))
+                        ) : (
+                            <li
+                                style={{
+                                    width: "100%",
+                                    height: "40px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    backgroundColor: "#f2f2f2",
+                                    borderRadius: "3px",
+                                    color: "#999",
+                                }}
+                            >
+                                필수로 검사할 요소가 없습니다.
+                            </li>
+                        )}
+                      {/*{userInfo.role === "Patient" ? (
                           listUser.filter((item) => item.status).length > 0 ? (
                             listUser
                                 .filter((item) => item.status)
@@ -211,7 +254,7 @@ const Content = () => {
                           >
                               로그인 후 이용하십시오.
                           </li>
-                      )}
+                      )}*/}
                   </ul>
                 </div>
               </div>
