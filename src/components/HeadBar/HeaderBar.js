@@ -36,12 +36,12 @@ const HeaderBar = () => {
             <div className="header-user-info">
                 {userInfo && userInfo.role === "Medical"
                     ? `${userInfo.username}님 (${userInfo.email}) 환영합니다.`
-                    : "로그인 정보를 확인할 수 없습니다."}
-                {userInfo?.email && (
+                    : "규혁님(너 이메일) 환영합니다."}
+                {/*{userInfo?.email && (*/}
                     <Button variant="outline-danger" onClick={handleLogout} style={{ marginLeft: '20px' }}>
                         Logout
                     </Button>
-                )}
+                {/*)}*/}
             </div>
         </header>
     );

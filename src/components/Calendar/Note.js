@@ -144,22 +144,22 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, han
                                             </Button>
                                         </>
                                     )}
-                                    {/*{userInfo.role === "Volunteer" &&(
-                                        <>*/}
+                                    {userInfo.role === "Volunteer" &&(
+                                        <>
                                             <Button variant="primary" onClick={() => handleAssignmentAction(index)}>
                                                 출장신청
                                             </Button>
-                                        {/*</>
-                                    )}*/}
+                                        </>
+                                    )}
                                 </>
                             )}
                             {!isFirstList && (
                                 <>
-                                    {/*{userInfo.role === "Volunteer" && (
-                                        <>*/}
+                                    {userInfo.role === "Volunteer" && (
+                                        <>
                                             <Button variant="complete" onClick={() => handleCompleteAction(index)}>봉사완료</Button>
-                                        {/*</>
-                                    )}*/}
+                                        </>
+                                    )}
                                     <Button variant="cancel" onClick={() => handleCancelAction(index)}>
                                         요청취소
                                     </Button>
@@ -167,7 +167,6 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, han
                             )}
                         </Col>
                     </Row>
-                    {!isFirstList && ( <p>환자 전화번호: {item.notePhone}</p>)}
                     {!isFirstList && userInfo.role === "Volunteer" && (
                         <>
                             <p>환자 전화번호: {item.notePhone}</p>

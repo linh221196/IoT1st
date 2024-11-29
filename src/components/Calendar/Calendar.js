@@ -35,7 +35,7 @@ const Calendar = () => {
     const [newValue, setValue] = useState(dayjs())
     const [showModal, setShowModal] = useState(false);
     const [note, setNote] = useState("")
-    const [noteList, setNoteList] = useState([ //예약 list
+    const [noteList, setNoteList] = useState([ //예약 lists
         { noteName : "정규혁", noteDate: "2024-12-9", noteContent: "2주차 검진", noteEmail: "1234@naver.com" },
         /*{ noteName : "홍길동", noteDate: "2024-12-16", noteContent: "3주차 검진", noteEmail: "5678@naver.com" },*/
     ]);

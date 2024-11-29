@@ -9,14 +9,14 @@ import { MdCheckBoxOutlineBlank } from "react-icons/md"; //빈표시
 const NoticeMeasure = ({ selectedUserId }) => {
     const userInfo = useSelector(state => state.user.account);
     const [listUser, setListUser] = useState([
-        { measurement: 'spo2', userid: selectedUserId, status: 'spo2' },
-        { measurement: 'airflow', userid: selectedUserId, status: 'airflow' },
-        { measurement: 'bodytemp', userid: selectedUserId, status: 'bodytemp' },
-        { measurement: 'ecg', userid: selectedUserId, status: 'ecg' },
-        { measurement: 'emg', userid: selectedUserId, status: 'emg' },
-        { measurement: 'gsr', userid: selectedUserId, status: 'gsr' },
-        { measurement: 'nibp', userid: selectedUserId, status: 'nibp' },
-        { measurement: 'eog', userid: selectedUserId, status: 'eog' },
+        { measurement: 'spo2', userid: 'l7562l@naver.com', status: 'spo2' },
+        { measurement: 'airflow', userid: 'l7562l@naver.com', status: 'airflow' },
+        { measurement: 'bodytemp', userid: 'l7562l@naver.com', status: 'bodytemp' },
+        { measurement: 'ecg', userid: 'l7562l@naver.com', status: 'ecg' },
+        { measurement: 'emg', userid: 'l7562l@naver.com', status: 'emg' },
+        { measurement: 'gsr', userid: 'l7562l@naver.com', status: 'gsr' },
+        { measurement: 'nibp', userid: 'l7562l@naver.com', status: 'nibp' },
+        { measurement: 'eog', userid: 'l7562l@naver.com', status: 'eog' },
     ]);
 
     const LoadList = async () => {
