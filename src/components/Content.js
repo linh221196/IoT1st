@@ -34,7 +34,7 @@ const Content = () => {
   const handleNoticeModalShow = (breakpoint) => {
     setFullscreen(breakpoint);
     // setNoticeModalShow(true);
-    //fetchData();
+    fetchData();
     setList(true);
   }
 
@@ -156,50 +156,7 @@ const Content = () => {
                             boxSizing: "border-box", // 패딩 포함 크기 계산
                         }}
                     >
-                        {listUser.filter((item) => item.status).length > 0 ? (
-                            listUser
-                                .filter((item) => item.status)
-                                .map((item, index) => (
-                                    <li
-                                        key={index}
-                                        style={{
-                                            width: "100%", // 모든 li 요소의 너비 동일
-                                            height: "40px", // 고정된 높이로 설정
-                                            display: "flex", // Flexbox로 내부 중앙 정렬
-                                            alignItems: "center", // 수직 중앙 정렬
-                                            justifyContent: "center", // 수평 중앙 정렬
-                                            backgroundColor: "#f9f9f9", // 리스트 항목의 배경
-                                            borderRadius: "3px",
-                                            cursor: "pointer",
-                                            transition: "background-color 0.2s ease",
-                                        }}
-                                        onMouseOver={(e) =>
-                                            (e.target.style.backgroundColor = "#e0e0e0")
-                                        }
-                                        onMouseOut={(e) =>
-                                            (e.target.style.backgroundColor = "#f9f9f9")
-                                        }
-                                    >
-                                        {item.measurement}: {item.text}
-                                    </li>
-                                ))
-                        ) : (
-                            <li
-                                style={{
-                                    width: "100%",
-                                    height: "40px",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    backgroundColor: "#f2f2f2",
-                                    borderRadius: "3px",
-                                    color: "#999",
-                                }}
-                            >
-                                필수로 검사할 요소가 없습니다.
-                            </li>
-                        )}
-                      {/*{userInfo.role === "Patient" ? (
+                      {userInfo.role === "Patient" ? (
                           listUser.filter((item) => item.status).length > 0 ? (
                             listUser
                                 .filter((item) => item.status)
@@ -254,7 +211,7 @@ const Content = () => {
                           >
                               로그인 후 이용하십시오.
                           </li>
-                      )}*/}
+                      )}
                   </ul>
                 </div>
               </div>
@@ -273,7 +230,7 @@ const Content = () => {
                     src={measure}
                 />
                 <div className="divider"></div>
-              <NavLink href="/Measurement">측정 치수</NavLink>
+              <NavLink href="/Measurement">측정 지수</NavLink>
             </Col>
             <Col className="c-content">
                 <Image
@@ -281,7 +238,7 @@ const Content = () => {
                     src={volunteer}
                 />
                 <div className="divider"></div>
-              <NavLink href="/Volunteer">자원 봉사</NavLink>
+              <NavLink href="/Volunteer">봉사자 요청</NavLink>
             </Col>
           </Row>
         </div>

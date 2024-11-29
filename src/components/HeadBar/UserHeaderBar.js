@@ -23,12 +23,12 @@ const UserHeaderBar = () => {
                 <nav className="header-nav">
                     <a href="/DeviceView" className="header-link">기기안내</a>
                     <a href="/Measurement" className="header-link">측정지수</a>
-                    <a href="/Volunteer" className="header-link">자원봉사</a>
+                    <a href="/Volunteer" className="header-link">봉사자요청</a>
                 </nav>
             )}
 
             {/* 오른쪽 정보 */}
-            <div className={`header-user-info ${!userInfo.role ? "hidden" : ""}`}>
+            <div className={`header-user-info ${!userInfo?.role ? "hidden" : ""}`}>
                 {userInfo?.role
                     ? `${userInfo.username}님 (${userInfo.email}) 환영합니다.`
                     : "로그인 정보를 확인할 수 없습니다."}

@@ -120,7 +120,38 @@ const Measurement = () => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [measurements, setMeasurements] = useState([]);
-    const [measurementsByDate, setMeasurementsByDate] = useState({});
+    const [measurementsByDate, setMeasurementsByDate] = useState({
+        "2024-11-02": [
+            { measurement: "spo2", status: "정상", text: "산소포화도" },
+            { measurement: "ecg", status: "정상", text: "심전도" },
+            { measurement: "airflow", status: "정상", text: "공기 흐름" },
+            { measurement: "bodytemp", status: "정상", text: "체온" },
+            { measurement: "emg", status: "정상", text: "근전도" },
+            { measurement: "eog", status: "정상", text: "눈전도" },
+            { measurement: "gsr", status: "정상", text: "피부 전도도" },
+            { measurement: "nibp", status: "정상", text: "혈압" },
+        ],
+        "2024-11-14": [
+            { measurement: "spo2", status: "정상", text: "산소포화도" },
+            { measurement: "ecg", status: "비정상", text: "심전도" },
+            { measurement: "airflow", status: "정상", text: "공기 흐름" },
+            { measurement: "bodytemp", status: "정상", text: "체온" },
+            { measurement: "emg", status: "정상", text: "근전도" },
+            { measurement: "eog", status: "비정상", text: "눈전도" },
+            { measurement: "gsr", status: "정상", text: "피부 전도도" },
+            { measurement: "nibp", status: "비정상", text: "혈압" },
+        ],
+        "2024-11-29": [
+            { measurement: "spo2", status: "정상", text: "산소포화도" },
+            { measurement: "ecg", status: "정상", text: "심전도" },
+            { measurement: "airflow", status: "정상", text: "공기 흐름" },
+            { measurement: "bodytemp", status: "정상", text: "체온" },
+            { measurement: "emg", status: "정상", text: "근전도" },
+            { measurement: "eog", status: "정상", text: "눈전도" },
+            { measurement: "gsr", status: "비정상", text: "피부 전도도" },
+            { measurement: "nibp", status: "정상", text: "혈압" },
+        ],
+    });
 
     const userInfo = useSelector(state => state.user.account);
 
