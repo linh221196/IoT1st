@@ -2,7 +2,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import {postMeasurePatient, postModifyMeasure} from "../services/apiServices";
+import {postMeasurePatient, postModifyMeasure} from "../../services/apiServices";
 import { MdCheckBox } from "react-icons/md"; //체크 표시
 import { MdCheckBoxOutlineBlank } from "react-icons/md"; //빈표시
 

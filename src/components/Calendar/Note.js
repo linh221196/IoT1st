@@ -19,7 +19,7 @@ import {
     postVolunteerAssignment,
     postVolunteerassignment,
     postVolunteerComplete
-} from "../services/apiServices";
+} from "../../services/apiServices";
 
 const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, handleCancelAction, handleAssignmentAction }) => {
     //리듁스에서 꺼내오기

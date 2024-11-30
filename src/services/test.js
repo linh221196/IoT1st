@@ -3,7 +3,7 @@ import './test.scss';
 import {Button} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import {logoutUser} from "../../redux/action/userAction";
+import {logoutUser} from "../redux/action/userAction";
 
 const Test = ({ role = 'Guest' }) => { //Patient, Volunteer, Guest, Medical
     const userInfo = useSelector(state => state.user.account);

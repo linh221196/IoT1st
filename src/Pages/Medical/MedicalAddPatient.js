@@ -1,24 +1,24 @@
-import { Container, Row, Col } from "react-bootstrap"
-import HeaderBar from "../HeadBar/HeaderBar"
-import UserTable from "./UserTable"
-import Chart from "./Chart"
-import AddList from "./AddList"
-import './Admin.scss'
-import NoticeMeasure from "./NoticeMeasure";
-import {useEffect, useState} from "react";
+import {Container, Row} from "react-bootstrap";
+import SideBar from "../../components/HeadBar/HeaderBar";
+import AddList from "../../components/Medical/AddList";
+import UserTable from "../../components/Medical/UserTable";
 import {useSelector} from "react-redux";
-import { postLoadPatient } from "../services/apiServices";
-import UserList from "../NotFound";
+import {postLoadPatient} from "../../services/apiServices";
+import {useEffect, useState} from "react";
+import Col from "react-bootstrap/Col";
+import HeaderBar from "../../components/HeadBar/HeaderBar";
+import NoticeMeasure from "../../components/Medical/NoticeMeasure";
+import Chart from "../../components/Medical/Chart";
 
 
-const MedicalHome = () => {
+const MedicalAddPatient = () => {
     const userInfo = useSelector(state => state.user.account)
     const [called, setCalled] = useState(false);
+    const [selectedUserId, setSelectedUserId] = useState(null);
     const [patientList, setPatientList] = useState([
-        { username: "정규혁", useremail: "l7562l@naver.com", userbirth: "2001-05-03" },
+        { username: "환자1", useremail: "이메일1", userbirth: "2001-11-01" },
         { username: "환자2", useremail: "이메일2", userbirth: "2001-11-02" }
     ]);
-    const [selectedUserId, setSelectedUserId] = useState(null);
 
 
     //의료진이 처음 들어왔을 때 담당환자 list 불러오기
@@ -45,20 +45,15 @@ const MedicalHome = () => {
         }
     }
 
-    //삭제 이벤트 발생시
+    //삭제 등 업데이트가 되었을때
     const handleUpdateList = (updatedList) => {
         setPatientList([...updatedList]);
-
-        // 삭제된 사용자를 확인
-        const deletedUserId = patientList.find(
-            (patient) => !updatedList.some((item) => item.useremail === patient.useremail)
-        )?.useremail;
-
-        // 삭제된 사용자가 선택된 사용자라면 초기화
-        if (deletedUserId && deletedUserId === selectedUserId) {
-            setSelectedUserId(null);
-        }
     };
+
+    useEffect(() => {
+        console.log("patientList가 변경되었습니다:", patientList);
+    }, [patientList]);
+
 
     //여기에 처음 들어왔을 때
     useEffect(() => {
@@ -79,32 +74,32 @@ const MedicalHome = () => {
     return (
         <>
             <Container style={{
-                maxWidth: '100%',
+                maxWidth: '1200px',
                 margin: '0 auto',
                 padding: '0',
                 boxSizing: 'border-box',
             }}
                        className="container admin-container">
-            {/* 헤더 높이만큼 마진 추가 */}
-            <div className="admin-container">
-                <div className="content-container" style={{display: "flex", flexDirection: "row", gap: "20px"}}>
-                    {/* User Table Container */}
-                    <div className="user-table-container" style={{flex: 1}}>
-                        <UserTable
-                            list={patientList}
-                            onSelectUser={handleUserSelect}
-                            onUpdateList={handleUpdateList}
-                        />
-                    </div>
-
-                    {/* Notice Measure Container */}
-                    <div className="notice-measure-container" style={{flex: 1}}>
-                        <NoticeMeasure selectedUserId={selectedUserId}/>
+                {/* 헤더 높이만큼 마진 추가 */}
+                <div className="custom-admin-container">
+                    <div className="content-container" style={{display: "flex", flexDirection: "row", gap: "20px"}}>
+                        <div>
+                            <AddList PatientCall={PatientCall}/>
+                        </div>
+                        <div>
+                            <UserTable
+                                list={patientList}
+                                disableClick={true}
+                                onUpdateList={(updatedList) => {
+                                    handleUpdateList(updatedList);
+                                }}
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Container>
+            </Container>
         </>
-    );
+    )
 }
-export default MedicalHome
+
+export default MedicalAddPatient

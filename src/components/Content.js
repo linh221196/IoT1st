@@ -5,7 +5,7 @@ import "./Content.scss";
 import {Image, NavLink} from "react-bootstrap";
 import PatientNoticeMeasure from "./User/PatientNoticeMeasure";
 import React, { useState } from 'react';
-import {postMeasurePatient} from "./services/apiServices";
+import {postMeasurePatient} from "../services/apiServices";
 import userInfo from "./User/UserInfo";
 import {useSelector} from "react-redux";
 import measure from '../assets/white_measure_icon_with_border.png'

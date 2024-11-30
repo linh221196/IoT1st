@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { refreshAccessToken } from '../services/apiServices';
-import { store } from '../../redux/store';
-import { logoutUser } from '../../redux/action/userAction';
+import { store } from '../redux/store';
+import { logoutUser } from '../redux/action/userAction';
 
 const instance = axios.create({
     baseURL: 'http://localhost:8081/',

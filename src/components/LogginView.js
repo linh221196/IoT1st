@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import SignUpModal from './SignUpModal';
 import FindPwModal from './FindPwModal';
-import {postCreateNewUser, postLoggin, postTokenCheck, postUserId} from './services/apiServices';
+import {postCreateNewUser, postLoggin, postTokenCheck, postUserId} from '../services/apiServices';
 import dayjs from 'dayjs';
 import { useDispatch, useSelector } from "react-redux";
 import {doLoggin, logoutUser} from '../redux/action/userAction';

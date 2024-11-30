@@ -1,11 +1,11 @@
-import HeaderBar from "../HeadBar/HeaderBar";
-import UserTable from "./UserTable";
+import HeaderBar from "../../components/HeadBar/HeaderBar";
+import UserTable from "../../components/Medical/UserTable";
 import {Container, Row, Col} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
-import {postLoadPatient, postMedicalChart} from "../services/apiServices";
-import Chart from "./Chart";
-import ChartList from "./ChartList";
+import {postLoadPatient, postMedicalChart} from "../../services/apiServices";
+import Chart from "../../components/Medical/Chart";
+import ChartList from "../../components/Medical/ChartList";
 
 const MedicalChart = () => {
     const userInfo = useSelector(state => state.user.account)

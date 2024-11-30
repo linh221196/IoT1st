@@ -2,12 +2,12 @@ import { useState } from "react";
 import {
     postAssignmentPatient,
     postSearchPatient, postVolunteerCallModify
-} from "../services/apiServices";
+} from "../../services/apiServices";
 import {useSelector} from "react-redux";
 
 
 const AddList = ({ PatientCall }) => {
-    const [addList, setaddList] = useState([
+    const [addList, setaddList] = useState([ //환자 검색 api 데이터 저장할 list
         { username: "이름", userid: "이메일" },
         { username: "이름1", userid: "이메일" },
         { username: "이름2", userid: "이메일" },
@@ -24,7 +24,7 @@ const AddList = ({ PatientCall }) => {
     };
 
     //검색 버튼을 눌렀을 때 그 id에 맞는 환자를 받아오기
-    const handleSearchItem = async () => {
+    const searchPatient = async () => {
         if (inputText.trim() !== '') {
             try {
                 const data = await postSearchPatient(inputText);
@@ -60,7 +60,7 @@ const AddList = ({ PatientCall }) => {
         }
     };
     //list에서 환자를 추가 할때
-    const handleAddItem = async (index) => {
+    const handleAddPatient = async (index) => {
         try {
             // API 호출
             const email = userInfo?.email;
@@ -95,13 +95,13 @@ const AddList = ({ PatientCall }) => {
                     onChange={handleInputChange}
                     onKeyDown={(e) => {
                         if (e.key === "Enter") {
-                            handleSearchItem(); // Enter 키를 누르면 handleSearchItem 호출
+                            searchPatient(); // Enter 키를 누르면 handleSearchItem 호출
                         }
                     }}
                     placeholder="환자 입력하세요"
                     style={styles.input}
                 />
-                <button onClick={handleSearchItem} style={styles.searchButton}>
+                <button onClick={searchPatient} style={styles.searchButton}>
                     검색
                 </button>
             </div>
@@ -116,7 +116,7 @@ const AddList = ({ PatientCall }) => {
                         <span style={styles.listText}>
                             {item.username} - {item.userid}
                         </span>
-                        <button onClick={() => handleAddItem(index)} style={styles.addButton}>
+                        <button onClick={() => handleAddPatient(index)} style={styles.addButton}>
                             추가
                         </button>
                     </li>

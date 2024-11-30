@@ -4,7 +4,7 @@ import code from '../../assets/userimage.png'
 import { FiEdit } from "react-icons/fi";
 import UserInfoUpdateModal from "./UserInfoUpdateModal";
 import { useEffect, useState } from 'react';
-import {postMedicalName, postVolunteerTime, putEditUserData} from "../services/apiServices";
+import {postMedicalName, postVolunteerTime, putEditUserData} from "../../services/apiServices";
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';

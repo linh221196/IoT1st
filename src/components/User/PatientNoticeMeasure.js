@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import { postMeasurePatient } from "../services/apiServices";
+import { postMeasurePatient } from "../../services/apiServices";
 
 const PatientNoticeMeasure = ({ showNoticeModal, setNoticeModalShow, fullscreen, selectedUserId }) => {
     const [listUser, setListUser] = useState([

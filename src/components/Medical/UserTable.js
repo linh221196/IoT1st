@@ -2,7 +2,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import { useSelector } from "react-redux";
-import { postDeletePatient } from "../services/apiServices";
+import { postDeletePatient } from "../../services/apiServices";
 import { useEffect, useState } from "react";
 
 const paginationModel = { page: 0, pageSize: 10 };

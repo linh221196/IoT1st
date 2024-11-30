@@ -1,8 +1,8 @@
-import UserInfo from '../User/UserInfo'
-import Calendar from '../Calendar/Calendar'
+import UserInfo from '../../components/User/UserInfo'
+import Calendar from '../../components/Calendar/Calendar'
 import { Container, Row,Col } from 'react-bootstrap'
 import './VolunteerHome.scss';
-import Content from "../Content";
+import Content from "../../components/Content";
 
 const VolunteerHome = () => {
     return (

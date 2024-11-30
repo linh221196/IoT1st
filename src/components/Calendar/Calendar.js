@@ -19,7 +19,7 @@ import {
     postCallVolunteer,
     postUserVolunteerCall, postVolunteerAssignment,
     putEditUserData
-} from "../services/apiServices";
+} from "../../services/apiServices";
 import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {MdDeleteForever, MdEdit} from "react-icons/md";
@@ -30,10 +30,10 @@ const Calendar = () => {
     //리듁스에서 꺼내오기
     const userInfo = useSelector(state => state.user.account)
 
-    const [newValue, setValue] = useState(dayjs())
-    const [showModal, setShowModal] = useState(false); //예약 list 작성 모달
-    const [note, setNote] = useState(""); //
-    const [noteList, setNoteList] = useState([ //예약 lists
+    const [newValue, setValue] = useState(dayjs()) //달력에서 날짜 저장하는 곳
+    const [showModal, setShowModal] = useState(false); //예약 list 작성 모달 띄우는 판단용
+    const [note, setNote] = useState(""); //예약 list을 작성할 때 내용을 저장하는 곳
+    const [noteList, setNoteList] = useState([ //예약 list
         { noteName : "정규혁", noteDate: "2024-12-9", noteContent: "2주차 검진", noteEmail: "1234@naver.com" },
         /*{ noteName : "홍길동", noteDate: "2024-12-16", noteContent: "3주차 검진", noteEmail: "5678@naver.com" },*/
     ]);
@@ -43,7 +43,7 @@ const Calendar = () => {
     const [view, setView] = useState('day');
 
     //달력에서 오늘 날짜로 이동
-    const handleDateChange = (newDate) => {
+    const handleDateChange = () => {
         const today = dayjs(); // 오늘 날짜를 가져옴
         setValue(today);
     };

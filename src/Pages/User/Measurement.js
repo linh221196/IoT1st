@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Icon } from '@iconify/react';
 import { format, addMonths, subMonths, startOfMonth, endOfMonth, startOfWeek, endOfWeek, isSameMonth, isSameDay, addDays } from 'date-fns';
 import './Measurement.scss'; // SCSS 파일을 import
-import NoteList from '../User/NoteList'
+import NoteList from '../../components/User/NoteList'
 import {useSelector} from "react-redux";
-import UserHeadBar from "../HeadBar/UserHeaderBar";
-import {postMeasureList} from "../services/apiServices";
+import UserHeadBar from "../../components/HeadBar/UserHeaderBar";
+import {postMeasureList} from "../../services/apiServices";
 
 const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
     return (

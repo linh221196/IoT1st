@@ -1,11 +1,11 @@
 import { Col, Container, Row, Stack } from "react-bootstrap"
 import './Home.scss'
-import Content from "./Content"
-import LogginView from "./LogginView"
+import Content from "../components/Content"
+import LogginView from "../components/LogginView"
 import {useSelector} from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import {useEffect} from "react";
-import userInfo from "./User/UserInfo";
+import userInfo from "../components/User/UserInfo";
 
 const Home = () => {
   const navigate = useNavigate();
