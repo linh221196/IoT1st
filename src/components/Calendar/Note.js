@@ -125,9 +125,7 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, han
                         <Col sm={8}>
                             <p>환자 이름: {item.noteName}</p>
                             {!isFirstList && (
-                                <>
                                     <p>봉사자 이름: {item.noteName2}</p>
-                                </>
                             )}
                             <p>날짜: {item.noteDate}</p>
                         </Col>
@@ -167,14 +165,14 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, han
                             )}
                         </Col>
                     </Row>
-                    {!isFirstList && userInfo.role === "Volunteer" && (
+                    {!isFirstList && (
                         <>
-                            <p>환자 전화번호: {item.notePhone}</p>
-                        </>
-                    )}
-                    {!isFirstList && userInfo.role === "Patient" && (
-                        <>
-                            <p>봉사자 전화번호: {item.notePhone}</p>
+                            {userInfo.role === "Patient" && (
+                                <p>봉사자 전화번호: {item.notePhone}</p>
+                            )}
+                            {userInfo.role === "Volunteer" &&(
+                                <p>환자 전화번호: {item.notePhone}</p>
+                            )}
                         </>
                     )}
                     <p>내용: {item.noteContent}</p>

@@ -215,7 +215,6 @@ const Measurement = () => {
         return transformedData;
     };
 
-
     // 백엔드에서 메모 데이터를 가져오는 함수
     const fetchNotes = async () => {
         try {
@@ -236,12 +235,15 @@ const Measurement = () => {
         fetchNotes(currentMonth); // 월이 변경될 때마다 메모를 가져옵니다.
     }, [currentMonth]);
 
+    //이전 달로 보이게 하는 함수
     const prevMonth = () => {
         setCurrentMonth(subMonths(currentMonth, 1));
     };
+    //다음 달로 보이게 하는 함수
     const nextMonth = () => {
         setCurrentMonth(addMonths(currentMonth, 1));
     };
+    //달력에서 날짜를 클릭했을때, 그 날짜를 받아오기
     const onDateClick = (day) => {
         setSelectedDate(day);
     };
