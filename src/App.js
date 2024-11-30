@@ -11,25 +11,33 @@ import MedicalHome from './components/Medical/MedicalHome';
 import MedicalAddPatient from "./components/Medical/MedicalAddPatient";
 import Measurement from "./components/User/Measurement";
 import MedicalChart from "./components/Medical/MedicalChart";
-import PatientHeader from "./components/HeadBar/UserHeaderBar"
-import MedicalHeader from "./components/HeadBar/HeaderBar"
+import HeaderBar from "./components/HeadBar/HeaderBar"
 import NotFound from './components/NotFound';
 
 function App() {
   const location = useLocation();
 
-  // 헤더 표시 조건 설정
-  let HeaderComponent = null;
-  if (['/DeviceView', '/Volunteer', '/Measurement', '/UserHome', '/', '/VolunteerHome'].includes(location.pathname)) {
-    HeaderComponent = <PatientHeader />; // PatientHeader를 표시할 경로
-  } else if (['/MedicalHome', '/MedicalAdd', '/MedicalChart'].includes(location.pathname)) {
-    HeaderComponent = <MedicalHeader />; // MedicalHeader를 표시할 경로
-  }
+  // 경로에 따라 role 결정
+  const getRoleByPath = () => {
+    if (['/MedicalHome', '/MedicalAdd', '/MedicalChart'].includes(location.pathname)) {
+      return "Medical"; // 의료진
+    } else if (['/Volunteer', '/Measurement', '/UserHome'].includes(location.pathname)) {
+      return "Patient"; // 환자
+    } else if (['/VolunteerHome'].includes(location.pathname)) {
+      return "Volunteer"; // 봉사자
+    } else if (['/', '/DeviceView'].includes(location.pathname)){
+      return "Guest"; // 비로그인 사용자
+    } else {
+      return null;
+    }
+  };
+
+  const role = getRoleByPath();
 
   return (
     <div className="App">
       {/* 조건부로 헤더 렌더링 */}
-      {HeaderComponent}
+      {role && <HeaderBar role={role} />}
 
       <div className="app-container">
         <Routes>

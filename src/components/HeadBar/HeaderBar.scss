@@ -1,11 +1,11 @@
 .header-bar {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-/*  background-color: #172A45; !* 어두운 네이비 색상 *!*/
-/*  background-color: #F5F5F5; !*밝은 회색*!*/
-/*  background-color: #324B78; !*미드나이트 블루*!*/
-/*  background-color: #FFFFFF; !*투명한 흰색*!*/
+  align-items: center; /* 세로 중앙 정렬 */
+  justify-content: space-between; /* 로고, 네비게이션, 사용자 정보를 양쪽 정렬 */
+  /*  background-color: #172A45; !* 어두운 네이비 색상 *!*/
+  /*  background-color: #F5F5F5; !*밝은 회색*!*/
+  /*  background-color: #324B78; !*미드나이트 블루*!*/
+  /*  background-color: #FFFFFF; !*투명한 흰색*!*/
   background-color: #3D5A80; /*코발트 블루*/
   color: #fff;
   padding: 10px 20px;
@@ -16,38 +16,57 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   .header-logo {
-    /*flex: 0; !* 로고를 왼쪽에 배치 *!*/
     font-size: 24px;
     font-weight: bold;
     cursor: pointer;
-    /*margin-left: 0; !* 로고를 왼쪽 끝으로 *!*/
+    flex: 1; /* 왼쪽에 고정 */
+    text-align: left; /* 로고를 왼쪽 정렬 */
   }
 
   .header-nav {
-    /*flex: 2; !* 메뉴를 가운데 배치 *!*/
     display: flex;
-    /*justify-content: center; !* 메뉴 항목을 중앙 정렬 *!*/
-    gap: 20px; //30
+    flex: 2; /* 가운데 영역 */
+    justify-content: center; /* 네비게이션을 중앙에 배치 */
 
+    // 공통 스타일
     .header-link {
       color: #fff;
       text-decoration: none;
-      font-size: 16px; //20
       font-weight: 500;
       transition: color 0.3s;
 
       &:hover {
-        color: #1abc9c; /* 링크에 마우스를 올릴 때의 색상 */
+        color: #1abc9c;
       }
+    }
+
+    &.Patient,
+    &.Guest {
+      gap: 20px;
+
+      .header-link {
+        font-size: 16px;
+      }
+    }
+
+    &.Medical {
+      gap: 30px;
+
+      .header-link {
+        font-size: 20px;
+      }
+    }
+    &.Volunteer {
+      display: none; // 봉사자는 메뉴 숨기기
     }
   }
 
   .header-user-info {
-    /*flex: 1; !* 사용자 정보를 오른쪽에 배치 *!*/
     font-size: 16px;
-    /*text-align: right; !* 텍스트를 오른쪽 정렬 *!*/
     font-style: italic;
     color: #ddd;
+    flex: 1; /* 오른쪽에 고정 */
+    text-align: right; /* 사용자 정보를 오른쪽 정렬 */
   }
   .header-user-info.hidden {
     color: transparent;
@@ -55,11 +74,11 @@
 
   .btn-outline-danger {
     color: #FFFFFF; /* 기본 텍스트 색상 */
-    border: 2px solid #95A5A6; /* 기본 테두리 색상 */
-    border-radius: 20px; /* 둥근 테두리 */
-    padding: 8px 20px; /* 여유 있는 버튼 내부 여백 */
-    font-size: 16px;
-    font-weight: 500; /* 적절한 두께로 텍스트 강조 */
+    border: 1px solid #95A5A6; /* 테두리를 얇게 조정 */
+    border-radius: 10px; /* 둥근 테두리 크기 축소 */
+    padding: 4px 10px; /* 내부 여백 줄이기 */
+    font-size: 12px; /* 텍스트 크기 줄이기 */
+    font-weight: 400; /* 텍스트 두께 조정 */
     background-color: transparent; /* 투명 배경 */
     transition: all 0.3s ease; /* 전환 효과 */
 
