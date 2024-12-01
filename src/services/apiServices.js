@@ -30,30 +30,8 @@ const postCreateNewUser = (email, password, username, birth, phoneNum, role, use
     if (userImage) {
         formData.append('userImage', userImage);
     }
-    //return axios.post(`/...`, formData);
-    // return axios.post(`/participant`, formData);
+
     return axios.post(`/signup`, formData)
-}
-
-const getAllUsers = () => {
-    // return axios.get(`/.../...`);
-    //http://localhost:8081/api/v1/login/participant/all
-    // return axios.get(`/participant/all`);
-}
-
-//개인정보 수정 (pw 아님)
-const putEditUserData = (id, username, role, userImage) => {
-    const formData = new FormData();
-    formData.append('id', id);
-    if (username) {
-        formData.append('username', username);
-    }
-    formData.append('role', role)
-    if (userImage) {
-        formData.append('userImage', userImage);
-    }
-    //return axios.put(`/...`)
-    // return axios.put(`/participant`, formData)
 }
 
 // 로그인
@@ -67,7 +45,6 @@ const postLoggin = (email, password) => {
     return axios.post('/login', data);
 };
 
-
 //ID 중복 check
 const postUserId = (email) => {
     // return axios.get(`/email/{email}`)
@@ -77,8 +54,6 @@ const postUserId = (email) => {
     return axios.post(`/idcheck`, formData);
 }
 
-//프론트
-/*여기는 calendar관련 기능*/
 //환자가 봉사자 요청하기(예약 list)
 const postCallVolunteer = (email, noteDate, noteContent) => {
     const formData = new FormData();
@@ -123,7 +98,6 @@ const postVolunteerTime = (email) => {
 
     return axios.post(`/volunteertime`, formData)
 }
-
 
 //봉사자가 봉사완료
 const postVolunteerComplete = (email, userid, noteDate) => {
@@ -223,7 +197,7 @@ const postModifyMeasure = (userid, spo2, airflow, bodytemp, ecg, emg, gsr, nibp)
     return axios.post(`/modifymeasure`, formData)
 }
 
-
+//담당의료진 이름 받아오기
 const postMedicalName = (email) => {
     const formData = new FormData();
     formData.append('userid', email)
@@ -231,6 +205,7 @@ const postMedicalName = (email) => {
     return axios.post(`/medicalname`, formData)
 }
 
+//환자의 측정값 Chart데이터로 받아오기
 const postMedicalChart = (email) => {
     const formData = new FormData();
     formData.append('userid', email)
@@ -238,6 +213,7 @@ const postMedicalChart = (email) => {
     return axios.post(`/medicalchart`, formData)
 }
 
+//환자의 측정값 정상, 비정상 받아오기
 const postMeasureList = (email) => {
     const formData = new FormData();
     formData.append('userid', email)
@@ -246,7 +222,7 @@ const postMeasureList = (email) => {
 }
 
 
-export { postCreateNewUser, getAllUsers, putEditUserData, postLoggin, postUserId, postCallVolunteer,
+export { postCreateNewUser, postLoggin, postUserId, postCallVolunteer,
     postAllVolunteerCall, postUserVolunteerCall, postVolunteerAssignment, postVolunteerComplete, postAssignmentCancel,
     postVolunteerCallModify, postVolunteerCallDelete, postSearchPatient, postAssignmentPatient, postLoadPatient,
     postDeletePatient, postMeasurePatient, postModifyMeasure, postVolunteerTime, postMedicalName, postMedicalChart,
