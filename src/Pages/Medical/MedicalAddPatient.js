@@ -12,9 +12,7 @@ import Chart from "../../components/Medical/Chart";
 
 
 const MedicalAddPatient = () => {
-    const userInfo = useSelector(state => state.user.account)
-    const [called, setCalled] = useState(false);
-    const [selectedUserId, setSelectedUserId] = useState(null);
+    const userInfo = useSelector(state => state.user.account);
     const [patientList, setPatientList] = useState([
         { username: "환자1", useremail: "이메일1", userbirth: "2001-11-01" },
         { username: "환자2", useremail: "이메일2", userbirth: "2001-11-02" }
@@ -57,18 +55,10 @@ const MedicalAddPatient = () => {
 
     //여기에 처음 들어왔을 때
     useEffect(() => {
-        if (userInfo && userInfo.role && !called) {
-            if (userInfo.role === "Medical" || userInfo.role === "user") {
+            if (userInfo.role === "Medical") {
                 PatientCall();
             }
-            setCalled(true); // 첫 호출 후에 called를 true로 설정하여 이후 호출 방지
-        }
-    }, [userInfo.role, called]);
-    //UserTable에서 선택된 사용자id 업데이트하는 함수
-    const handleUserSelect = (userId) => {
-        console.log('MedicalHome에서 선택한 userId:', userId);
-        setSelectedUserId(userId);
-    };
+    }, [userInfo]);
 
 
     return (

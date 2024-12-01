@@ -9,10 +9,10 @@ import { FaRegEyeSlash } from "react-icons/fa";
 
 const SignUpModal = ({ handleCheckId, show, handleSignUpClose, handleSignUpSubmit, validated, handleChange, isUsable }) => {
     const [showPw, setShowPw] = useState(false);
+
     const handleShowPassword = () => {
         setShowPw(!showPw)
     }
-
 
     return (
         <Modal
@@ -132,10 +132,6 @@ const SignUpModal = ({ handleCheckId, show, handleSignUpClose, handleSignUpSubmi
                         </Col>
                     </Form.Group>
 
-                    {/* <Form.Group controlId="formFile" className="mb-3" >
-                        <Form.Label>이미지</Form.Label>
-                        <Form.Control type="file" name="userImage" onChange={handleChange} />
-                    </Form.Group> */}
                     <Form.Group className="mb-3" hasvalidation="true">
                         <Form.Check
                             required

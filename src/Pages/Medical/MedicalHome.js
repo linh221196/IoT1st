@@ -63,12 +63,12 @@ const MedicalHome = () => {
     //여기에 처음 들어왔을 때
     useEffect(() => {
         if (userInfo && userInfo.role && !called) {
-            if (userInfo.role === "Medical" || userInfo.role === "user") {
+            if (userInfo.role === "Medical") {
                 PatientCall();
             }
-            setCalled(true); // 첫 호출 후에 called를 true로 설정하여 이후 호출 방지
         }
-    }, [userInfo.role, called]);
+    }, [userInfo, called]);
+
     //UserTable에서 선택된 사용자id 업데이트하는 함수
     const handleUserSelect = (userId) => {
         console.log('MedicalHome에서 선택한 userId:', userId);

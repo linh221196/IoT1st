@@ -9,16 +9,17 @@ import { MdCheckBoxOutlineBlank } from "react-icons/md"; //빈표시
 const NoticeMeasure = ({ selectedUserId }) => {
     const userInfo = useSelector(state => state.user.account);
     const [listUser, setListUser] = useState([
-        { measurement: 'spo2', userid: 'l7562l@naver.com', status: 'spo2' },
-        { measurement: 'airflow', userid: 'l7562l@naver.com', status: 'airflow' },
-        { measurement: 'bodytemp', userid: 'l7562l@naver.com', status: 'bodytemp' },
-        { measurement: 'ecg', userid: 'l7562l@naver.com', status: 'ecg' },
-        { measurement: 'emg', userid: 'l7562l@naver.com', status: 'emg' },
-        { measurement: 'gsr', userid: 'l7562l@naver.com', status: 'gsr' },
-        { measurement: 'nibp', userid: 'l7562l@naver.com', status: 'nibp' },
-        { measurement: 'eog', userid: 'l7562l@naver.com', status: 'eog' },
+        { measurement: 'spo2', userid: 'l7562l@naver.com', status: false },
+        { measurement: 'airflow', userid: 'l7562l@naver.com', status: false },
+        { measurement: 'bodytemp', userid: 'l7562l@naver.com', status: false },
+        { measurement: 'ecg', userid: 'l7562l@naver.com', status: false},
+        { measurement: 'emg', userid: 'l7562l@naver.com', status: false},
+        { measurement: 'gsr', userid: 'l7562l@naver.com', status: false },
+        { measurement: 'nibp', userid: 'l7562l@naver.com', status: false },
+        { measurement: 'eog', userid: 'l7562l@naver.com', status: false },
     ]);
 
+    //부모 컨포넌트에서 selectedUserId의 변경이 확인 될때마다 그 ID에 맞는 list값 받아오기
     const LoadList = async () => {
         try {
             console.log('Selected User ID: ', selectedUserId);
@@ -41,21 +42,23 @@ const NoticeMeasure = ({ selectedUserId }) => {
             alert("서버에서 필수 측정 요소를 못 받아왔습니다.");
         }
     };
-    //추가 버튼을 눌러 백엔드로 list값 보내기
+    //저장 버튼을 눌러 백엔드로 list값 보내기
     const handleModifyMeasure = async () => {
+        console.log(listUser)
         try {
             //list에서 필요 데이터 추출
             const dataToSend = {
                 userid: selectedUserId,
-                spo2: listUser.find(item => item.measurement === 'spo2')?.status || false.toString(),
-                airflow: listUser.find(item => item.measurement === 'airflow')?.status || false.toString(),
-                bodytemp: listUser.find(item => item.measurement === 'bodytemp')?.status || false.toString(),
-                ecg: listUser.find(item => item.measurement === 'ecg')?.status || false.toString(),
-                emg: listUser.find(item => item.measurement === 'emg')?.status || false.toString(),
-                gsr: listUser.find(item => item.measurement === 'gsr')?.status || false.toString(),
-                nibp: listUser.find(item => item.measurement === 'nibp')?.status || false.toString(),
-                eog: listUser.find(item => item.measurement === 'eog')?.status || false.toString(),
+                spo2: String(listUser.find(item => item.measurement === 'spo2')?.status || false),
+                airflow: String(listUser.find(item => item.measurement === 'airflow')?.status || false),
+                bodytemp: String(listUser.find(item => item.measurement === 'bodytemp')?.status || false),
+                ecg: String(listUser.find(item => item.measurement === 'ecg')?.status || false),
+                emg: String(listUser.find(item => item.measurement === 'emg')?.status || false),
+                gsr: String(listUser.find(item => item.measurement === 'gsr')?.status || false),
+                nibp: String(listUser.find(item => item.measurement === 'nibp')?.status || false),
+                eog: String(listUser.find(item => item.measurement === 'eog')?.status || false),
             };
+            console.log(dataToSend)
 
             postModifyMeasure(
                 dataToSend.userid,
@@ -85,16 +88,21 @@ const NoticeMeasure = ({ selectedUserId }) => {
         }
     }, [userInfo.role, selectedUserId]);
 
+    //주의할 요소의 변경값을 즉시 저장하는 작업
     const handleRowClick = (params) => {
-        if (userInfo.role === "Patient") return;
 
-        const updatedList = listUser.map(user => {
-            if (user.measurement === params.row.measurement) {
-                return { ...user, status: !user.status };
-            }
-            return user;
+        setListUser((prevList) => {
+            const index = prevList.findIndex(user => user.measurement === params.row.measurement);
+            if (index === -1) return prevList; // 해당 항목이 없으면 그대로 반환
+
+            // 클릭된 항목만 상태를 반전
+            const updatedList = [...prevList]; // 기존 배열 복사
+            updatedList[index] = {
+                ...updatedList[index],
+                status: !updatedList[index].status,
+            };
+            return updatedList;
         });
-        setListUser(updatedList);
     };
 
     const columns = [

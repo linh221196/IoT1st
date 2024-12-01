@@ -30,45 +30,12 @@ const UserInfo = () => {
     const [doctor, setDoctor] = useState('없음');
     const dispatch = useDispatch();
 
-
+    //로그아웃 버튼 눌렀을 때
     const handleLogout = () => {
         console.log('logoutUser 디스패치 호출');
         dispatch(logoutUser());
         navigate('/');
     };
-
-
-
-    const handleUpdate = () => {
-        setShowModal(true);
-    }
-
-    const handleClose = () => {
-        setShowModal(false);
-    }
-
-    const handleUpdateSubmit = async (e) => {
-        e.preventDefault();
-        const form = e.currentTarget;
-        if (form.checkValidity() === false) {
-            setValidated(true);
-            return;
-        }
-        setValidated(true);
-        try {
-            const data = await putEditUserData(userInfo.id, username, userInfo.role, userImage)
-            console.log('Check response', data)
-            if (data && data.EC === 0) {
-                setShowModal(false)
-                alert('Updated')
-            } else {
-                alert(data.EM || "Something went wrong")
-            }
-        } catch (error) {
-            alert("Error occurred")
-
-        }
-    }
 
     //봉사 횟수 가져오기
     const Volunteertime = async () => {
@@ -104,7 +71,7 @@ const UserInfo = () => {
     //여기에 처음 들어왔을 때
     useEffect(() => {
         if (userInfo && userInfo.role) {
-            if (userInfo.role === "Volunteer" || userInfo.role === "user") {
+            if (userInfo.role === "Volunteer") {
                 Volunteertime();
             } else if (userInfo.role === "Patient") {
                 MedicalName();
@@ -112,22 +79,6 @@ const UserInfo = () => {
         }
     }, [userInfo.role]);
 
-
-    const handleChange = (e) => {
-        const { name, value, files } = e.target;
-        switch (name) {
-            case 'email':
-                break;
-            case 'username':
-                setUserName(value);
-                break;
-            case 'userImage':
-                setUserImage(files[0]);
-                break;
-            default:
-                break;
-        }
-    }
 
     //userInfo.role에 따라 위치 조정
     const getTransformValue = (role) => {
@@ -174,31 +125,14 @@ const UserInfo = () => {
                             </TableCell>
                         </TableRow>
                     </TableBody>
-
                 </Table>
             </Paper>
 
             <div className="button-container">
-                {/*<Button variant="outline-success" className="me-3" onClick={handleUpdate} >
-                    수정
-                    <FiEdit />
-                </Button>
-                <Button variant="outline-primary" className="me-3" onClick={handleUpdate} >
-                    비밀번호
-                </Button>*/}
                 <Button variant="outline-danger" onClick={handleLogout}>
                     Logout
                 </Button>
-                <UserInfoUpdateModal
-                    userInfo={userInfo}
-                    show={showModal}
-                    handleClose={handleClose}
-                    handleUpdateSubmit={handleUpdateSubmit}
-                    handleChange={handleChange}
-                    validated={validated}
-                />
             </div>
-
         </div>
     );
 };

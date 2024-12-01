@@ -23,34 +23,14 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 얕은 그림자 */
     color: #333; /* 기본 글자 색상 */
     text-align: center; /* 텍스트 중앙 정렬 */
+
+    font-family: 'Arial', sans-serif; /* Arial 폰트 */
+    font-size: 16px; /* 약간 큰 글자 크기 */
+    font-weight: bold; /* 굵게 */
   }
 
   .chart-ul li:not(:last-child) {
     border-bottom: 1px solid #eee; /* 항목 간 경계선 추가 (마지막 항목 제외) */
-  }
-
-  /* Spo2 항목 스타일 */
-  .spo2-item {
-    font-family: 'Arial', sans-serif; /* Arial 폰트 */
-    font-size: 16px; /* 약간 큰 글자 크기 */
-    font-weight: bold; /* 굵게 */
-    color: #1a73e8; /* 파란색 */
-  }
-
-  /* Body Temperature 항목 스타일 */
-  .bodytemp-item {
-    font-family: 'Arial', sans-serif; /* Arial 폰트 */
-    font-size: 16px; /* 약간 큰 글자 크기 */
-    font-weight: bold; /* 굵게 */
-    color: #e37400; /* 주황색 */
-  }
-
-  /* NIBP 항목 스타일 */
-  .nibp-item {
-    font-family: 'Arial', sans-serif; /* Arial 폰트 */
-    font-size: 15px; /* 약간 큰 글자 크기 */
-    font-weight: bold; /* 굵게 */
-    color: #34a853; /* 초록색 */
   }
 
   .chart {

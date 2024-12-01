@@ -11,10 +11,10 @@ const ChartList = ({ data }) => {
         <div className="chart-container" style={{padding: '10px'}}>
             <ul className="chart-ul">
                 <li className="spo2-item">
-                    {spo2 !== null ? `Spo2: ${spo2}` : 'Spo2 측정 값 없음'}
+                    {spo2 !== null ? `Spo2: ${spo2}` : 'Spo2: 측정 값 없음'}
                 </li>
                 <li className="bodytemp-item">
-                    {bodytemp !== null ? `Body Temperature: ${bodytemp}` : 'Body Temperature 측정 값 없음'}
+                    {bodytemp !== null ? `Body Temperature: ${bodytemp}` : 'Body Temperature: 측정 값 없음'}
                 </li>
                 <li className="nibp-item">
                     {nibp !== null ? (
@@ -23,7 +23,7 @@ const ChartList = ({ data }) => {
                             수축기: {nibp.systolic} / 이완기: {nibp.diastolic}
                         </>
                     ) : (
-                        'NIBP 측정 값 없음'
+                        'NIBP: 측정 값 없음'
                     )}
                 </li>
             </ul>

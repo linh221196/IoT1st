@@ -129,23 +129,6 @@ const MedicalChart = () => {
     };
 
     //환자의 측정값 받아오기
-    /*const loadChart = async (userId) => {
-        try {
-            const data = await postMedicalChart(userId);
-            console.log('측정값 양식', data);
-
-            // 서버에서 받은 데이터가 EcgAverageValues 형태인지 확인
-            if (data?.EcgAverageValues && Array.isArray(data.EcgAverageValues)) {
-                setEcgData({
-                    name: "ECG",
-                    values: data.EcgAverageValues,
-                });
-            }
-
-        } catch (error) {
-            alert("서버에서 담당 환자 list를 못 받아왔습니다.");
-        }
-    }*/
     const loadChart = async (userId) => {
         try {
             const data = await postMedicalChart(userId);

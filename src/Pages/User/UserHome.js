@@ -2,18 +2,8 @@ import { Col, Container, Row } from "react-bootstrap"
 import '../Home.scss'
 import Content from "../../components/Content"
 import UserInfo from "../../components/User/UserInfo"
-import { useSelector } from 'react-redux'
-import {useNavigate} from "react-router-dom";
-import {postTokenCheck} from "../../services/apiServices";
-import {useEffect} from "react";
-import Test from "../../services/test";
 
 const UserHome = () => {
-  const userInfo = useSelector(state => state.user.account);
-  const isAuthenticated = useSelector(state => state.user.isAuthenticated)
-  console.log('account: ', userInfo, ' isAuthenticated: ', isAuthenticated)
-
-
 
   return (
     <Container className="homecontent-container">

@@ -14,7 +14,6 @@ import {doLoggin, logoutUser} from '../redux/action/userAction';
 const LogginView = () => {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
-    const [showFindPwModal, setFindPwShowModal] = useState(false);
     const [email, setEmail] = useState('');
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
@@ -174,14 +173,6 @@ const LogginView = () => {
             </Form.Group>
 
             <Button variant="primary" type="submit">Submit</Button>
-
-            {/*            <div className='findPw-container'>
-                <Form.Text className="text-muted" size="sm">
-                    비밀번호 잊으세요?
-                </Form.Text>
-                <NavLink onClick={() => setFindPwShowModal(true)}>비밀번호 찾기</NavLink>
-                <FindPwModal show={showFindPwModal} handleFindPwClose={() => setFindPwShowModal(false)} />
-            </div>*/}
 
             <div className='signUp-container'>
                 <Form.Text className="text-muted" size="sm">

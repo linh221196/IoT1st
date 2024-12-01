@@ -8,10 +8,10 @@ import React, { useState } from 'react';
 import {postMeasurePatient} from "../services/apiServices";
 import userInfo from "./User/UserInfo";
 import {useSelector} from "react-redux";
-import measure from '../assets/white_measure_icon_with_border.png'
-import device from '../assets/smaller_high_res_icon.png'
-import volunteer from '../assets/white_volunteer_icon_with_border.png'
-import notice from '../assets/white_icon_with_border.png'
+import measure from '../assets/measure_icon.png'
+import device from '../assets/device_icon.png'
+import volunteer from '../assets/volunteer_icon.png'
+import notice from '../assets/notice_icon.png'
 
 
 const Content = () => {
@@ -83,8 +83,6 @@ const Content = () => {
                 style={{
                   perspective: "1000px", // 3D 효과를 위한 원근감
                   position: "relative",  // 자식의 절대 위치 기준
-                  width: "100%",
-                  height: "100%",
                 }}
             >
               <div
