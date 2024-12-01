@@ -6,10 +6,8 @@ import Row from 'react-bootstrap/Row';
 import './DeviceView.scss'
 import Devices from '../assets/Devices/Devices';
 import { RxVideo } from "react-icons/rx";
-import { CiImageOn } from "react-icons/ci";
 import noimg from '../assets/Devices/noimg.png'
 import Modal from "react-bootstrap/Modal";
-import UserHeadBar from '../components/HeadBar/UserHeaderBar'
 
 
 const DeviceView = () => {
@@ -33,8 +31,8 @@ const DeviceView = () => {
                 <Row xs={1} md={2} xl={4} className="g-4">
                     {devices.map((device) =>
                         <Col key={device.id}>
-                            <Card className="h-100 d-flex flex-column" onClick={() => handleShowModal(device)}
-                                  style={{cursor: 'pointer'}}>
+                            <Card className="h-100 d-flex flex-column"
+                                  style={{cursor: 'pointer'}}>{/*onClick={() => handleShowModal(device)}*/}
                                 <div className="card-img-container p-3">
                                     <Card.Img variant="top" src={device.img}/>
                                 </div>
@@ -44,8 +42,6 @@ const DeviceView = () => {
                                         <Image src={device.imoticon ? device.imoticon : noimg}
                                                style={{width: 100, height: 100}}/>
                                         {device.des}
-
-
                                     </Card.Text>
                                 </Card.Body>
                                 <Card.Footer className="text-center">
@@ -63,7 +59,7 @@ const DeviceView = () => {
                 </Row>
 
                 {/* 모달 창 */}
-                <Modal show={showModal} onHide={handleCloseModal}>
+                {/*<Modal show={showModal} onHide={handleCloseModal}>
                     <Modal.Header closeButton>
                         <Modal.Title>{selectedDevice?.name}</Modal.Title>
                     </Modal.Header>
@@ -75,7 +71,7 @@ const DeviceView = () => {
                             닫기
                         </Button>
                     </Modal.Footer>
-                </Modal>
+                </Modal>*/}
             </div>
         </div>
     );

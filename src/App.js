@@ -41,59 +41,59 @@ function App() {
       {role && <HeaderBar role={role} />}
 
       <div className="app-container">
-        <Routes>
-          {/* 비로그인 페이지 */}
-          <Route path="/" element={<Home />} />
-          <Route path="/DeviceView" element={<DeviceView />} />
-          {/* 환자용 페이지 */}
-          <Route path="/UserHome"
-              element={
-                <PrivateRoute allowedRoles={["Patient"]}>
-                  <UserHome />
-                </PrivateRoute>
-              }/>
-          <Route path="/Volunteer"
-              element={
-                <PrivateRoute allowedRoles={["Patient"]}>
-                  <Volunteer />
-                </PrivateRoute>
-              }/>
-          <Route path="/Measurement"
-              element={
-                <PrivateRoute allowedRoles={["Patient"]}>
-                  <Measurement />
-                </PrivateRoute>
-              }/>
-          {/* 봉사자 페이지 */}
-          <Route path="/VolunteerHome"
-              element={
-                <PrivateRoute allowedRoles={["Volunteer"]}>
-                  <VolunteerHome />
-                </PrivateRoute>
-              }/>
-          {/* 의료진용 페이지 */}
-          <Route path="/MedicalHome"
-              element={
-                <PrivateRoute allowedRoles={["Medical"]}>
-                  <MedicalHome />
-                </PrivateRoute>
-              }/>
-          <Route path="/MedicalAdd"
-              element={
-                <PrivateRoute allowedRoles={["Medical"]}>
-                  <MedicalAddPatient />
-                </PrivateRoute>
-              }/>
-          <Route path="/MedicalChart"
-              element={
-                <PrivateRoute allowedRoles={["Medical"]}>
-                  <MedicalChart />
-                </PrivateRoute>
-              }/>
-          {/* 테스트 및 기타 */}
-          <Route path="/Test" element={<Test />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+          <Routes>
+              {/* 비로그인 페이지 */}
+              <Route path="/" element={<Home />} />
+              <Route path="/DeviceView" element={<DeviceView />} />
+              {/* 환자용 페이지 */}
+              <Route path="/UserHome"
+                     element={
+                         /* <PrivateRoute allowedRoles={["Patient"]}>*/
+                         <UserHome />
+                         /*</PrivateRoute>*/
+                     }/>
+              <Route path="/Volunteer"
+                     element={
+                         /*<PrivateRoute allowedRoles={["Patient"]}>*/
+                         <Volunteer />
+                         /*</PrivateRoute>*/
+                     }/>
+              <Route path="/Measurement"
+                     element={
+                         /*<PrivateRoute allowedRoles={["Patient"]}>*/
+                         <Measurement />
+                         /*</PrivateRoute>*/
+                     }/>
+              {/* 봉사자 페이지 */}
+              <Route path="/VolunteerHome"
+                     element={
+                         /*<PrivateRoute allowedRoles={["Volunteer"]}>*/
+                         <VolunteerHome />
+                         /*</PrivateRoute>*/
+                     }/>
+              {/* 의료진용 페이지 */}
+              <Route path="/MedicalHome"
+                     element={
+                         /*<PrivateRoute allowedRoles={["Medical"]}>*/
+                         <MedicalHome />
+                         /*</PrivateRoute>*/
+                     }/>
+              <Route path="/MedicalAdd"
+                     element={
+                         /*<PrivateRoute allowedRoles={["Medical"]}>*/
+                         <MedicalAddPatient />
+                         /*</PrivateRoute>*/
+                     }/>
+              <Route path="/MedicalChart"
+                     element={
+                         /*<PrivateRoute allowedRoles={["Medical"]}>*/
+                         <MedicalChart />
+                         /*</PrivateRoute>*/
+                     }/>
+              {/* 테스트 및 기타 */}
+              <Route path="/Test" element={<Test />} />
+              <Route path="*" element={<NotFound />} />
+          </Routes>
       </div>
     </div>
   );

@@ -48,11 +48,6 @@ const MedicalAddPatient = () => {
         setPatientList([...updatedList]);
     };
 
-    useEffect(() => {
-        console.log("patientList가 변경되었습니다:", patientList);
-    }, [patientList]);
-
-
     //여기에 처음 들어왔을 때
     useEffect(() => {
             if (userInfo.role === "Medical") {

@@ -1,15 +1,10 @@
 import { Container, Row, Col } from "react-bootstrap"
-import HeaderBar from "../../components/HeadBar/HeaderBar"
 import UserTable from "../../components/Medical/UserTable"
-import Chart from "../../components/Medical/Chart"
-import AddList from "../../components/Medical/AddList"
 import './Admin.scss'
 import NoticeMeasure from "../../components/Medical/NoticeMeasure";
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import { postLoadPatient } from "../../services/apiServices";
-import UserList from "../NotFound";
-
 
 const MedicalHome = () => {
     const userInfo = useSelector(state => state.user.account)

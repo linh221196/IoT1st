@@ -155,6 +155,7 @@ const Measurement = () => {
 
     const userInfo = useSelector(state => state.user.account);
 
+    //백엔드에서 보낸 값을 가공하는 함수
     const transformMeasurements = (data) => {
         const transformedData = {};
 

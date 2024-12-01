@@ -5,7 +5,6 @@ import LogginView from "../components/LogginView"
 import {useSelector} from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import {useEffect} from "react";
-import userInfo from "../components/User/UserInfo";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -24,7 +23,6 @@ const Home = () => {
       }
     }
   }, [navigate, userInfo.role, isAuthenticated]);
-
 
   return (
     <Container className="homecontent-container" >
