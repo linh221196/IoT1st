@@ -31,7 +31,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 },
                 isAuthenticated: true
             };
-
         case LOGOUT_USER:
             console.log(`current state before reset: `, state);
             return INITIAL_STATE;

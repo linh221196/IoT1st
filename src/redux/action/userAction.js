@@ -10,6 +10,7 @@ export const doLoggin = (data) => {
         }
     )
 }
+
 //로그아웃 액션
 export const logoutUser = () => ({
     type: LOGOUT_USER,
