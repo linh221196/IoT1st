@@ -81,7 +81,7 @@ const Devices =
         img: EMG,
         des: "근전도",
         imoticon: emgimoticon,
-        link: "https://youtube.com/shorts/02mXnly17CU"
+        link: "https://youtube.com/shorts/ZzRvqzrSlK0?feature=share"
     },
     {
         id: 9,

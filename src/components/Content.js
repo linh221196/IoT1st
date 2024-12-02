@@ -20,14 +20,14 @@ const Content = () => {
   const [showNoticeModal, setNoticeModalShow] = useState(false);
   const [list, setList] = useState(false);
   const [listUser, setListUser] = useState([
-    { measurement: 'spo2', status: true, text: '산소포화도' },
+    { measurement: 'spo2', status: false, text: '산소포화도' },
     { measurement: 'airflow', status: true, text: '호흡' },
     { measurement: 'bodytemp', status: true, text: '체온' },
-    { measurement: 'ecg', status: true, text: '심전도' },
+    { measurement: 'ecg', status: false, text: '심전도' },
     { measurement: 'emg', status: true, text: '근전도' },
-    { measurement: 'gsr', status: true, text: '피부반응' },
+    { measurement: 'gsr', status: false, text: '피부반응' },
     { measurement: 'nibp', status: true, text: '혈압' },
-      { measurement: 'eog', status: true, text: '안구전도' },
+      { measurement: 'eog', status: false, text: '안구전도' },
   ]);
 
   //사용자가 주의할 요소를 클릭했을때 뒤집히는 이벤트와 fetchData함수 실행
@@ -44,13 +44,13 @@ const Content = () => {
       const data = await postMeasurePatient(userInfo.email);
 
       const predefinedList = [
-          { measurement: 'spo2', status: true, text: '산소포화도' },
+          { measurement: 'spo2', status: false, text: '산소포화도' },
           { measurement: 'airflow', status: true, text: '호흡센서' },
           { measurement: 'bodytemp', status: true, text: '체온센서' },
-          { measurement: 'ecg', status: true, text: '심전도' },
-          { measurement: 'emg', status: false, text: '근전도' },
-          { measurement: 'gsr', status: true, text: '피부반응' },
-          { measurement: 'nibp', status: false, text: '혈압측정' },
+          { measurement: 'ecg', status: false, text: '심전도' },
+          { measurement: 'emg', status: true, text: '근전도' },
+          { measurement: 'gsr', status: false, text: '피부반응' },
+          { measurement: 'nibp', status: true, text: '혈압측정' },
           { measurement: 'eog', status: false, text: '안구전도' },
       ];
 
