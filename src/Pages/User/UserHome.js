@@ -2,8 +2,12 @@ import { Col, Container, Row } from "react-bootstrap"
 import '../Home.scss'
 import Content from "../../components/Content"
 import UserInfo from "../../components/User/UserInfo"
+import {useSelector} from "react-redux";
 
 const UserHome = () => {
+  const userInfo = useSelector(state => state.user.account)
+
+  console.log('redux상태', userInfo);
 
   return (
     <Container className="homecontent-container">
