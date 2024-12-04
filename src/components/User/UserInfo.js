@@ -81,8 +81,8 @@ const UserInfo = ({ refresh }) => {
 
     useEffect(() => {
         console.log("refresh 값 변경:", refresh);
-        if (refresh) {
-            setVolunteerCount((prevCount) => prevCount + 1);
+        if (userInfo.role === "Volunteer") {
+            Volunteertime();
         }
     }, [refresh]);
 
