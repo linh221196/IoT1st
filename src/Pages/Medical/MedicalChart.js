@@ -77,9 +77,9 @@ const MedicalChart = () => {
         ],
     });
     const [chartData, setChartData] = useState([
-/*        {name: 'Spo2', value:"95%"},
-        { name: 'NIBP', value: { systolic: "120mmHg", diastolic: "80mmHg" } },
-        {name: 'BodyTemp', value:"36.7°C"},*/
+        {name: 'Spo2', value:""},
+        { name: 'NIBP', value: { systolic: "", diastolic: "" } },
+        {name: 'BodyTemp', value:""},
     ])
 
 
