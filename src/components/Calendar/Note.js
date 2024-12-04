@@ -21,7 +21,7 @@ import {
     postVolunteerComplete
 } from "../../services/apiServices";
 
-const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, handleCancelAction, handleAssignmentAction }) => {
+const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, handleCancelAction, handleAssignmentAction, onAssignmentSuccess }) => {
     //리듁스에서 꺼내오기
     const userInfo = useSelector(state => state.user.account)
 
@@ -104,6 +104,10 @@ const Note = ({ noteList, setNoteList, note, setNote, newValue, isFirstList, han
             setNoteList(prev => prev.filter((_, i) => i !== index));
 
             alert("봉사가 완료되었습니다.");
+
+            if (onAssignmentSuccess) {
+                onAssignmentSuccess(); // 함수 호출
+            }
 
         } catch (error) {
             alert("서버 문제로 봉사완료에 실패했습니다.");

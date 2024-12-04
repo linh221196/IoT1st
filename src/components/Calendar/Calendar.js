@@ -101,10 +101,6 @@ const Calendar = ({onAssignmentSuccess}) => {
 
             alert("봉사 확정이 완료되었습니다.");
 
-            if (onAssignmentSuccess) {
-                onAssignmentSuccess();
-                console.log("캘린더 정상")
-            }
             VolunteerCall();
         } catch (error) {
             alert("서버 문제로 봉사확정이 실패했습니다.");
@@ -275,6 +271,7 @@ const Calendar = ({onAssignmentSuccess}) => {
                             setNote={setNote}
                             isFirstList={false}
                             handleCancelAction={handleCancelAction}
+                            onAssignmentSuccess={onAssignmentSuccess}
                         />
                     </Col>
                 </Row>
