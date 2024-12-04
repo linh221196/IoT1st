@@ -83,7 +83,7 @@ const UserInfo = ({ refresh }) => {
         console.log("refresh 값 변경:", refresh);
         if (userInfo.role === "Volunteer") {
             console.log("환자 룰 확인");
-            Volunteertime();
+            setVolunteerCount((prevCount) => prevCount + 1);
         }
     }, [refresh]);
 
