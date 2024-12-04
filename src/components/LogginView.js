@@ -88,7 +88,7 @@ const LogginView = () => {
             console.log("Check Inter Response", data);
             if (data.status === "success") {
                 setShowModal(false);
-                alert("로그인 성공!");
+                alert("회원가입 성공!");
             } else {
                 alert(data.EM || "Something went wrong!");
             }
@@ -117,7 +117,7 @@ const LogginView = () => {
                 const refreshToken = data.data.refreshToken
                 localStorage.setItem('accessToken', accessToken)
                 localStorage.setItem('refreshToken', refreshToken)
-                alert("Login successfully!");
+                alert("로그인 성공!");
             } else if (data.status === "PasswordFail") {
                 alert("비밀번호가 일치하지 않습니다.");
             } else if (data.status === "IdFail") {
