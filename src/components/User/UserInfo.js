@@ -82,7 +82,9 @@ const UserInfo = ({ refresh }) => {
     //봉사시간 업데이트 될때마다.
     useEffect(() => {
         // refresh 값이 변경될 때마다 Volunteertime 호출
-        Volunteertime();
+        if (refresh) {
+            Volunteertime();
+        }
     }, [refresh]);
 
 
