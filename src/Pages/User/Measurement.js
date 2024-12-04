@@ -226,7 +226,12 @@ const Measurement = () => {
             const transformedData = transformMeasurements(data);
             console.log('받아온 데이터 변환', transformedData);
 
-            setMeasurementsByDate(transformedData);
+            /*setMeasurementsByDate(transformedData);*/
+            setMeasurementsByDate((prevState) => ({
+                ...prevState,
+                ...transformedData,
+            }));
+
         } catch (error) {
             console.error("메모 데이터를 가져오는 데 실패했습니다.", error);
         }

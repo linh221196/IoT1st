@@ -16,7 +16,7 @@ import { logoutUser } from '../../redux/action/userAction';
 import { useNavigate } from 'react-router-dom';
 
 
-const UserInfo = () => {
+const UserInfo = ({ refresh }) => {
 
     const navigate = useNavigate();
     const userInfo = useSelector(state => state.user.account)
@@ -78,6 +78,12 @@ const UserInfo = () => {
             }
         }
     }, [userInfo.role]);
+
+    //봉사시간 업데이트 될때마다.
+    useEffect(() => {
+        // refresh 값이 변경될 때마다 Volunteertime 호출
+        Volunteertime();
+    }, [refresh]);
 
 
     //userInfo.role에 따라 위치 조정

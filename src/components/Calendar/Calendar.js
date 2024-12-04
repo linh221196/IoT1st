@@ -26,7 +26,7 @@ import {MdDeleteForever, MdEdit} from "react-icons/md";
 
 dayjs.locale('ko');
 
-const Calendar = () => {
+const Calendar = ({onAssignmentSuccess}) => {
     //리듁스에서 꺼내오기
     const userInfo = useSelector(state => state.user.account)
 
@@ -100,6 +100,8 @@ const Calendar = () => {
             ]);
 
             alert("봉사 확정이 완료되었습니다.");
+
+            if (onAssignmentSuccess) onAssignmentSuccess();
         } catch (error) {
             alert("서버 문제로 봉사확정이 실패했습니다.");
         }
