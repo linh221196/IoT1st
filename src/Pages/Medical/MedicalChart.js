@@ -223,6 +223,8 @@ const MedicalChart = () => {
                 );
                 console.log('BodyTemp 데이터:', { name: "BodyTemp", value: `${bodyTemp}°C` }); // BodyTemp 데이터 출력
             }
+
+            console.log("chartData :", chartData);
         } catch (error) {
             console.error("서버에서 데이터를 받아오는 중 에러가 발생했습니다.", error);
         }
