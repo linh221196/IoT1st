@@ -102,6 +102,7 @@ const Calendar = ({onAssignmentSuccess}) => {
             alert("봉사 확정이 완료되었습니다.");
 
             if (onAssignmentSuccess) onAssignmentSuccess();
+            VolunteerCall();
         } catch (error) {
             alert("서버 문제로 봉사확정이 실패했습니다.");
         }
@@ -145,8 +146,8 @@ const Calendar = ({onAssignmentSuccess}) => {
             noteName2: item.userByVolunteerId?.name, // 봉사자 이름
             noteEmail2: item.userByVolunteerId?.userid,
             notePhone: !isVolunteer
-                ? item.userByVolunteerId?.phone_num // 봉사자 전화번호
-                : item.userByUserid?.phone_num // 환자 전화번호
+                ? item.userByVolunteerId.phone_num // 봉사자 전화번호
+                : item.userByUserid.phone_num // 환자 전화번호
         }));
 
         return { desiredVolunteerDates, volunteerAssignments };

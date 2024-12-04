@@ -88,7 +88,7 @@ const LogginView = () => {
             console.log("Check Inter Response", data);
             if (data.status === "success") {
                 setShowModal(false);
-                alert("User created successfully!");
+                alert("로그인 성공!");
             } else {
                 alert(data.EM || "Something went wrong!");
             }
