@@ -10,6 +10,7 @@ const VolunteerHome = () => {
     // 봉사 확정 성공 후 호출
     const triggerVolunteerTimeRefresh = () => {
         setRefreshVolunteerTime((prev) => !prev); // 상태 변경을 통해 리렌더링 유도
+        console.log("홈페이지 정상")
     };
 
     return (
