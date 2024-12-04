@@ -14,8 +14,8 @@ import Chart from "../../components/Medical/Chart";
 const MedicalAddPatient = () => {
     const userInfo = useSelector(state => state.user.account);
     const [patientList, setPatientList] = useState([
-        { username: "환자1", useremail: "이메일1", userbirth: "2001-11-01" },
-        { username: "환자2", useremail: "이메일2", userbirth: "2001-11-02" }
+/*        { username: "환자1", useremail: "이메일1", userbirth: "2001-11-01" },
+        { username: "환자2", useremail: "이메일2", userbirth: "2001-11-02" }*/
     ]);
 
 

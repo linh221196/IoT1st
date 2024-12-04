@@ -5,11 +5,11 @@ import { postMeasurePatient } from "../../services/apiServices";
 const PatientNoticeMeasure = ({ showNoticeModal, setNoticeModalShow, fullscreen, selectedUserId }) => {
     const [listUser, setListUser] = useState([
         { measurement: 'spo2', status: false },
-        { measurement: 'airflow', status: true },
+        { measurement: 'airflow', status: false },
         { measurement: 'bodytemp', status: false },
-        { measurement: 'ecg', status: true },
+        { measurement: 'ecg', status: false },
         { measurement: 'emg', status: false },
-        { measurement: 'gsr', status: true },
+        { measurement: 'gsr', status: false },
         { measurement: 'nibp', status: false }
     ]);
 

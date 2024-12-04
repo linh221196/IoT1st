@@ -10,8 +10,8 @@ const MedicalHome = () => {
     const userInfo = useSelector(state => state.user.account)
     const [called, setCalled] = useState(false);
     const [patientList, setPatientList] = useState([
-        { username: "정규혁", useremail: "l7562l@naver.com", userbirth: "2001-05-03" },
-        { username: "환자2", useremail: "이메일2", userbirth: "2001-11-02" }
+/*        { username: "정규혁", useremail: "l7562l@naver.com", userbirth: "2001-05-03" },
+        { username: "환자2", useremail: "이메일2", userbirth: "2001-11-02" }*/
     ]);
     const [selectedUserId, setSelectedUserId] = useState(null);
 

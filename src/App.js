@@ -48,47 +48,47 @@ function App() {
               {/* 환자용 페이지 */}
               <Route path="/UserHome"
                      element={
-                         /* <PrivateRoute allowedRoles={["Patient"]}>*/
+                          <PrivateRoute allowedRoles={["Patient"]}>
                          <UserHome />
-                         /*</PrivateRoute>*/
+                         </PrivateRoute>
                      }/>
               <Route path="/Volunteer"
                      element={
-                         /*<PrivateRoute allowedRoles={["Patient"]}>*/
+                         <PrivateRoute allowedRoles={["Patient"]}>
                          <Volunteer />
-                         /*</PrivateRoute>*/
+                         </PrivateRoute>
                      }/>
               <Route path="/Measurement"
                      element={
-                         /*<PrivateRoute allowedRoles={["Patient"]}>*/
+                         <PrivateRoute allowedRoles={["Patient"]}>
                          <Measurement />
-                         /*</PrivateRoute>*/
+                         </PrivateRoute>
                      }/>
               {/* 봉사자 페이지 */}
               <Route path="/VolunteerHome"
                      element={
-                         /*<PrivateRoute allowedRoles={["Volunteer"]}>*/
+                         <PrivateRoute allowedRoles={["Volunteer"]}>
                          <VolunteerHome />
-                         /*</PrivateRoute>*/
+                         </PrivateRoute>
                      }/>
               {/* 의료진용 페이지 */}
               <Route path="/MedicalHome"
                      element={
-                         /*<PrivateRoute allowedRoles={["Medical"]}>*/
+                         <PrivateRoute allowedRoles={["Medical"]}>
                          <MedicalHome />
-                         /*</PrivateRoute>*/
+                         </PrivateRoute>
                      }/>
               <Route path="/MedicalAdd"
                      element={
-                         /*<PrivateRoute allowedRoles={["Medical"]}>*/
+                         <PrivateRoute allowedRoles={["Medical"]}>
                          <MedicalAddPatient />
-                         /*</PrivateRoute>*/
+                         </PrivateRoute>
                      }/>
               <Route path="/MedicalChart"
                      element={
-                         /*<PrivateRoute allowedRoles={["Medical"]}>*/
+                         <PrivateRoute allowedRoles={["Medical"]}>
                          <MedicalChart />
-                         /*</PrivateRoute>*/
+                         </PrivateRoute>
                      }/>
               {/* 테스트 및 기타 */}
               <Route path="/Test" element={<Test />} />

@@ -121,7 +121,7 @@ const Measurement = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [measurements, setMeasurements] = useState([]);
     const [measurementsByDate, setMeasurementsByDate] = useState({
-        "2024-11-02": [
+        "2024-11-13": [
             { "measurement": "산소포화도", "status": "정상" },
             { "measurement": "심전도", "status": "정상" },
             { "measurement": "호흡", "status": "정상" },
@@ -131,7 +131,7 @@ const Measurement = () => {
             { "measurement": "피부반응", "status": "정상" },
             { "measurement": "혈압", "status": "정상" }
         ],
-        "2024-11-14": [
+        "2024-11-18": [
             { "measurement": "산소포화도", "status": "정상" },
             { "measurement": "심전도", "status": "정상" },
             { "measurement": "호흡", "status": "비정상" },
@@ -141,7 +141,7 @@ const Measurement = () => {
             { "measurement": "피부반응", "status": "비정상" },
             { "measurement": "혈압", "status": "정상" }
         ],
-        "2024-11-29": [
+        "2024-11-26": [
             { "measurement": "산소포화도", "status": "정상" },
             { "measurement": "심전도", "status": "정상" },
             { "measurement": "호흡", "status": "정상" },

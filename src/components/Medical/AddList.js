@@ -8,9 +8,7 @@ import {useSelector} from "react-redux";
 
 const AddList = ({ PatientCall }) => {
     const [addList, setaddList] = useState([ //환자 검색 api 데이터 저장할 list
-        { username: "이름", userid: "이메일" },
-        { username: "이름1", userid: "이메일" },
-        { username: "이름2", userid: "이메일" },
+        /*{ username: "", userid: "" },*/
         /*{ username: "이름3", userid: "이메일" },
         { username: "이름4", userid: "이메일" },
         { username: "이름5", userid: "이메일" },*/

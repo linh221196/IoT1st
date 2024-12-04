@@ -9,14 +9,14 @@ import { MdCheckBoxOutlineBlank } from "react-icons/md"; //빈표시
 const NoticeMeasure = ({ selectedUserId }) => {
     const userInfo = useSelector(state => state.user.account);
     const [listUser, setListUser] = useState([
-        { measurement: 'spo2', userid: 'l7562l@naver.com', status: false },
+/*        { measurement: 'spo2', userid: 'l7562l@naver.com', status: false },
         { measurement: 'airflow', userid: 'l7562l@naver.com', status: false },
         { measurement: 'bodytemp', userid: 'l7562l@naver.com', status: false },
         { measurement: 'ecg', userid: 'l7562l@naver.com', status: false},
         { measurement: 'emg', userid: 'l7562l@naver.com', status: false},
         { measurement: 'gsr', userid: 'l7562l@naver.com', status: false },
         { measurement: 'nibp', userid: 'l7562l@naver.com', status: false },
-        { measurement: 'eog', userid: 'l7562l@naver.com', status: false },
+        { measurement: 'eog', userid: 'l7562l@naver.com', status: false },*/
     ]);
 
     //부모 컨포넌트에서 selectedUserId의 변경이 확인 될때마다 그 ID에 맞는 list값 받아오기

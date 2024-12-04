@@ -34,11 +34,11 @@ const Calendar = () => {
     const [showModal, setShowModal] = useState(false); //예약 list 작성 모달 띄우는 판단용
     const [note, setNote] = useState(""); //예약 list을 작성할 때 내용을 저장하는 곳
     const [noteList, setNoteList] = useState([ //예약 list
-        { noteName : "정규혁", noteDate: "2024-12-9", noteContent: "2주차 검진", noteEmail: "1234@naver.com" },
+        /*{ noteName : "", noteDate: "", noteContent: "", noteEmail: "" },*/
         /*{ noteName : "홍길동", noteDate: "2024-12-16", noteContent: "3주차 검진", noteEmail: "5678@naver.com" },*/
     ]);
     const [secondNoteList, setSecondNoteList] = useState([ //출장 list
-        { noteName : "정규혁", noteDate: "2024-12-02", noteContent: "1주차 검진", noteName2 : "봉사자", noteEmail: "", noteEmail2: "", notePhone: "010-4634-1091"}
+        /*{ noteName : "", noteDate: "", noteContent: "", noteName2 : "", noteEmail: "", noteEmail2: "", notePhone: ""}*/
     ]);
     const [view, setView] = useState('day');
 
